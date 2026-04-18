@@ -31,8 +31,8 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 from backend.config import (
-    GEMINI_API_KEY,
-    GEMINI_EMBEDDING_MODEL,
+    OPENAI_API_KEY,
+    OPENAI_EMBEDDING_MODEL,
     SIMILARITY_THRESHOLD,
     LINK_SIMILARITY_THRESHOLD,
     EMBEDDING_BATCH_SIZE,
@@ -85,14 +85,14 @@ class UnionFind:
 # Embedding generation
 # ──────────────────────────────────────────────
 
-def _get_gemini_embeddings(texts: list[str]) -> np.ndarray:
+def _get_openai_embeddings(texts: list[str]) -> np.ndarray:
     """
-    Get embeddings from Gemini API in batches.
+    Get embeddings from OpenAI API in batches.
     Returns np.ndarray of shape (len(texts), embedding_dim).
     """
-    from google import genai as _genai
+    from openai import OpenAI
 
-    client = _genai.Client(api_key=GEMINI_API_KEY)
+    client = OpenAI(api_key=OPENAI_API_KEY)
     all_embeddings = []
 
     for i in range(0, len(texts), EMBEDDING_BATCH_SIZE):
@@ -101,11 +101,12 @@ def _get_gemini_embeddings(texts: list[str]) -> np.ndarray:
             f"Embedding batch {i // EMBEDDING_BATCH_SIZE + 1}"
             f" ({len(batch)} items)..."
         )
-        resp = client.models.embed_content(
-            model=GEMINI_EMBEDDING_MODEL,
-            contents=batch,
+        response = client.embeddings.create(
+            model=OPENAI_EMBEDDING_MODEL,
+            input=batch,
         )
-        all_embeddings.extend([list(e.values) for e in resp.embeddings])
+        batch_embeddings = [e.embedding for e in response.data]
+        all_embeddings.extend(batch_embeddings)
 
     return np.array(all_embeddings)
 
@@ -143,7 +144,7 @@ def build_ingredient_embeddings(
     ]
 
     logger.info(f"Generating embeddings for {len(readable_names)} ingredients...")
-    embeddings = _get_gemini_embeddings(readable_names)
+    embeddings = _get_openai_embeddings(readable_names)
 
     # Cache results
     np.savez_compressed(str(_EMBEDDING_CACHE_PATH), embeddings=embeddings)
@@ -302,8 +303,8 @@ def link_substitution_groups(
     sub_to_idx = {s: i for i, s in enumerate(substances)}
 
     # Get or build embeddings
-    if not GEMINI_API_KEY:
-        logger.warning("No GEMINI_API_KEY — skipping substitution linking.")
+    if not OPENAI_API_KEY:
+        logger.warning("No OPENAI_API_KEY — skipping substitution linking.")
         return []
 
     embeddings = build_ingredient_embeddings(

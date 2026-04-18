@@ -8,12 +8,12 @@ compliance status, and risk factors.
 
 from collections import defaultdict
 from dataclasses import dataclass, field
-from typing import Dict, List
+from typing import Dict, List, Optional
 import logging
-import math
 
 from backend.phase1_extraction.substitution_groups import SubstitutionGroup
 from backend.phase3_reasoning.compliance_checker import ComplianceResult
+from backend.phase3_reasoning.evidence_model import AggregatedMetric
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +42,13 @@ class SourcingProposal:
     is_pareto_optimal: bool = False
     dominated_by: List[int] = field(default_factory=list)
     verification_confidence: float = 0.5  # weighted mean of verification outcomes
+    # Uncertainty-aware fields — populated after Pareto in run_phase3
+    score_breakdown: Optional[AggregatedMetric] = None
+    compliance_breakdown: Dict[str, int] = field(
+        default_factory=lambda: {"compliant": 0, "non_compliant": 0, "unknown": 0}
+    )
+    impact_score: float = 0.0
+    flagged_low_confidence_high_impact: bool = False
 
 
 def _supplier_reach(group: SubstitutionGroup) -> Dict[int, dict]:
@@ -174,19 +181,27 @@ def optimize_sourcing(
         else:
             priority = "LOW"
 
-        # Aggregate compliance_probability across this group's products for this supplier
+        # Aggregate compliance across this group's products for this supplier
+        # Use arithmetic mean since compliance_probability now comes from the
+        # spec formula (not raw probability), so geometric mean is no longer appropriate.
         relevant = [
             r for r in compliance_results.values()
             if r.proposed_supplier_id == sid and r.product_id in group_product_ids
         ]
         if relevant:
-            probs = [r.compliance_probability for r in relevant]
-            log_sum = sum(math.log(max(p, 1e-10)) for p in probs)
-            comp_prob = round(math.exp(log_sum / len(probs)), 4)
+            comp_prob = round(
+                sum(r.compliance_probability for r in relevant) / len(relevant), 4
+            )
             ev_str = round(sum(r.evidence_strength for r in relevant) / len(relevant), 4)
+            # Aggregate breakdown counts across products
+            agg_breakdown: Dict[str, int] = {"compliant": 0, "non_compliant": 0, "unknown": 0}
+            for r in relevant:
+                for k, v in r.breakdown.items():
+                    agg_breakdown[k] = agg_breakdown.get(k, 0) + v
         else:
             comp_prob = 0.5
             ev_str = 0.5
+            agg_breakdown = {"compliant": 0, "non_compliant": 0, "unknown": 0}
 
         hq = sdata.get("headquarters", "")
         evidence = (
@@ -213,6 +228,7 @@ def optimize_sourcing(
             evidence_summary=evidence,
             compliance_probability=comp_prob,
             evidence_strength=ev_str,
+            compliance_breakdown=agg_breakdown,
         ))
 
     return proposals

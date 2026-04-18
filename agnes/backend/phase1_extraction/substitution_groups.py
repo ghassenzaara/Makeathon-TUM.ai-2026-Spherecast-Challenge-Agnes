@@ -19,7 +19,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import Optional
 
-from backend.config import GEMINI_API_KEY
+from backend.config import OPENAI_API_KEY
 from backend.phase1_extraction.sku_parser import parse_sku, ParsedSKU
 from backend.phase1_extraction.semantic_matcher import (
     build_ingredient_embeddings,
@@ -182,7 +182,7 @@ def build_substitution_groups(
             substance_clusters = cluster_by_substance(cards)
             logger.info(f"  {len(substance_clusters)} substance clusters formed")
             # Build soft links
-            if use_semantic and GEMINI_API_KEY:
+            if use_semantic and OPENAI_API_KEY:
                 logger.info("  Computing substitution links...")
                 sub_links = link_substitution_groups(
                     substance_clusters,
@@ -196,16 +196,16 @@ def build_substitution_groups(
 
     if not use_cards:
         logger.info("Step 3: Clustering ingredients (legacy mode)...")
-        if use_semantic and GEMINI_API_KEY:
+        if use_semantic and OPENAI_API_KEY:
             logger.info("  Using semantic (embedding-based) clustering...")
             embeddings = build_ingredient_embeddings(
                 unique_names, force_refresh=force_refresh_embeddings
             )
             legacy_clusters = cluster_ingredients(unique_names, embeddings)
         else:
-            if use_semantic and not GEMINI_API_KEY:
+            if use_semantic and not OPENAI_API_KEY:
                 logger.warning(
-                    "  No GEMINI_API_KEY set — falling back to exact-match clustering"
+                    "  No OPENAI_API_KEY set — falling back to exact-match clustering"
                 )
             logger.info("  Using exact-match clustering...")
             legacy_clusters = cluster_ingredients_exact_only(unique_names)

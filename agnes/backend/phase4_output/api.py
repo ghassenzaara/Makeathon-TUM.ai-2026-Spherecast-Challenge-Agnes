@@ -135,6 +135,11 @@ def list_proposals():
             "is_pareto_optimal": bool(p.get("IsParetoOptimal", 0)),
             "dominated_by": json.loads(p.get("DominatedByJson", "[]") or "[]"),
             "verification_confidence": p.get("VerificationConfidence", 0.5),
+            # Uncertainty-aware fields
+            "score_breakdown": json.loads(p.get("ScoreBreakdownJson", "null") or "null"),
+            "compliance_breakdown": json.loads(p.get("ComplianceBreakdownJson", "{}") or "{}"),
+            "impact_score": p.get("ImpactScore", 0.0),
+            "flagged_low_confidence_high_impact": bool(p.get("FlaggedLowConfHighImpact", 0)),
         }
         for p in proposals
     ]
@@ -161,6 +166,8 @@ def rerank_proposals(req: RerankRequest):
         ev_strength = p.get("EvidenceStrength") or 0.5
         uncertainty = 1.0 - ev_strength
         u = round(req.alpha * savings_norm - req.beta * risk - req.gamma * uncertainty, 4)
+        impact_score = p.get("ImpactScore") or round(savings_norm * ev_strength * 0.9, 4)
+        impact_confidence = round(ev_strength * 0.9, 4)
         results.append({
             "id": p["Id"],
             "utility_score": u,
@@ -170,6 +177,9 @@ def rerank_proposals(req: RerankRequest):
             "is_pareto_optimal": bool(p.get("IsParetoOptimal", 0)),
             "dominated_by": json.loads(p.get("DominatedByJson", "[]") or "[]"),
             "recommended_supplier_name": p.get("RecommendedSupplierName", ""),
+            "impact_score": impact_score,
+            "impact_confidence": impact_confidence,
+            "flagged_low_confidence_high_impact": bool(p.get("FlaggedLowConfHighImpact", 0)),
         })
     results.sort(key=lambda x: x["utility_score"], reverse=True)
     for i, r in enumerate(results):
@@ -195,6 +205,10 @@ def get_proposal(proposal_id: int):
     if not p:
         raise HTTPException(status_code=404, detail="Proposal not found")
     trail = build_evidence_trail(proposal_id)
+    trail["score_breakdown"] = json.loads(p.get("ScoreBreakdownJson", "null") or "null")
+    trail["compliance_breakdown"] = json.loads(p.get("ComplianceBreakdownJson", "{}") or "{}")
+    trail["impact_score"] = p.get("ImpactScore", 0.0)
+    trail["flagged_low_confidence_high_impact"] = bool(p.get("FlaggedLowConfHighImpact", 0))
     return trail
 
 

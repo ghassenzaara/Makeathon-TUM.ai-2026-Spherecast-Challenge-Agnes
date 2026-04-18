@@ -23,6 +23,9 @@ interface RerankPoint {
   is_pareto_optimal: boolean;
   dominated_by: number[];
   recommended_supplier_name: string;
+  impact_score: number;
+  impact_confidence: number;
+  flagged_low_confidence_high_impact: boolean;
 }
 
 function CustomTooltip({ active, payload }: { active?: boolean; payload?: Array<{ payload: RerankPoint }> }) {
@@ -30,20 +33,26 @@ function CustomTooltip({ active, payload }: { active?: boolean; payload?: Array<
   const d = payload[0]?.payload;
   if (!d) return null;
   return (
-    <div className="bg-white border border-slate-200 rounded-lg p-3 shadow-xl text-xs space-y-1 max-w-52 pointer-events-none">
+    <div className="bg-white border border-slate-200 rounded-lg p-3 shadow-xl text-xs space-y-1 max-w-56 pointer-events-none">
       <p className="font-semibold text-slate-900 truncate">{d.recommended_supplier_name || `Proposal #${d.id}`}</p>
       <p className="text-slate-500">
-        Savings: <span className="text-emerald-600 font-medium">{d.savings?.toFixed(1)}%</span>
+        Impact: <span className="text-emerald-600 font-medium">{d.impact_score?.toFixed(3)}</span>
+        {" "}
+        <span className="text-slate-400">(conf: {(d.impact_confidence * 100).toFixed(0)}%)</span>
       </p>
       <p className="text-slate-500">
         Compliance P: <span className="font-medium text-slate-800">{d.compliance_probability?.toFixed(3)}</span>
       </p>
       <p className="text-slate-500">
-        Risk: <span className="text-red-500 font-medium">{d.risk_score?.toFixed(3)}</span>
+        Savings: <span className="text-emerald-600 font-medium">{d.savings?.toFixed(1)}%</span>
+        {" · "}Risk: <span className="text-red-500 font-medium">{d.risk_score?.toFixed(3)}</span>
       </p>
       <p className="text-slate-500">
         Utility: <span className="font-mono font-semibold text-slate-800">{d.utility_score?.toFixed(3)}</span>
       </p>
+      {d.flagged_low_confidence_high_impact && (
+        <p className="text-red-600 font-semibold">⚠ High impact, low confidence — review required</p>
+      )}
       {d.is_pareto_optimal ? (
         <p className="text-amber-600 font-semibold">★ Pareto Optimal (rank #{d.rank})</p>
       ) : (
@@ -122,10 +131,16 @@ export function ParetoChart() {
 
   const frontier = data.filter((d) => d.is_pareto_optimal);
   const dominated = data.filter((d) => !d.is_pareto_optimal);
+  const flagged = data.filter((d) => d.flagged_low_confidence_high_impact);
 
   const handleClick = (point: { id?: number }) => {
     if (point?.id != null) router.push(`/proposals/${point.id}`);
   };
+
+  // Encode confidence as opacity: low confidence → translucent
+  function pointOpacity(conf: number): number {
+    return Math.max(0.2, Math.min(0.95, conf));
+  }
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white shadow-sm p-6 space-y-5">
@@ -135,7 +150,7 @@ export function ParetoChart() {
             Pareto Frontier — Decision-Theoretic Ranking
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">
-            No ground-truth data required · drag sliders to tune risk appetite
+            X-axis: evidence-weighted impact · opacity encodes confidence · red ring = high impact, low confidence
           </p>
         </div>
         {loading && (
@@ -177,11 +192,11 @@ export function ParetoChart() {
           <ScatterChart margin={{ top: 10, right: 24, bottom: 28, left: 10 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
             <XAxis
-              dataKey="savings"
-              name="Savings %"
+              dataKey="impact_score"
+              name="Impact"
               type="number"
-              domain={[0, 32]}
-              label={{ value: "Estimated Savings %", position: "insideBottom", offset: -16, fontSize: 11, fill: "#94a3b8" }}
+              domain={[0, 0.9]}
+              label={{ value: "Evidence-Weighted Impact", position: "insideBottom", offset: -16, fontSize: 11, fill: "#94a3b8" }}
               tick={{ fontSize: 10, fill: "#94a3b8" }}
             />
             <YAxis
@@ -196,7 +211,7 @@ export function ParetoChart() {
               cursor={{ strokeDasharray: "3 3", stroke: "#cbd5e1" }}
               content={<CustomTooltip />}
             />
-            {/* Dominated proposals */}
+            {/* Dominated proposals — opacity encodes confidence */}
             <Scatter
               name="Dominated"
               data={dominated}
@@ -207,12 +222,13 @@ export function ParetoChart() {
                 <Cell
                   key={`d-${entry.id}`}
                   fill="#94a3b8"
-                  opacity={0.5}
-                  stroke="none"
+                  opacity={pointOpacity(entry.impact_confidence)}
+                  stroke={entry.flagged_low_confidence_high_impact ? "#ef4444" : "none"}
+                  strokeWidth={entry.flagged_low_confidence_high_impact ? 2 : 0}
                 />
               ))}
             </Scatter>
-            {/* Pareto-optimal proposals */}
+            {/* Pareto-optimal proposals — opacity encodes confidence */}
             <Scatter
               name="Frontier"
               data={frontier}
@@ -223,9 +239,9 @@ export function ParetoChart() {
                 <Cell
                   key={`f-${entry.id}`}
                   fill="#f59e0b"
-                  stroke="#d97706"
-                  strokeWidth={2}
-                  opacity={0.9}
+                  opacity={pointOpacity(entry.impact_confidence)}
+                  stroke={entry.flagged_low_confidence_high_impact ? "#ef4444" : "#d97706"}
+                  strokeWidth={entry.flagged_low_confidence_high_impact ? 3 : 2}
                 />
               ))}
             </Scatter>
@@ -234,7 +250,7 @@ export function ParetoChart() {
       </div>
 
       {data.length > 0 && (
-        <div className="flex items-center gap-6 text-xs text-slate-500">
+        <div className="flex items-center gap-6 text-xs text-slate-500 flex-wrap">
           <span className="flex items-center gap-1.5">
             <span className="inline-block h-3 w-3 rounded-full bg-amber-400 border-2 border-amber-600" />
             {frontier.length} Pareto-optimal
@@ -243,7 +259,13 @@ export function ParetoChart() {
             <span className="inline-block h-3 w-3 rounded-full bg-slate-400 opacity-60" />
             {dominated.length} dominated
           </span>
-          <span className="text-slate-300">· click any point to view proposal</span>
+          {flagged.length > 0 && (
+            <span className="flex items-center gap-1.5">
+              <span className="inline-block h-3 w-3 rounded-full bg-white border-2 border-red-500" />
+              {flagged.length} high-impact / low-confidence
+            </span>
+          )}
+          <span className="text-slate-300">· opacity = confidence · click to view</span>
         </div>
       )}
 

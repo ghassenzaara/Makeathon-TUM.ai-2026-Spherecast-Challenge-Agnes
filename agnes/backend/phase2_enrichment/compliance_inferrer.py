@@ -18,7 +18,7 @@ import json
 import logging
 from datetime import datetime, timezone
 
-from backend.config import GEMINI_API_KEY, GEMINI_CHAT_MODEL
+from backend.config import OPENAI_API_KEY, OPENAI_CHAT_MODEL
 from backend.db.queries import (
     get_all_finished_goods,
     get_bom_for_product,
@@ -152,12 +152,11 @@ async def _find_exceptions(
     category: str,
 ) -> list[str]:
     """Use LLM to find exceptions for this ingredient."""
-    if not GEMINI_API_KEY or not fg_certs:
+    if not OPENAI_API_KEY or not fg_certs:
         return []
 
-    from google import genai as _genai
-    from google.genai import types as _genai_types
-    client = _genai.Client(api_key=GEMINI_API_KEY)
+    from openai import AsyncOpenAI
+    client = AsyncOpenAI(api_key=OPENAI_API_KEY)
 
     try:
         prompt = _EXCEPTION_PROMPT.format(
@@ -166,15 +165,13 @@ async def _find_exceptions(
             substance=substance or ingredient_name,
             category=category,
         )
-        response = await client.aio.models.generate_content(
-            model=GEMINI_CHAT_MODEL,
-            contents=prompt,
-            config=_genai_types.GenerateContentConfig(
-                response_mime_type="application/json",
-                temperature=0.1,
-            ),
+        response = await client.chat.completions.create(
+            model=OPENAI_CHAT_MODEL,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.1,
+            response_format={"type": "json_object"},
         )
-        result = json.loads(response.text)
+        result = json.loads(response.choices[0].message.content)
         return result.get("exceptions", [])
     except Exception as e:
         logger.error(f"  Exception finder failed for {ingredient_name}: {e}")

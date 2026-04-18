@@ -2,7 +2,7 @@
 Pareto frontier engine — multi-objective ranking for sourcing proposals.
 
 Objectives (all to maximize):
-  savings    = estimated_savings_pct / 30.0
+  impact     = savings_norm × evidence_strength × 0.9  (evidence-weighted savings)
   compliance = compliance_probability
   neg_risk   = 1 - risk_score
 
@@ -17,13 +17,20 @@ Risk model (structured heuristic decomposition, weights are design choices):
   risk = 0.4*(1 - compliance_probability)
        + 0.3*concentration_risk          (= companies_consolidated / total_companies)
        + 0.3*(1 - verification_confidence)
+
+Impact confidence & flagging:
+  impact_confidence = evidence_strength × 0.9  (DETERMINISTIC source weight for savings)
+  flagged_low_confidence_high_impact = impact > median AND impact_confidence < 0.5
 """
 
 import logging
-from dataclasses import dataclass, field
+import statistics
+from dataclasses import dataclass
 from typing import Dict, List, Tuple
 
 logger = logging.getLogger(__name__)
+
+_SAVINGS_SOURCE_WEIGHT = 0.9   # savings is computed deterministically
 
 
 @dataclass
@@ -32,7 +39,9 @@ class ParetoResult:
     is_pareto_optimal: bool
     pareto_rank: int                      # 1 = frontier, 2+ = dominated layers
     dominated_by: List[int]               # proposal IDs that dominate this one
-    objectives: Dict[str, float]          # {"savings", "compliance", "neg_risk"}
+    objectives: Dict[str, float]          # {"impact", "compliance", "neg_risk"}
+    impact_confidence: float = 0.0        # evidence_strength × source_weight
+    flagged_low_confidence_high_impact: bool = False   # impact > median AND conf < 0.5
 
 
 def _compute_risk_score(proposal) -> float:
@@ -64,7 +73,8 @@ def _dominates(obj_a: Dict[str, float], obj_b: Dict[str, float]) -> bool:
 
 def compute_pareto_frontier(proposals: List) -> List[ParetoResult]:
     """
-    Assign Pareto ranks to all proposals and write risk_score back onto each.
+    Assign Pareto ranks to all proposals and write risk_score + impact_score
+    back onto each proposal object.
 
     Returns a ParetoResult per proposal, parallel to the input list.
     """
@@ -72,14 +82,23 @@ def compute_pareto_frontier(proposals: List) -> List[ParetoResult]:
     if n == 0:
         return []
 
-    # Compute risk_score and build objective vectors
+    # Compute risk, impact, and build objective vectors
     results: List[ParetoResult] = []
     for p in proposals:
         risk = _compute_risk_score(p)
         p.risk_score = risk  # write back so utility + DB persistence can use it
+
         comp_prob = getattr(p, "compliance_probability", 0.5)
+        ev_strength = getattr(p, "evidence_strength", 0.5)
+        savings_norm = p.estimated_savings_pct / 30.0
+
+        # Evidence-weighted impact score (savings axis)
+        impact_score = round(savings_norm * ev_strength * _SAVINGS_SOURCE_WEIGHT, 4)
+        impact_confidence = round(ev_strength * _SAVINGS_SOURCE_WEIGHT, 4)
+        p.impact_score = impact_score  # write back for DB persistence + frontend
+
         objectives = {
-            "savings": p.estimated_savings_pct / 30.0,
+            "impact": impact_score,
             "compliance": comp_prob,
             "neg_risk": 1.0 - risk,
         }
@@ -89,6 +108,7 @@ def compute_pareto_frontier(proposals: List) -> List[ParetoResult]:
             pareto_rank=0,
             dominated_by=[],
             objectives=objectives,
+            impact_confidence=impact_confidence,
         ))
 
     # Compute pairwise dominance
@@ -125,8 +145,24 @@ def compute_pareto_frontier(proposals: List) -> List[ParetoResult]:
             if j in dominates[i]:
                 results[j].dominated_by.append(proposals[i].id)
 
+    # Flag: high impact AND low confidence (after all impact scores computed)
+    impact_values = [r.objectives["impact"] for r in results]
+    median_impact = statistics.median(impact_values) if impact_values else 0.0
+    for r in results:
+        r.flagged_low_confidence_high_impact = (
+            r.objectives["impact"] > median_impact and r.impact_confidence < 0.5
+        )
+        # Write flag back to proposal for DB persistence
+        for p in proposals:
+            if p.id == r.proposal_id:
+                p.flagged_low_confidence_high_impact = r.flagged_low_confidence_high_impact
+                break
+
     frontier_count = sum(1 for r in results if r.is_pareto_optimal)
     logger.info(f"Pareto frontier: {frontier_count}/{n} proposals optimal")
+    flagged_count = sum(1 for r in results if r.flagged_low_confidence_high_impact)
+    if flagged_count:
+        logger.info(f"Flagged {flagged_count} high-impact/low-confidence proposals")
     return results
 
 
