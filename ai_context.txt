@@ -1,0 +1,1974 @@
+Company: '21st Century' | Finished Good: 'FG-iherb-cen-27493'
+Ingredients:
+    - RM-C1-calcium-citrate-05c28cc3 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C1-cellulose-594d4ce6 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C1-croscarmellose-sodium-ba050b0c (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C1-magnesium-silicate-6045d1ce (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C1-magnesium-stearate-fdedf242 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C1-polyethylene-glycol-53cc28ba (Approved Suppliers: [Spectrum Chemical, Univar Solutions])
+    - RM-C1-polyvinyl-alcohol-ebfeea56 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C1-stearic-acid-9a014700 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C1-titanium-dioxide-e460a12c (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C1-vitamin-d3-cholecalciferol-67efce0f (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: '21st Century' | Finished Good: 'FG-target-a-1006517338'
+Ingredients:
+    - RM-C1-cellulose-594d4ce6 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C1-croscarmellose-sodium-ba050b0c (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C1-magnesium-stearate-fdedf242 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C1-stearic-acid-9a014700 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C1-vitamin-d3-cholecalciferol-67efce0f (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'ALL ONE' | Finished Good: 'FG-amazon-b0002wrqy4'
+Ingredients:
+    - RM-C2-ascorbic-acid-4823fabf (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C2-beta-carotene-bb90cd60 (Approved Suppliers: [AIDP, Nutri Avenue])
+    - RM-C2-choline-bitartrate-296d4da4 (Approved Suppliers: [Balchem, Prinova USA])
+    - RM-C2-cyanocobalamin-c2d9669b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C2-d-alpha-tocopheryl-succinate-532e67fd (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C2-d-calcium-pantothenate-bc49e976 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C2-hesperidin-complex-a26e0bcd (Approved Suppliers: [AIDP, Nutri Avenue])
+    - RM-C2-inositol-a10dfe66 (Approved Suppliers: [Nutri Avenue, PureBulk])
+    - RM-C2-lemon-bioflavonoid-complex-0eeb9802 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C2-manganese-2947a710 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C2-niacinamide-c27eb0fe (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C2-para-amino-benzoic-acid-b19c9ed7 (Approved Suppliers: [Cambrex, Spectrum Chemical])
+    - RM-C2-potassium-alginate-ab91bdcc (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C2-pyridoxine-hcl-0a843bcb (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C2-riboflavin-a3d02436 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C2-rice-bran-1f905661 (Approved Suppliers: [Ingredion])
+    - RM-C2-rice-protein-c17ff51d (Approved Suppliers: [AIDP, Ingredion])
+    - RM-C2-rutin-e29ccf19 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C2-soy-lecithin-cc38c49d (Approved Suppliers: [ADM, Cargill])
+    - RM-C2-thiamine-hcl-a714a4bf (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C2-vitamin-a-palmitate-58b26912 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'AN PERFORMANCE' | Finished Good: 'FG-the-vitamin-shoppe-anp-14924'
+Ingredients:
+    - RM-C3-citric-acid-6f4f6850 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C3-maltodextrin-9e221e16 (Approved Suppliers: [Ingredion])
+    - RM-C3-orange-flavor-10a9b501 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C3-potassium-a7e6389c (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C3-sodium-bd233043 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C3-sugar-ef04e1fd (Approved Suppliers: [Ingredion, Prinova USA])
+
+Company: 'AlkemyPower' | Finished Good: 'FG-amazon-b07z2x2xtc'
+Ingredients:
+    - RM-C4-calcium-c77f1de7 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C4-magnesium-7058dcb8 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C4-potassium-4fd2e03c (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Aloha' | Finished Good: 'FG-thrive-market-aloha-vanilla-protein-powder'
+Ingredients:
+    - RM-C5-blue-agave-inulin-b9f21209 (Approved Suppliers: [Ingredion, Nutra Food Ingredients])
+    - RM-C5-brown-rice-protein-f2127b74 (Approved Suppliers: [AIDP, Ingredion])
+    - RM-C5-cinnamon-28c1b925 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C5-coconut-sugar-72cdee92 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C5-ground-vanilla-beans-51d15fb4 (Approved Suppliers: [Gold Coast Ingredients, Virginia Dare])
+    - RM-C5-hemp-seed-protein-8695d4e3 (Approved Suppliers: [AIDP])
+    - RM-C5-medium-chain-triglycerides-mct-from-coconut-oil-69d4233c (Approved Suppliers: [ADM, Cargill])
+    - RM-C5-monk-fruit-extract-a8190686 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C5-natural-flavor-177a6a66 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C5-pea-protein-4369ae6b (Approved Suppliers: [AIDP, Ingredion])
+    - RM-C5-pumpkin-seed-protein-e4230ea3 (Approved Suppliers: [AIDP])
+    - RM-C5-xanthan-gum-7ff5328f (Approved Suppliers: [Ingredion])
+
+Company: 'Animal' | Finished Good: 'FG-iherb-116514'
+Ingredients:
+    - RM-C6-acesulfame-potassium-72a88908 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C6-artificial-flavor-abc70ce1 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C6-carrageenan-5724a865 (Approved Suppliers: [Ingredion])
+    - RM-C6-cellulose-gum-fbd9bf21 (Approved Suppliers: [Ingredion])
+    - RM-C6-cocoa-processed-with-alkali-4270adbb (Approved Suppliers: [Ingredion])
+    - RM-C6-natural-flavor-89d4e0c4 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C6-sodium-chloride-baddece9 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C6-soy-lecithin-5de90202 (Approved Suppliers: [ADM, Cargill])
+    - RM-C6-sucralose-792c37c8 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C6-sunflower-lecithin-47e33a0e (Approved Suppliers: [ADM, Cargill])
+    - RM-C6-whey-protein-concentrate-3d85f0ab (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C6-whey-protein-isolate-0a63f8af (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C6-xanthan-gum-ead6309f (Approved Suppliers: [Ingredion])
+
+Company: 'BBEEAAUU' | Finished Good: 'FG-walmart-17338669408'
+Ingredients:
+    - RM-C7-b-vitamins-d6188591 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C7-magnesium-964b9c23 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C7-natural-flavors-ed1c092b (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C7-potassium-c3344ceb (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C7-sodium-72777d06 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C7-stevia-or-sucralose-sweetener-a556c26e (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C7-vitamin-c-cd36dbb3 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C7-zinc-d01732ec (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Biochem' | Finished Good: 'FG-iherb-12222'
+Ingredients:
+    - RM-C8-cocoa-processed-with-alkali-bf29b228 (Approved Suppliers: [Ingredion])
+    - RM-C8-natural-french-vanilla-flavor-440891d7 (Approved Suppliers: [Gold Coast Ingredients, Virginia Dare])
+    - RM-C8-organic-cane-sugar-a6aae34c (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C8-sunflower-lecithin-f6a00a49 (Approved Suppliers: [ADM, Cargill])
+    - RM-C8-whey-protein-isolate-057891ce (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C8-xanthan-gum-e13cc7cd (Approved Suppliers: [Ingredion])
+
+Company: 'Body Fortress' | Finished Good: 'FG-walgreens-300436539'
+Ingredients:
+    - RM-C9-acesulfame-potassium-82c4ce5f (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C9-cellulose-gum-86c049a5 (Approved Suppliers: [Ingredion])
+    - RM-C9-cocoa-82946ec0 (Approved Suppliers: [Ingredion])
+    - RM-C9-maltodextrin-273f0e8c (Approved Suppliers: [Ingredion])
+    - RM-C9-natural-and-artificial-flavors-0702b8aa (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C9-salt-79a25e0f (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C9-sucralose-0d0ed3f1 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C9-sunflower-lecithin-db6877ff (Approved Suppliers: [ADM, Cargill])
+    - RM-C9-vitamin-c-46b8181f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C9-vitamin-d-f836407b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C9-whey-protein-concentrate-410208b7 (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C9-whey-protein-isolate-2d082fc2 (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C9-zinc-eab3b1ef (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Body Fortress' | Finished Good: 'FG-walgreens-300436641'
+Ingredients:
+    - RM-C9-acesulfame-potassium-82c4ce5f (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C9-ascorbic-acid-ee968c4e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C9-cellulose-gum-86c049a5 (Approved Suppliers: [Ingredion])
+    - RM-C9-maltodextrin-273f0e8c (Approved Suppliers: [Ingredion])
+    - RM-C9-natural-and-artificial-flavors-0702b8aa (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C9-salt-79a25e0f (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C9-sucralose-0d0ed3f1 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C9-sunflower-lecithin-db6877ff (Approved Suppliers: [ADM, Cargill])
+    - RM-C9-vitamin-d3-1ac68852 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C9-whey-protein-concentrate-410208b7 (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C9-whey-protein-isolate-2d082fc2 (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C9-zinc-oxide-d758de8e (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'BodyTech' | Finished Good: 'FG-the-vitamin-shoppe-vs-2573'
+Ingredients:
+    - RM-C10-chloride-b98a465b (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C10-citric-acid-8159ad4e (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C10-effervescent-base-ddcd1d62 (Approved Suppliers: [Prinova USA, Vitaquest])
+    - RM-C10-natural-lemon-lime-flavor-2351fcc6 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C10-potassium-4334e301 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C10-vitamin-c-a3c07522 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'BodyTech' | Finished Good: 'FG-the-vitamin-shoppe-vs-4311'
+Ingredients:
+    - RM-C10-citric-acid-8159ad4e (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C10-concentrace-trace-minerals-4f4f68d2 (Approved Suppliers: [Trace Minerals])
+
+Company: 'CVS' | Finished Good: 'FG-cvs-342300'
+Ingredients:
+    - RM-C11-gelatin-capsule-bovine-42ef5483 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C11-magnesium-glycinate-309625e9 (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C11-rice-powder-3d1b7e08 (Approved Suppliers: [Ingredion])
+    - RM-C11-silica-1de71d67 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C11-vegetable-magnesium-stearate-a91ab707 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'Caltrate' | Finished Good: 'FG-sams-club-prod19150276'
+Ingredients:
+    - RM-C12-blue-2-lake-b1728ef8 (Approved Suppliers: [Gold Coast Ingredients, Sensient])
+    - RM-C12-calcium-carbonate-7423a5f4 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C12-cholecalciferol-vitamin-d3-d24cbd0c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C12-copper-sulfate-18cbcb56 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C12-croscarmellose-sodium-6986ada1 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C12-magnesium-oxide-80939af8 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C12-magnesium-stearate-1cf9b021 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C12-maltodextrin-2c5ab478 (Approved Suppliers: [Ingredion])
+    - RM-C12-manganese-sulfate-a7c552be (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C12-polyethylene-glycol-8a996dc9 (Approved Suppliers: [Spectrum Chemical, Univar Solutions])
+    - RM-C12-polyvinyl-alcohol-bef41d00 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C12-red-40-lake-8f2e0c08 (Approved Suppliers: [Gold Coast Ingredients, Sensient])
+    - RM-C12-talc-4e027cb7 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C12-titanium-dioxide-6699b33e (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C12-tocopherols-98f93e88 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C12-yellow-6-lake-d8d481af (Approved Suppliers: [Gold Coast Ingredients, Sensient])
+    - RM-C12-zinc-oxide-81626087 (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'Care/of' | Finished Good: 'FG-sams-club-p03016382'
+Ingredients:
+    - RM-C13-b-vitamins-00134c85 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C13-energy-support-botanicals-nutrients-4823efcb (Approved Suppliers: [Nutra Blend, Prinova USA])
+    - RM-C13-probiotic-cultures-4fa0be80 (Approved Suppliers: [Custom Probiotics, Specialty Enzymes & Probiotics])
+    - RM-C13-vitamin-d-b89cc23f (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Centrum' | Finished Good: 'FG-amazon-b09hjv7xjs'
+Ingredients:
+    - RM-C14-biotin-b128e9e7 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-calcium-1b8fb86e (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-chromium-e949ac4b (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-copper-0315914d (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-folate-65ea52b0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-iodine-f96d860c (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-iron-1f8c0d39 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-lutein-c82b0e46 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C14-lycopene-92d0ad75 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C14-magnesium-0ad704ee (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-manganese-c9e87173 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-molybdenum-4a13d728 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-niacinamide-603dda4f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-pantothenic-acid-9e8a871d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-selenium-95d94eb8 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-vitamin-a-72b32d59 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-b1-9fb2f65d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-b12-296cc7e3 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-b2-cad7cce6 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-b6-c130b713 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-c-e97cb4c7 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-d-0d97442e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-e-7d43f6b1 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-k1-59e9cf97 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-zinc-35e67d6e (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Centrum' | Finished Good: 'FG-target-a-13943499'
+Ingredients:
+    - RM-C14-b-vitamins-6b1105ff (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-calcium-1b8fb86e (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-chloride-3391a511 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-chromium-e949ac4b (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-gelatin-017eb28d (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C14-magnesium-0ad704ee (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-molybdenum-4a13d728 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-potassium-e9dad6ca (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-selenium-95d94eb8 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-vitamin-a-72b32d59 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-c-e97cb4c7 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-d-0d97442e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-e-7d43f6b1 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-k-8acc4148 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-zinc-35e67d6e (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Centrum' | Finished Good: 'FG-walmart-970963212'
+Ingredients:
+    - RM-C14-biotin-b128e9e7 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-calcium-1b8fb86e (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-chromium-e949ac4b (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-copper-0315914d (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-folate-65ea52b0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-lutein-c82b0e46 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C14-lycopene-92d0ad75 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C14-magnesium-0ad704ee (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-manganese-c9e87173 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-molybdenum-4a13d728 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-niacinamide-603dda4f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-pantothenic-acid-9e8a871d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-riboflavin-cca38c81 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-selenium-95d94eb8 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C14-thiamine-904ca673 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-a-72b32d59 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-b12-296cc7e3 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-b6-c130b713 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-c-e97cb4c7 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-d-0d97442e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-e-7d43f6b1 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-vitamin-k-8acc4148 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C14-zinc-35e67d6e (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Cure Hydration' | Finished Good: 'FG-thrive-market-cure-hydration-electrolyte-drink-mix-jar-berry-pomegranate'
+Ingredients:
+    - RM-C15-beet-powder-584aabff (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C15-coconut-water-powder-ed983a65 (Approved Suppliers: [AIDP, American Botanicals])
+    - RM-C15-lemon-juice-powder-0952a268 (Approved Suppliers: [AIDP, American Botanicals])
+    - RM-C15-monk-fruit-extract-3b75b354 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C15-non-gmo-citric-acid-7638d213 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C15-organic-flavor-1c1273ac (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C15-organic-pomegranate-juice-powder-b89704e5 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C15-organic-stevia-extract-f10816df (Approved Suppliers: [Sawgrass Nutra Labs])
+    - RM-C15-pink-himalayan-salt-7f2aeceb (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C15-sodium-citrate-2bb2e71f (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'Cure Hydration' | Finished Good: 'FG-vitacost-cure-hydration-hydrating-electrolyte-drink-mix-ginger-turmeric'
+Ingredients:
+    - RM-C15-coconut-water-powder-ed983a65 (Approved Suppliers: [AIDP, American Botanicals])
+    - RM-C15-lemon-juice-powder-0952a268 (Approved Suppliers: [AIDP, American Botanicals])
+    - RM-C15-monk-fruit-extract-3b75b354 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C15-non-gmo-citric-acid-7638d213 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C15-organic-ginger-4318d2ea (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C15-organic-stevia-extract-f10816df (Approved Suppliers: [Sawgrass Nutra Labs])
+    - RM-C15-organic-turmeric-75c7aa52 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C15-pink-himalayan-salt-7f2aeceb (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C15-sodium-citrate-2bb2e71f (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'Electrolit' | Finished Good: 'FG-amazon-b0fts2jxgw'
+Ingredients:
+    - RM-C16-calcium-6951db19 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C16-citric-acid-67e2da70 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C16-magnesium-e731ae15 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C16-natural-flavors-2b576df4 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C16-potassium-3356f222 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C16-sodium-ec6914d6 (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Equate' | Finished Good: 'FG-walmart-10324636'
+Ingredients:
+    - RM-C17-ascorbic-acid-ab2a6348 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-ascorbyl-palmitate-f401359d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-beta-carotene-75e75e5d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-bht-7970c2c1 (Approved Suppliers: [Spectrum Chemical, Univar Solutions])
+    - RM-C17-biotin-07291e5b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-calcium-carbonate-164af619 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-carboxymethylcellulose-sodium-1d92bbc2 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-cholecalciferol-75e08048 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-chromium-chloride-ac386ae8 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-cupric-oxide-95cf9a6a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-cyanocobalamin-902cb05e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-d-calcium-pantothenate-b22e6b6d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-dl-alpha-tocopherol-68b372d5 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-dl-alpha-tocopheryl-acetate-153b1b41 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-dl-tartaric-acid-d0c76b57 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C17-folic-acid-6c8e8f26 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-gelatin-45b7cd2c (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C17-glucose-16858abc (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C17-gum-arabic-21ea5acf (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C17-hydroxypropyl-methylcellulose-46512c9c (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-lycopene-37067980 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C17-magnesium-oxide-2b403060 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C17-magnesium-stearate-6abf59fc (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-maltodextrin-8c87d5eb (Approved Suppliers: [Ingredion])
+    - RM-C17-manganese-sulfate-f60c6285 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-medium-chain-triglycerides-8f09d80d (Approved Suppliers: [ADM, Cargill])
+    - RM-C17-microcrystalline-cellulose-557e108b (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-nicotinamide-bcdfeba8 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-phytonadione-55621c1e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-polyvinyl-alcohol-7d52bf18 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-pyridoxine-hydrochloride-9ea3cd1b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-retinyl-acetate-464fff68 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-riboflavin-1e96c616 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-silica-53bc9dc6 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-sodium-aluminum-silicate-ad903eef (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-sodium-ascorbate-f4dc2885 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-sodium-benzoate-4b00adc9 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-sodium-selenite-733ab69c (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-sodium-starch-glycolate-027c1542 (Approved Suppliers: [Ingredion])
+    - RM-C17-sorbic-acid-c99fcf34 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-sorbitol-fe5cb8ba (Approved Suppliers: [Nutra Food Ingredients, Prinova USA])
+    - RM-C17-starch-2edb910e (Approved Suppliers: [Ingredion])
+    - RM-C17-sucrose-efa729e9 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C17-sunflower-oil-bb851f70 (Approved Suppliers: [ADM, Cargill])
+    - RM-C17-thiamine-mononitrate-b51b48ac (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-tocopherols-a8fa557b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-tricalcium-phosphate-431a4818 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-zinc-oxide-add96a17 (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'Equate' | Finished Good: 'FG-walmart-10325038'
+Ingredients:
+    - RM-C17-ascorbic-acid-ab2a6348 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-beta-carotene-75e75e5d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-bht-7970c2c1 (Approved Suppliers: [Spectrum Chemical, Univar Solutions])
+    - RM-C17-biotin-07291e5b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-calcium-carbonate-164af619 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-carboxymethylcellulose-sodium-1d92bbc2 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-cholecalciferol-75e08048 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-chromium-picolinate-9a349105 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C17-croscarmellose-sodium-a3e32460 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-cupric-sulfate-38ac7927 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-cyanocobalamin-902cb05e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-d-calcium-pantothenate-b22e6b6d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-dicalcium-phosphate-a5ed9ed7 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-dl-alpha-tocopheryl-acetate-153b1b41 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-dl-tartaric-acid-d0c76b57 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C17-fd-and-c-blue-no-2-lake-64e07256 (Approved Suppliers: [Gold Coast Ingredients, Sensient])
+    - RM-C17-fd-and-c-red-no-40-lake-0779ba16 (Approved Suppliers: [Gold Coast Ingredients, Sensient])
+    - RM-C17-fd-and-c-yellow-no-6-lake-6685d42c (Approved Suppliers: [Gold Coast Ingredients, Sensient])
+    - RM-C17-ferrous-fumarate-1bb7e62c (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-folic-acid-6c8e8f26 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-hydroxypropyl-methylcellulose-46512c9c (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-magnesium-oxide-2b403060 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C17-magnesium-stearate-6abf59fc (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-maltodextrin-8c87d5eb (Approved Suppliers: [Ingredion])
+    - RM-C17-manganese-sulfate-f60c6285 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-medium-chain-triglycerides-8f09d80d (Approved Suppliers: [ADM, Cargill])
+    - RM-C17-microcrystalline-cellulose-557e108b (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-nicotinamide-bcdfeba8 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-phytonadione-55621c1e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-polydextrose-cd4814b7 (Approved Suppliers: [Ingredion])
+    - RM-C17-polyvinyl-alcohol-7d52bf18 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-potassium-chloride-35a32d7a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-potassium-iodide-e373836a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-pyridoxine-hydrochloride-9ea3cd1b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-retinyl-acetate-464fff68 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-riboflavin-1e96c616 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-silica-53bc9dc6 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-sodium-molybdate-0f7d838a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-sodium-selenite-733ab69c (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-starch-2edb910e (Approved Suppliers: [Ingredion])
+    - RM-C17-thiamine-mononitrate-b51b48ac (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-titanium-dioxide-341f50d1 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-tricalcium-phosphate-431a4818 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-zinc-oxide-add96a17 (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'Equate' | Finished Good: 'FG-walmart-17324942'
+Ingredients:
+    - RM-C17-biotin-07291e5b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-calcium-carbonate-164af619 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-chromium-5721b069 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C17-folic-acid-6c8e8f26 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-magnesium-oxide-2b403060 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C17-maltodextrin-8c87d5eb (Approved Suppliers: [Ingredion])
+    - RM-C17-microcrystalline-cellulose-557e108b (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-molybdenum-bc44eb9d (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C17-niacin-3c2ef14d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-pantothenic-acid-cc467f0a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-potassium-chloride-35a32d7a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-riboflavin-1e96c616 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-selenium-3c5cc68c (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C17-thiamine-3ad733ed (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-vitamin-a-8273c020 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-vitamin-b12-79c7611a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-vitamin-b6-64f65ea4 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-vitamin-c-44b4a0f7 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-vitamin-d3-e8b80826 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-vitamin-e-d3ec2225 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-vitamin-k-bc485b26 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-zinc-oxide-add96a17 (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'Equate' | Finished Good: 'FG-walmart-40775783'
+Ingredients:
+    - RM-C17-ascorbic-acid-ab2a6348 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-beta-carotene-75e75e5d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-bht-7970c2c1 (Approved Suppliers: [Spectrum Chemical, Univar Solutions])
+    - RM-C17-biotin-07291e5b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-calcium-carbonate-164af619 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-carboxymethylcellulose-sodium-1d92bbc2 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-cholecalciferol-75e08048 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-chromium-picolinate-9a349105 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C17-croscarmellose-sodium-a3e32460 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-cupric-sulfate-38ac7927 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-cyanocobalamin-902cb05e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-d-calcium-pantothenate-b22e6b6d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-dicalcium-phosphate-a5ed9ed7 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-dl-alpha-tocopheryl-acetate-153b1b41 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-dl-tartaric-acid-d0c76b57 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C17-fd-and-c-blue-no-2-lake-64e07256 (Approved Suppliers: [Gold Coast Ingredients, Sensient])
+    - RM-C17-fd-and-c-red-no-40-lake-0779ba16 (Approved Suppliers: [Gold Coast Ingredients, Sensient])
+    - RM-C17-fd-and-c-yellow-no-6-lake-6685d42c (Approved Suppliers: [Gold Coast Ingredients, Sensient])
+    - RM-C17-ferrous-fumarate-1bb7e62c (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-folic-acid-6c8e8f26 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-hydroxypropyl-methylcellulose-46512c9c (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-magnesium-oxide-2b403060 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C17-magnesium-stearate-6abf59fc (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-maltodextrin-8c87d5eb (Approved Suppliers: [Ingredion])
+    - RM-C17-manganese-sulfate-f60c6285 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-medium-chain-triglycerides-8f09d80d (Approved Suppliers: [ADM, Cargill])
+    - RM-C17-microcrystalline-cellulose-557e108b (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-nicotinamide-bcdfeba8 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-phytonadione-55621c1e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-polydextrose-cd4814b7 (Approved Suppliers: [Ingredion])
+    - RM-C17-polyvinyl-alcohol-7d52bf18 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-potassium-chloride-35a32d7a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-potassium-iodide-e373836a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-pyridoxine-hydrochloride-9ea3cd1b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-retinyl-acetate-464fff68 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-riboflavin-1e96c616 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-silica-53bc9dc6 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-sodium-molybdate-0f7d838a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-sodium-selenite-733ab69c (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-starch-2edb910e (Approved Suppliers: [Ingredion])
+    - RM-C17-thiamine-mononitrate-b51b48ac (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C17-titanium-dioxide-341f50d1 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C17-tricalcium-phosphate-431a4818 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C17-zinc-oxide-add96a17 (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'GMU SPORT' | Finished Good: 'FG-amazon-b0cn51242z'
+Ingredients:
+    - RM-C18-bcaas-162e8977 (Approved Suppliers: [BulkSupplements, PureBulk])
+    - RM-C18-collagen-peptides-45fc58ed (Approved Suppliers: [Darling Ingredients / Rousselot, Nutra Food Ingredients])
+    - RM-C18-digestive-enzymes-5dab88c4 (Approved Suppliers: [ADM, Specialty Enzymes & Probiotics])
+    - RM-C18-lecithin-a7f2d498 (Approved Suppliers: [ADM, Cargill])
+    - RM-C18-natural-and-artificial-flavors-0e9a8451 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C18-whey-protein-isolate-5a7e86bf (Approved Suppliers: [Actus Nutrition, Prinova USA])
+
+Company: 'GNC' | Finished Good: 'FG-gnc-136813'
+Ingredients:
+    - RM-C19-gelatin-33f6d946 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C19-magnesium-oxide-22a42bff (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C19-magnesium-stearate-63974975 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C19-microcrystalline-cellulose-652ba547 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C19-stearic-acid-3d5eb908 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'GNC' | Finished Good: 'FG-gnc-145223'
+Ingredients:
+    - RM-C19-calcium-c18ce14f (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C19-carnauba-wax-217a6c92 (Approved Suppliers: [Koster Keunen, Strahl & Pitsch])
+    - RM-C19-dicalcium-phosphate-2e99d674 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C19-gum-arabic-d8b5f627 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C19-hydroxypropylmethylcellulose-eb1c22cf (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C19-magnesium-stearate-63974975 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C19-microcrystalline-cellulose-652ba547 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C19-polyethylene-glycol-42d8398a (Approved Suppliers: [Spectrum Chemical, Univar Solutions])
+    - RM-C19-polysorbate-80-d1fa702e (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C19-silicon-dioxide-8f3934a0 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C19-stearic-acid-3d5eb908 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C19-sucrose-c6abca6a (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C19-titanium-dioxide-6921e678 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C19-vegetable-acetoglycerides-14dd8d70 (Approved Suppliers: [Koster Keunen, Strahl & Pitsch])
+    - RM-C19-vitamin-d3-cholecalciferol-3f392102 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Garden of Life' | Finished Good: 'FG-amazon-b016mrfr8y'
+Ingredients:
+    - RM-C20-bifidobacterium-lactis-bl-04-5b08978c (Approved Suppliers: [Custom Probiotics, IFF])
+    - RM-C20-milk-protein-6d7328df (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C20-organic-erythritol-7dc0aad5 (Approved Suppliers: [Nutra Food Ingredients, Prinova USA])
+    - RM-C20-organic-gum-acacia-17c541a3 (Approved Suppliers: [Ingredion])
+    - RM-C20-organic-stevia-extract-leaf-e803f0cb (Approved Suppliers: [Sawgrass Nutra Labs])
+    - RM-C20-organic-tapioca-fiber-imo-efc511c2 (Approved Suppliers: [Ingredion, Nutra Food Ingredients])
+    - RM-C20-organic-vanilla-flavors-713ec126 (Approved Suppliers: [Gold Coast Ingredients, Virginia Dare])
+    - RM-C20-sea-salt-1e8490d8 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C20-sunflower-lecithin-34d25076 (Approved Suppliers: [ADM, Cargill])
+    - RM-C20-whey-protein-isolate-bfe00719 (Approved Suppliers: [Actus Nutrition, Prinova USA])
+
+Company: 'GreeNatr' | Finished Good: 'FG-amazon-b0d4625jds'
+Ingredients:
+    - RM-C22-magnesium-citrate-086264b4 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C22-magnesium-glycinate-946fc249 (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C22-magnesium-malate-fbb003be (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C22-magnesium-oxide-c1a77e26 (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Greens First' | Finished Good: 'FG-amazon-b0gh94rpd9'
+Ingredients:
+    - RM-C23-fructooligosaccharides-e129cdd9 (Approved Suppliers: [Ingredion])
+    - RM-C23-natural-vanilla-a59abdd6 (Approved Suppliers: [Gold Coast Ingredients, Virginia Dare])
+    - RM-C23-stevia-25f8dd86 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C23-whey-protein-concentrate-55ceaff9 (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C23-whey-protein-isolate-4ac9a835 (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C23-xanthan-gum-d9789f5b (Approved Suppliers: [Ingredion])
+
+Company: 'Jarrow Formulas' | Finished Good: 'FG-thrive-market-jarrow-formulas-vitamin-d3-supplement'
+Ingredients:
+    - RM-C24-glycerin-6cb5343a (Approved Suppliers: [Ingredion])
+    - RM-C24-olive-oil-1c285951 (Approved Suppliers: [ADM, Cargill])
+    - RM-C24-softgel-bovine-gelatin-81674934 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C24-vitamin-d3-cholecalciferol-0949dd9f (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Kirkland Signature' | Finished Good: 'FG-costco-11467951'
+Ingredients:
+    - RM-C25-gelatin-121e19eb (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C25-glycerin-d32adb62 (Approved Suppliers: [Ingredion])
+    - RM-C25-soybean-oil-a542aa7c (Approved Suppliers: [ADM, Cargill])
+    - RM-C25-vitamin-d3-cholecalciferol-564712ba (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Kirkland Signature' | Finished Good: 'FG-costco-11491625'
+Ingredients:
+    - RM-C25-ascorbic-acid-c727ed5c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C25-b-vitamins-46e3c4f9 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C25-calcium-carbonate-4eb96085 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C25-chromium-6ae0933c (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C25-copper-5e0fc5d5 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C25-dicalcium-phosphate-2dbbfc34 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C25-ferrous-fumarate-1e0f20e4 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C25-magnesium-oxide-e49e39a0 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C25-manganese-6ca1ae84 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C25-microcrystalline-cellulose-6d0e7fe3 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C25-potassium-chloride-f927469d (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C25-selenium-e14cba90 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C25-vitamin-a-2910180c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C25-vitamin-d-aa256974 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C25-vitamin-e-4f4c99b8 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C25-vitamin-k-d253aa53 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C25-zinc-a4c54648 (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Kirkland Signature' | Finished Good: 'FG-costco-11672433'
+Ingredients:
+    - RM-C25-calcium-citrate-02aa8da0 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C25-magnesium-b5c61094 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C25-vitamin-d3-5116d136 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C25-zinc-a4c54648 (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'LMNT' | Finished Good: 'FG-target-a-94285133'
+Ingredients:
+    - RM-C26-citric-acid-fa037e6f (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C26-magnesium-malate-98ccabb5 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C26-natural-flavors-20d1db28 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C26-potassium-chloride-414b5246 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C26-salt-sodium-chloride-dd396d8b (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C26-stevia-leaf-extract-40dbb2cc (Approved Suppliers: [Cargill, Prinova USA])
+
+Company: 'LMNT' | Finished Good: 'FG-thrive-market-drink-lmnt-electrolyte-drink-mix-grapefruit-salt'
+Ingredients:
+    - RM-C26-citric-acid-fa037e6f (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C26-magnesium-malate-98ccabb5 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C26-natural-flavor-1d5bbf86 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C26-potassium-chloride-414b5246 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C26-salt-sodium-chloride-dd396d8b (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C26-stevia-leaf-extract-40dbb2cc (Approved Suppliers: [Cargill, Prinova USA])
+
+Company: 'Liquid I.V.' | Finished Good: 'FG-iherb-105065'
+Ingredients:
+    - RM-C27-citric-acid-22adab04 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C27-dextrose-7cf0a4ab (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C27-dipotassium-phosphate-0471d680 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-potassium-citrate-b91db2ed (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-pure-cane-sugar-44f6c2d3 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C27-salt-848383fa (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-silicon-dioxide-3e48964c (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C27-sodium-citrate-08487851 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-stevia-leaf-extract-rebaudioside-a-7b086972 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C27-vitamin-b12-cyanocobalamin-2da25f81 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b3-niacinamide-7dfaf6f5 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b5-d-calcium-pantothenate-fd43f6c0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b6-pyridoxine-hydrochloride-bb52b75a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-c-ascorbic-acid-2d17523d (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Liquid I.V.' | Finished Good: 'FG-target-a-81806945'
+Ingredients:
+    - RM-C27-citric-acid-22adab04 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C27-dextrose-7cf0a4ab (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C27-dipotassium-phosphate-0471d680 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-natural-strawberry-flavor-6678e15f (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C27-potassium-citrate-b91db2ed (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-pure-cane-sugar-44f6c2d3 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C27-salt-848383fa (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-silicon-dioxide-3e48964c (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C27-sodium-citrate-08487851 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-stevia-leaf-extract-rebaudioside-a-7b086972 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C27-vitamin-b12-cyanocobalamin-2da25f81 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b3-niacinamide-7dfaf6f5 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b5-d-calcium-pantothenate-fd43f6c0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b6-pyridoxine-hydrochloride-bb52b75a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-c-ascorbic-acid-2d17523d (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Liquid I.V.' | Finished Good: 'FG-walgreens-300411121'
+Ingredients:
+    - RM-C27-citric-acid-22adab04 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C27-dextrose-7cf0a4ab (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C27-dipotassium-phosphate-0471d680 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-natural-strawberry-flavor-6678e15f (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C27-potassium-citrate-b91db2ed (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-pure-cane-sugar-44f6c2d3 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C27-salt-848383fa (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-silicon-dioxide-3e48964c (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C27-sodium-citrate-08487851 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-stevia-leaf-extract-rebaudioside-a-7b086972 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C27-vitamin-b12-cyanocobalamin-2da25f81 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b3-niacinamide-7dfaf6f5 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b5-d-calcium-pantothenate-fd43f6c0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b6-pyridoxine-hydrochloride-bb52b75a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-c-ascorbic-acid-2d17523d (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Liquid I.V.' | Finished Good: 'FG-walgreens-300447518'
+Ingredients:
+    - RM-C27-citric-acid-22adab04 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C27-dextrose-7cf0a4ab (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C27-dipotassium-phosphate-0471d680 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-natural-flavor-1bb80751 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C27-potassium-citrate-b91db2ed (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-pure-cane-sugar-44f6c2d3 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C27-salt-848383fa (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-silicon-dioxide-3e48964c (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C27-sodium-citrate-08487851 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-stevia-leaf-extract-rebaudioside-a-7b086972 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C27-vitamin-b12-cyanocobalamin-2da25f81 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b3-niacinamide-7dfaf6f5 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b5-d-calcium-pantothenate-fd43f6c0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b6-pyridoxine-hydrochloride-bb52b75a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-c-ascorbic-acid-2d17523d (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Liquid I.V.' | Finished Good: 'FG-walmart-270357039'
+Ingredients:
+    - RM-C27-citric-acid-22adab04 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C27-dextrose-7cf0a4ab (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C27-dipotassium-phosphate-0471d680 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-natural-strawberry-flavor-6678e15f (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C27-potassium-citrate-b91db2ed (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-pure-cane-sugar-44f6c2d3 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C27-salt-848383fa (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-silicon-dioxide-3e48964c (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C27-sodium-citrate-08487851 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C27-stevia-leaf-extract-rebaudioside-a-7b086972 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C27-vitamin-b12-cyanocobalamin-2da25f81 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b3-niacinamide-7dfaf6f5 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b5-d-calcium-pantothenate-fd43f6c0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-b6-pyridoxine-hydrochloride-bb52b75a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C27-vitamin-c-ascorbic-acid-2d17523d (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'NOW Foods' | Finished Good: 'FG-iherb-10421'
+Ingredients:
+    - RM-C28-glycerin-85e43afb (Approved Suppliers: [Ingredion])
+    - RM-C28-safflower-oil-a84bc3ce (Approved Suppliers: [ADM, Cargill])
+    - RM-C28-softgel-capsule-bovine-gelatin-5a1a1582 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C28-vitamin-d3-cholecalciferol-8956b79c (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'NOW Foods' | Finished Good: 'FG-iherb-698'
+Ingredients:
+    - RM-C28-ascorbyl-palmitate-373a4bfa (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C28-hypromellose-155bba6b (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C28-magnesium-citrate-d364c220 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C28-silicon-dioxide-8891b60f (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'Natural Factors' | Finished Good: 'FG-iherb-2582'
+Ingredients:
+    - RM-C29-dibasic-calcium-phosphate-dihydrate-ef3ab6b0 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C29-magnesium-stearate-589caed7 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C29-microcrystalline-cellulose-734eb550 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C29-vitamin-d3-cholecalciferol-aedcde8b (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature Made' | Finished Good: 'FG-costco-100214136'
+Ingredients:
+    - RM-C30-gelatin-2e7ec9f6 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C30-glycerin-8bc0ab1f (Approved Suppliers: [Ingredion])
+    - RM-C30-soybean-oil-e0b7881a (Approved Suppliers: [ADM, Cargill])
+    - RM-C30-vitamin-d3-cholecalciferol-559c9699 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature Made' | Finished Good: 'FG-costco-100494097'
+Ingredients:
+    - RM-C30-gelatin-2e7ec9f6 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C30-glycerin-8bc0ab1f (Approved Suppliers: [Ingredion])
+    - RM-C30-magnesium-oxide-a499cb62 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C30-medium-chain-triglycerides-b74dc13f (Approved Suppliers: [ADM, Cargill])
+
+Company: 'Nature Made' | Finished Good: 'FG-cvs-424495'
+Ingredients:
+    - RM-C30-cellulose-gel-66b4a4d5 (Approved Suppliers: [Ingredion])
+    - RM-C30-citric-acid-d939ac85 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C30-hypromellose-917a9b27 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C30-magnesium-bisglycinate-c6e583c4 (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C30-magnesium-stearate-201fdf47 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-silicon-dioxide-47cf951f (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-stearic-acid-19acfab5 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'Nature Made' | Finished Good: 'FG-cvs-486916'
+Ingredients:
+    - RM-C30-acacia-gum-fc79918e (Approved Suppliers: [Ingredion])
+    - RM-C30-cellulose-gel-66b4a4d5 (Approved Suppliers: [Ingredion])
+    - RM-C30-croscarmellose-sodium-6e3702fa (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-magnesium-stearate-201fdf47 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-maltodextrin-65cad49f (Approved Suppliers: [Ingredion])
+    - RM-C30-stearic-acid-19acfab5 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-sugar-0bdf5d67 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C30-vitamin-d3-cholecalciferol-559c9699 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature Made' | Finished Good: 'FG-cvs-504105'
+Ingredients:
+    - RM-C30-gelatin-2e7ec9f6 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C30-glycerin-8bc0ab1f (Approved Suppliers: [Ingredion])
+    - RM-C30-soybean-oil-e0b7881a (Approved Suppliers: [ADM, Cargill])
+    - RM-C30-vitamin-d3-cholecalciferol-559c9699 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C30-vitamin-k2-menaquinone-7-859f4a44 (Approved Suppliers: [Balchem])
+
+Company: 'Nature Made' | Finished Good: 'FG-cvs-704167'
+Ingredients:
+    - RM-C30-acacia-gum-fc79918e (Approved Suppliers: [Ingredion])
+    - RM-C30-cellulose-gel-66b4a4d5 (Approved Suppliers: [Ingredion])
+    - RM-C30-croscarmellose-sodium-6e3702fa (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-magnesium-stearate-201fdf47 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-maltodextrin-65cad49f (Approved Suppliers: [Ingredion])
+    - RM-C30-stearic-acid-19acfab5 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-sugar-0bdf5d67 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C30-vitamin-d3-cholecalciferol-559c9699 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature Made' | Finished Good: 'FG-cvs-843231'
+Ingredients:
+    - RM-C30-calcium-carbonate-dd9f47aa (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C30-cellulose-gel-66b4a4d5 (Approved Suppliers: [Ingredion])
+    - RM-C30-croscarmellose-sodium-6e3702fa (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-gelatin-2e7ec9f6 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C30-magnesium-stearate-201fdf47 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-maltodextrin-65cad49f (Approved Suppliers: [Ingredion])
+    - RM-C30-stearic-acid-19acfab5 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-vitamin-d3-cholecalciferol-559c9699 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature Made' | Finished Good: 'FG-sams-club-p03012212'
+Ingredients:
+    - RM-C30-epicor-postbiotic-57bf1fc9 (Approved Suppliers: [Cargill])
+    - RM-C30-vegetarian-capsule-ea92a1d1 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C30-vitamin-c-5399011f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C30-vitamin-d3-e0800226 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature Made' | Finished Good: 'FG-target-a-14161820'
+Ingredients:
+    - RM-C30-gelatin-2e7ec9f6 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C30-glycerin-8bc0ab1f (Approved Suppliers: [Ingredion])
+    - RM-C30-medium-chain-triglycerides-b74dc13f (Approved Suppliers: [ADM, Cargill])
+    - RM-C30-soybean-oil-e0b7881a (Approved Suppliers: [ADM, Cargill])
+    - RM-C30-vitamin-d3-cholecalciferol-559c9699 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature Made' | Finished Good: 'FG-target-a-81858337'
+Ingredients:
+    - RM-C30-cellulose-gel-66b4a4d5 (Approved Suppliers: [Ingredion])
+    - RM-C30-citric-acid-d939ac85 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C30-hypromellose-917a9b27 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C30-magnesium-bisglycinate-c6e583c4 (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C30-magnesium-stearate-201fdf47 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-silicon-dioxide-47cf951f (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-stearic-acid-19acfab5 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'Nature Made' | Finished Good: 'FG-target-a-91641237'
+Ingredients:
+    - RM-C30-b-vitamins-363953a0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C30-cellulose-gel-66b4a4d5 (Approved Suppliers: [Ingredion])
+    - RM-C30-croscarmellose-sodium-6e3702fa (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-hypromellose-917a9b27 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C30-iron-411b5c14 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C30-magnesium-stearate-201fdf47 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-maltodextrin-65cad49f (Approved Suppliers: [Ingredion])
+    - RM-C30-modified-food-starch-961c9833 (Approved Suppliers: [Ingredion])
+    - RM-C30-silicon-dioxide-47cf951f (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-vitamin-a-600bcca5 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C30-vitamin-c-5399011f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C30-vitamin-d3-e0800226 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C30-vitamin-e-5cbd51e2 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature Made' | Finished Good: 'FG-target-a-91641244'
+Ingredients:
+    - RM-C30-calcium-carbonate-dd9f47aa (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C30-carboxymethylcellulose-sodium-c79871c7 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-carnauba-wax-302c3873 (Approved Suppliers: [Koster Keunen, Strahl & Pitsch])
+    - RM-C30-citric-acid-d939ac85 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C30-magnesium-oxide-a499cb62 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C30-magnesium-stearate-201fdf47 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-microcrystalline-cellulose-98dc8e4d (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-silica-903baaf4 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-starch-883b427a (Approved Suppliers: [Ingredion])
+    - RM-C30-stearic-acid-19acfab5 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'Nature Made' | Finished Good: 'FG-walgreens-300413432'
+Ingredients:
+    - RM-C30-cellulose-gel-66b4a4d5 (Approved Suppliers: [Ingredion])
+    - RM-C30-citric-acid-d939ac85 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C30-hypromellose-917a9b27 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C30-magnesium-bisglycinate-c6e583c4 (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C30-magnesium-stearate-201fdf47 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-silicon-dioxide-47cf951f (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-stearic-acid-19acfab5 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'Nature Made' | Finished Good: 'FG-walgreens-300425544'
+Ingredients:
+    - RM-C30-gelatin-2e7ec9f6 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C30-glycerin-8bc0ab1f (Approved Suppliers: [Ingredion])
+    - RM-C30-soybean-oil-e0b7881a (Approved Suppliers: [ADM, Cargill])
+    - RM-C30-vitamin-d3-cholecalciferol-559c9699 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C30-vitamin-k2-menaquinone-7-859f4a44 (Approved Suppliers: [Balchem])
+
+Company: 'Nature Made' | Finished Good: 'FG-walgreens-prod2303851'
+Ingredients:
+    - RM-C30-acacia-gum-fc79918e (Approved Suppliers: [Ingredion])
+    - RM-C30-cellulose-gel-66b4a4d5 (Approved Suppliers: [Ingredion])
+    - RM-C30-croscarmellose-sodium-6e3702fa (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-magnesium-stearate-201fdf47 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-maltodextrin-65cad49f (Approved Suppliers: [Ingredion])
+    - RM-C30-stearic-acid-19acfab5 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-sugar-0bdf5d67 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C30-vitamin-d3-cholecalciferol-559c9699 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature Made' | Finished Good: 'FG-walgreens-prod6031044'
+Ingredients:
+    - RM-C30-gelatin-2e7ec9f6 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C30-glycerin-8bc0ab1f (Approved Suppliers: [Ingredion])
+    - RM-C30-medium-chain-triglycerides-b74dc13f (Approved Suppliers: [ADM, Cargill])
+    - RM-C30-soybean-oil-e0b7881a (Approved Suppliers: [ADM, Cargill])
+    - RM-C30-vitamin-d3-cholecalciferol-559c9699 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature Made' | Finished Good: 'FG-walgreens-prod6063885'
+Ingredients:
+    - RM-C30-gelatin-2e7ec9f6 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C30-glycerin-8bc0ab1f (Approved Suppliers: [Ingredion])
+    - RM-C30-soybean-oil-e0b7881a (Approved Suppliers: [ADM, Cargill])
+    - RM-C30-vitamin-d3-cholecalciferol-559c9699 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature Made' | Finished Good: 'FG-walgreens-prod6063886'
+Ingredients:
+    - RM-C30-gelatin-2e7ec9f6 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C30-glycerin-8bc0ab1f (Approved Suppliers: [Ingredion])
+    - RM-C30-soybean-oil-e0b7881a (Approved Suppliers: [ADM, Cargill])
+    - RM-C30-vitamin-d3-cholecalciferol-559c9699 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature Made' | Finished Good: 'FG-walmart-143538101'
+Ingredients:
+    - RM-C30-calcium-carbonate-dd9f47aa (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C30-carboxymethylcellulose-sodium-c79871c7 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-carnauba-wax-302c3873 (Approved Suppliers: [Koster Keunen, Strahl & Pitsch])
+    - RM-C30-citric-acid-d939ac85 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C30-magnesium-oxide-a499cb62 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C30-magnesium-stearate-201fdf47 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-microcrystalline-cellulose-98dc8e4d (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-silica-903baaf4 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-starch-883b427a (Approved Suppliers: [Ingredion])
+    - RM-C30-stearic-acid-19acfab5 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'Nature Made' | Finished Good: 'FG-walmart-3170683942'
+Ingredients:
+    - RM-C30-hypromellose-917a9b27 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C30-magnesium-citrate-31b1d4da (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C30-magnesium-glycinate-ba21d239 (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C30-magnesium-malate-41278a52 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C30-magnesium-oxide-a499cb62 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C30-palm-oil-f9de4c81 (Approved Suppliers: [ADM, Cargill])
+    - RM-C30-rice-flour-947be4ee (Approved Suppliers: [Ingredion])
+    - RM-C30-vitamin-d3-e0800226 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C30-zinc-f5b864e3 (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Nature Made' | Finished Good: 'FG-walmart-36280067'
+Ingredients:
+    - RM-C30-b-vitamins-363953a0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C30-cellulose-gel-66b4a4d5 (Approved Suppliers: [Ingredion])
+    - RM-C30-croscarmellose-sodium-6e3702fa (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-hypromellose-917a9b27 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C30-iron-411b5c14 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C30-magnesium-stearate-201fdf47 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-maltodextrin-65cad49f (Approved Suppliers: [Ingredion])
+    - RM-C30-modified-food-starch-961c9833 (Approved Suppliers: [Ingredion])
+    - RM-C30-silicon-dioxide-47cf951f (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-vitamin-a-600bcca5 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C30-vitamin-c-5399011f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C30-vitamin-d3-e0800226 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C30-vitamin-e-5cbd51e2 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature Made' | Finished Good: 'FG-walmart-398189644'
+Ingredients:
+    - RM-C30-cellulose-gel-66b4a4d5 (Approved Suppliers: [Ingredion])
+    - RM-C30-citric-acid-d939ac85 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C30-hypromellose-917a9b27 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C30-magnesium-bisglycinate-c6e583c4 (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C30-magnesium-stearate-201fdf47 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-silicon-dioxide-47cf951f (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C30-stearic-acid-19acfab5 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'Nature's Bounty' | Finished Good: 'FG-costco-100351325'
+Ingredients:
+    - RM-C31-corn-oil-1009aec3 (Approved Suppliers: [ADM, Cargill])
+    - RM-C31-gelatin-64baa1c8 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C31-soybean-oil-a030edea (Approved Suppliers: [ADM, Cargill])
+    - RM-C31-vegetable-glycerin-78229fba (Approved Suppliers: [Ingredion])
+    - RM-C31-vitamin-d3-cholecalciferol-6e6ef79b (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Nature's Bounty' | Finished Good: 'FG-costco-100851161'
+Ingredients:
+    - RM-C31-ascorbyl-palmitate-cdce22fe (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C31-magnesium-glycinate-74e5e25d (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C31-vegetable-cellulose-6da081fc (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'Nature's Nutrition' | Finished Good: 'FG-target-a-1003257378'
+Ingredients:
+    - RM-C32-aquamin-mg-soluble-2229f585 (Approved Suppliers: [Stauber])
+    - RM-C32-ascorbic-acid-e21a79c1 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C32-calcium-citrate-2f9465c9 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C32-calcium-d-pantothenate-5db35528 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C32-cyanocobalamin-3d4cc1db (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C32-magnesium-citrate-199478da (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C32-manganese-chelate-3e7e37a6 (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C32-niacin-6e777dec (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C32-pink-himalayan-salt-3eab5c0a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C32-potassium-citrate-ec7e555a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C32-pyridoxine-hcl-b18e1d94 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C32-sodium-chloride-c98dabe3 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C32-zinc-oxide-1bf96a0d (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'New Chapter' | Finished Good: 'FG-iherb-52816'
+Ingredients:
+    - RM-C33-biotin-dd51a7e1 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-ferment-media-c911f8c0 (Approved Suppliers: [Nutra Blend, Prinova USA])
+    - RM-C33-folate-b7efc577 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-niacin-151277db (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-organic-coating-83434eb0 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C33-organic-gum-acacia-32c6f17e (Approved Suppliers: [Ingredion])
+    - RM-C33-organic-maltodextrin-3279a920 (Approved Suppliers: [Ingredion])
+    - RM-C33-pantothenic-acid-39dfb546 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-riboflavin-f24838be (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-thiamin-1c74da1a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-a-4518d5ec (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-b12-000a19b7 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-b6-fadb33a5 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-c-cc2f941d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-d3-cd036b64 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-e-d3ce1b4f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-k-2f127d05 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'New Chapter' | Finished Good: 'FG-thrive-market-new-chapter-every-womans-one-daily-multivitamin-40-plus'
+Ingredients:
+    - RM-C33-biotin-dd51a7e1 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-ferment-media-c911f8c0 (Approved Suppliers: [Nutra Blend, Prinova USA])
+    - RM-C33-folate-b7efc577 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-niacin-151277db (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-organic-coating-83434eb0 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C33-organic-gum-acacia-32c6f17e (Approved Suppliers: [Ingredion])
+    - RM-C33-organic-maltodextrin-3279a920 (Approved Suppliers: [Ingredion])
+    - RM-C33-pantothenic-acid-39dfb546 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-riboflavin-f24838be (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-thiamin-1c74da1a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-a-4518d5ec (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-b12-000a19b7 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-b6-fadb33a5 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-c-cc2f941d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-d3-cd036b64 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-e-d3ce1b4f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-k-2f127d05 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'New Chapter' | Finished Good: 'FG-thrive-market-new-chapter-mens-advanced-multivitamin'
+Ingredients:
+    - RM-C33-b-vitamins-3aef7be4 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-carnauba-wax-81404016 (Approved Suppliers: [Koster Keunen, Strahl & Pitsch])
+    - RM-C33-lac-resin-c604fad6 (Approved Suppliers: [Koster Keunen, Strahl & Pitsch])
+    - RM-C33-organic-gum-acacia-32c6f17e (Approved Suppliers: [Ingredion])
+    - RM-C33-selenium-5e6509a0 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C33-silica-a853ee85 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C33-vitamin-c-cc2f941d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-vitamin-d3-cd036b64 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C33-zinc-5e8d3f7e (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Nordic Naturals' | Finished Good: 'FG-walmart-109808244'
+Ingredients:
+    - RM-C34-glycerin-ae7d95de (Approved Suppliers: [Ingredion])
+    - RM-C34-soft-gel-capsule-bovine-gelatin-7f9790b5 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C34-vitamin-d3-cholecalciferol-7e2cad2a (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'NutriBiotic' | Finished Good: 'FG-iherb-5452'
+Ingredients:
+    - RM-C35-calcium-carbonate-d0e0b4e2 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C35-chromium-nicotinate-5344125d (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C35-magnesium-carbonate-192d24ea (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C35-magnesium-stearate-e0ea85f7 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C35-potassium-gluconate-1edd6ca1 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C35-sodium-chloride-235bec7e (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C35-vegan-capsule-d9a85712 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C35-vitamin-c-l-ascorbic-acid-17da2399 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C35-zinc-sulfate-04f0fb89 (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'Nutricost' | Finished Good: 'FG-vitacost-nutricost-whey-protein-concentrate-powder-chocolate'
+Ingredients:
+    - RM-C36-acesulfame-potassium-553079fd (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C36-cocoa-powder-99916811 (Approved Suppliers: [Ingredion])
+    - RM-C36-natural-flavors-82a902e9 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C36-soy-lecithin-e5096e4a (Approved Suppliers: [ADM, Cargill])
+    - RM-C36-sucralose-d02d5b0f (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C36-whey-protein-concentrate-7323d34b (Approved Suppliers: [Actus Nutrition, Prinova USA])
+
+Company: 'One A Day' | Finished Good: 'FG-costco-100143268'
+Ingredients:
+    - RM-C37-ascorbic-acid-2dce8c2c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-beta-carotene-4a5e8c4f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-biotin-2d59ee9a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-calcium-carbonate-4d035065 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-cholecalciferol-f6d103e4 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-chromium-chloride-29a65259 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-copper-sulfate-31751952 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-croscarmellose-sodium-08ab6ca3 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-cyanocobalamin-e7d33656 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-d-calcium-pantothenate-baa38478 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-dl-alpha-tocopheryl-acetate-50d2f8bd (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-folic-acid-2bb2a34c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-gelatin-a40fdc3f (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C37-hydroxypropyl-methylcellulose-6110db19 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-inulin-c35ef509 (Approved Suppliers: [Ingredion, Nutra Food Ingredients])
+    - RM-C37-lycopene-8cb6cef4 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C37-magnesium-oxide-f07b6a9a (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C37-maltodextrin-8bbe7b7e (Approved Suppliers: [Ingredion])
+    - RM-C37-manganese-sulfate-1324ef0a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-medium-chain-triglycerides-c9f8b215 (Approved Suppliers: [ADM, Cargill])
+    - RM-C37-microcrystalline-cellulose-613163d9 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-niacinamide-51ff204b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-polyvinylpolypyrrolidone-7e317c46 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-potassium-iodide-f9b2b205 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-pyridoxine-hydrochloride-67345b25 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-riboflavin-ece92ffe (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-silicon-dioxide-16967f77 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-sodium-selenite-5b7a29da (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-stearic-acid-8fe47daa (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-thiamine-mononitrate-1795539a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-a-acetate-c9020dfa (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-zinc-oxide-b733fd8f (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'One A Day' | Finished Good: 'FG-cvs-246284'
+Ingredients:
+    - RM-C37-ascorbic-acid-2dce8c2c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-beta-carotene-4a5e8c4f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-biotin-2d59ee9a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-calcium-carbonate-4d035065 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-cholecalciferol-f6d103e4 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-chromium-chloride-29a65259 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-copper-sulfate-31751952 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-croscarmellose-sodium-08ab6ca3 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-cyanocobalamin-e7d33656 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-d-calcium-pantothenate-baa38478 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-dl-alpha-tocopheryl-acetate-50d2f8bd (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-folic-acid-2bb2a34c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-gelatin-a40fdc3f (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C37-hydroxypropyl-methylcellulose-6110db19 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-inulin-c35ef509 (Approved Suppliers: [Ingredion, Nutra Food Ingredients])
+    - RM-C37-lycopene-8cb6cef4 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C37-magnesium-oxide-f07b6a9a (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C37-maltodextrin-8bbe7b7e (Approved Suppliers: [Ingredion])
+    - RM-C37-manganese-sulfate-1324ef0a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-medium-chain-triglycerides-c9f8b215 (Approved Suppliers: [ADM, Cargill])
+    - RM-C37-microcrystalline-cellulose-613163d9 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-niacinamide-51ff204b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-polyvinylpolypyrrolidone-7e317c46 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-potassium-iodide-f9b2b205 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-pyridoxine-hydrochloride-67345b25 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-riboflavin-ece92ffe (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-silicon-dioxide-16967f77 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-sodium-selenite-5b7a29da (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-stearic-acid-8fe47daa (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-thiamine-mononitrate-1795539a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-a-acetate-c9020dfa (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-zinc-oxide-b733fd8f (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'One A Day' | Finished Good: 'FG-cvs-410537'
+Ingredients:
+    - RM-C37-calcium-carbonate-4d035065 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-copper-84081b0a (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C37-magnesium-oxide-f07b6a9a (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C37-manganese-11c87791 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C37-microcrystalline-cellulose-613163d9 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-selenium-f5f4d7c6 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C37-vitamin-a-1b4aced9 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-c-32bfc0a0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-e-cf6cd7f8 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-zinc-eacf0348 (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'One A Day' | Finished Good: 'FG-cvs-448437'
+Ingredients:
+    - RM-C37-ascorbic-acid-2dce8c2c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-beta-carotene-4a5e8c4f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-biotin-2d59ee9a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-calcium-carbonate-4d035065 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-cholecalciferol-f6d103e4 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-chromium-chloride-29a65259 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-copper-sulfate-31751952 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-croscarmellose-sodium-08ab6ca3 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-cyanocobalamin-e7d33656 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-d-calcium-pantothenate-baa38478 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-dl-alpha-tocopheryl-acetate-50d2f8bd (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-folic-acid-2bb2a34c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-gelatin-a40fdc3f (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C37-hydroxypropyl-methylcellulose-6110db19 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-inulin-c35ef509 (Approved Suppliers: [Ingredion, Nutra Food Ingredients])
+    - RM-C37-lycopene-8cb6cef4 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C37-magnesium-oxide-f07b6a9a (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C37-maltodextrin-8bbe7b7e (Approved Suppliers: [Ingredion])
+    - RM-C37-manganese-sulfate-1324ef0a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-medium-chain-triglycerides-c9f8b215 (Approved Suppliers: [ADM, Cargill])
+    - RM-C37-microcrystalline-cellulose-613163d9 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-niacinamide-51ff204b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-polyvinylpolypyrrolidone-7e317c46 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-potassium-iodide-f9b2b205 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-pyridoxine-hydrochloride-67345b25 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-riboflavin-ece92ffe (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-silicon-dioxide-16967f77 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-sodium-selenite-5b7a29da (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-stearic-acid-8fe47daa (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-thiamine-mononitrate-1795539a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-a-acetate-c9020dfa (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-zinc-oxide-b733fd8f (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'One A Day' | Finished Good: 'FG-cvs-880579'
+Ingredients:
+    - RM-C37-biotin-2d59ee9a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-gummy-base-7cb34dcd (Approved Suppliers: [Makers Nutrition, Vitaquest])
+    - RM-C37-natural-flavors-cbe92289 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C37-selenium-f5f4d7c6 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C37-vitamin-a-1b4aced9 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-c-32bfc0a0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-d-e888c721 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-e-cf6cd7f8 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-zinc-eacf0348 (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'One A Day' | Finished Good: 'FG-sams-club-prod15990273'
+Ingredients:
+    - RM-C37-biotin-2d59ee9a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-calcium-carbonate-4d035065 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-folic-acid-2bb2a34c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-magnesium-oxide-f07b6a9a (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C37-microcrystalline-cellulose-613163d9 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-niacin-578ac50b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-pantothenic-acid-9279a870 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-riboflavin-ece92ffe (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-thiamin-34ea3d66 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-a-1b4aced9 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-b12-3cf1dc01 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-b6-6cd7e57e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-c-32bfc0a0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-d-e888c721 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-e-cf6cd7f8 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-k-8eb31269 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'One A Day' | Finished Good: 'FG-target-a-10996455'
+Ingredients:
+    - RM-C37-ascorbic-acid-2dce8c2c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-beta-carotene-4a5e8c4f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-biotin-2d59ee9a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-calcium-carbonate-4d035065 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-cholecalciferol-f6d103e4 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-chromium-chloride-29a65259 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-copper-sulfate-31751952 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-croscarmellose-sodium-08ab6ca3 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-cyanocobalamin-e7d33656 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-d-calcium-pantothenate-baa38478 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-dl-alpha-tocopheryl-acetate-50d2f8bd (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-folic-acid-2bb2a34c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-gelatin-a40fdc3f (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C37-hydroxypropyl-methylcellulose-6110db19 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-inulin-c35ef509 (Approved Suppliers: [Ingredion, Nutra Food Ingredients])
+    - RM-C37-lycopene-8cb6cef4 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C37-magnesium-oxide-f07b6a9a (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C37-maltodextrin-8bbe7b7e (Approved Suppliers: [Ingredion])
+    - RM-C37-manganese-sulfate-1324ef0a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-medium-chain-triglycerides-c9f8b215 (Approved Suppliers: [ADM, Cargill])
+    - RM-C37-microcrystalline-cellulose-613163d9 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-niacinamide-51ff204b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-polyvinylpolypyrrolidone-7e317c46 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-potassium-iodide-f9b2b205 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-pyridoxine-hydrochloride-67345b25 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-riboflavin-ece92ffe (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-silicon-dioxide-16967f77 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-sodium-selenite-5b7a29da (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-stearic-acid-8fe47daa (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-thiamine-mononitrate-1795539a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-a-acetate-c9020dfa (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-zinc-oxide-b733fd8f (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'One A Day' | Finished Good: 'FG-walgreens-300413257'
+Ingredients:
+    - RM-C37-biotin-2d59ee9a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-gummy-base-7cb34dcd (Approved Suppliers: [Makers Nutrition, Vitaquest])
+    - RM-C37-natural-flavors-cbe92289 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C37-selenium-f5f4d7c6 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C37-vitamin-a-1b4aced9 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-c-32bfc0a0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-d-e888c721 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-e-cf6cd7f8 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-zinc-eacf0348 (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'One A Day' | Finished Good: 'FG-walgreens-prod6028865'
+Ingredients:
+    - RM-C37-calcium-carbonate-4d035065 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-magnesium-oxide-f07b6a9a (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C37-microcrystalline-cellulose-613163d9 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-niacin-578ac50b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-riboflavin-ece92ffe (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-thiamin-34ea3d66 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-a-1b4aced9 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-b12-3cf1dc01 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-b6-6cd7e57e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-c-32bfc0a0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-d-e888c721 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-e-cf6cd7f8 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-k-8eb31269 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'One A Day' | Finished Good: 'FG-walgreens-prod6083374'
+Ingredients:
+    - RM-C37-ascorbic-acid-2dce8c2c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-beta-carotene-4a5e8c4f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-biotin-2d59ee9a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-calcium-carbonate-4d035065 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-cholecalciferol-f6d103e4 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-chromium-chloride-29a65259 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-copper-sulfate-31751952 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-croscarmellose-sodium-08ab6ca3 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-cyanocobalamin-e7d33656 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-d-calcium-pantothenate-baa38478 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-dl-alpha-tocopheryl-acetate-50d2f8bd (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-folic-acid-2bb2a34c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-gelatin-a40fdc3f (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C37-hydroxypropyl-methylcellulose-6110db19 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-inulin-c35ef509 (Approved Suppliers: [Ingredion, Nutra Food Ingredients])
+    - RM-C37-lycopene-8cb6cef4 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C37-magnesium-oxide-f07b6a9a (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C37-maltodextrin-8bbe7b7e (Approved Suppliers: [Ingredion])
+    - RM-C37-manganese-sulfate-1324ef0a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-medium-chain-triglycerides-c9f8b215 (Approved Suppliers: [ADM, Cargill])
+    - RM-C37-microcrystalline-cellulose-613163d9 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-niacinamide-51ff204b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-polyvinylpolypyrrolidone-7e317c46 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-potassium-iodide-f9b2b205 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-pyridoxine-hydrochloride-67345b25 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-riboflavin-ece92ffe (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-silicon-dioxide-16967f77 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-sodium-selenite-5b7a29da (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C37-stearic-acid-8fe47daa (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C37-thiamine-mononitrate-1795539a (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-vitamin-a-acetate-c9020dfa (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C37-zinc-oxide-b733fd8f (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'Optimum Nutrition' | Finished Good: 'FG-amazon-b012t9ga6c'
+Ingredients:
+    - RM-C38-acesulfame-potassium-f51994fd (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C38-hydrolyzed-whey-protein-9f15d933 (Approved Suppliers: [Actus Nutrition])
+    - RM-C38-natural-and-artificial-flavors-fbca0d45 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-soy-lecithin-563dc5ae (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-sunflower-lecithin-57949880 (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-whey-protein-concentrate-c419722f (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C38-whey-protein-isolate-f910e5ae (Approved Suppliers: [Actus Nutrition, Prinova USA])
+
+Company: 'Optimum Nutrition' | Finished Good: 'FG-amazon-b07mg7bxrt'
+Ingredients:
+    - RM-C38-acesulfame-potassium-f51994fd (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C38-cocoa-powder-processed-with-alkali-fc69b9d4 (Approved Suppliers: [Ingredion])
+    - RM-C38-hydrolyzed-whey-protein-9f15d933 (Approved Suppliers: [Actus Nutrition])
+    - RM-C38-natural-and-artificial-flavors-fbca0d45 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-soy-lecithin-563dc5ae (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-sunflower-lecithin-57949880 (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-whey-protein-concentrate-c419722f (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C38-whey-protein-isolate-f910e5ae (Approved Suppliers: [Actus Nutrition, Prinova USA])
+
+Company: 'Optimum Nutrition' | Finished Good: 'FG-iherb-27509'
+Ingredients:
+    - RM-C38-acesulfame-potassium-f51994fd (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C38-artificial-flavor-66466071 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-cocoa-powder-processed-with-alkali-fc69b9d4 (Approved Suppliers: [Ingredion])
+    - RM-C38-hydrolyzed-whey-protein-9f15d933 (Approved Suppliers: [Actus Nutrition])
+    - RM-C38-natural-flavor-ec532add (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-soy-lecithin-563dc5ae (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-sunflower-lecithin-57949880 (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-whey-protein-concentrate-c419722f (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C38-whey-protein-isolate-f910e5ae (Approved Suppliers: [Actus Nutrition, Prinova USA])
+
+Company: 'Optimum Nutrition' | Finished Good: 'FG-target-a-78807251'
+Ingredients:
+    - RM-C38-acesulfame-potassium-f51994fd (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C38-artificial-flavor-66466071 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-cellulose-gum-4260e588 (Approved Suppliers: [Ingredion])
+    - RM-C38-hydrolyzed-whey-protein-9f15d933 (Approved Suppliers: [Actus Nutrition])
+    - RM-C38-natural-flavor-ec532add (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-salt-bddf68d5 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C38-soy-lecithin-563dc5ae (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-sucralose-ea50c9df (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C38-sunflower-lecithin-57949880 (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-whey-protein-concentrate-c419722f (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C38-whey-protein-isolate-f910e5ae (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C38-xanthan-gum-67eb24ef (Approved Suppliers: [Ingredion])
+
+Company: 'Optimum Nutrition' | Finished Good: 'FG-target-a-78807252'
+Ingredients:
+    - RM-C38-acesulfame-potassium-f51994fd (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C38-artificial-flavor-66466071 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-cocoa-powder-processed-with-alkali-fc69b9d4 (Approved Suppliers: [Ingredion])
+    - RM-C38-hydrolyzed-whey-protein-9f15d933 (Approved Suppliers: [Actus Nutrition])
+    - RM-C38-natural-flavor-ec532add (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-soy-lecithin-563dc5ae (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-sunflower-lecithin-57949880 (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-whey-protein-concentrate-c419722f (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C38-whey-protein-isolate-f910e5ae (Approved Suppliers: [Actus Nutrition, Prinova USA])
+
+Company: 'Optimum Nutrition' | Finished Good: 'FG-target-a-83786452'
+Ingredients:
+    - RM-C38-acesulfame-potassium-f51994fd (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C38-cocoa-powder-processed-with-alkali-fc69b9d4 (Approved Suppliers: [Ingredion])
+    - RM-C38-hydrolyzed-whey-protein-9f15d933 (Approved Suppliers: [Actus Nutrition])
+    - RM-C38-natural-and-artificial-flavors-fbca0d45 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-soy-lecithin-563dc5ae (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-sunflower-lecithin-57949880 (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-whey-protein-concentrate-c419722f (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C38-whey-protein-isolate-f910e5ae (Approved Suppliers: [Actus Nutrition, Prinova USA])
+
+Company: 'Optimum Nutrition' | Finished Good: 'FG-the-vitamin-shoppe-op-1009'
+Ingredients:
+    - RM-C38-acesulfame-potassium-f51994fd (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C38-artificial-flavor-66466071 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-cocoa-powder-processed-with-alkali-fc69b9d4 (Approved Suppliers: [Ingredion])
+    - RM-C38-hydrolyzed-whey-protein-9f15d933 (Approved Suppliers: [Actus Nutrition])
+    - RM-C38-natural-flavor-ec532add (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-soy-lecithin-563dc5ae (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-sunflower-lecithin-57949880 (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-whey-protein-concentrate-c419722f (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C38-whey-protein-isolate-f910e5ae (Approved Suppliers: [Actus Nutrition, Prinova USA])
+
+Company: 'Optimum Nutrition' | Finished Good: 'FG-the-vitamin-shoppe-op-1011'
+Ingredients:
+    - RM-C38-acesulfame-potassium-f51994fd (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C38-artificial-flavor-66466071 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-cocoa-powder-processed-with-alkali-fc69b9d4 (Approved Suppliers: [Ingredion])
+    - RM-C38-hydrolyzed-whey-protein-9f15d933 (Approved Suppliers: [Actus Nutrition])
+    - RM-C38-natural-flavor-ec532add (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-soy-lecithin-563dc5ae (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-sunflower-lecithin-57949880 (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-whey-protein-concentrate-c419722f (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C38-whey-protein-isolate-f910e5ae (Approved Suppliers: [Actus Nutrition, Prinova USA])
+
+Company: 'Optimum Nutrition' | Finished Good: 'FG-walmart-8053802024'
+Ingredients:
+    - RM-C38-acesulfame-potassium-f51994fd (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C38-artificial-flavor-66466071 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-cellulose-gum-4260e588 (Approved Suppliers: [Ingredion])
+    - RM-C38-hydrolyzed-whey-protein-9f15d933 (Approved Suppliers: [Actus Nutrition])
+    - RM-C38-natural-flavor-ec532add (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C38-salt-bddf68d5 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C38-soy-lecithin-563dc5ae (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-sucralose-ea50c9df (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C38-sunflower-lecithin-57949880 (Approved Suppliers: [ADM, Cargill])
+    - RM-C38-whey-protein-concentrate-c419722f (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C38-whey-protein-isolate-f910e5ae (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C38-xanthan-gum-67eb24ef (Approved Suppliers: [Ingredion])
+
+Company: 'Orgain' | Finished Good: 'FG-thrive-market-orgain-grass-fed-whey-protein-powder-vanilla-bean'
+Ingredients:
+    - RM-C39-cellulose-gum-04700a3c (Approved Suppliers: [Ingredion])
+    - RM-C39-grass-fed-whey-protein-concentrate-43f49f43 (Approved Suppliers: [Actus Nutrition])
+    - RM-C39-natural-flavors-8eb8a548 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C39-organic-acacia-a1a4fd61 (Approved Suppliers: [Ingredion])
+    - RM-C39-organic-erythritol-5e3cd183 (Approved Suppliers: [Nutra Food Ingredients, Prinova USA])
+    - RM-C39-organic-inulin-b5d7a6d9 (Approved Suppliers: [Ingredion, Nutra Food Ingredients])
+    - RM-C39-organic-rice-bran-extract-b66ec8f2 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C39-organic-rice-dextrins-1576ca20 (Approved Suppliers: [Ingredion])
+    - RM-C39-organic-rosemary-extract-64ac6002 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C39-organic-stevia-5f6b93f5 (Approved Suppliers: [Sawgrass Nutra Labs])
+    - RM-C39-potassium-chloride-8ccbe8a7 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C39-sea-salt-ca9e7781 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C39-xanthan-gum-65a01479 (Approved Suppliers: [Ingredion])
+
+Company: 'PRIME HYDRATION+' | Finished Good: 'FG-amazon-b0ft5z9k9n'
+Ingredients:
+    - RM-C40-acesulfame-potassium-6684085e (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C40-ascorbic-acid-vitamin-c-2db5a34b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C40-citric-acid-c97d12d1 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C40-coconut-water-from-concentrate-c23c9c80 (Approved Suppliers: [Sawgrass Nutra Labs])
+    - RM-C40-cyanocobalamin-vitamin-b12-2048bd4e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C40-d-alpha-tocopheryl-acetate-vitamin-e-4f0e2772 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C40-dipotassium-phosphate-0f032a47 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C40-l-isoleucine-fc3f6810 (Approved Suppliers: [BulkSupplements, PureBulk])
+    - RM-C40-l-leucine-dc251fa2 (Approved Suppliers: [BulkSupplements, PureBulk])
+    - RM-C40-l-valine-237d9405 (Approved Suppliers: [BulkSupplements, PureBulk])
+    - RM-C40-magnesium-citrate-a5181724 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C40-natural-flavor-8c940fd7 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C40-pyridoxine-hydrochloride-vitamin-b6-3753727e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C40-retinyl-palmitate-vitamin-a-037f1204 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C40-sea-salt-cc1b7ba6 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C40-sucralose-23b7e87e (Approved Suppliers: [Prinova USA, Univar Solutions])
+
+Company: 'Pedialyte' | Finished Good: 'FG-walmart-17018124'
+Ingredients:
+    - RM-C41-anhydrous-dextrose-d3ab3366 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C41-citric-acid-1ace1f97 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C41-natural-and-artificial-flavors-9b95de33 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C41-potassium-citrate-614cd5f0 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C41-salt-601e8ca1 (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'PowderVitamin' | Finished Good: 'FG-amazon-b0dmzfympv'
+Ingredients:
+    - RM-C42-calcium-7730815b (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C42-magnesium-c8ab4bb5 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C42-manganese-48c4b6c0 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C42-organic-stevia-673828e1 (Approved Suppliers: [Sawgrass Nutra Labs])
+    - RM-C42-pink-himalayan-salt-0d9b133e (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C42-potassium-73c4631d (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C42-vitamin-c-e6bbe2c3 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C42-zinc-9419c71d (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Premier Protein' | Finished Good: 'FG-walmart-945235241'
+Ingredients:
+    - RM-C43-acesulfame-potassium-0f3b3a01 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C43-natural-and-artificial-flavors-5df885b2 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C43-salt-ff3b2d7b (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C43-sucralose-34d90dd1 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C43-sunflower-lecithin-c6faf83a (Approved Suppliers: [ADM, Cargill])
+    - RM-C43-whey-protein-concentrate-9e1878ec (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C43-whey-protein-isolate-f612d921 (Approved Suppliers: [Actus Nutrition, Prinova USA])
+
+Company: 'Ritual' | Finished Good: 'FG-thrive-market-ritual-mens-multivitamin-18'
+Ingredients:
+    - RM-C44-boron-calcium-fructoborate-e286252b (Approved Suppliers: [FutureCeuticals])
+    - RM-C44-cellulose-8f00a013 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C44-gellan-gum-b7fdbe7e (Approved Suppliers: [Ingredion])
+    - RM-C44-hypromellose-09b87db3 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C44-magnesium-dimagnesium-malate-ada4840f (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C44-non-gmo-corn-zein-f09ef11c (Approved Suppliers: [Spectrum Chemical, TCI America])
+    - RM-C44-omega-3-dha-93196c59 (Approved Suppliers: [Icelandirect, Source-Omega LLC])
+    - RM-C44-silica-eabf835d (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C44-vitamin-a-retinyl-palmitate-c8fb97b4 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C44-vitamin-b12-methylcobalamin-5f1622cd (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C44-vitamin-d3-cholecalciferol-7429dd7b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C44-vitamin-e-alpha-tocopherol-0ac90371 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C44-vitamin-k2-menaquinone-7-67e508fd (Approved Suppliers: [Balchem])
+    - RM-C44-zinc-zinc-bisglycinate-1d1aacc9 (Approved Suppliers: [Balchem, PureBulk])
+
+Company: 'SALTWTR' | Finished Good: 'FG-thrive-market-6009804424153'
+Ingredients:
+    - RM-C45-kalahari-desert-salt-bda53857 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C45-natural-peach-flavor-ad37c12c (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C45-prebiotic-fiber-19375eea (Approved Suppliers: [Nutra Blend, Prinova USA])
+    - RM-C45-probiotic-cultures-288f2f30 (Approved Suppliers: [Custom Probiotics, Specialty Enzymes & Probiotics])
+
+Company: 'Seeking Health' | Finished Good: 'FG-vitacost-seeking-health-optimal-electrolyte-powder-unflavored'
+Ingredients:
+    - RM-C46-chloride-f97942ce (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C46-magnesium-c7a80cd7 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C46-potassium-2f0ec99d (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C46-sodium-ee605774 (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Simply Tera's' | Finished Good: 'FG-amazon-b07dlflsyp'
+Ingredients:
+    - RM-C47-organic-dairy-whey-protein-concentrate-380e0c61 (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C47-organic-sunflower-lecithin-0369477b (Approved Suppliers: [ADM, Cargill])
+
+Company: 'Simply Tera's' | Finished Good: 'FG-thrive-market-simply-tera-s-whey-organic-whey-protein'
+Ingredients:
+    - RM-C47-organic-dairy-whey-protein-concentrate-380e0c61 (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C47-organic-sunflower-lecithin-0369477b (Approved Suppliers: [ADM, Cargill])
+
+Company: 'Solgar' | Finished Good: 'FG-iherb-14689'
+Ingredients:
+    - RM-C48-microcrystalline-cellulose-aa7703fd (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C48-riboflavin-1c60a1f7 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C48-silica-35249d68 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C48-vegetable-cellulose-61685b37 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C48-vegetable-glycerin-38cf02f7 (Approved Suppliers: [Ingredion])
+    - RM-C48-vegetable-magnesium-stearate-f8b702b6 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C48-vegetable-stearic-acid-c62355d9 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C48-vitamin-d3-cholecalciferol-a14e1c25 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Sports Research' | Finished Good: 'FG-costco-4000025085'
+Ingredients:
+    - RM-C49-coconut-mct-oil-df9c4153 (Approved Suppliers: [ADM, Cargill])
+    - RM-C49-plantgel-capsule-98443da5 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C49-vitamin-d3-cholecalciferol-0d990e67 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C49-vitamin-k2-menaquinone-7-a5d25cb5 (Approved Suppliers: [Balchem])
+
+Company: 'Spring Valley' | Finished Good: 'FG-walmart-19758123'
+Ingredients:
+    - RM-C50-gelatin-e04eefe9 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C50-glycerin-46154c5e (Approved Suppliers: [Ingredion])
+    - RM-C50-soybean-oil-525500a0 (Approved Suppliers: [ADM, Cargill])
+    - RM-C50-vitamin-d3-cholecalciferol-22ab18a7 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'TREVI' | Finished Good: 'FG-amazon-b0ghwg73j4'
+Ingredients:
+    - RM-C51-beet-juice-powder-e6a75b77 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C51-calcium-citrate-05013377 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C51-citric-acid-b71ce960 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C51-fruit-and-vegetable-juice-2b966920 (Approved Suppliers: [AIDP, American Botanicals])
+    - RM-C51-magnesium-citrate-cab42be9 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C51-malic-acid-ba710486 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C51-manganese-chelate-2371eb5e (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C51-natural-flavor-536a8cd1 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C51-pink-himalayan-salt-81828c4c (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C51-potassium-citrate-2d946db4 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C51-potassium-phosphate-adcfe753 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C51-silicon-dioxide-ff5733b0 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C51-stevia-leaf-extract-5786cb50 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C51-sucralose-2f4eb103 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C51-vitamin-c-calcium-ascorbate-cc36787c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C51-zinc-chelate-89f8dfbc (Approved Suppliers: [Balchem, PureBulk])
+
+Company: 'The Vitamin Shoppe' | Finished Good: 'FG-the-vitamin-shoppe-vs-0168'
+Ingredients:
+    - RM-C52-lecithin-a3b01178 (Approved Suppliers: [ADM, Cargill])
+    - RM-C52-whey-protein-isolate-c26e7fed (Approved Suppliers: [Actus Nutrition, Prinova USA])
+
+Company: 'The Vitamin Shoppe' | Finished Good: 'FG-the-vitamin-shoppe-vs-0435'
+Ingredients:
+    - RM-C52-b-vitamins-a8a22ae9 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C52-magnesium-bad565ba (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C52-performance-support-nutrients-165afec4 (Approved Suppliers: [Nutra Blend, Prinova USA])
+    - RM-C52-vitamin-a-2b057046 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C52-vitamin-c-cb25e76b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C52-vitamin-d-8be54225 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C52-vitamin-e-ba108fda (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C52-zinc-0d5d167a (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'The Vitamin Shoppe' | Finished Good: 'FG-the-vitamin-shoppe-vs-1977'
+Ingredients:
+    - RM-C52-magnesium-citrate-dd88ed96 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C52-magnesium-stearate-c3a91d20 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C52-microcrystalline-cellulose-10b9f4fb (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C52-stearic-acid-bc04499f (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'The Vitamin Shoppe' | Finished Good: 'FG-the-vitamin-shoppe-vs-2453'
+Ingredients:
+    - RM-C52-bone-gelatin-bovine-00801541 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C52-glycerin-6d2397e8 (Approved Suppliers: [Ingredion])
+    - RM-C52-sunflower-oil-32988c9f (Approved Suppliers: [ADM, Cargill])
+    - RM-C52-vitamin-d3-cholecalciferol-1d08f804 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'The Vitamin Shoppe' | Finished Good: 'FG-the-vitamin-shoppe-vs-2750'
+Ingredients:
+    - RM-C52-aqueous-coating-d3902f73 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C52-astaxanthin-52c593d5 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C52-black-pepper-concentrate-c4264fd8 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C52-boron-amino-acid-chelate-bddb269c (Approved Suppliers: [Balchem])
+    - RM-C52-croscarmellose-sodium-cf407533 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C52-grape-seed-extract-24729e2a (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C52-green-tea-extract-d0c3336d (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C52-inositol-7e1bd408 (Approved Suppliers: [Nutri Avenue, PureBulk])
+    - RM-C52-lutein-bbbf953c (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C52-lycopene-7367e764 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C52-magnesium-stearate-c3a91d20 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C52-microcrystalline-cellulose-10b9f4fb (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C52-modified-cellulose-80821d07 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C52-natural-vanilla-flavor-46230f28 (Approved Suppliers: [Gold Coast Ingredients, Virginia Dare])
+    - RM-C52-pomegranate-extract-9e5077f4 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C52-silica-b4663ebe (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C52-stearic-acid-bc04499f (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C52-vanadium-as-vanadyl-sulfate-52713008 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C52-zeaxanthin-fdb7165d (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+
+Company: 'The Vitamin Shoppe' | Finished Good: 'FG-the-vitamin-shoppe-vs-2824'
+Ingredients:
+    - RM-C52-bone-gelatin-bovine-00801541 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C52-glycerin-6d2397e8 (Approved Suppliers: [Ingredion])
+    - RM-C52-sunflower-oil-32988c9f (Approved Suppliers: [ADM, Cargill])
+    - RM-C52-vitamin-d3-cholecalciferol-1d08f804 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'The Vitamin Shoppe' | Finished Good: 'FG-the-vitamin-shoppe-vs-3026'
+Ingredients:
+    - RM-C52-hypromellose-capsule-1f966702 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C52-magnesium-glycinate-18aefa48 (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C52-magnesium-stearate-c3a91d20 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'The Vitamin Shoppe' | Finished Good: 'FG-the-vitamin-shoppe-vs-3115'
+Ingredients:
+    - RM-C52-b-vitamins-a8a22ae9 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C52-citrus-bioflavonoids-0eafa0d2 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C52-coenzyme-q10-2ac6b422 (Approved Suppliers: [Nutri Avenue, PureBulk])
+    - RM-C52-resveratrol-380303bc (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C52-rhodiola-rosea-extract-root-67517b7c (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C52-vitamin-a-2b057046 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C52-vitamin-c-cb25e76b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C52-vitamin-d-8be54225 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C52-vitamin-e-ba108fda (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C52-zinc-0d5d167a (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'The Vitamin Shoppe' | Finished Good: 'FG-the-vitamin-shoppe-vs-3450'
+Ingredients:
+    - RM-C52-gelatin-capsule-d73cae98 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C52-glycerin-6d2397e8 (Approved Suppliers: [Ingredion])
+    - RM-C52-oil-fill-f62eb920 (Approved Suppliers: [ADM, Cargill])
+    - RM-C52-vitamin-d3-cholecalciferol-1d08f804 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C52-vitamin-k2-14872ba1 (Approved Suppliers: [Balchem, Prinova USA])
+
+Company: 'The Vitamin Shoppe' | Finished Good: 'FG-the-vitamin-shoppe-ye-7038'
+Ingredients:
+    - RM-C52-hypromellose-capsule-1f966702 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C52-magnesium-aspartate-587ada69 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C52-magnesium-glycinate-18aefa48 (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C52-magnesium-stearate-c3a91d20 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C52-magnesium-taurate-a92bc022 (Approved Suppliers: [Balchem])
+
+Company: 'Thorne' | Finished Good: 'FG-thrive-market-thorne-vitamin-d-5-000'
+Ingredients:
+    - RM-C53-hypromellose-62e46f08 (Approved Suppliers: [Capsuline, Colorcon])
+    - RM-C53-leucine-d14d0c88 (Approved Suppliers: [BulkSupplements, PureBulk])
+    - RM-C53-microcrystalline-cellulose-50860e67 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C53-silicon-dioxide-e129db18 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C53-vitamin-d3-cholecalciferol-d3043492 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C53-vitamin-e-d-alpha-tocopheryl-95f6e23c (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Thrive Market' | Finished Good: 'FG-thrive-market-thrive-market-organic-whey-protein-vanilla'
+Ingredients:
+    - RM-C54-natural-vanilla-flavor-a683c377 (Approved Suppliers: [Gold Coast Ingredients, Virginia Dare])
+    - RM-C54-organic-whey-protein-37daa164 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Trace' | Finished Good: 'FG-iherb-119107'
+Ingredients:
+    - RM-C55-alfalfa-leaf-d50c2290 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C55-boron-4ae66b5e (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C55-chloride-785dda86 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C55-concentrace-trace-minerals-d946a4e9 (Approved Suppliers: [Trace Minerals])
+    - RM-C55-croscarmellose-sodium-f806a3ba (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C55-hydroxypropyl-methyl-cellulose-d319fb46 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C55-iron-glycinate-6ef778b3 (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C55-kelp-extract-c17e558c (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C55-magnesium-719304ad (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C55-magnesium-stearate-475309ec (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C55-microcrystalline-cellulose-6b9cdf39 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C55-potassium-aaed46d8 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C55-sodium-613e8388 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C55-stearic-acid-3a1ca9f9 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C55-sulfate-92639eea (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C55-taurine-e1cf4b6c (Approved Suppliers: [BulkSupplements, PureBulk])
+    - RM-C55-vitamin-b6-pyridoxal-5-phosphate-5af7c48a (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Ultima Replenisher' | Finished Good: 'FG-iherb-71022'
+Ingredients:
+    - RM-C56-beet-extract-e7c171ca (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C56-beta-carotene-30b80b09 (Approved Suppliers: [AIDP, Nutri Avenue])
+    - RM-C56-calcium-ascorbate-fca157d3 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C56-calcium-lactate-gluconate-44d08e4d (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C56-citric-acid-d55c874f (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C56-magnesium-citrate-5cf5996a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C56-manganese-citrate-0b990e60 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C56-natural-tangerine-flavor-ed4b8232 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C56-other-natural-flavors-565ce93f (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C56-potassium-aspartate-e54e5e27 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C56-potassium-phosphate-066639d2 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C56-rebaudioside-a-a60df8cc (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C56-salt-sodium-chloride-aa9476b4 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C56-zinc-citrate-45e7f827 (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Ultima Replenisher' | Finished Good: 'FG-thrive-market-ultima-replenisher-passionfruit'
+Ingredients:
+    - RM-C56-calcium-ascorbate-fca157d3 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C56-calcium-lactate-gluconate-44d08e4d (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C56-citric-acid-d55c874f (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C56-magnesium-citrate-5cf5996a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C56-malic-acid-6d696fa8 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C56-manganese-citrate-0b990e60 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C56-natural-passionfruit-flavor-e6075eee (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C56-organic-stevia-leaf-extract-rebaudioside-a-4b383f8d (Approved Suppliers: [Sawgrass Nutra Labs])
+    - RM-C56-potassium-aspartate-e54e5e27 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C56-potassium-phosphate-066639d2 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C56-salt-sodium-chloride-aa9476b4 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C56-zinc-citrate-45e7f827 (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Ultima Replenisher' | Finished Good: 'FG-walmart-502509842'
+Ingredients:
+    - RM-C56-calcium-ascorbate-fca157d3 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C56-calcium-lactate-gluconate-44d08e4d (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C56-citric-acid-d55c874f (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C56-coloring-concentrates-92216482 (Approved Suppliers: [Gold Coast Ingredients, Sensient])
+    - RM-C56-magnesium-citrate-5cf5996a (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C56-manganese-citrate-0b990e60 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C56-natural-flavors-4adc0048 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C56-organic-stevia-leaf-extract-rebaudioside-a-4b383f8d (Approved Suppliers: [Sawgrass Nutra Labs])
+    - RM-C56-potassium-aspartate-e54e5e27 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C56-potassium-phosphate-066639d2 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C56-salt-sodium-chloride-aa9476b4 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C56-zinc-citrate-45e7f827 (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Vitacost' | Finished Good: 'FG-amazon-b007vwbm2u'
+Ingredients:
+    - RM-C57-hydroxypropyl-methylcellulose-fd866cd2 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C57-magnesium-l-threonate-magtein-f0269f1e (Approved Suppliers: [Magtein / ThreoTech LLC])
+    - RM-C57-rice-flour-110edd38 (Approved Suppliers: [Ingredion])
+    - RM-C57-vegetable-magnesium-stearate-006c7e32 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'Vitacost' | Finished Good: 'FG-vitacost-vitacost-electrolyte-mineral-drops-low-sodium'
+Ingredients:
+    - RM-C57-magnesium-21307eac (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C57-potassium-f8472195 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C57-trace-mineral-concentrate-74f28e46 (Approved Suppliers: [Trace Minerals])
+
+Company: 'Vitacost' | Finished Good: 'FG-vitacost-vitacost-magnesium'
+Ingredients:
+    - RM-C57-gelatin-7989e661 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C57-magnesium-oxide-bfe97255 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C57-microcrystalline-cellulose-4a390b30 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C57-silicon-dioxide-2a2a437f (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C57-vegetable-magnesium-stearate-006c7e32 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C57-vegetable-stearic-acid-d0876531 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'Vitacost' | Finished Good: 'FG-vitacost-vitacost-magnesium-400-mg-200-capsules'
+Ingredients:
+    - RM-C57-gelatin-7989e661 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C57-magnesium-oxide-bfe97255 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C57-microcrystalline-cellulose-4a390b30 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C57-silicon-dioxide-2a2a437f (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C57-vegetable-magnesium-stearate-006c7e32 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C57-vegetable-stearic-acid-d0876531 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'Vitacost' | Finished Good: 'FG-vitacost-vitacost-magnesium-ultra'
+Ingredients:
+    - RM-C57-gelatin-7989e661 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C57-magnesium-amino-acid-chelate-9d18d641 (Approved Suppliers: [Balchem])
+    - RM-C57-magnesium-malate-20ee1628 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C57-magnesium-oxide-bfe97255 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C57-magnesium-taurinate-cc787279 (Approved Suppliers: [Balchem])
+    - RM-C57-microcrystalline-cellulose-4a390b30 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C57-vegetable-magnesium-stearate-006c7e32 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C57-vegetable-stearic-acid-d0876531 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'Vitacost' | Finished Good: 'FG-vitacost-vitacost-synergy-once-daily-multivitamin'
+Ingredients:
+    - RM-C57-b-vitamins-43e97376 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C57-calcium-c4d04740 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C57-coq10-9d71a3b0 (Approved Suppliers: [Nutri Avenue, PureBulk])
+    - RM-C57-green-tea-extract-392bcde1 (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C57-magnesium-21307eac (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C57-resveratrol-61a80a5b (Approved Suppliers: [American Botanicals, Mueggenburg USA])
+    - RM-C57-selenium-e7d5f552 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C57-vitamin-a-67ccef59 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C57-vitamin-c-51069db6 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C57-vitamin-d-d6cf0dcb (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C57-vitamin-e-4ec68bfe (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C57-zinc-6557a033 (Approved Suppliers: [Jost Chemical, Prinova USA])
+
+Company: 'Vitacost' | Finished Good: 'FG-vitacost-vitacost-synergy-vitamin-d3-with-cultured-nutrients-fruits-vegetables'
+Ingredients:
+    - RM-C57-cultured-nutrients-5c87fee4 (Approved Suppliers: [Nutra Blend, Prinova USA])
+    - RM-C57-fruit-nutrients-b65036d4 (Approved Suppliers: [Nutra Blend, Prinova USA])
+    - RM-C57-vegetable-nutrients-4667fd2d (Approved Suppliers: [Nutra Blend, Prinova USA])
+    - RM-C57-vitamin-d3-9213116f (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Vitacost' | Finished Good: 'FG-vitacost-vitacost-vitamin-d3-as-cholecalciferol'
+Ingredients:
+    - RM-C57-gelatin-7989e661 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C57-oil-fill-6d6c2601 (Approved Suppliers: [ADM, Cargill])
+    - RM-C57-vitamin-d3-cholecalciferol-528f4316 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Vitacost' | Finished Good: 'FG-vitacost-vitacost-vitamin-d3-as-cholecalciferol-25-mcg-1000-iu-300-capsules'
+Ingredients:
+    - RM-C57-gelatin-7989e661 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C57-oil-fill-6d6c2601 (Approved Suppliers: [ADM, Cargill])
+    - RM-C57-vitamin-d3-cholecalciferol-528f4316 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Vitacost' | Finished Good: 'FG-vitacost-vitacost-vitamin-d3-mini-gels'
+Ingredients:
+    - RM-C57-gelatin-7989e661 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C57-glycerin-f6cb3f81 (Approved Suppliers: [Ingredion])
+    - RM-C57-oil-fill-6d6c2601 (Approved Suppliers: [ADM, Cargill])
+    - RM-C57-vitamin-d3-cholecalciferol-528f4316 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Vitafusion' | Finished Good: 'FG-sams-club-p03010993'
+Ingredients:
+    - RM-C58-blend-of-oils-coconut-and-or-palm-with-beeswax-and-or-carnauba-w-740c2381 (Approved Suppliers: [Koster Keunen, Strahl & Pitsch])
+    - RM-C58-citric-acid-37ade881 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C58-gelatin-c50b9920 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C58-lactic-acid-24bdbce4 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C58-natural-cherry-flavor-01fcd8a9 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C58-sugar-117cb796 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C58-tapioca-syrup-7b1d82e3 (Approved Suppliers: [Ingredion, Nutra Food Ingredients])
+    - RM-C58-vitamin-b12-0f254674 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Walgreens' | Finished Good: 'FG-walgreens-prod6253529'
+Ingredients:
+    - RM-C59-ascorbic-acid-56e58451 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-ascorbyl-palmitate-e1e4a88d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-beta-carotene-90830a92 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-bht-2d7917e1 (Approved Suppliers: [Spectrum Chemical, Univar Solutions])
+    - RM-C59-biotin-463a7b27 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-calcium-carbonate-690f19e0 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C59-carboxymethylcellulose-sodium-133ab5ac (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C59-cholecalciferol-509366a6 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-chromium-picolinate-0dcb6cc2 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C59-cupric-sulfate-5e195820 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C59-cyanocobalamin-8c510008 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-d-calcium-pantothenate-038632c0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-dl-tartaric-acid-03e26fb5 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C59-folic-acid-b94e91e8 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-hydroxypropyl-methylcellulose-abdbe801 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C59-magnesium-oxide-4a98c9ca (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C59-magnesium-stearate-4561c008 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C59-maltodextrin-b4840597 (Approved Suppliers: [Ingredion])
+    - RM-C59-manganese-sulfate-ef83585c (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C59-medium-chain-triglycerides-3a3179d8 (Approved Suppliers: [ADM, Cargill])
+    - RM-C59-microcrystalline-cellulose-eb777a11 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C59-nicotinamide-c2fc9f74 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-phytonadione-9828ed92 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-polyvinyl-alcohol-0b7755ed (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C59-pyridoxine-hydrochloride-8e3b8cb3 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-retinyl-acetate-66d8f431 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-riboflavin-6d322379 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-silica-632f3bc8 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C59-sodium-selenite-4368f280 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C59-sodium-starch-glycolate-c3fc22e9 (Approved Suppliers: [Ingredion])
+    - RM-C59-sorbitol-8ca4b855 (Approved Suppliers: [Nutra Food Ingredients, Prinova USA])
+    - RM-C59-starch-8ddef958 (Approved Suppliers: [Ingredion])
+    - RM-C59-thiamine-mononitrate-9971bee4 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C59-zinc-oxide-b64ce7de (Approved Suppliers: [Jost Chemical, PureBulk])
+
+Company: 'Wellmade' | Finished Good: 'FG-thrive-market-671635733788'
+Ingredients:
+    - RM-C60-organic-agave-inulin-powder-d12caa82 (Approved Suppliers: [Ingredion, Nutra Food Ingredients])
+    - RM-C60-organic-food-complex-83c82fa3 (Approved Suppliers: [Nutra Blend, Prinova USA])
+    - RM-C60-vitamin-d3-301398bc (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Wellmade' | Finished Good: 'FG-thrive-market-671635734464'
+Ingredients:
+    - RM-C60-magnesium-glycinate-37b966a0 (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C60-vegan-capsule-hypromellose-e7b625d7 (Approved Suppliers: [Capsuline, Colorcon])
+
+Company: 'Wellmade' | Finished Good: 'FG-thrive-market-wellmade-real-food-organic-womens-multivitamin'
+Ingredients:
+    - RM-C60-b-vitamins-228430aa (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C60-iron-99cff33a (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C60-organic-food-complex-blend-20007d19 (Approved Suppliers: [Nutra Blend, Prinova USA])
+    - RM-C60-vitamin-a-f0d3ee67 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C60-vitamin-c-26700f36 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C60-vitamin-d3-301398bc (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C60-vitamin-e-51bd7c78 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'Women's Best' | Finished Good: 'FG-walmart-867413342'
+Ingredients:
+    - RM-C61-acesulfame-potassium-0fe24e86 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C61-artificial-flavors-1a59971a (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C61-natural-flavors-987592fa (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C61-salt-69aa56ac (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C61-silicon-dioxide-b7db8185 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C61-sucralose-ca42d35b (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C61-sunflower-lecithin-3bc12a21 (Approved Suppliers: [ADM, Cargill])
+    - RM-C61-whey-protein-concentrate-1e516212 (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C61-whey-protein-isolate-a098ef43 (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C61-xanthan-gum-aaef1463 (Approved Suppliers: [Ingredion])
+
+Company: 'up&up' | Finished Good: 'FG-target-a-14364963'
+Ingredients:
+    - RM-C62-corn-oil-910491c6 (Approved Suppliers: [ADM, Cargill])
+    - RM-C62-gelatin-f333c686 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C62-soybean-oil-e3a6ee3c (Approved Suppliers: [ADM, Cargill])
+    - RM-C62-vegetable-glycerin-45011119 (Approved Suppliers: [Ingredion])
+    - RM-C62-vitamin-d3-cholecalciferol-c763da21 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'up&up' | Finished Good: 'FG-target-a-14510453'
+Ingredients:
+    - RM-C62-corn-oil-910491c6 (Approved Suppliers: [ADM, Cargill])
+    - RM-C62-gelatin-f333c686 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C62-soybean-oil-e3a6ee3c (Approved Suppliers: [ADM, Cargill])
+    - RM-C62-vegetable-glycerin-45011119 (Approved Suppliers: [Ingredion])
+    - RM-C62-vitamin-d3-cholecalciferol-c763da21 (Approved Suppliers: [Prinova USA, PureBulk])
+
+Company: 'up&up' | Finished Good: 'FG-target-a-50284728'
+Ingredients:
+    - RM-C62-calcium-carbonate-f7674431 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C62-carboxymethylcellulose-sodium-4b2d41f6 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-carnauba-wax-1b29fa95 (Approved Suppliers: [Koster Keunen, Strahl & Pitsch])
+    - RM-C62-citric-acid-1bf7cf36 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C62-magnesium-oxide-f01522b4 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C62-magnesium-stearate-f03e0ce6 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-microcrystalline-cellulose-c7cb2454 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-silica-37e58489 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-starch-5debaa10 (Approved Suppliers: [Ingredion])
+    - RM-C62-stearic-acid-29ed75dd (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'up&up' | Finished Good: 'FG-target-a-90043361'
+Ingredients:
+    - RM-C62-ascorbic-acid-vitamin-c-bafc417d (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-calcium-pantothenate-vitamin-b5-be397bac (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-cane-sugar-3a174aee (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C62-citric-acid-1bf7cf36 (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C62-cyanocobalamin-vitamin-b12-64ceac07 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-dextrose-fee38410 (Approved Suppliers: [Ingredion, Prinova USA])
+    - RM-C62-dipotassium-phosphate-e5d48242 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C62-natural-flavor-d8548a82 (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C62-niacinamide-vitamin-b3-6eb51d3f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-potassium-citrate-916cd876 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C62-pyridoxine-hydrochloride-vitamin-b6-7b4a9792 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-salt-8c7e3d71 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C62-silicon-dioxide-0de24b28 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-sodium-citrate-b96411ba (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C62-stevia-leaf-extract-646b040d (Approved Suppliers: [Cargill, Prinova USA])
+
+Company: 'up&up' | Finished Good: 'FG-target-a-90043370'
+Ingredients:
+    - RM-C62-acesulfame-potassium-db0d2756 (Approved Suppliers: [Cargill, Prinova USA])
+    - RM-C62-maltodextrin-e4ad06b4 (Approved Suppliers: [Ingredion])
+    - RM-C62-natural-and-artificial-flavors-8d2408fe (Approved Suppliers: [Gold Coast Ingredients])
+    - RM-C62-salt-8c7e3d71 (Approved Suppliers: [Jost Chemical, PureBulk])
+    - RM-C62-soy-lecithin-2621a336 (Approved Suppliers: [ADM, Cargill])
+    - RM-C62-sucralose-c98ea80a (Approved Suppliers: [Prinova USA, Univar Solutions])
+    - RM-C62-whey-protein-concentrate-ea7872cd (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C62-whey-protein-isolate-fe1d5c8c (Approved Suppliers: [Actus Nutrition, Prinova USA])
+    - RM-C62-xanthan-gum-91be16c3 (Approved Suppliers: [Ingredion])
+
+Company: 'up&up' | Finished Good: 'FG-target-a-90430364'
+Ingredients:
+    - RM-C62-gelatin-f333c686 (Approved Suppliers: [Capsuline, Darling Ingredients / Rousselot])
+    - RM-C62-magnesium-glycinate-91e40c88 (Approved Suppliers: [Balchem, PureBulk])
+    - RM-C62-magnesium-stearate-f03e0ce6 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-rice-powder-2b0b6431 (Approved Suppliers: [Ingredion])
+    - RM-C62-silica-37e58489 (Approved Suppliers: [Ashland, Colorcon])
+
+Company: 'up&up' | Finished Good: 'FG-target-a-94645860'
+Ingredients:
+    - RM-C62-biotin-bde34d3e (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-calcium-060cf77f (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C62-chromium-3b73995f (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C62-copper-ac5ea57f (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C62-croscarmellose-sodium-f8a1a234 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-folate-00e488da (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-gum-acacia-5116cd9c (Approved Suppliers: [Ingredion])
+    - RM-C62-iron-ce69dcf7 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C62-magnesium-27e501c9 (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C62-magnesium-silicate-a5115f01 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-manganese-1e2d5f6c (Approved Suppliers: [Jost Chemical, Prinova USA])
+    - RM-C62-microcrystalline-cellulose-c7cb2454 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-niacinamide-5dd1cad0 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-pantothenic-acid-e361dd4c (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-pea-starch-b6c86033 (Approved Suppliers: [Ingredion])
+    - RM-C62-pharmaceutical-glaze-9e2f2a57 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-riboflavin-98692789 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-silicon-dioxide-0de24b28 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-sodium-alginate-079fb879 (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-stearic-acid-29ed75dd (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-thiamin-3f27fbc4 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-vegetable-magnesium-stearate-9a981b0a (Approved Suppliers: [Ashland, Colorcon])
+    - RM-C62-vitamin-a-237ecc57 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-vitamin-b6-fc69f47f (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-vitamin-c-b1892692 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-vitamin-d3-58becc1b (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-vitamin-e-4af75bd6 (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-vitamin-k-c09d2fee (Approved Suppliers: [Prinova USA, PureBulk])
+    - RM-C62-zinc-e3a68036 (Approved Suppliers: [Jost Chemical, Prinova USA])
