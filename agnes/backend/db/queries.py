@@ -302,3 +302,80 @@ def clear_substitution_tables():
         cur.execute("DROP TABLE IF EXISTS SubstitutionGroupMember")
         cur.execute("DROP TABLE IF EXISTS SubstitutionGroup")
     create_substitution_tables()
+
+
+# ──────────────────────────────────────────────
+# Sourcing Proposals (Phase 3 output storage)
+# ──────────────────────────────────────────────
+
+def create_proposal_tables():
+    """Create tables for Phase 3 sourcing proposals."""
+    with get_cursor() as cur:
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS SourcingProposal (
+                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                IngredientGroupId INTEGER NOT NULL,
+                RecommendedSupplierId INTEGER NOT NULL,
+                RecommendedSupplierName TEXT NOT NULL,
+                CompaniesConsolidated INTEGER NOT NULL,
+                MembersServed INTEGER NOT NULL,
+                TotalCompaniesInGroup INTEGER NOT NULL,
+                EstimatedSavingsPct REAL NOT NULL,
+                ComplianceStatus TEXT NOT NULL,
+                RiskFactorsJson TEXT NOT NULL DEFAULT '[]',
+                ConfidenceScore REAL NOT NULL DEFAULT 0.0,
+                Priority TEXT NOT NULL,
+                EvidenceSummary TEXT NOT NULL DEFAULT '',
+                VerificationsJson TEXT NOT NULL DEFAULT '{}',
+                VerificationPassed INTEGER NOT NULL DEFAULT 0,
+                CreatedAt TEXT NOT NULL,
+                FOREIGN KEY (IngredientGroupId) REFERENCES SubstitutionGroup(Id),
+                FOREIGN KEY (RecommendedSupplierId) REFERENCES Supplier(Id)
+            )
+        """)
+
+
+def clear_proposal_tables():
+    with get_cursor() as cur:
+        cur.execute("DROP TABLE IF EXISTS SourcingProposal")
+    create_proposal_tables()
+
+
+def insert_sourcing_proposal(row: dict) -> int:
+    """Insert a single sourcing proposal record."""
+    with get_cursor() as cur:
+        cur.execute("""
+            INSERT INTO SourcingProposal (
+                IngredientGroupId, RecommendedSupplierId, RecommendedSupplierName,
+                CompaniesConsolidated, MembersServed, TotalCompaniesInGroup,
+                EstimatedSavingsPct, ComplianceStatus, RiskFactorsJson,
+                ConfidenceScore, Priority, EvidenceSummary,
+                VerificationsJson, VerificationPassed, CreatedAt
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            row["IngredientGroupId"],
+            row["RecommendedSupplierId"],
+            row["RecommendedSupplierName"],
+            row["CompaniesConsolidated"],
+            row["MembersServed"],
+            row["TotalCompaniesInGroup"],
+            row["EstimatedSavingsPct"],
+            row["ComplianceStatus"],
+            row["RiskFactorsJson"],
+            row["ConfidenceScore"],
+            row["Priority"],
+            row["EvidenceSummary"],
+            row["VerificationsJson"],
+            row["VerificationPassed"],
+            row["CreatedAt"],
+        ))
+        return cur.lastrowid
+
+
+def get_all_sourcing_proposals() -> list[dict]:
+    with get_cursor() as cur:
+        cur.execute("""
+            SELECT * FROM SourcingProposal
+            ORDER BY ConfidenceScore DESC, EstimatedSavingsPct DESC
+        """)
+        return cur.fetchall()

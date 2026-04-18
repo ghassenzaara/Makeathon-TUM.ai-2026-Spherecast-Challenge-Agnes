@@ -26,8 +26,6 @@ env/
 .DS_Store
 Thumbs.db
 
-# Data caches (commented out to share with team during hackathon)
-# data/enrichment_cache/
 
 # Gemini
 .gemini/
