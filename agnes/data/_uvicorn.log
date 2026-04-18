@@ -14,3 +14,7 @@ INFO:     127.0.0.1:63537 - "GET /api/proposals/1 HTTP/1.1" 200 OK
 2026-04-18 04:30:12,282 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
 2026-04-18 04:30:15,380 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 INFO:     127.0.0.1:63546 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55174 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55176 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55181 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55181 - "GET /openapi.json HTTP/1.1" 200 OK
