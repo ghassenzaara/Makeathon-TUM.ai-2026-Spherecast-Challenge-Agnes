@@ -18,8 +18,8 @@ import re
 
 from backend.config import (
     SCRAPE_DELAY_SECONDS,
-    OPENAI_API_KEY,
-    OPENAI_CHAT_MODEL,
+    GEMINI_API_KEY,
+    GEMINI_CHAT_MODEL,
     TAVILY_API_KEY,
 )
 from backend.phase1_extraction.sku_parser import parse_sku
@@ -185,8 +185,9 @@ async def _llm_fallback_iherb(iherb_id: str, result: dict) -> dict:
         result["_inference_note"] = "Both Tavily and LLM unavailable (no API keys)"
         return result
 
-    from openai import AsyncOpenAI
-    client = AsyncOpenAI(api_key=OPENAI_API_KEY)
+    from google import genai as _genai
+    from google.genai import types as _genai_types
+    client = _genai.Client(api_key=GEMINI_API_KEY)
 
     prompt = f"""You are a supplement industry analyst. An iHerb product page at
 https://www.iherb.com/pr/p/{iherb_id} could not be retrieved.
@@ -207,13 +208,15 @@ Respond in JSON:
 Set confidence between 5-25 since we cannot verify the page content."""
 
     try:
-        response = await client.chat.completions.create(
-            model=OPENAI_CHAT_MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.3,
-            response_format={"type": "json_object"},
+        response = await client.aio.models.generate_content(
+            model=GEMINI_CHAT_MODEL,
+            contents=prompt,
+            config=_genai_types.GenerateContentConfig(
+                response_mime_type="application/json",
+                temperature=0.3,
+            ),
         )
-        inferred = json.loads(response.choices[0].message.content)
+        inferred = json.loads(response.text)
         result["title"] = inferred.get("title", "")
         result["brand"] = inferred.get("brand", "")
         result["certifications"] = inferred.get("certifications", [])

@@ -29,8 +29,8 @@ from backend.config import (
     ATTRIBUTE_EXTRACTION_BATCH_SIZE,
     ENRICHMENT_CACHE_DIR,
     MAX_LLM_CALLS_PER_RUN,
-    OPENAI_API_KEY,
-    OPENAI_CHAT_MODEL,
+    GEMINI_API_KEY,
+    GEMINI_CHAT_MODEL,
 )
 from backend.db.evidence import record_evidence
 from backend.db.queries import (
@@ -207,15 +207,16 @@ async def _llm_batch(names: list[str], budget: _LLMBudget) -> dict[str, dict]:
     One OpenAI call for a batch of ingredient names. Returns {name: attrs-dict}.
     On error or budget exhaustion, returns {}.
     """
-    if not names or not OPENAI_API_KEY:
+    if not names or not GEMINI_API_KEY:
         return {}
     if not budget.consume(1):
         logger.warning("LLM budget exhausted (cap=%d). Skipping batch of %d names.",
                        budget.cap, len(names))
         return {}
 
-    from openai import AsyncOpenAI
-    client = AsyncOpenAI(api_key=OPENAI_API_KEY)
+    from google import genai as _genai
+    from google.genai import types as _genai_types
+    client = _genai.Client(api_key=GEMINI_API_KEY)
 
     prompt = (
         "You are a supplement-ingredient chemistry expert. Given these normalized "
@@ -228,13 +229,15 @@ async def _llm_batch(names: list[str], budget: _LLMBudget) -> dict[str, dict]:
     try:
         logger.info("  LLM attribute batch: %d names (budget used %d/%d)",
                     len(names), budget.used, budget.cap)
-        response = await client.chat.completions.create(
-            model=OPENAI_CHAT_MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.0,
-            response_format={"type": "json_object"},
+        response = await client.aio.models.generate_content(
+            model=GEMINI_CHAT_MODEL,
+            contents=prompt,
+            config=_genai_types.GenerateContentConfig(
+                response_mime_type="application/json",
+                temperature=0.0,
+            ),
         )
-        payload = json.loads(response.choices[0].message.content)
+        payload = json.loads(response.text)
         if not isinstance(payload, dict):
             return {}
         # Sanity filter: keys should overlap with inputs

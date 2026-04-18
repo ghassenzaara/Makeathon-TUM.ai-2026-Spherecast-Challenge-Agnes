@@ -16,7 +16,9 @@ import logging
 import re
 from typing import Any
 
-from backend.config import OPENAI_API_KEY, OPENAI_CHAT_MODEL
+from backend.config import GEMINI_API_KEY, GEMINI_CHAT_MODEL
+from google import genai as _genai
+from google.genai import types as _genai_types
 from backend.db.queries import get_sourcing_proposal
 from backend.phase4_output.evidence_trail_builder import build_evidence_trail
 from backend.phase4_output.retriever import RetrievalIndex, Doc
@@ -106,16 +108,23 @@ def _fallback_answer(question: str, retrieved: dict[str, list[tuple[Doc, float]]
 
 
 def _llm_answer(messages: list[dict], context: str) -> str:
-    from openai import OpenAI
-    client = OpenAI(api_key=OPENAI_API_KEY)
-    convo = [{"role": "system", "content": SYSTEM_PROMPT + "\n\n" + context}]
-    convo.extend(messages)
-    resp = client.chat.completions.create(
-        model=OPENAI_CHAT_MODEL,
-        messages=convo,
-        temperature=0.1,
+    client = _genai.Client(api_key=GEMINI_API_KEY)
+    contents = [
+        _genai_types.Content(
+            role="model" if m["role"] == "assistant" else "user",
+            parts=[_genai_types.Part(text=m["content"])],
+        )
+        for m in messages if m["role"] != "system"
+    ]
+    resp = client.models.generate_content(
+        model=GEMINI_CHAT_MODEL,
+        contents=contents,
+        config=_genai_types.GenerateContentConfig(
+            system_instruction=SYSTEM_PROMPT + "\n\n" + context,
+            temperature=0.1,
+        ),
     )
-    return resp.choices[0].message.content or ""
+    return resp.text or ""
 
 
 def answer(messages: list[dict], index: RetrievalIndex, proposal_id: int | None = None) -> dict[str, Any]:
@@ -176,18 +185,25 @@ def answer(messages: list[dict], index: RetrievalIndex, proposal_id: int | None 
 
     citation_pool = _citations_for(retrieved)
 
-    if OPENAI_API_KEY:
+    if GEMINI_API_KEY:
         try:
-            from openai import OpenAI
-            client = OpenAI(api_key=OPENAI_API_KEY)
-            convo = [{"role": "system", "content": system_prompt + "\n\n" + context}]
-            convo.extend(messages)
-            resp = client.chat.completions.create(
-                model=OPENAI_CHAT_MODEL,
-                messages=convo,
-                temperature=0.1,
+            client = _genai.Client(api_key=GEMINI_API_KEY)
+            contents = [
+                _genai_types.Content(
+                    role="model" if m["role"] == "assistant" else "user",
+                    parts=[_genai_types.Part(text=m["content"])],
+                )
+                for m in messages if m["role"] != "system"
+            ]
+            resp = client.models.generate_content(
+                model=GEMINI_CHAT_MODEL,
+                contents=contents,
+                config=_genai_types.GenerateContentConfig(
+                    system_instruction=system_prompt + "\n\n" + context,
+                    temperature=0.1,
+                ),
             )
-            text = resp.choices[0].message.content or ""
+            text = resp.text or ""
         except Exception as e:
             logger.warning(f"LLM call failed, using fallback: {e}")
             text = _fallback_answer(query, retrieved)
