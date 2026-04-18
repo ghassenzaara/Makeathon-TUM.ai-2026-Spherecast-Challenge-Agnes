@@ -343,14 +343,14 @@ function ProposalCard({ proposal: p, isCritical, isTop }: { proposal: Proposal; 
           </div>
           <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/[0.04]">
             <div className="flex -space-x-1.5">
-              {p.companies_consolidated.slice(0, 4).map((c, i) => (
-                <div key={i} className="h-6 w-6 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-[9px] font-medium text-gray-500" title={c}>
-                  {c[0]}
+              {Array.from({ length: Math.min(4, p.companies_consolidated) }).map((_, i) => (
+                <div key={i} className="h-6 w-6 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-[9px] font-medium text-gray-500">
+                  •
                 </div>
               ))}
-              {p.companies_consolidated.length > 4 && (
+              {p.companies_consolidated > 4 && (
                 <div className="h-6 w-6 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-[9px] text-gray-500">
-                  +{p.companies_consolidated.length - 4}
+                  +{p.companies_consolidated - 4}
                 </div>
               )}
             </div>

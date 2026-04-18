@@ -17,7 +17,7 @@ export interface Proposal {
   ingredient_group_id: number;
   recommended_supplier_id: number;
   recommended_supplier_name: string;
-  companies_consolidated: string[];
+  companies_consolidated: number;
   members_served: number;
   total_companies_in_group: number;
   estimated_savings_pct: number;

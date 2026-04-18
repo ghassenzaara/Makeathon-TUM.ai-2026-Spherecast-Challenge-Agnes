@@ -22,7 +22,7 @@ export const MOCK_PROPOSALS: Proposal[] = [
     estimated_savings_pct: 18.5,
     members_served: 4,
     total_companies_in_group: 5,
-    companies_consolidated: ["AutoCenter", "GearWorks", "MetalFab", "BuildIt"],
+    companies_consolidated: 4,
     verification_passed: true,
   },
   {
@@ -37,7 +37,7 @@ export const MOCK_PROPOSALS: Proposal[] = [
     estimated_savings_pct: 12.2,
     members_served: 8,
     total_companies_in_group: 12,
-    companies_consolidated: ["FreshFoods", "GreenMart", "LogiWrap"],
+    companies_consolidated: 3,
     verification_passed: true,
   },
   {
@@ -52,7 +52,7 @@ export const MOCK_PROPOSALS: Proposal[] = [
     estimated_savings_pct: 21.4,
     members_served: 2,
     total_companies_in_group: 6,
-    companies_consolidated: ["HeavyMachinery", "LineOps"],
+    companies_consolidated: 2,
     verification_passed: false,
   }
 ];
