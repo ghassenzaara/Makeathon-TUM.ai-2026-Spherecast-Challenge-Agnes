@@ -29,6 +29,7 @@ from backend.phase1_extraction.substitution_groups import (
 )
 from backend.phase2_enrichment.enrichment_store import (
     get_supplier_info, get_compliance_requirements,
+    get_fda_risk, get_entity_verification,
 )
 from backend.phase3_reasoning.substitution_validator import validate_substitution_group
 from backend.phase3_reasoning.compliance_checker import check_compliance, ComplianceResult
@@ -141,9 +142,14 @@ def run_phase3(top_groups: int = 50, persist: bool = True) -> List[SourcingPropo
             continue
 
         # 2. Load supplier evidence for every supplier in the group
+        supplier_ids = {s.supplier_id for s in group.suppliers}
         supplier_data_map: Dict[int, dict] = {}
-        for sid in {s.supplier_id for s in group.suppliers}:
+        fda_data_map: Dict[int, dict] = {}
+        entity_data_map: Dict[int, dict] = {}
+        for sid in supplier_ids:
             supplier_data_map[sid] = get_supplier_info(sid) or {}
+            fda_data_map[sid] = get_fda_risk(sid) or {}
+            entity_data_map[sid] = get_entity_verification(sid) or {}
 
         # 3. Compliance check per (member product, supplier) pair
         compliance_results: Dict[int, ComplianceResult] = {}
@@ -165,16 +171,27 @@ def run_phase3(top_groups: int = 50, persist: bool = True) -> List[SourcingPropo
                 compliance_results[member.product_id * 1_000_000 + sid] = res
 
         # 4. Optimize sourcing
-        proposals = optimize_sourcing(group, supplier_data_map, compliance_results)
+        proposals = optimize_sourcing(
+            group, supplier_data_map, compliance_results,
+            fda_data_map=fda_data_map,
+            entity_data_map=entity_data_map,
+        )
 
         # 5. Score + verify
         for prop in proposals:
             sdata = supplier_data_map.get(prop.recommended_supplier_id, {}) or {}
             cdata_agg = compliance_evidence[0] if compliance_evidence else {}
+            sid = prop.recommended_supplier_id
             prop.confidence_score = score_proposal_confidence(
                 prop, group, validation, sdata, cdata_agg,
+                fda_data=fda_data_map.get(sid),
+                entity_data=entity_data_map.get(sid),
             )
-            verifications = verify_proposal(prop, sdata, compliance_evidence)
+            verifications = verify_proposal(
+                prop, sdata, compliance_evidence,
+                fda_data=fda_data_map.get(sid),
+                entity_data=entity_data_map.get(sid),
+            )
             v_summary = verification_summary(verifications)
             # Downgrade confidence if any claim was contradicted
             if not v_summary["passed"]:

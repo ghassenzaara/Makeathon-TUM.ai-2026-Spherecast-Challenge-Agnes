@@ -177,6 +177,16 @@ def get_compliance_requirements(product_id: int) -> Optional[dict]:
     return get_enrichment("product", str(product_id), "compliance_requirements")
 
 
+def get_fda_risk(supplier_id: int) -> Optional[dict]:
+    """Get OpenFDA enforcement risk record for a supplier."""
+    return get_enrichment("supplier", str(supplier_id), "fda_risk")
+
+
+def get_entity_verification(supplier_id: int) -> Optional[dict]:
+    """Get OpenCorporates entity verification record for a supplier."""
+    return get_enrichment("supplier", str(supplier_id), "entity_verification")
+
+
 def get_certifications_for_supplier(supplier_id: int) -> list[str]:
     """Get list of certifications for a supplier."""
     info = get_supplier_info(supplier_id)

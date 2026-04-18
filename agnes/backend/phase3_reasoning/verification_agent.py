@@ -24,12 +24,16 @@ def verify_proposal(
     proposal: SourcingProposal,
     supplier_evidence: dict,
     compliance_evidence: List[dict] = None,
+    fda_data: dict = None,
+    entity_data: dict = None,
 ) -> Dict[str, str]:
     """
     Args:
-        supplier_evidence:    The Phase 2 supplier record for the proposed supplier.
-        compliance_evidence:  List of Phase 2 compliance-requirement records for
-                              the finished goods that consume this group.
+        supplier_evidence:    Phase 2 supplier record for the proposed supplier.
+        compliance_evidence:  Phase 2 compliance-requirement records for the
+                              finished goods that consume this group.
+        fda_data:             OpenFDA enforcement risk record (optional).
+        entity_data:          OpenCorporates entity verification record (optional).
 
     Returns:
         {claim_label: status} where status ∈ {VERIFIED, UNVERIFIED, CONTRADICTED}.
@@ -90,6 +94,24 @@ def verify_proposal(
         verifications["savings_bounds"] = "VERIFIED"
     else:
         verifications["savings_bounds"] = "CONTRADICTED"
+
+    # Claim 5: FDA enforcement — no active recalls/enforcement actions
+    fda_status = (fda_data or {}).get("status", "")
+    if fda_status == "Clear":
+        verifications["fda_enforcement_clear"] = "VERIFIED"
+    elif fda_status == "Warning":
+        verifications["fda_enforcement_clear"] = "CONTRADICTED"
+    else:
+        verifications["fda_enforcement_clear"] = "UNVERIFIED"
+
+    # Claim 6: supplier is an active registered business entity
+    entity_status = (entity_data or {}).get("status", "")
+    if entity_status == "Active":
+        verifications["supplier_entity_active"] = "VERIFIED"
+    elif entity_status == "Dissolved":
+        verifications["supplier_entity_active"] = "CONTRADICTED"
+    else:
+        verifications["supplier_entity_active"] = "UNVERIFIED"
 
     return verifications
 
