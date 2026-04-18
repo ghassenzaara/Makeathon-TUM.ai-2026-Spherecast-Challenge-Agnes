@@ -1,6 +1,6 @@
 # agnes_core.py — The Brain of Agnes
 # Core reasoning engine: orchestrates context loading, scraping, prompt assembly,
-# Gemini API calls, and response parsing.
+# LLM API calls, and response parsing.
 
 import os
 import re
@@ -8,7 +8,7 @@ import json
 import time
 from typing import Optional
 from dotenv import load_dotenv
-from google import genai
+from openai import OpenAI
 
 from prompts import AGNES_SYSTEM_PROMPT, QUERY_TEMPLATE
 import scraper
@@ -18,82 +18,32 @@ load_dotenv()
 
 # ─── Module-level state ───
 _CONTEXT_CACHE: Optional[str] = None
-_CLIENT: Optional[genai.Client] = None
+_CLIENT: Optional[OpenAI] = None
 _ALL_SUPPLIERS: Optional[list[str]] = None
 
 # ─── Configuration ───
-MODEL_NAME = "gemini-2.0-flash"
+MODEL_NAME = "gpt-4o-mini"  # 128K context window, fits our ~35K prompt easily
 TEMPERATURE = 0.1
 MAX_OUTPUT_TOKENS = 8192
 MAX_RETRIES = 2
 CONTEXT_FILE = "ai_context.txt"
 
-# ─── Auth state ───
-_USE_VERTEX_REST = False  # Whether to use Vertex AI REST API directly
 
-
-def _get_client() -> genai.Client:
-    """
-    Lazily initializes the Gemini client.
-    Priority: Standard Gemini API key > Vertex AI REST (if standard key fails).
-    """
+def _get_client() -> OpenAI:
+    """Lazily initializes and returns the OpenAI client."""
     global _CLIENT
     if _CLIENT is not None:
         return _CLIENT
 
-    api_key = os.getenv("GEMINI_API_KEY")
-    if api_key:
-        _CLIENT = genai.Client(api_key=api_key)
-        print("  [AUTH] Connected via Gemini API key")
-        return _CLIENT
-
-    raise EnvironmentError(
-        "No authentication configured.\n"
-        "Set GEMINI_API_KEY in your .env file."
-    )
-
-
-def _call_vertex_rest(prompt: str, system_prompt: str) -> str:
-    """
-    Calls Gemini via Vertex AI REST API using the API key directly.
-    Bypasses the need for gcloud/ADC authentication.
-    """
-    import requests as req
-
-    project_id = os.getenv("GCP_PROJECT_ID", "digital-modem-493702")
-    location = os.getenv("GCP_LOCATION", "us-central1")
-    api_key = os.getenv("VERTEX_API_KEY", "")
-
-    url = (
-        f"https://{location}-aiplatform.googleapis.com/v1/"
-        f"projects/{project_id}/locations/{location}/"
-        f"publishers/google/models/{MODEL_NAME}:generateContent"
-    )
-
-    headers = {
-        "Content-Type": "application/json",
-        "X-Goog-Api-Key": api_key,
-    }
-
-    payload = {
-        "contents": [{"role": "user", "parts": [{"text": prompt}]}],
-        "systemInstruction": {"parts": [{"text": system_prompt}]},
-        "generationConfig": {
-            "temperature": TEMPERATURE,
-            "maxOutputTokens": MAX_OUTPUT_TOKENS,
-        },
-    }
-
-    resp = req.post(url, json=payload, headers=headers, timeout=120)
-
-    if resp.status_code != 200:
-        raise RuntimeError(f"Vertex AI REST error {resp.status_code}: {resp.text[:500]}")
-
-    data = resp.json()
-    try:
-        return data["candidates"][0]["content"]["parts"][0]["text"]
-    except (KeyError, IndexError):
-        raise ValueError(f"Unexpected Vertex AI response format: {str(data)[:500]}")
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise EnvironmentError(
+            "OPENAI_API_KEY not found in environment.\n"
+            "Set it in your .env file."
+        )
+    _CLIENT = OpenAI(api_key=api_key)
+    print("  [AUTH] Connected via OpenAI API key")
+    return _CLIENT
 
 
 def load_context(filepath: str = CONTEXT_FILE) -> str:
@@ -184,39 +134,29 @@ def build_mega_prompt(context: str, external_data: dict, user_query: str) -> str
     )
 
 
-def call_gemini(prompt: str, system_prompt: str) -> str:
+def call_llm(prompt: str, system_prompt: str) -> str:
     """
-    Makes a single call to Gemini with retry logic.
-    Tries: google-genai SDK first, falls back to Vertex AI REST on quota errors.
+    Makes a single call to the LLM with retry logic.
+    Uses OpenAI GPT-4o-mini (128K context window).
     """
-    global _USE_VERTEX_REST
-
-    # If we already know the standard API is quota-exhausted, go straight to Vertex
-    if _USE_VERTEX_REST:
-        print("  [AUTH] Using Vertex AI REST API (fallback)")
-        return _call_vertex_rest(prompt, system_prompt)
-
     client = _get_client()
 
     for attempt in range(MAX_RETRIES + 1):
         try:
-            response = client.models.generate_content(
+            response = client.chat.completions.create(
                 model=MODEL_NAME,
-                contents=prompt,
-                config=genai.types.GenerateContentConfig(
-                    system_instruction=system_prompt,
-                    temperature=TEMPERATURE,
-                    max_output_tokens=MAX_OUTPUT_TOKENS,
-                ),
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": prompt},
+                ],
+                temperature=TEMPERATURE,
+                max_tokens=MAX_OUTPUT_TOKENS,
             )
 
-            # Extract text from response
-            if response.text:
-                return response.text
-            else:
-                if response.candidates and response.candidates[0].content.parts:
-                    return response.candidates[0].content.parts[0].text
-                raise ValueError("Empty response from Gemini")
+            text = response.choices[0].message.content
+            if text and text.strip():
+                return text
+            raise ValueError("Empty response from LLM")
 
         except Exception as e:
             error_str = str(e).lower()
@@ -224,34 +164,22 @@ def call_gemini(prompt: str, system_prompt: str) -> str:
             print(f"  [DEBUG] Exception type: {error_type}, message: {str(e)[:200]}")
 
             is_rate_limit = any(kw in error_str for kw in [
-                "resource", "exhausted", "429", "rate", "quota",
-                "too many requests", "resourceexhausted"
+                "rate_limit", "429", "rate", "quota", "too many requests"
             ])
 
             if is_rate_limit:
-                # Try Vertex AI REST as fallback before retrying
-                vertex_key = os.getenv("VERTEX_API_KEY")
-                if vertex_key:
-                    print("  [FALLBACK] Standard API quota exhausted. Switching to Vertex AI REST...")
-                    _USE_VERTEX_REST = True
-                    try:
-                        return _call_vertex_rest(prompt, system_prompt)
-                    except Exception as ve:
-                        print(f"  [DEBUG] Vertex AI REST also failed: {str(ve)[:200]}")
-                        # Fall through to normal retry
-
                 wait_time = (2 ** attempt) * 5
                 print(f"  [WAIT] Rate limited. Retrying in {wait_time}s... (attempt {attempt + 1}/{MAX_RETRIES + 1})")
                 time.sleep(wait_time)
                 continue
             elif attempt < MAX_RETRIES:
-                print(f"  [WARN] Gemini error ({error_type}): {str(e)[:150]}. Retrying... (attempt {attempt + 1}/{MAX_RETRIES + 1})")
+                print(f"  [WARN] LLM error ({error_type}): {str(e)[:150]}. Retrying... (attempt {attempt + 1}/{MAX_RETRIES + 1})")
                 time.sleep(2)
                 continue
             else:
-                raise RuntimeError(f"Gemini API failed after {MAX_RETRIES + 1} attempts ({error_type}): {e}")
+                raise RuntimeError(f"LLM API failed after {MAX_RETRIES + 1} attempts ({error_type}): {e}")
 
-    raise RuntimeError("Gemini API failed: exhausted all retries")
+    raise RuntimeError("LLM API failed: exhausted all retries")
 
 
 def parse_response(raw_response: str) -> dict:
@@ -341,7 +269,7 @@ def ask_agnes(query: str, skip_scraping: bool = False) -> dict:
     # Step 5: Call Gemini
     print(f"  [5/6] Calling {MODEL_NAME}...")
     t_start = time.time()
-    raw_response = call_gemini(mega_prompt, AGNES_SYSTEM_PROMPT)
+    raw_response = call_llm(mega_prompt, AGNES_SYSTEM_PROMPT)
     t_elapsed = time.time() - t_start
     print(f"     Response received in {t_elapsed:.1f}s ({len(raw_response):,} chars)")
 
