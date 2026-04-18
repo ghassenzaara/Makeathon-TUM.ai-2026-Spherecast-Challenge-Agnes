@@ -27,8 +27,8 @@ import numpy as np
 
 from backend.config import (
     DATA_DIR,
-    GEMINI_API_KEY,
-    GEMINI_EMBEDDING_MODEL,
+    OPENAI_API_KEY,
+    OPENAI_EMBEDDING_MODEL,
     EMBEDDING_BATCH_SIZE,
 )
 from backend.db.connection import get_cursor
@@ -170,9 +170,9 @@ def _hash_embed(texts: list[str], dim: int = 512) -> np.ndarray:
     return out / norms
 
 
-def _embed(texts: list[str], using_gemini: bool) -> np.ndarray:
-    if using_gemini:
-        return _gemini_embed(texts)
+def _embed(texts: list[str], using_openai: bool) -> np.ndarray:
+    if using_openai:
+        return _openai_embed(texts)
     return _hash_embed(texts)
 
 
@@ -193,7 +193,7 @@ class RetrievalIndex:
     def search(self, query: str, k: int = 8, kind: Optional[str] = None, proposal_id: Optional[int] = None, ingredient_group_id: Optional[int] = None, supplier_id: Optional[str] = None) -> list[tuple[Doc, float]]:
         if not self.docs:
             return []
-        q_vec = _embed([query], using_gemini=(self.backend == "gemini"))[0]
+        q_vec = _embed([query], using_openai=(self.backend == "openai"))[0]
         sims = self.embeddings @ q_vec
         
         if proposal_id or ingredient_group_id or supplier_id:
@@ -273,11 +273,11 @@ def build_or_load_index(force_rebuild: bool = False) -> RetrievalIndex:
         logger.warning("Phase 4 corpus is empty -- did you run phases 1-3?")
         return RetrievalIndex([], np.zeros((0, 0), dtype=np.float32), "hash")
 
-    using_gemini = bool(GEMINI_API_KEY)
-    backend = "gemini" if using_gemini else "hash"
+    using_openai = bool(OPENAI_API_KEY)
+    backend = "openai" if using_openai else "hash"
     logger.info(
         f"Building Phase 4 retrieval index: {len(docs)} docs, backend={backend}"
     )
-    embeddings = _embed([d.text for d in docs], using_gemini=using_gemini)
+    embeddings = _embed([d.text for d in docs], using_openai=using_openai)
     _save(docs, embeddings, backend)
     return RetrievalIndex(docs, embeddings, backend)

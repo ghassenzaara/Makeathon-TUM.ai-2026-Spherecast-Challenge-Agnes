@@ -37,6 +37,7 @@ from backend.phase3_reasoning.sourcing_optimizer import optimize_sourcing, Sourc
 from backend.phase3_reasoning.confidence_scorer import score_proposal_confidence
 from backend.phase3_reasoning.verification_agent import verify_proposal, verification_summary
 from backend.phase3_reasoning.pareto_engine import compute_pareto_frontier, rank_by_utility
+from backend.phase3_reasoning.evidence_model import AggregatedMetric, Signal, SourceType, aggregate
 
 
 logging.basicConfig(
@@ -77,8 +78,56 @@ def dict_to_group(g_dict: dict) -> SubstitutionGroup:
     )
 
 
+def _build_score_breakdown(p: SourcingProposal) -> AggregatedMetric:
+    """
+    Aggregate compliance, savings, and risk signals into the proposal's
+    final uncertainty-aware score breakdown.
+    """
+    savings_norm = min(p.estimated_savings_pct / 30.0, 1.0)
+    signals = [
+        Signal(
+            value=p.compliance_probability,
+            confidence=p.evidence_strength,
+            source_type=SourceType.DETERMINISTIC,
+            importance=0.6,
+            label="Compliance",
+        ),
+        Signal(
+            value=savings_norm,
+            confidence=0.80,
+            source_type=SourceType.DETERMINISTIC,
+            importance=0.8,
+            label="Savings Potential",
+        ),
+        Signal(
+            value=max(0.0, 1.0 - p.risk_score),
+            confidence=p.verification_confidence,
+            source_type=SourceType.DETERMINISTIC,
+            importance=0.7,
+            label="Risk Profile",
+        ),
+    ]
+    metric = aggregate(signals, expected_count=3)
+
+    # Override uncertainty_sources with domain-specific reasons
+    reasons = []
+    if p.evidence_strength < 0.5:
+        reasons.append("Compliance evidence uncertain — limited supplier cert data")
+    if p.verification_confidence < 0.5:
+        reasons.append("Verification confidence below threshold")
+    if any("certifications unverified" in r for r in p.risk_factors):
+        reasons.append("Supplier certifications not verified externally")
+    if any("FDA enforcement" in r for r in p.risk_factors):
+        reasons.append("FDA enforcement history detected — review required")
+    if any("Dissolved" in r for r in p.risk_factors):
+        reasons.append("Supplier entity status flagged as Dissolved")
+    metric.uncertainty_sources = reasons or metric.uncertainty_sources
+    return metric
+
+
 def _persist_proposal(p: SourcingProposal, verifications: dict):
     summary = verification_summary(verifications)
+    score_bd = p.score_breakdown.to_dict() if p.score_breakdown else None
     insert_sourcing_proposal({
         "IngredientGroupId": p.ingredient_group_id,
         "RecommendedSupplierId": p.recommended_supplier_id,
@@ -104,6 +153,11 @@ def _persist_proposal(p: SourcingProposal, verifications: dict):
         "IsParetoOptimal": 1 if p.is_pareto_optimal else 0,
         "DominatedByJson": json.dumps(p.dominated_by),
         "VerificationConfidence": p.verification_confidence,
+        # Uncertainty-aware fields
+        "ScoreBreakdownJson": json.dumps(score_bd),
+        "ComplianceBreakdownJson": json.dumps(p.compliance_breakdown),
+        "ImpactScore": p.impact_score,
+        "FlaggedLowConfHighImpact": 1 if p.flagged_low_confidence_high_impact else 0,
     })
 
 
@@ -222,7 +276,6 @@ def run_phase3(top_groups: int = 50, persist: bool = True) -> List[SourcingPropo
     # 6. Global Pareto frontier (across ALL groups — chart needs a meaningful frontier)
     if all_proposals:
         pareto_results = compute_pareto_frontier(all_proposals)
-        pareto_map = {r.proposal_id: r for r in pareto_results}
         for r in pareto_results:
             for p in all_proposals:
                 if p.id == r.proposal_id:
@@ -230,6 +283,10 @@ def run_phase3(top_groups: int = 50, persist: bool = True) -> List[SourcingPropo
                     p.is_pareto_optimal = r.is_pareto_optimal
                     p.dominated_by = r.dominated_by
                     break
+
+        # Build score_breakdown for each proposal (requires Pareto fields to be set)
+        for p in all_proposals:
+            p.score_breakdown = _build_score_breakdown(p)
 
         # 7. Utility ranking (all proposals, not just frontier)
         ranked_pairs = rank_by_utility(
@@ -277,7 +334,18 @@ def run_phase3(top_groups: int = 50, persist: bool = True) -> List[SourcingPropo
     for i, p in enumerate(all_proposals[:5], 1):
         print(f"\n{i}. Group {p.ingredient_group_id} | {p.recommended_supplier_name}")
         print(f"   Consolidates {p.companies_consolidated}/{p.total_companies_in_group} companies ({p.members_served} SKUs)")
-        print(f"   Est. savings: {p.estimated_savings_pct:.1f}% | Confidence: {p.confidence_score:.1f}%")
+        print(f"   Est. savings: {p.estimated_savings_pct:.1f}% | Impact: {p.impact_score:.3f}")
+        bd = p.score_breakdown
+        if bd:
+            print(
+                f"   Score: value={bd.value:.3f} conf={bd.confidence:.3f} "
+                f"cov={bd.coverage:.2f}"
+            )
+            print(f"   compliance_score={p.compliance_probability:.3f} "
+                  f"(conf={p.evidence_strength:.3f}, "
+                  f"breakdown={p.compliance_breakdown})")
+        else:
+            print(f"   Confidence: {p.confidence_score:.1f}%")
         print(f"   Priority: {p.priority} | Compliance: {p.compliance_status}")
         if p.risk_factors:
             print(f"   Risks: {', '.join(p.risk_factors)}")

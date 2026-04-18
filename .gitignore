@@ -32,3 +32,6 @@ Thumbs.db
 
 # Claude
 .claude/
+
+# Chatbot
+agnes/chatbot/

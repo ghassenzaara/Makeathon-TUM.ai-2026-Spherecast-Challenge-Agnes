@@ -16,7 +16,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Optional
 
-from backend.config import GEMINI_API_KEY, GEMINI_CHAT_MODEL
+from backend.config import OPENAI_API_KEY, OPENAI_CHAT_MODEL
 from backend.db.evidence import record_evidence
 
 logger = logging.getLogger(__name__)
@@ -104,12 +104,11 @@ async def extract_product_from_html(
                        product_id, len(cleaned))
         return _empty_product_result()
 
-    if not GEMINI_API_KEY:
+    if not OPENAI_API_KEY:
         return _empty_product_result()
 
-    from google import genai as _genai
-    from google.genai import types as _genai_types
-    client = _genai.Client(api_key=GEMINI_API_KEY)
+    from openai import AsyncOpenAI
+    client = AsyncOpenAI(api_key=OPENAI_API_KEY)
 
     schema_str = _schema_to_prompt(PRODUCT_SCHEMA)
     prompt = (
@@ -126,15 +125,13 @@ async def extract_product_from_html(
     )
 
     try:
-        response = await client.aio.models.generate_content(
-            model=GEMINI_CHAT_MODEL,
-            contents=prompt,
-            config=_genai_types.GenerateContentConfig(
-                response_mime_type="application/json",
-                temperature=0.0,
-            ),
+        response = await client.chat.completions.create(
+            model=OPENAI_CHAT_MODEL,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.0,
+            response_format={"type": "json_object"},
         )
-        result = json.loads(response.text)
+        result = json.loads(response.choices[0].message.content)
         if not isinstance(result, dict):
             return _empty_product_result()
 
@@ -169,12 +166,11 @@ async def extract_supplier_from_text(
     """
     Extract structured supplier data from text (page content or LLM knowledge).
     """
-    if not GEMINI_API_KEY:
+    if not OPENAI_API_KEY:
         return _empty_supplier_result(supplier_name, supplier_id)
 
-    from google import genai as _genai
-    from google.genai import types as _genai_types
-    client = _genai.Client(api_key=GEMINI_API_KEY)
+    from openai import AsyncOpenAI
+    client = AsyncOpenAI(api_key=OPENAI_API_KEY)
 
     schema_str = _schema_to_prompt(SUPPLIER_SCHEMA)
     cleaned = clean_html(text) if text else ""
@@ -195,15 +191,13 @@ async def extract_supplier_from_text(
     )
 
     try:
-        response = await client.aio.models.generate_content(
-            model=GEMINI_CHAT_MODEL,
-            contents=prompt,
-            config=_genai_types.GenerateContentConfig(
-                response_mime_type="application/json",
-                temperature=0.2,
-            ),
+        response = await client.chat.completions.create(
+            model=OPENAI_CHAT_MODEL,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.2,
+            response_format={"type": "json_object"},
         )
-        result = json.loads(response.text)
+        result = json.loads(response.choices[0].message.content)
         if not isinstance(result, dict):
             return _empty_supplier_result(supplier_name, supplier_id)
 

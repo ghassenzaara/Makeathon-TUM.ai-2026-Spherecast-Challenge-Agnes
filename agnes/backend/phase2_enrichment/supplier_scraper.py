@@ -13,7 +13,7 @@ import asyncio
 import logging
 import re
 
-from backend.config import TAVILY_API_KEY
+from backend.config import OPENAI_API_KEY, OPENAI_CHAT_MODEL, TAVILY_API_KEY
 from backend.db.queries import get_all_suppliers
 from backend.phase2_enrichment.enrichment_store import (
     cache_get,
