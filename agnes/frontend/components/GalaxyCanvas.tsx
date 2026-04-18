@@ -92,12 +92,8 @@ export function GalaxyCanvas() {
         star.x = cx + dx * cos - dy * sin;
         star.y = cy + dx * sin + dy * cos;
 
-        // Very slow additional vertical drift (deep-space parallax feel)
         star.y += star.speed;
-        star.x += star.drift;
         if (star.y > h + 2) { star.y = -2; star.x = Math.random() * canvas!.width; }
-        if (star.x < -2)      star.x = canvas!.width + 2;
-        if (star.x > canvas!.width + 2) star.x = -2;
 
         // Individual twinkle synced to breath — trough aligns with logo dim
         const twinkle = 0.35 + 0.65 * ((Math.sin(t * star.speed * 8 + star.phase) + 1) / 2);
