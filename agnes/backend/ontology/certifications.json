@@ -1,0 +1,60 @@
+{
+  "_meta": {
+    "purpose": "Canonical certification names with synonym groups. Used by Phase 1 and Phase 2 to normalize cert labels. Seeded verbatim from phase3_reasoning/compliance_checker.py:_SYNONYM_GROUPS and extended.",
+    "matching": "Raw label is lowercased, whitespace normalized. Exact match on canonical or any synonym wins. Word-boundary match on synonyms is the fallback."
+  },
+
+  "non-gmo": {
+    "synonyms": ["non gmo", "nongmo", "ngmo", "non-gmo project verified", "non-gmo-project-verified"],
+    "blocking": false
+  },
+  "organic": {
+    "synonyms": ["usda organic", "certified organic", "eu organic", "certified-organic", "usda-organic"],
+    "blocking": true
+  },
+  "kosher": {
+    "synonyms": ["ou kosher", "ou-kosher", "kof-k", "star-k", "certified kosher", "kosher certified"],
+    "blocking": true
+  },
+  "halal": {
+    "synonyms": ["ifanca", "halal certified", "halal-certified", "certified halal"],
+    "blocking": true
+  },
+  "vegan": {
+    "synonyms": ["certified vegan", "vegan action", "vegan certified", "vegan-certified"],
+    "blocking": true
+  },
+  "vegetarian": {
+    "synonyms": [],
+    "blocking": false
+  },
+  "gluten-free": {
+    "synonyms": ["gluten free", "gfco", "certified gluten-free", "certified gluten free"],
+    "blocking": false
+  },
+  "gmp": {
+    "synonyms": ["gmp certified", "gmp-certified", "cgmp", "current gmp", "gmp quality assured"],
+    "blocking": false
+  },
+  "nsf": {
+    "synonyms": ["nsf certified", "nsf international", "nsf-certified"],
+    "blocking": false
+  },
+  "usp": {
+    "synonyms": ["usp verified", "usp-verified"],
+    "blocking": false
+  },
+  "iso-9001": {"synonyms": ["iso9001", "iso 9001:2015"], "blocking": false},
+  "iso-22000": {"synonyms": ["iso22000", "iso 22000:2018"], "blocking": false},
+  "iso-14001": {"synonyms": ["iso14001"], "blocking": false},
+  "fssc-22000": {"synonyms": ["fssc22000", "fssc 22000"], "blocking": false},
+  "sqf": {"synonyms": ["safe quality food"], "blocking": false},
+  "fair-trade": {"synonyms": ["fair-trade certified", "fair trade certified", "fairtrade"], "blocking": false},
+  "haccp": {"synonyms": [], "blocking": false},
+  "fda": {"synonyms": ["fda compliance", "fda registered", "fda-registered"], "blocking": false},
+  "dairy-free": {"synonyms": ["dairy free"], "blocking": false},
+  "soy-free": {"synonyms": ["soy free"], "blocking": false},
+  "sugar-free": {"synonyms": ["sugar free", "no added sugar"], "blocking": false},
+  "third-party-tested": {"synonyms": ["third party tested", "independently tested"], "blocking": false},
+  "b-corp": {"synonyms": ["certified b corporation", "b corporation"], "blocking": false}
+}

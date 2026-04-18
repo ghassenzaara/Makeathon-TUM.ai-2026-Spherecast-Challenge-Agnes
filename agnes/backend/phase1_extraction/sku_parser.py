@@ -134,3 +134,29 @@ def normalize_ingredient_name(name: str) -> str:
 def parse_all_skus(skus: list[str]) -> list[ParsedSKU]:
     """Parse a batch of SKUs and return structured results."""
     return [parse_sku(sku) for sku in skus]
+
+
+_TOKEN_SPLIT_RE = re.compile(r"[^a-z0-9\-]+")
+
+
+def tokens_from_ingredient(name: str) -> set[str]:
+    """
+    Split an ingredient name into tokens usable for axis matching.
+
+    Preserves hyphenated pairs (e.g. "d-alpha", "cold-pressed") so the
+    attribute ontology can match multi-word markers.
+    """
+    if not name:
+        return set()
+    n = name.lower().strip()
+    parts = _TOKEN_SPLIT_RE.split(n)
+    toks: set[str] = {p for p in parts if p}
+    # Also split hyphenated tokens into individual words, and keep adjacent pairs
+    for p in list(toks):
+        if "-" in p:
+            pieces = [x for x in p.split("-") if x]
+            toks.update(pieces)
+            for i in range(len(pieces) - 1):
+                toks.add(f"{pieces[i]}-{pieces[i+1]}")
+    toks.add(n)
+    return toks

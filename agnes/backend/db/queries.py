@@ -301,7 +301,316 @@ def clear_substitution_tables():
         cur.execute("DROP TABLE IF EXISTS SubstitutionGroupSupplier")
         cur.execute("DROP TABLE IF EXISTS SubstitutionGroupMember")
         cur.execute("DROP TABLE IF EXISTS SubstitutionGroup")
+        cur.execute("DROP TABLE IF EXISTS SubstitutionLink")
     create_substitution_tables()
+
+
+def create_substitution_group_v2_tables():
+    """
+    Extended substitution tables with attribute-rich columns.
+    Drops + recreates SubstitutionGroup so we can add JSON columns.
+    """
+    with get_cursor() as cur:
+        cur.execute("DROP TABLE IF EXISTS SubstitutionGroup")
+        cur.execute("""
+            CREATE TABLE SubstitutionGroup (
+                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                CanonicalName TEXT NOT NULL,
+                CrossCompanyCount INTEGER DEFAULT 0,
+                MemberCount INTEGER DEFAULT 0,
+                AvgSimilarity REAL DEFAULT 1.0,
+                UnifiedAttributesJson TEXT DEFAULT '{}',
+                DivergentAttributesJson TEXT DEFAULT '{}'
+            )
+        """)
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS SubstitutionLink (
+                FromGroupId INTEGER NOT NULL,
+                ToGroupId INTEGER NOT NULL,
+                Similarity REAL NOT NULL,
+                CaveatsJson TEXT NOT NULL DEFAULT '[]',
+                PRIMARY KEY (FromGroupId, ToGroupId),
+                FOREIGN KEY (FromGroupId) REFERENCES SubstitutionGroup(Id),
+                FOREIGN KEY (ToGroupId) REFERENCES SubstitutionGroup(Id)
+            )
+        """)
+
+
+def insert_substitution_group_v2(
+    canonical_name: str,
+    cross_company_count: int,
+    member_count: int,
+    avg_similarity: float,
+    unified_json: str = "{}",
+    divergent_json: str = "{}",
+) -> int:
+    """Insert a substitution group (v2, with attribute columns)."""
+    with get_cursor() as cur:
+        cur.execute("""
+            INSERT INTO SubstitutionGroup
+                (CanonicalName, CrossCompanyCount, MemberCount, AvgSimilarity,
+                 UnifiedAttributesJson, DivergentAttributesJson)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (canonical_name, cross_company_count, member_count,
+              avg_similarity, unified_json, divergent_json))
+        return cur.lastrowid
+
+
+def insert_substitution_link(
+    from_group_id: int,
+    to_group_id: int,
+    similarity: float,
+    caveats_json: str = "[]",
+):
+    """Insert a cross-group substitution link (functional substitute, not merge)."""
+    with get_cursor() as cur:
+        cur.execute("""
+            INSERT OR REPLACE INTO SubstitutionLink
+                (FromGroupId, ToGroupId, Similarity, CaveatsJson)
+            VALUES (?, ?, ?, ?)
+        """, (from_group_id, to_group_id, similarity, caveats_json))
+
+
+def get_substitution_links_for_group(group_id: int) -> list[dict]:
+    """Return all links touching this group (either direction)."""
+    with get_cursor() as cur:
+        cur.execute("""
+            SELECT FromGroupId, ToGroupId, Similarity, CaveatsJson
+            FROM SubstitutionLink
+            WHERE FromGroupId = ? OR ToGroupId = ?
+        """, (group_id, group_id))
+        return cur.fetchall()
+
+
+# ──────────────────────────────────────────────
+# Ingredient cards (attribute-rich ingredients)
+# ──────────────────────────────────────────────
+
+def create_ingredient_card_tables():
+    """Create tables for structured ingredient cards and their multi-value props."""
+    with get_cursor() as cur:
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS IngredientCard (
+                ProductId INTEGER PRIMARY KEY,
+                Substance TEXT,
+                Form TEXT,
+                Grade TEXT,
+                Hydration TEXT,
+                SaltOrEster TEXT,
+                Source TEXT,
+                SourceDetail TEXT,
+                Chirality TEXT,
+                VitDForm TEXT,
+                VitB12Form TEXT,
+                TocopherolForm TEXT,
+                ExtractedAt TEXT,
+                ExtractionMethod TEXT,
+                RawIngredientName TEXT,
+                FOREIGN KEY (ProductId) REFERENCES Product(Id)
+            )
+        """)
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS CardCertification (
+                ProductId INTEGER NOT NULL,
+                Certification TEXT NOT NULL,
+                EvidenceId INTEGER,
+                PRIMARY KEY (ProductId, Certification),
+                FOREIGN KEY (ProductId) REFERENCES Product(Id)
+            )
+        """)
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS CardAllergen (
+                ProductId INTEGER NOT NULL,
+                Allergen TEXT NOT NULL,
+                EvidenceId INTEGER,
+                PRIMARY KEY (ProductId, Allergen),
+                FOREIGN KEY (ProductId) REFERENCES Product(Id)
+            )
+        """)
+
+
+def clear_ingredient_card_tables():
+    with get_cursor() as cur:
+        cur.execute("DROP TABLE IF EXISTS CardAllergen")
+        cur.execute("DROP TABLE IF EXISTS CardCertification")
+        cur.execute("DROP TABLE IF EXISTS IngredientCard")
+    create_ingredient_card_tables()
+
+
+def upsert_ingredient_card(card: dict):
+    """Insert or replace an IngredientCard row. Keys: ProductId, Substance, Form, ..."""
+    with get_cursor() as cur:
+        cur.execute("""
+            INSERT OR REPLACE INTO IngredientCard (
+                ProductId, Substance, Form, Grade, Hydration, SaltOrEster,
+                Source, SourceDetail, Chirality, VitDForm, VitB12Form,
+                TocopherolForm, ExtractedAt, ExtractionMethod, RawIngredientName
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            card.get("ProductId"),
+            card.get("Substance"),
+            card.get("Form"),
+            card.get("Grade"),
+            card.get("Hydration"),
+            card.get("SaltOrEster"),
+            card.get("Source"),
+            card.get("SourceDetail"),
+            card.get("Chirality"),
+            card.get("VitDForm"),
+            card.get("VitB12Form"),
+            card.get("TocopherolForm"),
+            card.get("ExtractedAt"),
+            card.get("ExtractionMethod"),
+            card.get("RawIngredientName"),
+        ))
+
+
+def insert_card_certification(product_id: int, certification: str, evidence_id: int | None = None):
+    with get_cursor() as cur:
+        cur.execute("""
+            INSERT OR REPLACE INTO CardCertification (ProductId, Certification, EvidenceId)
+            VALUES (?, ?, ?)
+        """, (product_id, certification, evidence_id))
+
+
+def insert_card_allergen(product_id: int, allergen: str, evidence_id: int | None = None):
+    with get_cursor() as cur:
+        cur.execute("""
+            INSERT OR REPLACE INTO CardAllergen (ProductId, Allergen, EvidenceId)
+            VALUES (?, ?, ?)
+        """, (product_id, allergen, evidence_id))
+
+
+def get_ingredient_card(product_id: int) -> dict | None:
+    with get_cursor() as cur:
+        cur.execute("SELECT * FROM IngredientCard WHERE ProductId = ?", (product_id,))
+        row = cur.fetchone()
+        if not row:
+            return None
+        cur.execute("SELECT Certification FROM CardCertification WHERE ProductId = ?",
+                    (product_id,))
+        row["Certifications"] = [r["Certification"] for r in cur.fetchall()]
+        cur.execute("SELECT Allergen FROM CardAllergen WHERE ProductId = ?",
+                    (product_id,))
+        row["Allergens"] = [r["Allergen"] for r in cur.fetchall()]
+        return row
+
+
+def get_all_ingredient_cards() -> list[dict]:
+    with get_cursor() as cur:
+        cur.execute("SELECT * FROM IngredientCard")
+        return cur.fetchall()
+
+
+# ──────────────────────────────────────────────
+# Ingredient-level compliance requirements
+# ──────────────────────────────────────────────
+
+def create_ingredient_compliance_tables():
+    with get_cursor() as cur:
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS IngredientComplianceRequirement (
+                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                FinishedGoodId INTEGER NOT NULL,
+                RawMaterialId INTEGER NOT NULL,
+                Requirement TEXT NOT NULL,
+                DerivationType TEXT NOT NULL,
+                Confidence REAL NOT NULL DEFAULT 0.5,
+                EvidenceId INTEGER,
+                CreatedAt TEXT,
+                FOREIGN KEY (FinishedGoodId) REFERENCES Product(Id),
+                FOREIGN KEY (RawMaterialId) REFERENCES Product(Id)
+            )
+        """)
+
+
+def clear_ingredient_compliance_tables():
+    with get_cursor() as cur:
+        cur.execute("DROP TABLE IF EXISTS IngredientComplianceRequirement")
+    create_ingredient_compliance_tables()
+
+
+def insert_ingredient_compliance_requirement(row: dict) -> int:
+    with get_cursor() as cur:
+        cur.execute("""
+            INSERT INTO IngredientComplianceRequirement (
+                FinishedGoodId, RawMaterialId, Requirement,
+                DerivationType, Confidence, EvidenceId, CreatedAt
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (
+            row["FinishedGoodId"], row["RawMaterialId"], row["Requirement"],
+            row["DerivationType"], row["Confidence"],
+            row.get("EvidenceId"), row.get("CreatedAt"),
+        ))
+        return cur.lastrowid
+
+
+def get_requirements_for_raw_material(fg_id: int, rm_id: int) -> list[dict]:
+    with get_cursor() as cur:
+        cur.execute("""
+            SELECT * FROM IngredientComplianceRequirement
+            WHERE FinishedGoodId = ? AND RawMaterialId = ?
+        """, (fg_id, rm_id))
+        return cur.fetchall()
+
+
+def get_requirements_for_finished_good(fg_id: int) -> list[dict]:
+    with get_cursor() as cur:
+        cur.execute("""
+            SELECT * FROM IngredientComplianceRequirement
+            WHERE FinishedGoodId = ?
+        """, (fg_id,))
+        return cur.fetchall()
+
+
+# ──────────────────────────────────────────────
+# Contradictions
+# ──────────────────────────────────────────────
+
+def create_contradiction_tables():
+    with get_cursor() as cur:
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS Contradiction (
+                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                SubjectType TEXT NOT NULL,
+                SubjectId INTEGER NOT NULL,
+                Rule TEXT NOT NULL,
+                DetailJson TEXT NOT NULL,
+                Severity TEXT NOT NULL,
+                DetectedAt TEXT NOT NULL
+            )
+        """)
+
+
+def clear_contradiction_tables():
+    with get_cursor() as cur:
+        cur.execute("DROP TABLE IF EXISTS Contradiction")
+    create_contradiction_tables()
+
+
+def insert_contradiction(row: dict) -> int:
+    with get_cursor() as cur:
+        cur.execute("""
+            INSERT INTO Contradiction
+                (SubjectType, SubjectId, Rule, DetailJson, Severity, DetectedAt)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (
+            row["SubjectType"], row["SubjectId"], row["Rule"],
+            row["DetailJson"], row["Severity"], row["DetectedAt"],
+        ))
+        return cur.lastrowid
+
+
+def get_all_contradictions() -> list[dict]:
+    with get_cursor() as cur:
+        cur.execute("SELECT * FROM Contradiction ORDER BY DetectedAt DESC")
+        return cur.fetchall()
+
+
+def count_contradictions() -> int:
+    with get_cursor() as cur:
+        cur.execute("SELECT COUNT(*) AS c FROM Contradiction")
+        return cur.fetchone()["c"]
 
 
 # ──────────────────────────────────────────────

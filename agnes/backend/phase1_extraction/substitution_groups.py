@@ -1,14 +1,19 @@
 """
 Substitution Groups — builds, stores, and queries substitution groups.
 
-Orchestrates the full Phase 1 pipeline:
+Enhanced pipeline with attribute-aware grouping:
   1. Loads all raw materials from DB
   2. Parses SKUs to extract ingredient names
-  3. Clusters ingredients by semantic similarity
-  4. Cross-references with BOM and supplier data
-  5. Stores results in the SubstitutionGroup tables
+  3. Extracts structured attributes (IngredientCards) via attribute_extractor
+  4. Clusters by canonical substance (hard groups)
+  5. Computes unified/divergent attributes per group
+  6. Optionally links groups via embedding similarity (soft links)
+  7. Cross-references with BOM and supplier data
+  8. Stores results in the SubstitutionGroup tables (v2 schema)
 """
 
+import asyncio
+import json
 import logging
 from collections import defaultdict
 from dataclasses import dataclass, field
@@ -20,7 +25,11 @@ from backend.phase1_extraction.semantic_matcher import (
     build_ingredient_embeddings,
     cluster_ingredients,
     cluster_ingredients_exact_only,
+    cluster_by_substance,
+    link_substitution_groups,
     IngredientCluster,
+    SubstanceCluster,
+    SubstitutionLink,
 )
 from backend.db.queries import (
     get_all_raw_materials,
@@ -28,11 +37,14 @@ from backend.db.queries import (
     create_substitution_tables,
     clear_substitution_tables,
     insert_substitution_group,
+    insert_substitution_group_v2,
+    insert_substitution_link,
     insert_group_members,
     insert_group_suppliers,
     insert_group_consumers,
     get_all_substitution_groups,
     get_substitution_group_detail,
+    get_all_ingredient_cards,
 )
 
 logger = logging.getLogger(__name__)
@@ -76,6 +88,8 @@ class SubstitutionGroup:
     consuming_product_skus: list[str] = field(default_factory=list)
     cross_company_count: int = 0
     similarity_score: float = 1.0
+    unified_attrs: dict = field(default_factory=dict)
+    divergent_attrs: dict = field(default_factory=dict)
 
     @property
     def has_consolidation_potential(self) -> bool:
@@ -99,20 +113,23 @@ class SubstitutionGroup:
 
 
 # ──────────────────────────────────────────────
-# Pipeline
+# Pipeline (v2: attribute-aware)
 # ──────────────────────────────────────────────
 
 def build_substitution_groups(
     use_semantic: bool = True,
     force_refresh_embeddings: bool = False,
+    use_cards: bool = True,
 ) -> list[SubstitutionGroup]:
     """
-    Full Phase 1 pipeline: parse → cluster → enrich → store.
+    Full Phase 1 pipeline: parse → extract attrs → cluster → enrich → store.
 
     Args:
         use_semantic: Whether to use OpenAI embeddings for clustering.
                       Falls back to exact-match if False or no API key.
         force_refresh_embeddings: If True, re-generate embeddings.
+        use_cards: If True, use IngredientCard-based substance clustering (v2).
+                   If False, fall back to legacy name-based clustering.
 
     Returns:
         List of SubstitutionGroup objects, sorted by consolidation potential.
@@ -151,32 +168,50 @@ def build_substitution_groups(
         f"{len(unique_names)} unique ingredient names"
     )
 
-    # ── Step 3: Cluster ingredients ──
-    logger.info("Step 3: Clustering ingredients...")
+    # ── Step 3: Cluster ──
+    # Try v2 (card-based substance grouping) first, fall back to legacy.
+    cards = []
+    substance_clusters: list[SubstanceCluster] = []
+    sub_links: list[SubstitutionLink] = []
 
-    if use_semantic and OPENAI_API_KEY:
-        logger.info("  Using semantic (embedding-based) clustering...")
-        embeddings = build_ingredient_embeddings(
-            unique_names, force_refresh=force_refresh_embeddings
-        )
-        clusters = cluster_ingredients(unique_names, embeddings)
-    else:
-        if use_semantic and not OPENAI_API_KEY:
-            logger.warning(
-                "  No OPENAI_API_KEY set — falling back to exact-match clustering"
+    if use_cards:
+        logger.info("Step 3: Loading IngredientCards for substance clustering...")
+        cards = get_all_ingredient_cards()
+        if cards:
+            logger.info(f"  Found {len(cards)} IngredientCards")
+            substance_clusters = cluster_by_substance(cards)
+            logger.info(f"  {len(substance_clusters)} substance clusters formed")
+            # Build soft links
+            if use_semantic and OPENAI_API_KEY:
+                logger.info("  Computing substitution links...")
+                sub_links = link_substitution_groups(
+                    substance_clusters,
+                    force_refresh_embeddings=force_refresh_embeddings,
+                )
+            else:
+                logger.info("  Skipping substitution links (no API key or --no-semantic)")
+        else:
+            logger.info("  No IngredientCards found; falling back to legacy clustering")
+            use_cards = False
+
+    if not use_cards:
+        logger.info("Step 3: Clustering ingredients (legacy mode)...")
+        if use_semantic and OPENAI_API_KEY:
+            logger.info("  Using semantic (embedding-based) clustering...")
+            embeddings = build_ingredient_embeddings(
+                unique_names, force_refresh=force_refresh_embeddings
             )
-        logger.info("  Using exact-match clustering...")
-        clusters = cluster_ingredients_exact_only(unique_names)
+            legacy_clusters = cluster_ingredients(unique_names, embeddings)
+        else:
+            if use_semantic and not OPENAI_API_KEY:
+                logger.warning(
+                    "  No OPENAI_API_KEY set — falling back to exact-match clustering"
+                )
+            logger.info("  Using exact-match clustering...")
+            legacy_clusters = cluster_ingredients_exact_only(unique_names)
+        logger.info(f"  Formed {len(legacy_clusters)} clusters")
 
-    logger.info(f"  Formed {len(clusters)} clusters")
-
-    # ── Step 4: Build name → cluster mapping ──
-    name_to_cluster: dict[str, IngredientCluster] = {}
-    for cluster in clusters:
-        for name in cluster.member_names:
-            name_to_cluster[name] = cluster
-
-    # ── Step 5: Load BOM + supplier data ──
+    # ── Step 4: Load BOM + supplier data ──
     logger.info("Step 4: Loading BOM and supplier relationships...")
     bom_data = get_bom_components_with_suppliers()
     logger.info(f"  Loaded {len(bom_data)} BOM+supplier records")
@@ -221,70 +256,135 @@ def build_substitution_groups(
                 deduped.append(c)
         product_consumers[rm_id] = deduped
 
-    # ── Step 6: Assemble SubstitutionGroup objects ──
+    # ── Step 5: Assemble SubstitutionGroup objects ──
     logger.info("Step 5: Assembling substitution groups...")
 
-    # Group parsed materials by cluster canonical name
-    cluster_materials: dict[str, list[dict]] = defaultdict(list)
+    # Build product_id → parsed material mapping
+    pid_to_mat: dict[int, dict] = {}
     for mat in parsed_materials:
-        cluster = name_to_cluster.get(mat["ingredient_name"])
-        if cluster:
-            cluster_materials[cluster.canonical_name].append(mat)
+        pid_to_mat[mat["product_id"]] = mat
 
     groups: list[SubstitutionGroup] = []
 
-    for cluster in clusters:
-        materials = cluster_materials.get(cluster.canonical_name, [])
-        if not materials:
-            continue
+    if use_cards and substance_clusters:
+        # v2 path: one group per substance cluster
+        for sc in substance_clusters:
+            materials_for_group = [
+                pid_to_mat[pid]
+                for pid in sc.product_ids
+                if pid in pid_to_mat
+            ]
+            if not materials_for_group:
+                continue
 
-        # Collect members
-        members = [
-            IngredientMember(
-                product_id=m["product_id"],
-                sku=m["sku"],
-                company_id=m["company_id"],
-                company_name=m["company_name"],
-                ingredient_name=m["ingredient_name"],
+            members = [
+                IngredientMember(
+                    product_id=m["product_id"],
+                    sku=m["sku"],
+                    company_id=m["company_id"],
+                    company_name=m["company_name"],
+                    ingredient_name=m["ingredient_name"],
+                )
+                for m in materials_for_group
+            ]
+
+            # Collect suppliers
+            all_suppliers: list[SupplierInfo] = []
+            seen_supplier_keys = set()
+            for m in materials_for_group:
+                for s in product_suppliers.get(m["product_id"], []):
+                    key = (s["SupplierId"], s["ProductId"])
+                    if key not in seen_supplier_keys:
+                        seen_supplier_keys.add(key)
+                        all_suppliers.append(SupplierInfo(
+                            supplier_id=s["SupplierId"],
+                            supplier_name=s["SupplierName"],
+                            product_id=s["ProductId"],
+                        ))
+
+            # Collect consuming finished goods
+            all_consumer_ids = set()
+            all_consumer_skus = set()
+            for m in materials_for_group:
+                for c in product_consumers.get(m["product_id"], []):
+                    all_consumer_ids.add(c["FinishedGoodId"])
+                    all_consumer_skus.add(c["FinishedGoodSKU"])
+
+            distinct_companies = len(set(m.company_id for m in members))
+
+            group = SubstitutionGroup(
+                canonical_name=sc.substance,
+                members=members,
+                suppliers=all_suppliers,
+                consuming_product_ids=sorted(all_consumer_ids),
+                consuming_product_skus=sorted(all_consumer_skus),
+                cross_company_count=distinct_companies,
+                similarity_score=1.0,  # Hard group = perfect match
+                unified_attrs=sc.unified_attrs,
+                divergent_attrs=sc.divergent_attrs,
             )
-            for m in materials
-        ]
+            groups.append(group)
+    else:
+        # Legacy path: one group per IngredientCluster
+        name_to_cluster: dict[str, IngredientCluster] = {}
+        for cluster in legacy_clusters:
+            for name in cluster.member_names:
+                name_to_cluster[name] = cluster
 
-        # Collect all suppliers across all members
-        all_suppliers: list[SupplierInfo] = []
-        seen_supplier_keys = set()
-        for m in materials:
-            for s in product_suppliers.get(m["product_id"], []):
-                key = (s["SupplierId"], s["ProductId"])
-                if key not in seen_supplier_keys:
-                    seen_supplier_keys.add(key)
-                    all_suppliers.append(SupplierInfo(
-                        supplier_id=s["SupplierId"],
-                        supplier_name=s["SupplierName"],
-                        product_id=s["ProductId"],
-                    ))
+        cluster_materials: dict[str, list[dict]] = defaultdict(list)
+        for mat in parsed_materials:
+            cluster = name_to_cluster.get(mat["ingredient_name"])
+            if cluster:
+                cluster_materials[cluster.canonical_name].append(mat)
 
-        # Collect all consuming finished goods
-        all_consumer_ids = set()
-        all_consumer_skus = set()
-        for m in materials:
-            for c in product_consumers.get(m["product_id"], []):
-                all_consumer_ids.add(c["FinishedGoodId"])
-                all_consumer_skus.add(c["FinishedGoodSKU"])
+        for cluster in legacy_clusters:
+            materials = cluster_materials.get(cluster.canonical_name, [])
+            if not materials:
+                continue
 
-        # Count distinct companies
-        distinct_companies = len(set(m.company_id for m in members))
+            members = [
+                IngredientMember(
+                    product_id=m["product_id"],
+                    sku=m["sku"],
+                    company_id=m["company_id"],
+                    company_name=m["company_name"],
+                    ingredient_name=m["ingredient_name"],
+                )
+                for m in materials
+            ]
 
-        group = SubstitutionGroup(
-            canonical_name=cluster.canonical_name,
-            members=members,
-            suppliers=all_suppliers,
-            consuming_product_ids=sorted(all_consumer_ids),
-            consuming_product_skus=sorted(all_consumer_skus),
-            cross_company_count=distinct_companies,
-            similarity_score=cluster.avg_similarity,
-        )
-        groups.append(group)
+            all_suppliers: list[SupplierInfo] = []
+            seen_supplier_keys = set()
+            for m in materials:
+                for s in product_suppliers.get(m["product_id"], []):
+                    key = (s["SupplierId"], s["ProductId"])
+                    if key not in seen_supplier_keys:
+                        seen_supplier_keys.add(key)
+                        all_suppliers.append(SupplierInfo(
+                            supplier_id=s["SupplierId"],
+                            supplier_name=s["SupplierName"],
+                            product_id=s["ProductId"],
+                        ))
+
+            all_consumer_ids = set()
+            all_consumer_skus = set()
+            for m in materials:
+                for c in product_consumers.get(m["product_id"], []):
+                    all_consumer_ids.add(c["FinishedGoodId"])
+                    all_consumer_skus.add(c["FinishedGoodSKU"])
+
+            distinct_companies = len(set(m.company_id for m in members))
+
+            group = SubstitutionGroup(
+                canonical_name=cluster.canonical_name,
+                members=members,
+                suppliers=all_suppliers,
+                consuming_product_ids=sorted(all_consumer_ids),
+                consuming_product_skus=sorted(all_consumer_skus),
+                cross_company_count=distinct_companies,
+                similarity_score=cluster.avg_similarity,
+            )
+            groups.append(group)
 
     # Sort by consolidation potential
     groups.sort(
@@ -301,9 +401,9 @@ def build_substitution_groups(
         f"(consolidation candidates)"
     )
 
-    # ── Step 7: Store in database ──
+    # ── Step 6: Store in database ──
     logger.info("Step 6: Storing results in database...")
-    _store_groups(groups)
+    _store_groups(groups, sub_links, use_v2=use_cards)
 
     logger.info("=" * 60)
     logger.info("PHASE 1 COMPLETE")
@@ -312,20 +412,40 @@ def build_substitution_groups(
     return groups
 
 
-def _store_groups(groups: list[SubstitutionGroup]):
-    """Persist substitution groups to the database."""
-    # Clear previous results and create tables
+def _store_groups(
+    groups: list[SubstitutionGroup],
+    links: list[SubstitutionLink] | None = None,
+    use_v2: bool = True,
+):
+    """Persist substitution groups (and links) to the database."""
+    # Clear previous results and create tables (v2 schema if using cards)
     clear_substitution_tables()
+    if use_v2:
+        from backend.db.queries import create_substitution_group_v2_tables
+        create_substitution_group_v2_tables()
+
+    # Map substance → group_id for link storage
+    substance_to_gid: dict[str, int] = {}
 
     for group in groups:
-        # Insert the group
-        group_id = insert_substitution_group(
-            canonical_name=group.canonical_name,
-            cross_company_count=group.cross_company_count,
-            member_count=group.member_count,
-            avg_similarity=group.similarity_score,
-        )
+        if use_v2:
+            group_id = insert_substitution_group_v2(
+                canonical_name=group.canonical_name,
+                cross_company_count=group.cross_company_count,
+                member_count=group.member_count,
+                avg_similarity=group.similarity_score,
+                unified_json=json.dumps(group.unified_attrs),
+                divergent_json=json.dumps(group.divergent_attrs),
+            )
+        else:
+            group_id = insert_substitution_group(
+                canonical_name=group.canonical_name,
+                cross_company_count=group.cross_company_count,
+                member_count=group.member_count,
+                avg_similarity=group.similarity_score,
+            )
         group.id = group_id
+        substance_to_gid[group.canonical_name] = group_id
 
         # Insert members
         member_dicts = [
@@ -361,6 +481,21 @@ def _store_groups(groups: list[SubstitutionGroup]):
         ]
         if consumer_dicts:
             insert_group_consumers(group_id, consumer_dicts)
+
+    # Store substitution links
+    if links:
+        stored = 0
+        for link in links:
+            from_gid = substance_to_gid.get(link.from_substance)
+            to_gid = substance_to_gid.get(link.to_substance)
+            if from_gid and to_gid:
+                insert_substitution_link(
+                    from_gid, to_gid,
+                    link.similarity,
+                    json.dumps(link.caveats),
+                )
+                stored += 1
+        logger.info(f"  Stored {stored} substitution links")
 
     logger.info(f"  Stored {len(groups)} groups in database")
 
@@ -405,3 +540,8 @@ def print_summary(groups: list[SubstitutionGroup]):
             supplier_names = sorted(set(s.supplier_name for s in g.suppliers))
             print(f"     Suppliers: {', '.join(supplier_names)}")
         print(f"     Finished goods affected: {len(g.consuming_product_ids)}")
+        if g.unified_attrs:
+            print(f"     Unified: {json.dumps(g.unified_attrs)}")
+        if g.divergent_attrs:
+            axes = list(g.divergent_attrs.keys())
+            print(f"     Divergent axes: {', '.join(axes)}")

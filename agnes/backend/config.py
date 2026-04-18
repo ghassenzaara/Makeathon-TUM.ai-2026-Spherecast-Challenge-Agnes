@@ -33,6 +33,14 @@ CONFIDENCE_MEDIUM = 50  # >= 50 → recommend with warnings
 DATA_DIR = _PROJECT_ROOT / "data"
 ENRICHMENT_CACHE_DIR = DATA_DIR / "enrichment_cache"
 ENRICHMENT_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+ONTOLOGY_DIR = _PROJECT_ROOT / "backend" / "ontology"
 
 # --- Rate Limiting ---
 SCRAPE_DELAY_SECONDS = 1.0  # Delay between web scraping requests
+
+# --- Attribute extraction ---
+ATTRIBUTE_EXTRACTION_BATCH_SIZE = int(os.getenv("ATTRIBUTE_EXTRACTION_BATCH_SIZE", "25"))
+MAX_LLM_CALLS_PER_RUN = int(os.getenv("MAX_LLM_CALLS_PER_RUN", "60"))
+
+# --- Clustering ---
+LINK_SIMILARITY_THRESHOLD = float(os.getenv("LINK_SIMILARITY_THRESHOLD", "0.70"))

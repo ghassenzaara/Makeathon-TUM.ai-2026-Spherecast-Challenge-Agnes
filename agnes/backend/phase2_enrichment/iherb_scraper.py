@@ -2,9 +2,13 @@
 iHerb Product Scraper -- extracts certifications, ingredients, and pricing.
 
 Scrapes iHerb product pages for finished goods with FG-iherb-{id} SKUs.
-Falls back to LLM inference if scraping fails (rate limits, blocking, etc.).
+Falls back to:
+  1. Structured LLM extraction (if page is parseable but messy)
+  2. Group priors (if 403/blocked — uses sibling products' data)
+  3. LLM inference with low confidence (last resort)
 
 Rate-limited to 1 request/second. Results cached in data/enrichment_cache/iherb/.
+Every extracted field emits an Evidence row.
 """
 
 import asyncio
@@ -16,11 +20,17 @@ import httpx
 from bs4 import BeautifulSoup
 
 from backend.config import SCRAPE_DELAY_SECONDS, OPENAI_API_KEY, OPENAI_CHAT_MODEL
+from backend.db.evidence import record_evidence
 from backend.phase1_extraction.sku_parser import parse_sku
 from backend.phase2_enrichment.enrichment_store import (
     cache_get,
     cache_set,
     store_product_scrape,
+)
+from backend.phase2_enrichment.group_priors import apply_group_priors_to_scrape
+from backend.phase2_enrichment.structured_extractor import (
+    extract_product_from_html,
+    clean_html,
 )
 
 logger = logging.getLogger(__name__)
@@ -50,19 +60,19 @@ _HEADERS = {
 }
 
 
-async def scrape_iherb_product(iherb_id: str) -> dict:
+async def scrape_iherb_product(iherb_id: str, product_id: int = 0) -> dict:
     """
     Scrape an iHerb product page and extract structured info.
 
     Args:
         iherb_id: The iHerb product ID (e.g., '10421')
+        product_id: DB product ID (for evidence recording)
 
     Returns:
         Dict with: iherb_id, title, brand, description, certifications,
                    ingredients_text, price_usd, url, scrape_success
     """
-    # Check cache first (note: DB re-storage happens in scrape_all_iherb_products
-    # so this cache hit path does not need to duplicate it)
+    # Check cache first
     cached = cache_get("iherb", iherb_id)
     if cached:
         logger.info(f"  iHerb {iherb_id}: loaded from cache")
@@ -77,6 +87,7 @@ async def scrape_iherb_product(iherb_id: str) -> dict:
         "description": "",
         "certifications": [],
         "ingredients_text": "",
+        "allergens": [],
         "price_usd": None,
         "scrape_success": False,
     }
@@ -87,18 +98,50 @@ async def scrape_iherb_product(iherb_id: str) -> dict:
         ) as client:
             response = await client.get(url)
 
+            if response.status_code == 403:
+                logger.warning(f"  iHerb {iherb_id}: 403 blocked — using group priors")
+                result = apply_group_priors_to_scrape(result, product_id)
+                result["_source"] = "group-prior-403"
+                if not result.get("certifications"):
+                    result = await _llm_fallback_iherb(iherb_id, result)
+                cache_set("iherb", iherb_id, result)
+                return result
+
             if response.status_code != 200:
                 logger.warning(
                     f"  iHerb {iherb_id}: HTTP {response.status_code}"
                 )
-                # Fall back to LLM inference
                 result = await _llm_fallback_iherb(iherb_id, result)
                 cache_set("iherb", iherb_id, result)
                 return result
 
-            soup = BeautifulSoup(response.text, "html.parser")
-            result = _parse_iherb_page(soup, result)
-            result["scrape_success"] = True
+            # Try structured extraction first for better quality
+            raw_html = response.text
+            structured = await extract_product_from_html(
+                raw_html, url, product_id,
+                context_hints="iHerb supplement product page",
+            )
+
+            if structured.get("confidence", 0) > 30:
+                # Use structured extraction result
+                result.update({
+                    "title": structured.get("title", ""),
+                    "brand": structured.get("brand", ""),
+                    "description": structured.get("description", ""),
+                    "certifications": structured.get("certifications", []),
+                    "ingredients_text": structured.get("ingredients_text", ""),
+                    "allergens": structured.get("allergens", []),
+                    "price_usd": structured.get("price_usd"),
+                    "scrape_success": True,
+                    "_source": "structured-extractor",
+                })
+            else:
+                # Fall back to classic parsing
+                soup = BeautifulSoup(raw_html, "html.parser")
+                result = _parse_iherb_page(soup, result)
+                result["scrape_success"] = True
+                result["_source"] = "html-parser"
+
             logger.info(
                 f"  iHerb {iherb_id}: scraped OK - "
                 f"{result['title'][:50]}... | "
@@ -107,7 +150,9 @@ async def scrape_iherb_product(iherb_id: str) -> dict:
 
     except Exception as e:
         logger.warning(f"  iHerb {iherb_id}: scrape failed - {e}")
-        result = await _llm_fallback_iherb(iherb_id, result)
+        result = apply_group_priors_to_scrape(result, product_id)
+        if not result.get("certifications"):
+            result = await _llm_fallback_iherb(iherb_id, result)
 
     # Cache and return
     cache_set("iherb", iherb_id, result)
@@ -234,6 +279,7 @@ Set confidence between 5-25 since we cannot verify the page content."""
         result["ingredients_text"] = inferred.get("ingredients_text", "")
         result["_inference_note"] = "Data inferred by LLM (scraping failed)"
         result["_inference_confidence"] = inferred.get("confidence", 25)
+        result["_source"] = "llm-fallback"
         logger.info(
             f"  iHerb {iherb_id}: LLM fallback - "
             f"inferred {len(result['certifications'])} certs"
@@ -276,7 +322,10 @@ async def scrape_all_iherb_products(
         logger.info(
             f"  [{i}/{len(iherb_products)}] Scraping iHerb ID {product['iherb_id']}..."
         )
-        data = await scrape_iherb_product(product["iherb_id"])
+        data = await scrape_iherb_product(
+            product["iherb_id"],
+            product_id=product["product_id"],
+        )
         data["product_id"] = product["product_id"]
         data["sku"] = product["sku"]
 

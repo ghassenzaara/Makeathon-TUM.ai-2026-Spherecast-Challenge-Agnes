@@ -1,0 +1,69 @@
+{
+  "_meta": {
+    "purpose": "Finite value sets for structured ingredient attributes. The attribute extractor validates LLM output against these sets; unknown values are silently dropped.",
+    "seeded_from": "phase3_reasoning/substitution_validator.py:_AXES"
+  },
+
+  "form": {
+    "values": ["powder", "oil", "isolate", "extract", "liquid", "capsule", "gel", "granule", "paste", "concentrate", "flake", "resin", "wax"],
+    "tokens": ["powder", "oil", "isolate", "extract", "liquid", "capsule", "softgel", "gel", "granule", "paste", "concentrate", "flake", "resin", "wax"],
+    "blocking": false
+  },
+  "grade": {
+    "values": ["usp", "food", "pharma", "cosmetic", "feed", "technical"],
+    "tokens": ["usp", "food-grade", "pharma", "pharmaceutical", "cosmetic", "feed-grade", "technical"],
+    "blocking": false
+  },
+  "hydration": {
+    "values": ["anhydrous", "monohydrate", "dihydrate", "trihydrate", "hexahydrate"],
+    "tokens": ["anhydrous", "monohydrate", "dihydrate", "trihydrate", "hexahydrate"],
+    "blocking": true
+  },
+  "salt_or_ester": {
+    "values": ["citrate", "gluconate", "sulfate", "oxide", "carbonate", "chloride", "phosphate", "ascorbate", "acetate", "fumarate", "lactate", "malate", "bisglycinate", "glycinate", "picolinate", "taurate", "aspartate", "nitrate", "hydrochloride"],
+    "tokens": ["citrate", "gluconate", "sulfate", "oxide", "carbonate", "chloride", "phosphate", "ascorbate", "acetate", "fumarate", "lactate", "malate", "bisglycinate", "glycinate", "picolinate", "taurate", "aspartate", "mononitrate", "hydrochloride", "hcl"],
+    "blocking": true
+  },
+  "source": {
+    "values": ["plant", "animal", "microbial", "synthetic", "mineral", "marine"],
+    "tokens": ["plant", "vegetable", "vegan", "animal", "bovine", "porcine", "fish", "marine", "microbial", "synthetic", "mineral"],
+    "blocking": false
+  },
+  "source_detail": {
+    "values": ["lanolin", "lichen", "corn", "soy", "sunflower", "coconut", "palm", "beet", "coconut-shell", "wood-pulp", "bovine", "porcine", "fish", "algae", "yeast", "fermentation"],
+    "tokens": ["lanolin", "lichen", "corn", "soy", "sunflower", "coconut", "palm", "beet", "wood-pulp", "bovine", "porcine", "fish", "algae", "yeast"],
+    "blocking": false
+  },
+  "chirality": {
+    "values": ["l", "d", "dl"],
+    "tokens": ["l-", "d-", "dl-", "d,l-", "l-alpha", "d-alpha", "dl-alpha"],
+    "blocking": true
+  },
+  "vit_d_form": {
+    "values": ["d2", "d3"],
+    "tokens": ["ergocalciferol", "cholecalciferol", "d2", "d3", "vitamin-d2", "vitamin-d3"],
+    "blocking": true
+  },
+  "vit_b12_form": {
+    "values": ["cyanocobalamin", "methylcobalamin", "hydroxocobalamin", "adenosylcobalamin"],
+    "tokens": ["cyanocobalamin", "methylcobalamin", "hydroxocobalamin", "adenosylcobalamin"],
+    "blocking": true
+  },
+  "tocopherol_form": {
+    "values": ["d-alpha", "dl-alpha", "mixed-tocopherols", "tocotrienols"],
+    "tokens": ["d-alpha", "dl-alpha", "mixed-tocopherols", "tocotrienols"],
+    "blocking": false
+  },
+  "extraction": {
+    "values": ["extract", "isolate", "concentrate", "powder", "oil"],
+    "tokens": ["extract", "isolate", "concentrate", "powder", "oil"],
+    "blocking": false
+  },
+  "processing": {
+    "values": ["hydrolyzed", "fermented", "raw", "refined", "unrefined", "cold-pressed", "deodorized"],
+    "tokens": ["hydrolyzed", "fermented", "raw", "refined", "unrefined", "cold-pressed", "deodorized"],
+    "blocking": false
+  },
+
+  "_blocking_axes": ["hydration", "salt_or_ester", "chirality", "vit_d_form", "vit_b12_form"]
+}
