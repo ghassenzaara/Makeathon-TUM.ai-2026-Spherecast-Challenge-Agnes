@@ -90,10 +90,10 @@ export default function Dashboard() {
       {/* ── Row 1: compact stat tiles ── */}
       {stats && (
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          <StatTile label="Total Proposals" value={stats.proposal_count.toString()} accent="cyan"    icon={<Box className="h-3.5 w-3.5" />} />
-          <StatTile label="Avg Est. Savings" value={`${stats.avg_savings_pct}%`}   accent="emerald" icon={<TrendingUp className="h-3.5 w-3.5" />} />
-          <StatTile label="Agent Verified"   value={stats.verified_count.toString()} accent="violet" icon={<CheckCircle2 className="h-3.5 w-3.5" />} />
-          <StatTile label="High Priority"    value={(stats.by_priority["HIGH"] || 0).toString()} accent="amber" icon={<AlertTriangle className="h-3.5 w-3.5" />} />
+          <StatTile label="Total Proposals" value={stats.proposal_count.toString()} accent="cyan"    icon={<Box className="h-6 w-6" />} />
+          <StatTile label="Avg Est. Savings" value={`${stats.avg_savings_pct}%`}   accent="emerald" icon={<TrendingUp className="h-6 w-6" />} />
+          <StatTile label="Agent Verified"   value={stats.verified_count.toString()} accent="violet" icon={<CheckCircle2 className="h-6 w-6" />} />
+          <StatTile label="High Priority"    value={(stats.by_priority["HIGH"] || 0).toString()} accent="amber" icon={<AlertTriangle className="h-6 w-6" />} />
         </div>
       )}
 
@@ -231,17 +231,23 @@ function StatTile({
   accent: "cyan" | "emerald" | "violet" | "amber";
   icon: React.ReactNode;
 }) {
-  const colors = {
-    cyan:    "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
-    emerald: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
-    violet:  "text-violet-400 bg-violet-500/10 border-violet-500/20",
-    amber:   "text-amber-400 bg-amber-500/10 border-amber-500/20",
+  const panel = {
+    cyan:    "bg-cyan-500/10 border-cyan-500/20 text-cyan-400",
+    emerald: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400",
+    violet:  "bg-violet-500/10 border-violet-500/20 text-violet-400",
+    amber:   "bg-amber-500/10 border-amber-500/20 text-amber-400",
   };
   return (
-    <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-2.5 flex flex-col items-center justify-center gap-1 text-center">
-      <div className={`rounded-md p-1.5 border ${colors[accent]}`}>{icon}</div>
-      <p className="text-2xl font-bold text-[var(--foreground)] leading-none">{value}</p>
-      <p className="text-[9px] uppercase tracking-wider text-[var(--foreground-muted)]">{label}</p>
+    <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] flex items-stretch overflow-hidden h-11">
+      {/* Icon panel — left ~45%, full tile height, coloured fill */}
+      <div className={`flex items-center justify-center border-r ${panel[accent]}`} style={{ width: "45%" }}>
+        {icon}
+      </div>
+      {/* Value + label */}
+      <div className="flex flex-col justify-center px-3">
+        <p className="text-xl font-bold text-[var(--foreground)] leading-none">{value}</p>
+        <p className="text-[8px] uppercase tracking-wider text-[var(--foreground-muted)] mt-0.5">{label}</p>
+      </div>
     </div>
   );
 }
