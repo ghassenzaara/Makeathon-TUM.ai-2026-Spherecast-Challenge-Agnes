@@ -60,6 +60,7 @@ class ChatMessage(BaseModel):
 
 class ChatRequest(BaseModel):
     messages: list[ChatMessage]
+    proposal_id: int | None = None
 
 
 # ──────────────────────────────────────────────
@@ -146,4 +147,4 @@ def chat(req: ChatRequest):
     if not index:
         raise HTTPException(status_code=503, detail="Retrieval index not ready")
     msgs = [m.model_dump() for m in req.messages]
-    return chat_answer(msgs, index)
+    return chat_answer(msgs, index, proposal_id=req.proposal_id)

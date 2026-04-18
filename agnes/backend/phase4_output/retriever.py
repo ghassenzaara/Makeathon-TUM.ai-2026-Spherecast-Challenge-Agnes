@@ -181,11 +181,27 @@ class RetrievalIndex:
     def get(self, doc_id: str) -> Optional[Doc]:
         return self._id_to_doc.get(doc_id)
 
-    def search(self, query: str, k: int = 8, kind: Optional[str] = None) -> list[tuple[Doc, float]]:
+    def search(self, query: str, k: int = 8, kind: Optional[str] = None, proposal_id: Optional[int] = None, ingredient_group_id: Optional[int] = None, supplier_id: Optional[str] = None) -> list[tuple[Doc, float]]:
         if not self.docs:
             return []
         q_vec = _embed([query], using_openai=(self.backend == "openai"))[0]
         sims = self.embeddings @ q_vec
+        
+        if proposal_id or ingredient_group_id or supplier_id:
+            for i, d in enumerate(self.docs):
+                boost = 0.0
+                if d.kind == "proposal" and proposal_id is not None:
+                    if d.meta.get("proposal_id") == proposal_id:
+                        boost += 0.5
+                elif d.kind == "evidence":
+                    et = d.meta.get("entity_type")
+                    eid = d.meta.get("entity_id")
+                    if supplier_id and et == "SUPPLIER" and str(eid) == str(supplier_id):
+                        boost += 0.5
+                    if ingredient_group_id and et == "INGREDIENT_GROUP" and str(eid) == str(ingredient_group_id):
+                        boost += 0.5
+                sims[i] += boost
+                
         order = np.argsort(-sims)
         results: list[tuple[Doc, float]] = []
         for idx in order:
@@ -197,10 +213,10 @@ class RetrievalIndex:
                 break
         return results
 
-    def retrieve(self, query: str, k_proposals: int = 5, k_evidence: int = 8) -> dict[str, list[tuple[Doc, float]]]:
+    def retrieve(self, query: str, k_proposals: int = 5, k_evidence: int = 8, proposal_id: Optional[int] = None, ingredient_group_id: Optional[int] = None, supplier_id: Optional[str] = None) -> dict[str, list[tuple[Doc, float]]]:
         return {
-            "proposals": self.search(query, k=k_proposals, kind="proposal"),
-            "evidence": self.search(query, k=k_evidence, kind="evidence"),
+            "proposals": self.search(query, k=k_proposals, kind="proposal", proposal_id=proposal_id, ingredient_group_id=ingredient_group_id, supplier_id=supplier_id),
+            "evidence": self.search(query, k=k_evidence, kind="evidence", proposal_id=proposal_id, ingredient_group_id=ingredient_group_id, supplier_id=supplier_id),
         }
 
 

@@ -12,6 +12,7 @@ import {
   Loader2,
   FileText
 } from "lucide-react";
+import AgnesChat from "../../components/AgnesChat";
 
 interface Citation {
   label: string;
@@ -241,6 +242,15 @@ export default function ProposalDetail() {
             )}
           </div>
         ))}
+      </div>
+
+      <div className="mt-12 pt-8 border-t border-slate-200">
+        <h3 className="text-lg font-semibold text-slate-900 mb-4">Chat with Agnes</h3>
+        <AgnesChat 
+          proposalId={trail.proposal_id} 
+          initialGreeting="Ask me anything about this proposal — why this supplier, what's missing, what would change my confidence."
+          compact={true}
+        />
       </div>
     </div>
   );
