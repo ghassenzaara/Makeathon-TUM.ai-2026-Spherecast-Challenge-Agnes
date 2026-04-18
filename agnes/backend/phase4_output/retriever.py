@@ -128,13 +128,22 @@ def _load_corpus() -> list[Doc]:
 # ──────────────────────────────────────────────
 
 def _openai_embed(texts: list[str]) -> np.ndarray:
-    from openai import OpenAI
+    from openai import OpenAI, RateLimitError
+    import time
     client = OpenAI(api_key=OPENAI_API_KEY)
     out = []
-    for i in range(0, len(texts), EMBEDDING_BATCH_SIZE):
-        batch = texts[i : i + EMBEDDING_BATCH_SIZE]
-        resp = client.embeddings.create(model=OPENAI_EMBEDDING_MODEL, input=batch)
-        out.extend([e.embedding for e in resp.data])
+    # Force a smaller batch size to avoid exceeding TPM limit in a single request
+    actual_batch_size = min(EMBEDDING_BATCH_SIZE, 25) 
+    for i in range(0, len(texts), actual_batch_size):
+        batch = texts[i : i + actual_batch_size]
+        while True:
+            try:
+                resp = client.embeddings.create(model=OPENAI_EMBEDDING_MODEL, input=batch)
+                out.extend([e.embedding for e in resp.data])
+                break
+            except RateLimitError as e:
+                logger.warning(f"OpenAI TPM limit hit. Sleeping for 20 seconds... ({e})")
+                time.sleep(20)
     arr = np.array(out, dtype=np.float32)
     # L2-normalize so cosine = dot product
     norms = np.linalg.norm(arr, axis=1, keepdims=True)

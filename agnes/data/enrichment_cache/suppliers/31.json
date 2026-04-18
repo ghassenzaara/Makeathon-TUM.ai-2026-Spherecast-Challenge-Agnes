@@ -1,19 +1,19 @@
 {
-  "supplier_id": 31,
   "name": "Source-Omega LLC",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Chapel Hill, North Carolina, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "GMP",
+    "ISO 9001"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "Omega-3 ingredients",
+    "Algae-based products"
   ],
-  "company_size": "medium",
-  "website": "https://www.source-omegallc.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "company_size": "small",
+  "website": "http://www.source-omega.com",
+  "notes": "Source-Omega specializes in algae-based omega-3 ingredients, focusing on sustainable and vegetarian sources.",
+  "confidence": 85,
+  "supplier_id": 31,
+  "source": "llm_inference"
 }

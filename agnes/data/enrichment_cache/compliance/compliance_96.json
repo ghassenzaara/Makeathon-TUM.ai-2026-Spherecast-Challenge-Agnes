@@ -3,9 +3,163 @@
   "product_sku": "FG-target-a-90043361",
   "company_name": "up&up",
   "retailer": "target",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 982,
+      "ingredient": "ascorbic-acid-vitamin-c",
+      "substance": "ascorbic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 986,
+      "ingredient": "calcium-pantothenate-vitamin-b5",
+      "substance": "vitamin-b5",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 987,
+      "ingredient": "cane-sugar",
+      "substance": "sucrose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 991,
+      "ingredient": "citric-acid",
+      "substance": "citric-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 995,
+      "ingredient": "cyanocobalamin-vitamin-b12",
+      "substance": "vitamin-b12",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 996,
+      "ingredient": "dextrose",
+      "substance": "dextrose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 997,
+      "ingredient": "dipotassium-phosphate",
+      "substance": "potassium-phosphate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1011,
+      "ingredient": "natural-flavor",
+      "substance": "natural-flavor",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1013,
+      "ingredient": "niacinamide-vitamin-b3",
+      "substance": "vitamin-b3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1017,
+      "ingredient": "potassium-citrate",
+      "substance": "potassium-citrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1019,
+      "ingredient": "pyridoxine-hydrochloride-vitamin-b6",
+      "substance": "vitamin-b6",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1022,
+      "ingredient": "salt",
+      "substance": "sodium-chloride",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1024,
+      "ingredient": "silicon-dioxide",
+      "substance": "silicon-dioxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1026,
+      "ingredient": "sodium-citrate",
+      "substance": "sodium-citrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1031,
+      "ingredient": "stevia-leaf-extract",
+      "substance": "stevia",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 30,
   "required_certifications": [
-    "Kosher",
-    "GMP"
+    "fda-compliant",
+    "cgmp-manufactured"
   ],
   "inferred_constraints": [],
   "regulatory_requirements": [
@@ -14,6 +168,6 @@
   ],
   "risk_flags": [],
   "confidence": 35,
-  "reasoning": "Mocked compliance inference due to API limits",
-  "source": "mock"
+  "reasoning": "Derived 30 requirements from 0 FG certs across 15 ingredients",
+  "source": "rule"
 }

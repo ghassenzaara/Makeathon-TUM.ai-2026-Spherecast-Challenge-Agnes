@@ -3,20 +3,121 @@
   "product_sku": "FG-walmart-867413342",
   "company_name": "Women's Best",
   "retailer": "walmart",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 971,
+      "ingredient": "acesulfame-potassium",
+      "substance": "acesulfame-potassium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 972,
+      "ingredient": "artificial-flavors",
+      "substance": "artificial-flavor",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 973,
+      "ingredient": "natural-flavors",
+      "substance": "natural-flavor",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 974,
+      "ingredient": "salt",
+      "substance": "sodium-chloride",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 975,
+      "ingredient": "silicon-dioxide",
+      "substance": "silicon-dioxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 976,
+      "ingredient": "sucralose",
+      "substance": "sucralose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 977,
+      "ingredient": "sunflower-lecithin",
+      "substance": "sunflower-lecithin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 978,
+      "ingredient": "whey-protein-concentrate",
+      "substance": "whey-protein-concentrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 979,
+      "ingredient": "whey-protein-isolate",
+      "substance": "whey-protein-isolate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 980,
+      "ingredient": "xanthan-gum",
+      "substance": "xanthan-gum",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 20,
   "required_certifications": [
-    "Non-GMO"
+    "fda-compliant",
+    "cgmp-manufactured"
   ],
-  "inferred_constraints": [
-    "plant-based"
-  ],
+  "inferred_constraints": [],
   "regulatory_requirements": [
     "FDA Compliance",
     "cGMP"
   ],
-  "risk_flags": [
-    "Ingredient origin unknown"
-  ],
+  "risk_flags": [],
   "confidence": 35,
-  "reasoning": "Mocked compliance inference due to API limits",
-  "source": "mock"
+  "reasoning": "Derived 20 requirements from 0 FG certs across 10 ingredients",
+  "source": "rule"
 }

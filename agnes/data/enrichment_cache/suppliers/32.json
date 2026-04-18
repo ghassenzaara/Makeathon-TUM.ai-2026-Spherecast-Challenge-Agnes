@@ -1,19 +1,19 @@
 {
-  "supplier_id": 32,
   "name": "Specialty Enzymes & Probiotics",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Chino, California, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "ISO 9001",
+    "GMP"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "Enzymes",
+    "Probiotics"
   ],
   "company_size": "medium",
-  "website": "https://www.specialtyenzymes&probiotics.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "website": "https://www.specialtyenzymes.com",
+  "notes": "Specialty Enzymes & Probiotics is known for its expertise in enzyme and probiotic manufacturing, serving various industries including dietary supplements and food processing.",
+  "confidence": 85,
+  "supplier_id": 32,
+  "source": "llm_inference"
 }

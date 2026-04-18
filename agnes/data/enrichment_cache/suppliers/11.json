@@ -1,19 +1,20 @@
 {
-  "supplier_id": 11,
   "name": "Colorcon",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Harleysville, Pennsylvania, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "ISO 9001",
+    "EXCiPACT"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "pharmaceutical coatings",
+    "modified release technologies",
+    "nutritional coatings"
   ],
-  "company_size": "medium",
+  "company_size": "large",
   "website": "https://www.colorcon.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Colorcon is known for its expertise in film coatings and excipients for the pharmaceutical industry. They provide a range of products and services to enhance the appearance and functionality of pharmaceutical and nutritional products.",
+  "confidence": 85,
+  "supplier_id": 11,
+  "source": "llm_inference"
 }

@@ -1,19 +1,23 @@
 {
-  "supplier_id": 20,
   "name": "Koster Keunen",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Watertown, Connecticut, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "ISO 9001",
+    "RSPO",
+    "Kosher",
+    "Organic"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "wax",
+    "beeswax",
+    "natural waxes",
+    "synthetic waxes"
   ],
   "company_size": "medium",
   "website": "https://www.kosterkeunen.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Koster Keunen is known for its extensive range of wax products, serving industries such as cosmetics, pharmaceuticals, and food. They focus on sustainability and innovation in wax technology.",
+  "confidence": 85,
+  "supplier_id": 20,
+  "source": "llm_inference"
 }

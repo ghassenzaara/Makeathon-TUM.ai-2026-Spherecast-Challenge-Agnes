@@ -1,20 +1,19 @@
 {
-  "supplier_id": 12,
   "name": "Custom Probiotics",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Glendale, California, USA",
   "region": "North America",
   "certifications": [
-    "ISO 9001",
     "GMP",
-    "Kosher"
+    "FDA Registered"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "Probiotics",
+    "Custom Probiotic Formulations"
   ],
-  "company_size": "medium",
+  "company_size": "small",
   "website": "https://www.customprobiotics.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Custom Probiotics specializes in high-quality probiotic supplements and custom formulations. They focus on potency and purity, offering a range of probiotic strains.",
+  "confidence": 85,
+  "supplier_id": 12,
+  "source": "llm_inference"
 }

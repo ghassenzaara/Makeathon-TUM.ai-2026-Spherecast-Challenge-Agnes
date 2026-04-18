@@ -1,19 +1,21 @@
 {
-  "supplier_id": 17,
   "name": "Icelandirect",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Clifton, New Jersey, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "GMP",
+    "HACCP",
+    "ISO 9001"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "fish oils",
+    "omega-3 supplements",
+    "marine oils"
   ],
   "company_size": "medium",
   "website": "https://www.icelandirect.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Icelandirect is known for supplying high-quality fish oils and omega-3 supplements. They focus on sustainability and traceability in their supply chain.",
+  "confidence": 85,
+  "supplier_id": 17,
+  "source": "llm_inference"
 }

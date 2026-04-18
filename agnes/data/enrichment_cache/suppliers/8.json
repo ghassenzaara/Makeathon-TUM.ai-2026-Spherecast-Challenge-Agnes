@@ -1,19 +1,20 @@
 {
-  "supplier_id": 8,
   "name": "Cambrex",
-  "headquarters": "Mock City, USA",
+  "headquarters": "East Rutherford, New Jersey, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "cGMP",
+    "ISO 9001"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "active pharmaceutical ingredients (APIs)",
+    "drug product manufacturing",
+    "chemical synthesis"
   ],
-  "company_size": "medium",
+  "company_size": "large",
   "website": "https://www.cambrex.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Cambrex is a leading supplier in the pharmaceutical industry, specializing in the development and manufacturing of small molecule therapeutics.",
+  "confidence": 85,
+  "supplier_id": 8,
+  "source": "llm_inference"
 }

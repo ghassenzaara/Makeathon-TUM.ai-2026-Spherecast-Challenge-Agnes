@@ -3,19 +3,181 @@
   "product_sku": "FG-amazon-b0ghwg73j4",
   "company_name": "TREVI",
   "retailer": "amazon",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 776,
+      "ingredient": "beet-juice-powder",
+      "substance": "beet-extract",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 777,
+      "ingredient": "calcium-citrate",
+      "substance": "calcium-citrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 778,
+      "ingredient": "citric-acid",
+      "substance": "citric-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 779,
+      "ingredient": "fruit-and-vegetable-juice",
+      "substance": "fruit-and-vegetable-juice",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 780,
+      "ingredient": "magnesium-citrate",
+      "substance": "magnesium-citrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 781,
+      "ingredient": "malic-acid",
+      "substance": "malic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 782,
+      "ingredient": "manganese-chelate",
+      "substance": "manganese-chelate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 783,
+      "ingredient": "natural-flavor",
+      "substance": "natural-flavor",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 784,
+      "ingredient": "pink-himalayan-salt",
+      "substance": "sodium-chloride",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 785,
+      "ingredient": "potassium-citrate",
+      "substance": "potassium-citrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 786,
+      "ingredient": "potassium-phosphate",
+      "substance": "potassium-phosphate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 787,
+      "ingredient": "silicon-dioxide",
+      "substance": "silicon-dioxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 788,
+      "ingredient": "stevia-leaf-extract",
+      "substance": "stevia",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 789,
+      "ingredient": "sucralose",
+      "substance": "sucralose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 790,
+      "ingredient": "vitamin-c-calcium-ascorbate",
+      "substance": "calcium-ascorbate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 791,
+      "ingredient": "zinc-chelate",
+      "substance": "zinc-chelate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 32,
   "required_certifications": [
-    "Kosher",
-    "GMP"
+    "fda-compliant",
+    "cgmp-manufactured"
   ],
   "inferred_constraints": [],
   "regulatory_requirements": [
     "FDA Compliance",
     "cGMP"
   ],
-  "risk_flags": [
-    "Ingredient origin unknown"
-  ],
+  "risk_flags": [],
   "confidence": 35,
-  "reasoning": "Mocked compliance inference due to API limits",
-  "source": "mock"
+  "reasoning": "Derived 32 requirements from 0 FG certs across 16 ingredients",
+  "source": "rule"
 }

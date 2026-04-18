@@ -1,20 +1,22 @@
 {
-  "supplier_id": 27,
   "name": "Prinova USA",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Hanover Park, IL, USA",
   "region": "North America",
   "certifications": [
     "ISO 9001",
-    "GMP",
-    "Kosher"
+    "FSSC 22000",
+    "Organic Certification"
   ],
   "specialties": [
     "Vitamins",
-    "Minerals"
+    "Amino Acids",
+    "Sweeteners",
+    "Nutraceuticals"
   ],
-  "company_size": "medium",
-  "website": "https://www.prinovausa.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "company_size": "large",
+  "website": "https://www.prinovaglobal.com",
+  "notes": "Prinova USA is known for its extensive range of ingredients and expertise in the food and beverage industry. They offer custom formulation and premix manufacturing services.",
+  "confidence": 85,
+  "supplier_id": 27,
+  "source": "llm_inference"
 }

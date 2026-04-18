@@ -1,19 +1,22 @@
 {
-  "supplier_id": 7,
   "name": "BulkSupplements",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Henderson, Nevada, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "GMP",
+    "FDA Registered"
   ],
   "specialties": [
+    "Dietary Supplements",
+    "Nutritional Ingredients",
     "Vitamins",
-    "Minerals"
+    "Minerals",
+    "Amino Acids"
   ],
   "company_size": "medium",
   "website": "https://www.bulksupplements.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "BulkSupplements is known for providing a wide range of dietary supplements and nutritional ingredients. They focus on bulk supply and cater to both individual consumers and businesses.",
+  "confidence": 85,
+  "supplier_id": 7,
+  "source": "llm_inference"
 }

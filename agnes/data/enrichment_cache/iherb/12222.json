@@ -1,16 +1,15 @@
 {
   "iherb_id": "12222",
   "url": "https://www.iherb.com/pr/p/12222",
-  "title": "Vitamin D3 5000 IU",
-  "brand": "Now Foods",
+  "title": "",
+  "brand": "",
   "description": "",
-  "certifications": [
-    "GMP Certified",
-    "Non-GMO"
-  ],
-  "ingredients_text": "Vitamin D3 (as Cholecalciferol), Extra Virgin Olive Oil, Softgel Capsule (Gelatin, Glycerin, Water)",
+  "certifications": [],
+  "ingredients_text": "",
+  "allergens": [],
   "price_usd": null,
   "scrape_success": false,
+  "_source": "llm-fallback",
   "_inference_note": "Data inferred by LLM (scraping failed)",
-  "_inference_confidence": 35
+  "_inference_confidence": 15
 }

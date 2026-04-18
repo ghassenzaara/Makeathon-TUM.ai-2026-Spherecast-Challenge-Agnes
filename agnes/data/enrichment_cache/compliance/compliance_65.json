@@ -3,18 +3,51 @@
   "product_sku": "FG-vitacost-vitacost-vitamin-d3-as-cholecalciferol-25-mcg-1000-iu-300-capsules",
   "company_name": "Vitacost",
   "retailer": "vitacost",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 887,
+      "ingredient": "gelatin",
+      "substance": "gelatin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 898,
+      "ingredient": "oil-fill",
+      "substance": "oil-fill",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 912,
+      "ingredient": "vitamin-d3-cholecalciferol",
+      "substance": "vitamin-d3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 6,
   "required_certifications": [
-    "Non-GMO"
+    "fda-compliant",
+    "cgmp-manufactured"
   ],
-  "inferred_constraints": [
-    "plant-based"
-  ],
+  "inferred_constraints": [],
   "regulatory_requirements": [
     "FDA Compliance",
     "cGMP"
   ],
   "risk_flags": [],
   "confidence": 35,
-  "reasoning": "Mocked compliance inference due to API limits",
-  "source": "mock"
+  "reasoning": "Derived 6 requirements from 0 FG certs across 3 ingredients",
+  "source": "rule"
 }

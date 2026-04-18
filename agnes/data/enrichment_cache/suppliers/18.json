@@ -1,20 +1,21 @@
 {
-  "supplier_id": 18,
   "name": "Ingredion",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Westchester, IL, USA",
   "region": "North America",
   "certifications": [
     "ISO 9001",
-    "GMP",
-    "Kosher"
+    "FSSC 22000"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "starches",
+    "sweeteners",
+    "texturizers",
+    "nutrition ingredients"
   ],
-  "company_size": "medium",
+  "company_size": "large",
   "website": "https://www.ingredion.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Ingredion is a global ingredient solutions provider specializing in nature-based sweeteners, starches, and nutrition ingredients. They serve various industries, including food, beverage, and pharmaceuticals.",
+  "confidence": 85,
+  "supplier_id": 18,
+  "source": "llm_inference"
 }

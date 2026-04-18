@@ -1,19 +1,19 @@
 {
-  "supplier_id": 29,
   "name": "Sawgrass Nutra Labs",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Miramar, Florida, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "cGMP",
+    "NSF"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "nutraceuticals",
+    "dietary supplements"
   ],
   "company_size": "medium",
   "website": "https://www.sawgrassnutralabs.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Sawgrass Nutra Labs is known for its contract manufacturing services in the nutraceutical industry, focusing on quality and compliance.",
+  "confidence": 85,
+  "supplier_id": 29,
+  "source": "llm_inference"
 }

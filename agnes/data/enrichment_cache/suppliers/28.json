@@ -1,19 +1,21 @@
 {
-  "supplier_id": 28,
   "name": "PureBulk",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Roseburg, Oregon, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "GMP",
+    "FDA Registered"
   ],
   "specialties": [
+    "Nutritional Supplements",
+    "Bulk Ingredients",
     "Vitamins",
     "Minerals"
   ],
   "company_size": "medium",
-  "website": "https://www.purebulk.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "website": "https://purebulk.com",
+  "notes": "PureBulk is known for providing high-quality bulk supplements and ingredients. They focus on purity and transparency in their product offerings.",
+  "confidence": 85,
+  "supplier_id": 28,
+  "source": "llm_inference"
 }

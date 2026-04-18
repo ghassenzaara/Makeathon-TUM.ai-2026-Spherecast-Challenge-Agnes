@@ -3,8 +3,103 @@
   "product_sku": "FG-walmart-3170683942",
   "company_name": "Nature Made",
   "retailer": "walmart",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 529,
+      "ingredient": "hypromellose",
+      "substance": "hydroxypropyl-methyl-cellulose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 532,
+      "ingredient": "magnesium-citrate",
+      "substance": "magnesium-citrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 533,
+      "ingredient": "magnesium-glycinate",
+      "substance": "magnesium-bisglycinate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 534,
+      "ingredient": "magnesium-malate",
+      "substance": "magnesium-malate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 535,
+      "ingredient": "magnesium-oxide",
+      "substance": "magnesium-oxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 541,
+      "ingredient": "palm-oil",
+      "substance": "palm-oil",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 542,
+      "ingredient": "rice-flour",
+      "substance": "rice-flour",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 552,
+      "ingredient": "vitamin-d3",
+      "substance": "vitamin-d3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 557,
+      "ingredient": "zinc",
+      "substance": "zinc",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 18,
   "required_certifications": [
-    "Non-GMO"
+    "fda-compliant",
+    "cgmp-manufactured"
   ],
   "inferred_constraints": [],
   "regulatory_requirements": [
@@ -13,6 +108,6 @@
   ],
   "risk_flags": [],
   "confidence": 35,
-  "reasoning": "Mocked compliance inference due to API limits",
-  "source": "mock"
+  "reasoning": "Derived 18 requirements from 0 FG certs across 9 ingredients",
+  "source": "rule"
 }

@@ -1,20 +1,20 @@
 {
-  "supplier_id": 33,
   "name": "Spectrum Chemical",
-  "headquarters": "Mock City, USA",
+  "headquarters": "New Brunswick, New Jersey, USA",
   "region": "North America",
   "certifications": [
     "ISO 9001",
-    "GMP",
-    "Kosher"
+    "FDA Registered"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "Laboratory Chemicals",
+    "Pharmaceutical Ingredients",
+    "Nutritional Ingredients"
   ],
   "company_size": "medium",
   "website": "https://www.spectrumchemical.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Spectrum Chemical is known for providing a wide range of laboratory chemicals and pharmaceutical ingredients. They have a strong presence in the North American market.",
+  "confidence": 85,
+  "supplier_id": 33,
+  "source": "llm_inference"
 }

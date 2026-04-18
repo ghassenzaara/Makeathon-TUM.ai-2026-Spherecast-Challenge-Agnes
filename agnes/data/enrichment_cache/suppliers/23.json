@@ -1,19 +1,21 @@
 {
-  "supplier_id": 23,
   "name": "Mueggenburg USA",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Culver City, California, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "Organic",
+    "Kosher",
+    "Non-GMO"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "Herbs",
+    "Botanicals",
+    "Spices"
   ],
   "company_size": "medium",
   "website": "https://www.mueggenburgusa.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Mueggenburg USA is known for supplying high-quality herbs and botanicals. They focus on sustainable and ethical sourcing practices.",
+  "confidence": 85,
+  "supplier_id": 23,
+  "source": "llm_inference"
 }
