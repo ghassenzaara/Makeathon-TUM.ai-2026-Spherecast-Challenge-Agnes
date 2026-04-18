@@ -66,6 +66,7 @@ export default function ProposalDetail() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     async function loadData() {
       try {
         const data = await fetchProposalDetail(params.id as string);
@@ -115,23 +116,34 @@ export default function ProposalDetail() {
     <div className="max-w-4xl mx-auto px-6 py-6 space-y-6">
 
       {/* ── Header ── */}
-      <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-4">
-        <button
-          onClick={() => router.back()}
-          className="p-2 rounded-xl text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-white/[0.04] transition-all mt-0.5"
-        >
-          <ArrowLeft className="h-5 w-5" />
-        </button>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-3 mb-1">
-            <h1 className="text-xl font-bold text-[var(--foreground)] truncate">{trail.canonical_name}</h1>
-            <span className="text-[10px] text-[var(--foreground-muted)] bg-white/[0.04] border border-[var(--border)] rounded-md px-2 py-0.5 shrink-0">
-              ID: {trail.proposal_id}
-            </span>
-            <PriorityBadge priority={trail.metrics.priority} />
+      <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col md:flex-row items-start gap-4 justify-between">
+        <div className="flex items-start gap-4 flex-1 min-w-0">
+          <button
+            onClick={() => router.back()}
+            className="p-2 rounded-xl text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-white/[0.04] transition-all mt-0.5 shrink-0"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-3 mb-1">
+              <h1 className="text-xl font-bold text-[var(--foreground)] truncate">{trail.canonical_name}</h1>
+              <span className="text-[10px] text-[var(--foreground-muted)] bg-white/[0.04] border border-[var(--border)] rounded-md px-2 py-0.5 shrink-0">
+                ID: {trail.proposal_id}
+              </span>
+              <PriorityBadge priority={trail.metrics.priority} />
+            </div>
+            <p className="text-sm text-[var(--foreground-muted)] leading-relaxed">{trail.headline}</p>
           </div>
-          <p className="text-sm text-[var(--foreground-muted)] leading-relaxed">{trail.headline}</p>
         </div>
+
+        <button
+          onClick={() => {
+            document.getElementById("chat-section")?.scrollIntoView({ behavior: "smooth" });
+          }}
+          className="shrink-0 md:mt-1 px-4 py-2 text-sm font-semibold rounded-full bg-[var(--accent-blue)]/10 text-[var(--accent-blue)] border border-[var(--accent-blue)]/30 hover:bg-[var(--accent-blue)]/20 transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:shadow-[0_0_25px_rgba(56,189,248,0.5)] whitespace-nowrap flex items-center gap-2 ml-14 md:ml-0"
+        >
+          Ask More <AgnesOrb state="idle" size={16} />
+        </button>
       </motion.div>
 
       {/* ── Metrics Grid ── */}
@@ -260,6 +272,7 @@ export default function ProposalDetail() {
 
       {/* ── Per-Proposal Chat (Evidence-Trail Context) ── */}
       <motion.div
+        id="chat-section"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7, duration: 0.5 }}

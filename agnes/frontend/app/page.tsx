@@ -53,6 +53,25 @@ export default function Dashboard() {
   const [orbState, setOrbState] = useState<"idle" | "thinking" | "complete">("thinking");
   const [whatIf, setWhatIf] = useState(false);
 
+  // Sorting, Filtering, and Pagination state
+  const [sortBy, setSortBy] = useState<"impact" | "savings" | "confidence" | "name">("impact");
+  const [filterPriority, setFilterPriority] = useState<"ALL" | "HIGH" | "MEDIUM" | "LOW">("ALL");
+  const [filterCompliance, setFilterCompliance] = useState<"ALL" | "ALL_PASS" | "PARTIAL" | "REVIEW_NEEDED">("ALL");
+  const [displayedCount, setDisplayedCount] = useState(10);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 300);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setDisplayedCount(10);
+  }, [sortBy, filterPriority, filterCompliance]);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   useEffect(() => {
     async function loadData() {
       try {
@@ -71,8 +90,24 @@ export default function Dashboard() {
     loadData();
   }, []);
 
-  const sorted = sortByImpact(proposals);
-  const highCount = sorted.filter((p) => p.priority === "HIGH").length;
+  const processedProposals = proposals
+    .filter(p => filterPriority === "ALL" || p.priority === filterPriority)
+    .filter(p => filterCompliance === "ALL" || p.compliance_status === filterCompliance || (filterCompliance === "ALL_PASS" && p.compliance_status === "PASSED"))
+    .sort((a, b) => {
+      if (sortBy === "impact") {
+        const wA = PRIORITY_WEIGHT[a.priority] || 0;
+        const wB = PRIORITY_WEIGHT[b.priority] || 0;
+        if (wA !== wB) return wB - wA;
+        return b.estimated_savings_pct - a.estimated_savings_pct;
+      }
+      if (sortBy === "savings") return b.estimated_savings_pct - a.estimated_savings_pct;
+      if (sortBy === "confidence") return b.confidence_score - a.confidence_score;
+      if (sortBy === "name") return a.canonical_name.localeCompare(b.canonical_name);
+      return 0;
+    });
+
+  const highCount = processedProposals.filter((p) => p.priority === "HIGH").length;
+  const displayedProposals = processedProposals.slice(0, displayedCount);
 
   const savingsChart = [...proposals]
     .sort((a, b) => a.id - b.id)
@@ -165,28 +200,84 @@ export default function Dashboard() {
 
       {/* ═══ 2. DECISION LOGS — Prioritized, critical at top ═══ */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm font-semibold text-gray-100 flex items-center gap-2">
-            <Zap className="h-4 w-4 text-blue-400" />
-            Decision Log
-          </h2>
-          <span className="text-[10px] text-gray-500 bg-white/[0.03] border border-[var(--border)] rounded-md px-2 py-0.5">
-            {sorted.length} entries · sorted by impact
-          </span>
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4 gap-3">
+          <div className="flex items-center gap-3">
+            <h2 className="text-sm font-semibold text-gray-100 flex items-center gap-2">
+              <Zap className="h-4 w-4 text-blue-400" />
+              Decision Log
+            </h2>
+            <span className="text-[10px] text-gray-500 bg-white/[0.03] border border-[var(--border)] rounded-md px-2 py-0.5">
+              {processedProposals.length} entries
+            </span>
+          </div>
+          
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            <div className="flex items-center gap-1.5 bg-gray-800/50 border border-gray-700/50 rounded-lg p-1">
+              <span className="text-[10px] text-gray-500 pl-2 uppercase tracking-wider">Sort:</span>
+              <select 
+                value={sortBy} 
+                onChange={(e) => setSortBy(e.target.value as any)}
+                className="bg-transparent text-gray-300 text-xs outline-none border-none cursor-pointer py-1 pr-2"
+              >
+                <option value="impact">Highest Impact</option>
+                <option value="savings">Top Savings</option>
+                <option value="confidence">Highest Confidence</option>
+                <option value="name">Alphabetical</option>
+              </select>
+            </div>
+            
+            <div className="flex items-center gap-1.5 bg-gray-800/50 border border-gray-700/50 rounded-lg p-1">
+              <span className="text-[10px] text-gray-500 pl-2 uppercase tracking-wider">Priority:</span>
+              <select 
+                value={filterPriority} 
+                onChange={(e) => setFilterPriority(e.target.value as any)}
+                className="bg-transparent text-gray-300 text-xs outline-none border-none cursor-pointer py-1 pr-2"
+              >
+                <option value="ALL">All Priorities</option>
+                <option value="HIGH">High Only</option>
+                <option value="MEDIUM">Medium Only</option>
+                <option value="LOW">Low Only</option>
+              </select>
+            </div>
+
+            <div className="flex items-center gap-1.5 bg-gray-800/50 border border-gray-700/50 rounded-lg p-1">
+              <span className="text-[10px] text-gray-500 pl-2 uppercase tracking-wider">Status:</span>
+              <select 
+                value={filterCompliance} 
+                onChange={(e) => setFilterCompliance(e.target.value as any)}
+                className="bg-transparent text-gray-300 text-xs outline-none border-none cursor-pointer py-1 pr-2"
+              >
+                <option value="ALL">All Statuses</option>
+                <option value="ALL_PASS">Passed</option>
+                <option value="PARTIAL">Partial</option>
+                <option value="REVIEW_NEEDED">Review Needed</option>
+              </select>
+            </div>
+          </div>
         </div>
         <div className="space-y-3">
           <AnimatePresence>
-            {sorted.map((p, i) => (
+            {displayedProposals.map((p, i) => (
               <motion.div key={p.id} variants={fadeInUp} custom={i} initial="hidden" animate="visible" layout>
-                <ProposalCard proposal={p} isCritical={i < highCount} isTop={i < 2} />
+                <ProposalCard proposal={p} isCritical={p.priority === "HIGH"} isTop={i < 2} />
               </motion.div>
             ))}
           </AnimatePresence>
-          {sorted.length === 0 && (
+          {processedProposals.length === 0 && (
             <div className="card-solid p-12 text-center">
               <Activity className="h-8 w-8 mx-auto mb-3 text-gray-600" />
-              <p className="text-sm text-gray-500">No proposals yet — start the backend on port 8000.</p>
+              <p className="text-sm text-gray-500">No proposals match the current filters.</p>
             </div>
+          )}
+          {displayedCount < processedProposals.length && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-2 pb-4 text-center">
+              <button
+                onClick={() => setDisplayedCount(prev => prev + 10)}
+                className="px-6 py-2.5 rounded-full border border-white/[0.08] bg-white/[0.03] text-xs font-medium text-gray-400 hover:text-white hover:bg-white/[0.08] transition-all"
+              >
+                Show More ({processedProposals.length - displayedCount} remaining)
+              </button>
+            </motion.div>
           )}
         </div>
       </motion.div>
@@ -296,6 +387,22 @@ export default function Dashboard() {
         </SpotlightCard>
         </motion.div>
       )}
+
+      {/* Scroll to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 left-8 p-3 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 hover:bg-blue-500/20 transition-all z-50 shadow-lg backdrop-blur-md"
+            aria-label="Scroll to top"
+          >
+            <ChevronUp className="h-5 w-5" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -336,20 +443,41 @@ function ProposalCard({ proposal: p, isCritical, isTop }: { proposal: Proposal; 
                 {p.recommended_supplier_name} · {p.members_served} of {p.total_companies_in_group} companies
               </p>
             </div>
-            <div className="flex flex-col items-end gap-1.5 shrink-0">
-              <span className={`font-bold text-emerald-400 ${isTop ? "text-xl" : "text-lg"}`}>+{p.estimated_savings_pct}%</span>
-              <ConfidenceBar score={p.confidence_score} />
+            <div className="flex flex-col items-end gap-1.5 shrink-0" title="Estimated cost savings percentage">
+              <div className="text-right flex flex-col items-end">
+                <span className={`font-bold text-emerald-400 leading-none ${isTop ? "text-xl" : "text-lg"}`}>+{p.estimated_savings_pct}%</span>
+                <span className="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Est. Savings</span>
+              </div>
+              <div title="AI Confidence Score: the probability that this consolidation is compliant and viable" className="flex flex-col items-end mt-1">
+                <ConfidenceBar score={p.confidence_score} />
+                <span className="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Confidence</span>
+              </div>
             </div>
           </div>
           <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/[0.04]">
             <div className="flex -space-x-1.5">
-              {Array.from({ length: Math.min(4, p.companies_consolidated) }).map((_, i) => (
-                <div key={i} className="h-6 w-6 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-[9px] font-medium text-gray-500">
-                  •
-                </div>
-              ))}
+              {Array.from({ length: Math.min(4, p.companies_consolidated) }).map((_, i) => {
+                const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                const colors = [
+                  "bg-blue-500/20 text-blue-400 border-blue-500/30",
+                  "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+                  "bg-amber-500/20 text-amber-400 border-amber-500/30",
+                  "bg-purple-500/20 text-purple-400 border-purple-500/30",
+                  "bg-rose-500/20 text-rose-400 border-rose-500/30",
+                  "bg-cyan-500/20 text-cyan-400 border-cyan-500/30"
+                ];
+                const hash = p.id * 17 + i * 31;
+                const letter = letters[hash % letters.length];
+                const colorClass = colors[hash % colors.length];
+                
+                return (
+                  <div key={i} className={`h-6 w-6 rounded-full flex items-center justify-center text-[10px] font-bold border ${colorClass} shadow-sm backdrop-blur-sm z-${10 - i}`}>
+                    {letter}
+                  </div>
+                );
+              })}
               {p.companies_consolidated > 4 && (
-                <div className="h-6 w-6 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-[9px] text-gray-500">
+                <div className="h-6 w-6 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-[9px] text-gray-500 z-0 backdrop-blur-sm">
                   +{p.companies_consolidated - 4}
                 </div>
               )}
