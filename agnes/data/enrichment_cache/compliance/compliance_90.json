@@ -1,0 +1,20 @@
+{
+  "product_id": 90,
+  "product_sku": "FG-the-vitamin-shoppe-op-1009",
+  "company_name": "Optimum Nutrition",
+  "retailer": "the-vitamin-shoppe",
+  "required_certifications": [
+    "Non-GMO"
+  ],
+  "inferred_constraints": [
+    "plant-based"
+  ],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Mocked compliance inference due to API limits",
+  "source": "mock"
+}

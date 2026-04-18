@@ -1,0 +1,20 @@
+{
+  "product_id": 145,
+  "product_sku": "FG-cvs-880579",
+  "company_name": "One A Day",
+  "retailer": "cvs",
+  "required_certifications": [
+    "Non-GMO"
+  ],
+  "inferred_constraints": [
+    "plant-based"
+  ],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Mocked compliance inference due to API limits",
+  "source": "mock"
+}

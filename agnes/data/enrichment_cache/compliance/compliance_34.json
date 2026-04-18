@@ -1,0 +1,18 @@
+{
+  "product_id": 34,
+  "product_sku": "FG-walmart-17324942",
+  "company_name": "Equate",
+  "retailer": "walmart",
+  "required_certifications": [
+    "Non-GMO"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Mocked compliance inference due to API limits",
+  "source": "mock"
+}

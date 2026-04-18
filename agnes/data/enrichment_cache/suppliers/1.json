@@ -1,0 +1,28 @@
+{
+  "supplier_id": 1,
+  "name": "ADM",
+  "headquarters": "Chicago, IL, USA",
+  "region": "North America",
+  "certifications": [
+    "ISO 9001",
+    "ISO 22000",
+    "FSSC 22000",
+    "GMP",
+    "USDA Organic",
+    "Non-GMO Project Verified",
+    "Kosher",
+    "Halal"
+  ],
+  "specialties": [
+    "agricultural commodities",
+    "food ingredients",
+    "animal nutrition",
+    "biofuels",
+    "industrial products"
+  ],
+  "company_size": "large",
+  "website": "https://www.adm.com",
+  "notes": "ADM is a global leader in human and animal nutrition and the world's premier agricultural origination and processing company.",
+  "confidence": 70,
+  "source": "llm_inference"
+}

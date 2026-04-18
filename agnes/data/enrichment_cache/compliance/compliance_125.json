@@ -1,0 +1,20 @@
+{
+  "product_id": 125,
+  "product_sku": "FG-walgreens-prod6083374",
+  "company_name": "One A Day",
+  "retailer": "walgreens",
+  "required_certifications": [
+    "Non-GMO"
+  ],
+  "inferred_constraints": [
+    "plant-based"
+  ],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Mocked compliance inference due to API limits",
+  "source": "mock"
+}

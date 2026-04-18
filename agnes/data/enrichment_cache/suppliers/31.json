@@ -1,0 +1,19 @@
+{
+  "supplier_id": 31,
+  "name": "Source-Omega LLC",
+  "headquarters": "Mock City, USA",
+  "region": "North America",
+  "certifications": [
+    "USDA Organic",
+    "Non-GMO Project Verified"
+  ],
+  "specialties": [
+    "Vitamins",
+    "Minerals"
+  ],
+  "company_size": "medium",
+  "website": "https://www.source-omegallc.com",
+  "notes": "Mocked supplier info",
+  "confidence": 40,
+  "source": "mock"
+}

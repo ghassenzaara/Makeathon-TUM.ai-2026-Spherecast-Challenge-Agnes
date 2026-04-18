@@ -1,0 +1,21 @@
+{
+  "product_id": 28,
+  "product_sku": "FG-thrive-market-new-chapter-mens-advanced-multivitamin",
+  "company_name": "New Chapter",
+  "retailer": "thrive-market",
+  "required_certifications": [
+    "Kosher",
+    "GMP"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [
+    "Ingredient origin unknown"
+  ],
+  "confidence": 35,
+  "reasoning": "Mocked compliance inference due to API limits",
+  "source": "mock"
+}

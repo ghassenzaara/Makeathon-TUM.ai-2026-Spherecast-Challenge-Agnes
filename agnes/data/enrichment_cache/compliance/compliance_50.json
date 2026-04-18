@@ -1,0 +1,20 @@
+{
+  "product_id": 50,
+  "product_sku": "FG-amazon-b0fts2jxgw",
+  "company_name": "Electrolit",
+  "retailer": "amazon",
+  "required_certifications": [
+    "Non-GMO"
+  ],
+  "inferred_constraints": [
+    "plant-based"
+  ],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Mocked compliance inference due to API limits",
+  "source": "mock"
+}

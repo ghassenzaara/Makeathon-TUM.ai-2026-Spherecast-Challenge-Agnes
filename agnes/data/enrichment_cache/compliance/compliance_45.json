@@ -1,0 +1,20 @@
+{
+  "product_id": 45,
+  "product_sku": "FG-walmart-970963212",
+  "company_name": "Centrum",
+  "retailer": "walmart",
+  "required_certifications": [
+    "Non-GMO"
+  ],
+  "inferred_constraints": [
+    "plant-based"
+  ],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Mocked compliance inference due to API limits",
+  "source": "mock"
+}

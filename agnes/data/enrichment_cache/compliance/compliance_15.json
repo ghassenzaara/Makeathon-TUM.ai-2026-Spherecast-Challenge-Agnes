@@ -1,0 +1,20 @@
+{
+  "product_id": 15,
+  "product_sku": "FG-thrive-market-thrive-market-organic-whey-protein-vanilla",
+  "company_name": "Thrive Market",
+  "retailer": "thrive-market",
+  "required_certifications": [
+    "Non-GMO"
+  ],
+  "inferred_constraints": [
+    "plant-based"
+  ],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Mocked compliance inference due to API limits",
+  "source": "mock"
+}

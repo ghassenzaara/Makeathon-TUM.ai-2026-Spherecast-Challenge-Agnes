@@ -1,0 +1,20 @@
+{
+  "product_id": 30,
+  "product_sku": "FG-walmart-8053802024",
+  "company_name": "Optimum Nutrition",
+  "retailer": "walmart",
+  "required_certifications": [
+    "Non-GMO"
+  ],
+  "inferred_constraints": [
+    "plant-based"
+  ],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Mocked compliance inference due to API limits",
+  "source": "mock"
+}

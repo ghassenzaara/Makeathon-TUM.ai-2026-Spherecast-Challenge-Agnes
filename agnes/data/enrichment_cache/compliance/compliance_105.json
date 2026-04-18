@@ -1,0 +1,22 @@
+{
+  "product_id": 105,
+  "product_sku": "FG-target-a-90043370",
+  "company_name": "up&up",
+  "retailer": "target",
+  "required_certifications": [
+    "Non-GMO"
+  ],
+  "inferred_constraints": [
+    "plant-based"
+  ],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [
+    "Ingredient origin unknown"
+  ],
+  "confidence": 35,
+  "reasoning": "Mocked compliance inference due to API limits",
+  "source": "mock"
+}

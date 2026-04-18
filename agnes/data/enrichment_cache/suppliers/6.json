@@ -1,0 +1,23 @@
+{
+  "supplier_id": 6,
+  "name": "Balchem",
+  "headquarters": "New Hampton, New York, USA",
+  "region": "North America",
+  "certifications": [
+    "ISO 9001",
+    "FSSC 22000",
+    "Kosher",
+    "Halal"
+  ],
+  "specialties": [
+    "encapsulation technology",
+    "nutritional ingredients",
+    "mineral and vitamin premixes",
+    "choline products"
+  ],
+  "company_size": "large",
+  "website": "https://www.balchem.com",
+  "notes": "Balchem is known for its innovative solutions in the field of human and animal nutrition, as well as industrial products. They have a strong focus on encapsulation technology and are a significant player in the choline market.",
+  "confidence": 65,
+  "source": "llm_inference"
+}

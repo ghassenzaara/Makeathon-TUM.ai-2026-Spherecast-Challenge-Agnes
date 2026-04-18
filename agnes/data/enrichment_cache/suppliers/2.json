@@ -1,0 +1,23 @@
+{
+  "supplier_id": 2,
+  "name": "AIDP",
+  "headquarters": "City of Industry, California, USA",
+  "region": "North America",
+  "certifications": [
+    "ISO 9001",
+    "GMP",
+    "Kosher",
+    "Halal"
+  ],
+  "specialties": [
+    "nutritional ingredients",
+    "dietary supplements",
+    "functional foods",
+    "sports nutrition"
+  ],
+  "company_size": "medium",
+  "website": "https://www.aidp.com",
+  "notes": "AIDP is known for its innovative ingredient solutions, focusing on health and wellness products. They offer a wide range of ingredients including plant-based proteins, prebiotics, and collagen.",
+  "confidence": 65,
+  "source": "llm_inference"
+}

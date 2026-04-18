@@ -1,0 +1,20 @@
+{
+  "product_id": 55,
+  "product_sku": "FG-amazon-b07mg7bxrt",
+  "company_name": "Optimum Nutrition",
+  "retailer": "amazon",
+  "required_certifications": [
+    "Non-GMO"
+  ],
+  "inferred_constraints": [
+    "plant-based"
+  ],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Mocked compliance inference due to API limits",
+  "source": "mock"
+}

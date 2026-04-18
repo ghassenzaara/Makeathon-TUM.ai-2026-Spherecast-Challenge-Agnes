@@ -1,0 +1,20 @@
+{
+  "supplier_id": 33,
+  "name": "Spectrum Chemical",
+  "headquarters": "Mock City, USA",
+  "region": "North America",
+  "certifications": [
+    "ISO 9001",
+    "GMP",
+    "Kosher"
+  ],
+  "specialties": [
+    "Vitamins",
+    "Minerals"
+  ],
+  "company_size": "medium",
+  "website": "https://www.spectrumchemical.com",
+  "notes": "Mocked supplier info",
+  "confidence": 40,
+  "source": "mock"
+}

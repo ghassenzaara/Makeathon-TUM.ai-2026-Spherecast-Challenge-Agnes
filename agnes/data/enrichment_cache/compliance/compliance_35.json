@@ -1,0 +1,22 @@
+{
+  "product_id": 35,
+  "product_sku": "FG-walmart-867413342",
+  "company_name": "Women's Best",
+  "retailer": "walmart",
+  "required_certifications": [
+    "Non-GMO"
+  ],
+  "inferred_constraints": [
+    "plant-based"
+  ],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [
+    "Ingredient origin unknown"
+  ],
+  "confidence": 35,
+  "reasoning": "Mocked compliance inference due to API limits",
+  "source": "mock"
+}

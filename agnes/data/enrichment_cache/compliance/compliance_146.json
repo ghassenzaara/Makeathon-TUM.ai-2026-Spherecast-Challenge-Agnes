@@ -1,0 +1,18 @@
+{
+  "product_id": 146,
+  "product_sku": "FG-cvs-843231",
+  "company_name": "Nature Made",
+  "retailer": "cvs",
+  "required_certifications": [
+    "Non-GMO"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Mocked compliance inference due to API limits",
+  "source": "mock"
+}
