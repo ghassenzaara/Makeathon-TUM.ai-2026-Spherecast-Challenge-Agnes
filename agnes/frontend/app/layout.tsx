@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
-import { ThemeProvider } from "./providers";
-import { ThemeToggle } from "./components/ThemeToggle";
-import { CrystalBallOrb, AgnesWordmark } from "./components/AgnesLogo";
+import { AgnesLogoMark } from "./components/AgnesLogo";
 
 export const metadata: Metadata = {
   title: "Agnes — AI Supply Chain Manager",
@@ -14,51 +12,35 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased transition-colors duration-200">
-        <ThemeProvider>
-          <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--surface)] backdrop-blur">
-            <div className="mx-auto flex max-w-7xl items-center px-6 py-4 relative">
+    <html lang="en" className="dark">
+      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased">
+        <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-transparent backdrop-blur-md">
+          <div className="flex items-center justify-between px-20 py-3">
 
-              {/* Left — nav links */}
-              <nav className="flex items-center gap-1 text-sm">
-                <Link
-                  href="/"
-                  className="rounded-md px-3 py-1.5 text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-white/5 transition-colors"
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  href="/chat"
-                  className="rounded-md px-3 py-1.5 text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-white/5 transition-colors"
-                >
-                  Chat
-                </Link>
-              </nav>
+            {/* Left — logo */}
+            <Link href="/" className="flex items-center">
+              <AgnesLogoMark />
+            </Link>
 
-              {/* Center — logo (absolutely centered) */}
-              <Link
-                href="/"
-                className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2.5 group"
-              >
-                <CrystalBallOrb size={38} />
-                <div>
-                  <AgnesWordmark />
-                  <div className="text-[11px] uppercase tracking-widest text-[var(--foreground-muted)] mt-0.5">
-                    Supply Chain AI
-                  </div>
-                </div>
-              </Link>
+            {/* Right — Log In: glassy orb-blue pill */}
+            <button
+              disabled
+              className="relative rounded-full px-5 py-1.5 text-sm font-medium transition-all cursor-not-allowed overflow-hidden"
+              style={{
+                color: "#a8d4ef",
+                border: "1px solid rgba(163,198,236,0.22)",
+                background: "linear-gradient(135deg, rgba(163,198,236,0.08) 0%, rgba(92,127,199,0.06) 100%)",
+                boxShadow: "0 0 10px 1px rgba(163,198,236,0.08), inset 0 1px 0 rgba(255,255,255,0.06)",
+                backdropFilter: "blur(8px)",
+              }}
+            >
+              Log In
+            </button>
 
-              {/* Right — theme toggle */}
-              <div className="ml-auto">
-                <ThemeToggle />
-              </div>
-            </div>
-          </header>
+          </div>
+        </header>
 
-          <main className="mx-auto max-w-7xl px-6 py-8">{children}</main>
-        </ThemeProvider>
+        <main className="relative z-10">{children}</main>
       </body>
     </html>
   );

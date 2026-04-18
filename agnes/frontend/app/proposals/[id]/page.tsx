@@ -92,6 +92,7 @@ export default function ProposalDetail() {
   }
 
   return (
+    <div className="px-6 py-8">
     <div className="space-y-6 animate-fade-in max-w-4xl mx-auto">
 
       {/* Back + title */}
@@ -203,6 +204,7 @@ export default function ProposalDetail() {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 }

@@ -65,7 +65,8 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)] max-w-3xl mx-auto rounded-xl border border-[var(--border)] bg-[var(--surface)] overflow-hidden animate-fade-in">
+    <div className="px-6 py-8">
+    <div className="flex flex-col h-[calc(100vh-9rem)] max-w-3xl mx-auto rounded-xl border border-[var(--border)] bg-[var(--surface)] overflow-hidden animate-fade-in">
 
       {/* Header */}
       <div className="border-b border-[var(--border)] px-5 py-4 flex items-center gap-3 bg-white/[0.02]">
@@ -139,6 +140,7 @@ export default function ChatPage() {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 }
