@@ -638,6 +638,14 @@ def create_proposal_tables():
                 VerificationsJson TEXT NOT NULL DEFAULT '{}',
                 VerificationPassed INTEGER NOT NULL DEFAULT 0,
                 CreatedAt TEXT NOT NULL,
+                ComplianceProbability REAL NOT NULL DEFAULT 0.5,
+                EvidenceStrength REAL NOT NULL DEFAULT 0.5,
+                RiskScore REAL NOT NULL DEFAULT 0.0,
+                UtilityScore REAL NOT NULL DEFAULT 0.0,
+                ParetoRank INTEGER NOT NULL DEFAULT 0,
+                IsParetoOptimal INTEGER NOT NULL DEFAULT 0,
+                DominatedByJson TEXT NOT NULL DEFAULT '[]',
+                VerificationConfidence REAL NOT NULL DEFAULT 0.5,
                 FOREIGN KEY (IngredientGroupId) REFERENCES SubstitutionGroup(Id),
                 FOREIGN KEY (RecommendedSupplierId) REFERENCES Supplier(Id)
             )
@@ -659,8 +667,10 @@ def insert_sourcing_proposal(row: dict) -> int:
                 CompaniesConsolidated, MembersServed, TotalCompaniesInGroup,
                 EstimatedSavingsPct, ComplianceStatus, RiskFactorsJson,
                 ConfidenceScore, Priority, EvidenceSummary,
-                VerificationsJson, VerificationPassed, CreatedAt
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VerificationsJson, VerificationPassed, CreatedAt,
+                ComplianceProbability, EvidenceStrength, RiskScore, UtilityScore,
+                ParetoRank, IsParetoOptimal, DominatedByJson, VerificationConfidence
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             row["IngredientGroupId"],
             row["RecommendedSupplierId"],
@@ -677,6 +687,14 @@ def insert_sourcing_proposal(row: dict) -> int:
             row["VerificationsJson"],
             row["VerificationPassed"],
             row["CreatedAt"],
+            row.get("ComplianceProbability", 0.5),
+            row.get("EvidenceStrength", 0.5),
+            row.get("RiskScore", 0.0),
+            row.get("UtilityScore", 0.0),
+            row.get("ParetoRank", 0),
+            row.get("IsParetoOptimal", 0),
+            row.get("DominatedByJson", "[]"),
+            row.get("VerificationConfidence", 0.5),
         ))
         return cur.lastrowid
 
