@@ -1,0 +1,51 @@
+Creating a new Next.js app in [32mD:\Projects\Hackathons\TUM.ai_Makeathon\Makeathon-TUM.ai-2026-Spherecast-Challenge-Agnes\agnes\frontend[39m.
+
+[1mUsing npm.[22m
+
+Initializing project with template: app-tw 
+
+
+Installing dependencies:
+- [36mreact[39m
+- [36mreact-dom[39m
+- [36mnext[39m
+
+Installing devDependencies:
+- [36mtypescript[39m
+- [36m@types/node[39m
+- [36m@types/react[39m
+- [36m@types/react-dom[39m
+- [36mpostcss[39m
+- [36mtailwindcss[39m
+- [36meslint[39m
+- [36meslint-config-next[39m
+
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.3.10: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+
+added 380 packages, and audited 381 packages in 1m
+
+150 packages are looking for funding
+  run `npm fund` for details
+
+4 high severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+[32mSuccess![39m Created frontend at D:\Projects\Hackathons\TUM.ai_Makeathon\Makeathon-TUM.ai-2026-Spherecast-Challenge-Agnes\agnes\frontend
+
+[33m[1mA new version of `create-next-app` is available![22m[39m
+You can update by running: [36mnpm i -g create-next-app[39m
+
+npm notice
+npm notice New minor version of npm available! 11.7.0 -> 11.12.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.12.1
+npm notice To update run: npm install -g npm@11.12.1
+npm notice

@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "Bash(grep -E \"\\\\.py$\")",
+      "Bash(curl -s -X POST http://localhost:8000/api/chat -H \"Content-Type: application/json\" -d '{\"messages\":[{\"role\":\"user\",\"content\":\"Which Vitamin D3 \\(cholecalciferol\\) consolidation has the strongest evidence and what are the risks?\"}]}')",
+      "Bash(python -c \"import json; d=json.load\\(open\\('data/_api_chat.json'\\)\\); print\\('--- ANSWER ---'\\); print\\(d['answer']\\); print\\(\\); print\\('--- CITATIONS \\(', len\\(d['citations']\\),'\\) ---'\\); [print\\(c['doc_id'], c['label'], c['url']\\) for c in d['citations']]; print\\(\\); print\\('retrieved:', len\\(d['retrieved']\\)\\)\")"
     ]
   }
 }

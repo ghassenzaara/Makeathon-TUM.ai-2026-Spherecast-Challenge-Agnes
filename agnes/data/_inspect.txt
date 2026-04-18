@@ -1,0 +1,5 @@
+keys: ['proposal_id', 'ingredient_group_id', 'canonical_name', 'recommended_supplier', 'headline', 'metrics', 'claims', 'risks', 'verification_summary', 'created_at']
+headline: Recommend consolidating 'cholecalciferol' to Prinova USA (21/21 companies, 30.0% est. savings, 61% confidence, priority HIGH).
+claims: 4
+first claim: Recommended supplier 'Prinova USA' matches the enriched supplier record -> VERIFIED / 1 cites
+compliance claim cites: 6

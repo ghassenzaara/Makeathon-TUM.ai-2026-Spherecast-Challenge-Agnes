@@ -1,0 +1,10 @@
+SourcingProposal: 38
+Enrichment: 202
+SubstitutionGroup: 288
+SubstitutionGroupConsumer: 1517
+SubstitutionGroupSupplier: 1633
+Sample SourcingProposal: {'Id': 1, 'IngredientGroupId': 1, 'RecommendedSupplierId': 27, 'RecommendedSupplierName': 'Prinova USA', 'CompaniesConsolidated': 21, 'MembersServed': 21, 'TotalCompaniesInGroup': 21, 'EstimatedSavingsPct': 30.0, 'ComplianceStatus': 'ALL_PASS', 'RiskFactorsJson': '["Single-supplier concentration risk"]', 'ConfidenceScore': 61.2, 'Priority': 'HIGH', 'EvidenceSummary': "Prinova USA can serve 21 of 21 companies in the 'cholecalciferol' group (21 SKUs). HQ: Mock City, USA.", 'VerificationsJson': '{"supplier_identity": "VERIFIED", "compliance_claims": "UNVERIFIED", "consolidation_footprint": "VERIFIED", "savings_bounds": "VERIFIED"}', 'VerificationPassed': 1, 'CreatedAt': '2026-04-18T02:08:18.272167+00:00'}
+Enrichment breakdown:
+  {'EntityType': 'product', 'DataType': 'compliance_requirements', 'n': 149}
+  {'EntityType': 'product', 'DataType': 'product_scrape', 'n': 13}
+  {'EntityType': 'supplier', 'DataType': 'supplier_info', 'n': 40}

@@ -376,6 +376,35 @@ def get_all_sourcing_proposals() -> list[dict]:
     with get_cursor() as cur:
         cur.execute("""
             SELECT * FROM SourcingProposal
-            ORDER BY ConfidenceScore DESC, EstimatedSavingsPct DESC
+            ORDER BY
+                CASE Priority
+                    WHEN 'HIGH' THEN 3
+                    WHEN 'MEDIUM' THEN 2
+                    WHEN 'LOW' THEN 1
+                    ELSE 0
+                END DESC,
+                ConfidenceScore DESC,
+                EstimatedSavingsPct DESC
         """)
+        return cur.fetchall()
+
+
+def get_sourcing_proposal(proposal_id: int) -> dict | None:
+    with get_cursor() as cur:
+        cur.execute("SELECT * FROM SourcingProposal WHERE Id = ?", (proposal_id,))
+        return cur.fetchone()
+
+
+def get_consumer_finished_goods(group_id: int) -> list[dict]:
+    """Finished goods (with company) consuming a substitution group's members."""
+    with get_cursor() as cur:
+        cur.execute("""
+            SELECT DISTINCT
+                sgc.FinishedGoodId, sgc.FinishedGoodSKU,
+                p.CompanyId, c.Name AS CompanyName
+            FROM SubstitutionGroupConsumer sgc
+            JOIN Product p  ON p.Id = sgc.FinishedGoodId
+            JOIN Company c  ON c.Id = p.CompanyId
+            WHERE sgc.GroupId = ?
+        """, (group_id,))
         return cur.fetchall()

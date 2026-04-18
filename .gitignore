@@ -29,3 +29,6 @@ Thumbs.db
 
 # Gemini
 .gemini/
+
+# Claude
+.claude/
