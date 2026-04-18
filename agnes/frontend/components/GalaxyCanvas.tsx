@@ -27,14 +27,14 @@ export function GalaxyCanvas() {
     }
 
     function initStars() {
-      const count = Math.floor((canvas!.width * canvas!.height) / 6000);
-      stars = Array.from({ length: Math.min(count, 220) }, () => ({
+      const count = Math.min(Math.floor((canvas!.width * canvas!.height) / 4500), 280);
+      stars = Array.from({ length: count }, () => ({
         x:       Math.random() * canvas!.width,
         y:       Math.random() * canvas!.height,
-        r:       Math.random() * 1.8 + 0.35,
-        opacity: Math.random() * 0.10 + 0.90,   // 0.90–1.00 base — doubled brightness
-        speed:   Math.random() * 0.10 + 0.02,
-        drift:   (Math.random() - 0.5) * 0.08,
+        r:       Math.random() * 1.2 + 0.25,
+        opacity: Math.random() * 0.40 + 0.45,
+        speed:   0.0006,
+        drift:   0,
         phase:   Math.random() * Math.PI * 2,
       }));
     }
@@ -43,7 +43,7 @@ export function GalaxyCanvas() {
       const w = canvas!.width, h = canvas!.height;
       ctx!.clearRect(0, 0, w, h);
 
-      // Deep navy base — Spherecast palette
+      // Deep navy base
       const bg = ctx!.createLinearGradient(0, 0, w, h);
       bg.addColorStop(0,   "#060914");
       bg.addColorStop(0.5, "#080d1a");
@@ -51,20 +51,16 @@ export function GalaxyCanvas() {
       ctx!.fillStyle = bg;
       ctx!.fillRect(0, 0, w, h);
 
-      // Nebula layers — slow drift
+      // Nebula clouds — slow drift
       const s  = Math.sin(t * 0.00025);
       const s2 = Math.cos(t * 0.00018);
       const nebulae = [
-        // Spherecast sky-blue tones
-        { cx: w * 0.18 + s  * 55, cy: h * 0.28 + s2 * 35, r: w * 0.38, color: "rgba(95,163,212,0.07)"  },
+        { cx: w * 0.18 + s  * 55, cy: h * 0.28 + s2 * 35, r: w * 0.38, color: "rgba(95,163,212,0.07)"   },
         { cx: w * 0.82 + s2 * 45, cy: h * 0.65 + s  * 50, r: w * 0.42, color: "rgba(168,212,239,0.055)" },
         { cx: w * 0.52 + s  * 70, cy: h * 0.12 + s2 * 25, r: w * 0.30, color: "rgba(232,245,253,0.04)"  },
-        // Faint prismatic accent — violet
         { cx: w * 0.70 + s2 * 35, cy: h * 0.18 + s  * 45, r: w * 0.28, color: "rgba(139,92,246,0.03)"   },
-        // Warm near-white core
         { cx: w * 0.35 + s  * 40, cy: h * 0.55 + s2 * 30, r: w * 0.22, color: "rgba(248,252,255,0.035)" },
       ];
-
       nebulae.forEach(({ cx, cy, r, color }) => {
         const grad = ctx!.createRadialGradient(cx, cy, 0, cx, cy, r);
         grad.addColorStop(0, color);
@@ -73,65 +69,53 @@ export function GalaxyCanvas() {
         ctx!.fillRect(0, 0, w, h);
       });
 
-      // Global heartbeat — wall-clock locked to 6 000 ms so it stays in phase
-      // with the CSS orbPulse / agnesGlow animations (same 6 s period).
-      const masterPhase = (Date.now() % 6000) / 6000;           // 0 → 1 every 6 s
-      const heartbeat   = (Math.sin(masterPhase * Math.PI * 2 - Math.PI / 2) + 1) / 2; // 0 → 1
+      // Heartbeat — locked to 6 s (matches CSS orbPulse / agnesGlow)
+      const masterPhase = (Date.now() % 6000) / 6000;
+      const heartbeat   = (Math.sin(masterPhase * Math.PI * 2 - Math.PI / 2) + 1) / 2;
+      // Wider breath range so the sync with the logo is clearly felt
+      const globalBright = 0.45 + 0.55 * heartbeat; // 0.45 dim → 1.0 full
 
-      // Global multiplier: dims to 0.70, brightens to 1.05 at the peak breath
-      const globalBright = 0.85 + 0.50 * heartbeat;
+      // Slow galactic rotation offset — the whole field gently swirls
+      const galacticAngle = t * 0.0000008; // one full rotation every ~2 hours
 
-      // Stars — individual twinkle × global breath
       stars.forEach((star) => {
-        const twinkle = 0.22 + 0.78 * ((Math.sin(t * star.speed * 0.018 + star.phase) + 1) / 2);
-        const alpha   = Math.min(star.opacity * twinkle * globalBright, 1.0);
+        // Rotate each star slightly around the canvas centre for galaxy swirl
+        const cx = canvas!.width  / 2;
+        const cy = canvas!.height / 2;
+        const dx = star.x - cx;
+        const dy = star.y - cy;
+        // Depth-weighted rotation: stars further from centre move a touch faster
+        const dist  = Math.sqrt(dx * dx + dy * dy);
+        const angle = galacticAngle * (0.5 + dist / (Math.max(cx, cy) * 2));
+        const cos   = Math.cos(angle);
+        const sin   = Math.sin(angle);
+        star.x = cx + dx * cos - dy * sin;
+        star.y = cy + dx * sin + dy * cos;
 
-        const hue = 195 + Math.sin(star.phase) * 30;
+        // Very slow additional vertical drift (deep-space parallax feel)
+        star.y += star.speed;
+        star.x += star.drift;
+        if (star.y > h + 2) { star.y = -2; star.x = Math.random() * canvas!.width; }
+        if (star.x < -2)      star.x = canvas!.width + 2;
+        if (star.x > canvas!.width + 2) star.x = -2;
 
-        // Core — pure white pinpoint
+        // Individual twinkle synced to breath — trough aligns with logo dim
+        const twinkle = 0.35 + 0.65 * ((Math.sin(t * star.speed * 8 + star.phase) + 1) / 2);
+        const alpha   = Math.min(star.opacity * twinkle * globalBright, 0.92);
+        const hue     = 200 + Math.sin(star.phase) * 25;
+
+        // Core pinpoint
         ctx!.beginPath();
         ctx!.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-        ctx!.fillStyle = `hsla(${hue}, 10%, 100%, ${alpha})`;
+        ctx!.fillStyle = `hsla(${hue}, 40%, 96%, ${alpha})`;
         ctx!.fill();
 
-        const large = star.r > 1.2;
-        const pulse  = 0.85 + 0.45 * heartbeat; // heartbeat multiplier kept in sync
-
-        // Layer 1 — tight hot glow
-        const r1 = star.r * (large ? 14 : 10);
+        // Glow halo — radius kept tight, scales slightly with heartbeat
+        const glowR = star.r * (star.r > 1.0 ? 4.0 : 3.0);
         ctx!.beginPath();
-        ctx!.arc(star.x, star.y, r1, 0, Math.PI * 2);
-        ctx!.fillStyle = `hsla(${hue}, 50%, 99%, ${Math.min(alpha * 0.92 * pulse, 0.92)})`;
+        ctx!.arc(star.x, star.y, glowR, 0, Math.PI * 2);
+        ctx!.fillStyle = `hsla(${hue}, 55%, 97%, ${alpha * 0.24})`;
         ctx!.fill();
-
-        // Layer 2 — mid bloom
-        const r2 = r1 * 2.2;
-        ctx!.beginPath();
-        ctx!.arc(star.x, star.y, r2, 0, Math.PI * 2);
-        ctx!.fillStyle = `hsla(${hue}, 55%, 98%, ${Math.min(alpha * 0.60 * pulse, 0.70)})`;
-        ctx!.fill();
-
-        // Layer 3 — wide corona
-        const r3 = r2 * 2.5;
-        ctx!.beginPath();
-        ctx!.arc(star.x, star.y, r3, 0, Math.PI * 2);
-        ctx!.fillStyle = `hsla(${hue}, 60%, 97%, ${alpha * 0.28 * pulse})`;
-        ctx!.fill();
-
-        // Layer 4 — faint super-wide halo (big stars only)
-        if (large) {
-          const r4 = r3 * 2;
-          ctx!.beginPath();
-          ctx!.arc(star.x, star.y, r4, 0, Math.PI * 2);
-          ctx!.fillStyle = `hsla(${hue}, 65%, 97%, ${alpha * 0.10 * pulse})`;
-          ctx!.fill();
-        }
-
-        star.y += star.speed * 0.055;
-        star.x += star.drift * 0.04;
-        if (star.y > h + 2)    { star.y = -2; star.x = Math.random() * w; }
-        if (star.x < -2)        star.x = w + 2;
-        if (star.x > w + 2)    star.x = -2;
       });
 
       t++;

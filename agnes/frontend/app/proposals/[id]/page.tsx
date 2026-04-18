@@ -12,6 +12,10 @@ import {
   Loader2,
   FileText,
 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Citation {
   label: string;
@@ -74,8 +78,11 @@ export default function ProposalDetail() {
 
   if (loading) {
     return (
-      <div className="flex min-h-[60vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-cyan-500" />
+      <div className="px-6 py-8 max-w-4xl mx-auto space-y-4">
+        <Skeleton className="h-9 w-64 rounded-xl" />
+        <Skeleton className="h-40 rounded-xl" />
+        <Skeleton className="h-24 rounded-xl" />
+        <Skeleton className="h-32 rounded-xl" />
       </div>
     );
   }
@@ -114,24 +121,28 @@ export default function ProposalDetail() {
       </div>
 
       {/* Summary card */}
-      <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6">
-        <h2 className="text-sm font-semibold text-[var(--foreground)] mb-3">Consolidation Summary</h2>
-        <p className="text-sm text-[var(--foreground-muted)] leading-relaxed mb-6">{trail.headline}</p>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <MetricTile label="Target Supplier" value={trail.recommended_supplier.name} color="default" />
-          <MetricTile label="Est. Savings" value={`${trail.metrics.estimated_savings_pct.toFixed(1)}%`} color="emerald" />
-          <MetricTile label="Confidence" value={`${trail.metrics.confidence_score.toFixed(0)}%`} color="cyan" />
-          <MetricTile
-            label="Agent Verification"
-            value={trail.verification_summary.passed ? "Passed" : "Issues Found"}
-            color={trail.verification_summary.passed ? "emerald" : "amber"}
-            icon={trail.verification_summary.passed
-              ? <CheckCircle2 className="h-3.5 w-3.5" />
-              : <ShieldAlert className="h-3.5 w-3.5" />}
-          />
-        </div>
-      </div>
+      <Card>
+        <CardHeader className="pb-2">
+          <h2 className="text-sm font-semibold text-[var(--foreground)]">Consolidation Summary</h2>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="text-sm text-[var(--foreground-muted)] leading-relaxed">{trail.headline}</p>
+          <Separator />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <MetricTile label="Target Supplier" value={trail.recommended_supplier.name} color="default" />
+            <MetricTile label="Est. Savings" value={`${trail.metrics.estimated_savings_pct.toFixed(1)}%`} color="emerald" />
+            <MetricTile label="Confidence" value={`${trail.metrics.confidence_score.toFixed(0)}%`} color="cyan" />
+            <MetricTile
+              label="Agent Verification"
+              value={trail.verification_summary.passed ? "Passed" : "Issues Found"}
+              color={trail.verification_summary.passed ? "emerald" : "amber"}
+              icon={trail.verification_summary.passed
+                ? <CheckCircle2 className="h-3.5 w-3.5" />
+                : <ShieldAlert className="h-3.5 w-3.5" />}
+            />
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Risk factors */}
       {trail.risks?.length > 0 && (
@@ -185,9 +196,9 @@ export default function ProposalDetail() {
                             Source <ExternalLink className="h-3 w-3" />
                           </a>
                         )}
-                        <span className="text-[10px] uppercase tracking-wider font-semibold text-[var(--foreground-muted)] bg-white/5 border border-[var(--border)] px-2 py-0.5 rounded">
+                        <Badge variant="outline">
                           {(cite.confidence * 100).toFixed(0)}% confidence
-                        </span>
+                        </Badge>
                       </div>
                       <blockquote className="text-sm text-[var(--foreground-muted)] leading-relaxed border-l-2 border-cyan-500/40 pl-3 italic">
                         &quot;{cite.snippet}&quot;
@@ -237,20 +248,8 @@ function MetricTile({
 
 function ClaimStatus({ status }: { status: string }) {
   if (status === "VERIFIED")
-    return (
-      <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 shrink-0">
-        <CheckCircle2 className="h-4 w-4" /> Verified
-      </span>
-    );
+    return <Badge variant="emerald" className="shrink-0"><CheckCircle2 className="h-3 w-3" /> Verified</Badge>;
   if (status === "CONTRADICTED")
-    return (
-      <span className="inline-flex items-center gap-1 text-xs font-semibold text-fuchsia-400 shrink-0">
-        <XCircle className="h-4 w-4" /> Contradicted
-      </span>
-    );
-  return (
-    <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-400 shrink-0">
-      <AlertTriangle className="h-4 w-4" /> Unverified
-    </span>
-  );
+    return <Badge variant="fuchsia" className="shrink-0"><XCircle className="h-3 w-3" /> Contradicted</Badge>;
+  return <Badge variant="amber" className="shrink-0"><AlertTriangle className="h-3 w-3" /> Unverified</Badge>;
 }
