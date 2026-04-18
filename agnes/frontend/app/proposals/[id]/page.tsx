@@ -2,19 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 import {
-  ArrowLeft,
-  CheckCircle2,
-  AlertTriangle,
-  XCircle,
-  ExternalLink,
-  ShieldAlert,
-  Loader2,
-  FileText,
-  TrendingUp,
-  AlertCircle,
+  ArrowLeft, CheckCircle2, AlertTriangle, XCircle,
+  ExternalLink, ShieldAlert, FileText, Activity,
 } from "lucide-react";
+import { AgnesOrb } from "../../components/AgnesOrb";
+import { TracingBorder } from "../../components/TracingBorder";
+import { Waveform } from "../../components/Waveform";
 import AgnesChat from "../../components/AgnesChat";
+import { fetchProposalDetail } from "@/lib/api";
 
 interface Citation {
   label: string;
@@ -30,31 +27,10 @@ interface Claim {
   citations: Citation[];
 }
 
-interface SignalItem {
-  label: string;
-  value: number;
-  confidence: number;
-  source_type: string;
-  importance: number;
-}
-
-interface ScoreBreakdown {
-  value: number;
-  confidence: number;
-  coverage: number;
-  source_distribution: Record<string, number>;
-  drivers: SignalItem[];
-  weak_signals: SignalItem[];
-  uncertainty_sources: string[];
-}
-
 interface EvidenceTrail {
   proposal_id: number;
   canonical_name: string;
-  recommended_supplier: {
-    id: number;
-    name: string;
-  };
+  recommended_supplier: { id: number; name: string };
   headline: string;
   metrics: {
     companies_consolidated: number;
@@ -72,64 +48,15 @@ interface EvidenceTrail {
     passed: boolean;
     all_verified: boolean;
   };
-  score_breakdown: ScoreBreakdown | null;
-  compliance_breakdown: Record<string, number> | null;
-  impact_score: number;
-  flagged_low_confidence_high_impact: boolean;
 }
 
-const SOURCE_COLORS: Record<string, string> = {
-  ontology: "bg-violet-500",
-  deterministic: "bg-blue-500",
-  llm: "bg-amber-500",
-  embedding: "bg-slate-400",
+const fadeIn = {
+  hidden: { opacity: 0, y: 14 },
+  visible: (i: number) => ({
+    opacity: 1, y: 0,
+    transition: { delay: i * 0.08, duration: 0.4 },
+  }),
 };
-
-function SourceBar({ distribution }: { distribution: Record<string, number> }) {
-  const entries = Object.entries(distribution).filter(([, v]) => v > 0);
-  if (!entries.length) return null;
-  return (
-    <div className="space-y-1">
-      <p className="text-[10px] font-medium text-slate-500 uppercase tracking-wider">Source distribution</p>
-      <div className="flex h-2 w-full rounded-full overflow-hidden gap-px">
-        {entries.map(([src, frac]) => (
-          <div
-            key={src}
-            className={`${SOURCE_COLORS[src] ?? "bg-slate-300"}`}
-            style={{ width: `${(frac * 100).toFixed(1)}%` }}
-            title={`${src}: ${(frac * 100).toFixed(0)}%`}
-          />
-        ))}
-      </div>
-      <div className="flex flex-wrap gap-x-3 gap-y-0.5">
-        {entries.map(([src, frac]) => (
-          <span key={src} className="flex items-center gap-1 text-[10px] text-slate-500">
-            <span className={`inline-block h-2 w-2 rounded-sm ${SOURCE_COLORS[src] ?? "bg-slate-300"}`} />
-            {src} {(frac * 100).toFixed(0)}%
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function CoverageMeter({ coverage }: { coverage: number }) {
-  const pct = Math.round(coverage * 100);
-  const color = pct >= 70 ? "bg-emerald-500" : pct >= 40 ? "bg-amber-500" : "bg-red-500";
-  return (
-    <div className="space-y-1">
-      <div className="flex justify-between text-[10px] font-medium text-slate-500 uppercase tracking-wider">
-        <span>Signal coverage</span>
-        <span className={pct >= 70 ? "text-emerald-600" : pct >= 40 ? "text-amber-600" : "text-red-600"}>
-          {pct}%
-        </span>
-      </div>
-      <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-        <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
-      </div>
-    </div>
-  );
-}
 
 export default function ProposalDetail() {
   const params = useParams();
@@ -141,18 +68,10 @@ export default function ProposalDetail() {
   useEffect(() => {
     async function loadData() {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/api/proposals/${params.id}`);
-        if (!res.ok) {
-          if (res.status === 404) throw new Error("Proposal not found");
-          throw new Error("Failed to fetch proposal details");
-        }
-        setTrail(await res.json());
+        const data = await fetchProposalDetail(params.id as string);
+        setTrail(data);
       } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("An unexpected error occurred");
-        }
+        setError(err instanceof Error ? err.message : "Unexpected error");
       } finally {
         setLoading(false);
       }
@@ -162,301 +81,274 @@ export default function ProposalDetail() {
 
   if (loading) {
     return (
-      <div className="flex min-h-[50vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-slate-400" />
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <AgnesOrb state="thinking" size={56} />
+          <span className="text-xs uppercase tracking-[0.2em] text-[var(--foreground-muted)]">Loading evidence trail…</span>
+          <Waveform active={true} barCount={24} />
+        </div>
       </div>
     );
   }
 
   if (error || !trail) {
     return (
-      <div className="text-center py-12">
-        <p className="text-slate-500 mb-4">{error || "Something went wrong"}</p>
-        <button onClick={() => router.back()} className="text-indigo-600 font-medium hover:underline">
-          Go back
-        </button>
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="glass-card p-8 text-center max-w-sm">
+          <Activity className="h-8 w-8 mx-auto mb-3 text-[var(--foreground-dim)]" />
+          <p className="text-sm text-[var(--foreground-muted)] mb-4">{error || "Something went wrong"}</p>
+          <button
+            onClick={() => router.back()}
+            className="text-[var(--accent-blue)] text-sm font-medium hover:underline"
+          >
+            ← Go back
+          </button>
+        </div>
       </div>
     );
   }
 
-  const bd = trail.score_breakdown;
-  const cb = trail.compliance_breakdown;
+  const confScore = trail.metrics.confidence_score;
+  const confColor = confScore >= 75 ? "text-emerald-400" : confScore >= 50 ? "text-amber-400" : "text-fuchsia-400";
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500 max-w-4xl mx-auto">
-      <div className="flex items-center gap-4">
+    <div className="max-w-4xl mx-auto px-6 py-6 space-y-6">
+
+      {/* ── Header ── */}
+      <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-4">
         <button
           onClick={() => router.back()}
-          className="p-2 rounded-full hover:bg-slate-100 text-slate-500 transition-colors"
+          className="p-2 rounded-xl text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-white/[0.04] transition-all mt-0.5"
         >
           <ArrowLeft className="h-5 w-5" />
         </button>
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
-            {trail.canonical_name}
-            <span className="text-sm font-normal text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-3 mb-1">
+            <h1 className="text-xl font-bold text-[var(--foreground)] truncate">{trail.canonical_name}</h1>
+            <span className="text-[10px] text-[var(--foreground-muted)] bg-white/[0.04] border border-[var(--border)] rounded-md px-2 py-0.5 shrink-0">
               ID: {trail.proposal_id}
             </span>
-            {trail.flagged_low_confidence_high_impact && (
-              <span className="text-xs font-semibold text-red-600 bg-red-50 border border-red-200 px-2 py-0.5 rounded-full flex items-center gap-1">
-                <AlertCircle className="h-3 w-3" /> High impact · Low confidence
-              </span>
-            )}
-          </h1>
+            <PriorityBadge priority={trail.metrics.priority} />
+          </div>
+          <p className="text-sm text-[var(--foreground-muted)] leading-relaxed">{trail.headline}</p>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="text-lg font-semibold text-slate-900 mb-4">Consolidation Summary</h2>
-        <p className="text-slate-700 leading-relaxed mb-6">{trail.headline}</p>
+      {/* ── Metrics Grid ── */}
+      <motion.div
+        className="grid grid-cols-2 md:grid-cols-4 gap-3"
+        initial="hidden" animate="visible"
+        variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
+      >
+        <motion.div variants={fadeIn} custom={0}>
+          <MetricTile label="Target Supplier" value={trail.recommended_supplier.name} accent="silver" />
+        </motion.div>
+        <motion.div variants={fadeIn} custom={1}>
+          <MetricTile label="Est. Savings" value={`${trail.metrics.estimated_savings_pct.toFixed(1)}%`} accent="emerald" />
+        </motion.div>
+        <motion.div variants={fadeIn} custom={2}>
+          <MetricTile label="Confidence" value={`${confScore.toFixed(0)}%`} accent={confScore >= 75 ? "emerald" : confScore >= 50 ? "amber" : "fuchsia"} />
+        </motion.div>
+        <motion.div variants={fadeIn} custom={3}>
+          <MetricTile
+            label="Verification"
+            value={trail.verification_summary.passed ? "Passed" : "Issues Found"}
+            accent={trail.verification_summary.passed ? "emerald" : "amber"}
+            icon={trail.verification_summary.passed ? <CheckCircle2 className="h-3.5 w-3.5" /> : <ShieldAlert className="h-3.5 w-3.5" />}
+          />
+        </motion.div>
+      </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="p-4 rounded-lg bg-slate-50 border border-slate-100">
-            <div className="text-xs font-medium text-slate-500 mb-1">Target Supplier</div>
-            <div className="font-semibold text-slate-900 truncate" title={trail.recommended_supplier.name}>
-              {trail.recommended_supplier.name}
-            </div>
-          </div>
-          <div className="p-4 rounded-lg bg-emerald-50 border border-emerald-100">
-            <div className="text-xs font-medium text-emerald-600 mb-1">Est. Savings</div>
-            <div className="font-semibold text-emerald-700 text-xl">
-              {trail.metrics.estimated_savings_pct.toFixed(1)}%
-            </div>
-          </div>
-          <div className="p-4 rounded-lg bg-blue-50 border border-blue-100">
-            <div className="text-xs font-medium text-blue-600 mb-1">Impact Score</div>
-            <div className="font-semibold text-blue-700 text-xl">
-              {trail.impact_score.toFixed(3)}
-            </div>
-          </div>
-          <div className={`p-4 rounded-lg border ${
-            trail.verification_summary.passed
-              ? "bg-emerald-50 border-emerald-100"
-              : "bg-amber-50 border-amber-100"
-          }`}>
-            <div className={`text-xs font-medium mb-1 ${
-              trail.verification_summary.passed ? "text-emerald-600" : "text-amber-600"
-            }`}>
-              Agent Verification
-            </div>
-            <div className={`font-semibold flex items-center gap-1.5 ${
-              trail.verification_summary.passed ? "text-emerald-700" : "text-amber-700"
-            }`}>
-              {trail.verification_summary.passed ? (
-                <><CheckCircle2 className="h-4 w-4" /> Passed</>
-              ) : (
-                <><ShieldAlert className="h-4 w-4" /> Issues Found</>
-              )}
-            </div>
-          </div>
+      {/* ── Coverage Bar ── */}
+      <motion.div variants={fadeIn} custom={4} initial="hidden" animate="visible" className="glass-card p-4">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--foreground-muted)]">Consolidation Coverage</span>
+          <span className="text-xs font-medium text-[var(--foreground)]">{trail.metrics.members_served} / {trail.metrics.total_companies_in_group} companies</span>
         </div>
-      </div>
-
-      {/* Uncertainty-aware score breakdown */}
-      {bd && (
-        <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-5">
-          <h2 className="text-lg font-semibold text-slate-900">Score Breakdown</h2>
-
-          {/* Value ± uncertainty band */}
-          <div className="flex items-end gap-4">
-            <div>
-              <p className="text-[10px] font-medium text-slate-500 uppercase tracking-wider mb-1">
-                Composite score
-              </p>
-              <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-bold text-slate-900">
-                  {(bd.value * 100).toFixed(0)}
-                  <span className="text-lg font-normal text-slate-500">%</span>
-                </span>
-                <span className="text-sm text-slate-400">
-                  ± {((1 - bd.confidence) * 100).toFixed(0)}% uncertainty band
-                </span>
-              </div>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Confidence: <span className="font-medium text-slate-600">{(bd.confidence * 100).toFixed(0)}%</span>
-              </p>
-            </div>
-
-            {/* Compliance breakdown pills */}
-            {cb && (
-              <div className="ml-auto flex gap-2 flex-wrap justify-end">
-                {cb.compliant != null && (
-                  <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
-                    ✓ {cb.compliant} compliant
-                  </span>
-                )}
-                {cb.non_compliant != null && cb.non_compliant > 0 && (
-                  <span className="px-2.5 py-1 rounded-full bg-red-50 text-red-700 text-xs font-semibold border border-red-200">
-                    ✗ {cb.non_compliant} non-compliant
-                  </span>
-                )}
-                {cb.unknown != null && cb.unknown > 0 && (
-                  <span className="px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-semibold border border-amber-200">
-                    ? {cb.unknown} unknown
-                  </span>
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Coverage bar + source distribution */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <CoverageMeter coverage={bd.coverage} />
-            <SourceBar distribution={bd.source_distribution} />
-          </div>
-
-          {/* Main drivers */}
-          {bd.drivers.length > 0 && (
-            <div>
-              <p className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 mb-2">
-                <TrendingUp className="h-3.5 w-3.5 text-emerald-500" />
-                Main drivers (top contributing signals)
-              </p>
-              <div className="space-y-2">
-                {bd.drivers.map((s, i) => (
-                  <div key={i} className="flex items-center gap-3 text-xs">
-                    <span className="font-medium text-slate-800 w-36 shrink-0 truncate">{s.label}</span>
-                    <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-emerald-400 rounded-full"
-                        style={{ width: `${(s.value * 100).toFixed(0)}%` }}
-                      />
-                    </div>
-                    <span className="text-slate-500 w-10 text-right">{(s.value * 100).toFixed(0)}%</span>
-                    <span className="text-slate-400 w-16 text-right">
-                      conf {(s.confidence * 100).toFixed(0)}%
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Weak signals / uncertainty sources */}
-          {(bd.weak_signals.length > 0 || bd.uncertainty_sources.length > 0) && (
-            <div className="rounded-lg bg-amber-50 border border-amber-100 p-4 space-y-2">
-              {bd.weak_signals.length > 0 && (
-                <>
-                  <p className="text-xs font-semibold text-amber-800 flex items-center gap-1.5">
-                    <AlertTriangle className="h-3.5 w-3.5" />
-                    Weak signals (high-importance, low-confidence)
-                  </p>
-                  <ul className="space-y-1">
-                    {bd.weak_signals.map((s, i) => (
-                      <li key={i} className="text-xs text-amber-700 flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-amber-500 shrink-0" />
-                        {s.label}
-                        <span className="text-amber-500">
-                          (conf {(s.confidence * 100).toFixed(0)}% · imp {(s.importance * 100).toFixed(0)}%)
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )}
-              {bd.uncertainty_sources.length > 0 && (
-                <>
-                  <p className="text-xs font-semibold text-amber-800 mt-2">Uncertainty sources</p>
-                  <ul className="space-y-1">
-                    {bd.uncertainty_sources.map((src, i) => (
-                      <li key={i} className="text-xs text-amber-700 flex items-start gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-amber-400 shrink-0 mt-1" />
-                        {src}
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </div>
-          )}
+        <div className="h-2 rounded-full bg-white/[0.06] overflow-hidden">
+          <motion.div
+            className="h-full rounded-full bg-gradient-to-r from-sky-500 to-cyan-400"
+            initial={{ width: 0 }}
+            animate={{ width: `${(trail.metrics.members_served / trail.metrics.total_companies_in_group) * 100}%` }}
+            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+            style={{ boxShadow: "0 0 8px rgba(56,189,248,0.3)" }}
+          />
         </div>
+      </motion.div>
+
+      {/* ── Risk Factors ── */}
+      {trail.risks?.length > 0 && (
+        <motion.div variants={fadeIn} custom={5} initial="hidden" animate="visible">
+          <div className="glass-card p-4 border-amber-500/15" style={{ borderColor: "rgba(245,158,11,0.12)" }}>
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.15em] text-amber-400 flex items-center gap-2 mb-3">
+              <AlertTriangle className="h-3.5 w-3.5" /> Risk Factors
+            </h3>
+            <ul className="space-y-2">
+              {trail.risks.map((risk, i) => (
+                <li key={i} className="text-sm text-amber-300/80 flex items-start gap-2">
+                  <span className="mt-1.5 block h-1.5 w-1.5 rounded-full bg-amber-500 shrink-0" />
+                  {risk}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </motion.div>
       )}
 
-      {trail.risks && trail.risks.length > 0 && (
-        <div className="rounded-xl border border-amber-200 bg-amber-50 p-6 shadow-sm">
-          <h3 className="text-sm font-semibold text-amber-900 flex items-center gap-2 mb-3">
-            <AlertTriangle className="h-4 w-4" />
-            Identified Risk Factors
-          </h3>
-          <ul className="space-y-2">
-            {trail.risks.map((risk, i) => (
-              <li key={i} className="text-sm text-amber-800 flex items-start gap-2">
-                <span className="mt-1 block h-1.5 w-1.5 rounded-full bg-amber-500 shrink-0" />
-                {risk}
-              </li>
-            ))}
-          </ul>
+      {/* ── Evidence Trail ── */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
+        <h3 className="text-sm font-semibold text-[var(--foreground)] mb-3 flex items-center gap-2">
+          <FileText className="h-4 w-4 text-[var(--accent-cyan)]" />
+          Evidence Trail
+          <span className="text-[10px] text-[var(--foreground-muted)] bg-white/[0.04] border border-[var(--border)] rounded-md px-2 py-0.5">
+            {trail.claims.length} claims
+          </span>
+        </h3>
+        <div className="space-y-3">
+          {trail.claims.map((claim, idx) => {
+            const isVerified = claim.status === "VERIFIED";
+            return (
+              <motion.div key={idx} variants={fadeIn} custom={idx} initial="hidden" animate="visible">
+                {isVerified ? (
+                  <div className="glass-card overflow-hidden">
+                    <ClaimContent claim={claim} />
+                  </div>
+                ) : (
+                  <TracingBorder
+                    active={claim.status === "CONTRADICTED"}
+                    borderRadius={16}
+                    glowColor={claim.status === "CONTRADICTED" ? "rgba(217, 70, 239, 0.6)" : "rgba(56, 189, 248, 0.6)"}
+                  >
+                    <ClaimContent claim={claim} />
+                  </TracingBorder>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
-      )}
+      </motion.div>
 
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-slate-900">Evidence Trail</h3>
-        {trail.claims.map((claim, idx) => (
-          <div key={idx} className="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm">
-            <div className="bg-slate-50 px-5 py-3 border-b border-slate-200 flex items-start justify-between gap-4">
-              <div className="font-medium text-slate-800 text-sm">{claim.claim}</div>
-              <div className="shrink-0">
-                {claim.status === "VERIFIED" && (
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600">
-                    <CheckCircle2 className="h-4 w-4" /> Verified
-                  </span>
+      {/* ── Agnes Summary ── */}
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
+        <TracingBorder active={true} borderRadius={16}>
+          <div className="p-5 flex items-start gap-4">
+            <AgnesOrb state="idle" size={40} />
+            <div>
+              <h4 className="text-sm font-semibold text-[var(--foreground)] mb-1">Agnes Assessment</h4>
+              <p className="text-[13px] leading-relaxed text-[var(--foreground-muted)]">
+                {trail.verification_summary.passed ? (
+                  <>
+                    All verification checks <span className="text-emerald-400 font-medium">passed</span>. This proposal
+                    for <span className="text-[var(--accent-blue)] font-medium">{trail.canonical_name}</span> via{" "}
+                    <span className="text-[var(--foreground)] font-medium">{trail.recommended_supplier.name}</span> is
+                    recommended for consolidation with <span className={confColor + " font-medium"}>{confScore}% confidence</span> and
+                    an estimated <span className="text-emerald-400 font-medium">+{trail.metrics.estimated_savings_pct.toFixed(1)}%</span> savings.
+                  </>
+                ) : (
+                  <>
+                    Some verification checks <span className="text-amber-400 font-medium">require review</span>.
+                    While <span className="text-[var(--accent-blue)] font-medium">{trail.canonical_name}</span> shows
+                    potential for consolidation, {trail.risks.length > 0 ? `${trail.risks.length} risk factor(s) were identified` : "further analysis is needed"}.
+                    Confidence: <span className={confColor + " font-medium"}>{confScore}%</span>.
+                  </>
                 )}
-                {claim.status === "CONTRADICTED" && (
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-red-600">
-                    <XCircle className="h-4 w-4" /> Contradicted
+              </p>
+            </div>
+          </div>
+        </TracingBorder>
+      </motion.div>
+
+      {/* ── Per-Proposal Chat (Evidence-Trail Context) ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.7, duration: 0.5 }}
+      >
+        <AgnesChat proposalId={trail.proposal_id} compact />
+      </motion.div>
+    </div>
+  );
+}
+
+
+/* ═══ Sub-Components ═══ */
+
+function ClaimContent({ claim }: { claim: Claim }) {
+  return (
+    <>
+      <div className="px-5 py-3 border-b border-white/[0.04] flex items-start justify-between gap-4 bg-white/[0.01]">
+        <p className="text-sm font-medium text-[var(--foreground)]">{claim.claim}</p>
+        <ClaimStatus status={claim.status} />
+      </div>
+      {claim.citations.length > 0 ? (
+        <div className="p-5 space-y-4">
+          {claim.citations.map((cite, cidx) => (
+            <div key={cidx} className="flex gap-3">
+              <FileText className="h-4 w-4 text-[var(--foreground-muted)] mt-0.5 shrink-0" />
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <span className="text-sm font-medium text-[var(--foreground)]">{cite.label}</span>
+                  {cite.url && (
+                    <a
+                      href={cite.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-xs text-[var(--accent-blue)] hover:underline"
+                    >
+                      Source <ExternalLink className="h-3 w-3" />
+                    </a>
+                  )}
+                  <span className="text-[10px] uppercase tracking-wider font-semibold text-[var(--foreground-muted)] bg-white/[0.04] border border-[var(--border)] px-2 py-0.5 rounded">
+                    {(cite.confidence * 100).toFixed(0)}% confidence
                   </span>
-                )}
-                {claim.status === "UNVERIFIED" && (
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-600">
-                    <AlertTriangle className="h-4 w-4" /> Unverified
-                  </span>
-                )}
+                </div>
+                <blockquote className="text-sm text-[var(--foreground-muted)] leading-relaxed border-l-2 border-sky-500/30 pl-3 italic">
+                  &quot;{cite.snippet}&quot;
+                </blockquote>
               </div>
             </div>
+          ))}
+        </div>
+      ) : (
+        <p className="px-5 py-4 text-sm text-[var(--foreground-muted)] italic">No direct citations found for this claim.</p>
+      )}
+    </>
+  );
+}
 
-            {claim.citations.length > 0 ? (
-              <div className="p-5 space-y-4">
-                {claim.citations.map((cite, cidx) => (
-                  <div key={cidx} className="flex gap-4">
-                    <div className="mt-0.5 text-slate-400">
-                      <FileText className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <span className="font-medium text-sm text-slate-900">{cite.label}</span>
-                        {cite.url && (
-                          <a href={cite.url} target="_blank" rel="noreferrer" className="text-indigo-600 hover:underline inline-flex items-center gap-1 text-xs">
-                            Source <ExternalLink className="h-3 w-3" />
-                          </a>
-                        )}
-                        <span className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-sm">
-                          Confidence: {(cite.confidence * 100).toFixed(0)}%
-                        </span>
-                      </div>
-                      <p className="text-sm text-slate-600 leading-relaxed bg-slate-50 border border-slate-100 rounded-md p-3">
-                        &quot;{cite.snippet}&quot;
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="p-5 text-sm text-slate-500 italic">
-                No direct citations found for this claim.
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-12 pt-8 border-t border-slate-200">
-        <h3 className="text-lg font-semibold text-slate-900 mb-4">Chat with Agnes</h3>
-        <AgnesChat
-          proposalId={trail.proposal_id}
-          initialGreeting="Ask me anything about this proposal — why this supplier, what's missing, what would change my confidence."
-          compact={true}
-        />
+function MetricTile({ label, value, accent, icon }: {
+  label: string; value: string; accent: string; icon?: React.ReactNode;
+}) {
+  const colors: Record<string, string> = {
+    silver:  "text-gray-300",
+    emerald: "text-emerald-400",
+    cyan:    "text-cyan-400",
+    amber:   "text-amber-400",
+    fuchsia: "text-fuchsia-400",
+  };
+  return (
+    <div className="glass-card p-4">
+      <div className="text-[9px] uppercase tracking-[0.12em] font-medium text-[var(--foreground-muted)] mb-1">{label}</div>
+      <div className={`font-semibold text-lg flex items-center gap-1.5 truncate ${colors[accent] ?? colors.silver}`}>
+        {icon}{value}
       </div>
     </div>
   );
+}
+
+function PriorityBadge({ priority }: { priority: string }) {
+  const s: Record<string, string> = {
+    HIGH: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    MEDIUM: "bg-sky-500/10 text-sky-400 border-sky-500/20",
+    LOW: "bg-slate-500/10 text-slate-400 border-slate-500/20",
+  };
+  return <span className={`inline-flex items-center rounded-md px-1.5 py-0.5 text-[10px] font-medium border shrink-0 ${s[priority] ?? s.LOW}`}>{priority}</span>;
+}
+
+function ClaimStatus({ status }: { status: string }) {
+  if (status === "VERIFIED")
+    return <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 shrink-0"><CheckCircle2 className="h-4 w-4" /> Verified</span>;
+  if (status === "CONTRADICTED")
+    return <span className="inline-flex items-center gap-1 text-xs font-semibold text-fuchsia-400 shrink-0"><XCircle className="h-4 w-4" /> Contradicted</span>;
+  return <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-400 shrink-0"><AlertTriangle className="h-4 w-4" /> Unverified</span>;
 }

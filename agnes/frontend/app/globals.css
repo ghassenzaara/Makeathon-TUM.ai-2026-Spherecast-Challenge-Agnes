@@ -2,26 +2,122 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══ STRICT SPHERECAST DESIGN SYSTEM ═══
+   Background: #030303 (pure void)
+   Cards/Panels: #0A0A0A
+   Borders: rgba(255,255,255,0.08)
+   Text: gray-400 for muted, gray-100 for primary
+   Font: Inter (tight tracking, technical)
+   ═══════════════════════════════════════ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-void: #030303;
+  --bg-card: #0A0A0A;
+  --bg-surface-solid: #0A0A0A;
+  --border: rgba(255, 255, 255, 0.08);
+  --foreground: #f3f4f6;
+  --foreground-muted: #9ca3af;
+  --foreground-dim: #6b7280;
+  --accent-blue: #3b82f6;
+  --accent-cyan: #06b6d4;
+  --glass-bg: rgba(10, 10, 10, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --grid-line: rgba(255, 255, 255, 0.025);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ─── */
+html {
+  background: var(--bg-void);
+  color-scheme: dark;
 }
 
 body {
+  background: var(--bg-void);
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
 }
 
+/* ─── Background grid overlay ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ─── Top-center blue vignette — makes galaxy visible ─── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 90% 50% at 50% 0%,
+    rgba(59, 130, 246, 0.03) 0%,
+    transparent 65%
+  );
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.07); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.12); }
+
+/* ─── Utilities ─── */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
   }
+
+  .card-solid {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+
+  .glow-blue {
+    box-shadow:
+      0 0 0 1px rgba(59, 130, 246, 0.1),
+      0 4px 20px -4px rgba(59, 130, 246, 0.2),
+      0 0 40px -8px rgba(59, 130, 246, 0.1);
+  }
+
+  .status-pulse {
+    animation: statusPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* ── Tracing border spin — 30s full rotation ── */
+  .animate-tracing-spin {
+    animation: tracingSpin 30s linear infinite;
+  }
+}
+
+/* ─── Keyframes ─── */
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes tracingSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
