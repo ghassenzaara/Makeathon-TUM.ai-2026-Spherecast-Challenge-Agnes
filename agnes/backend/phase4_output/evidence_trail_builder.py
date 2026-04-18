@@ -30,6 +30,8 @@ from backend.phase2_enrichment.enrichment_store import (
     get_supplier_info,
     get_compliance_requirements,
     get_product_scrape,
+    get_fda_risk,
+    get_entity_verification,
 )
 from backend.phase3_reasoning.verification_agent import verification_summary
 
@@ -113,6 +115,53 @@ def _compliance_citations(consumers: list[dict]) -> list[dict]:
     return citations
 
 
+def _fda_citation(supplier_id: int) -> dict | None:
+    """Build a citation from an OpenFDA enforcement risk record."""
+    fda_data = get_fda_risk(supplier_id)
+    if not fda_data or fda_data.get("status") == "Error":
+        return None
+    meta = fda_data.get("_meta") or {}
+    source_url = _clean_url(meta.get("source_url") or "")
+    status = fda_data.get("status", "Unknown")
+    if status == "Warning":
+        count = fda_data.get("enforcement_count", 0)
+        latest = fda_data.get("latest_recall") or ""
+        snippet = f"FDA enforcement records found: {count}. Latest: {latest}"
+    else:
+        snippet = "No FDA food enforcement records found for this supplier."
+    return {
+        "label": "OpenFDA Food Enforcement Records",
+        "url": source_url,
+        "scraped_at": meta.get("scraped_at", ""),
+        "confidence": meta.get("confidence", 0.95),
+        "snippet": _truncate(snippet),
+    }
+
+
+def _entity_citation(supplier_id: int) -> dict | None:
+    """Build a citation from an OpenCorporates entity verification record."""
+    entity_data = get_entity_verification(supplier_id)
+    if not entity_data:
+        return None
+    meta = entity_data.get("_meta") or {}
+    source = entity_data.get("source", "")
+    raw_url = meta.get("source_url") or ""
+    url = _clean_url("" if raw_url == "mock" else raw_url)
+    bits = [f"Registration status: {entity_data.get('status', 'Unknown')}"]
+    if entity_data.get("registered_name"):
+        bits.append(f"Registered as: {entity_data['registered_name']}")
+    if entity_data.get("jurisdiction"):
+        bits.append(f"Jurisdiction: {entity_data['jurisdiction']}")
+    label_suffix = "live" if source == "opencorporates_live" else "mock"
+    return {
+        "label": f"OpenCorporates Entity Verification ({label_suffix})",
+        "url": url,
+        "scraped_at": meta.get("scraped_at", ""),
+        "confidence": meta.get("confidence", 0.70),
+        "snippet": _truncate(" \u2022 ".join(bits)),
+    }
+
+
 def _scrape_citations(group_detail: dict) -> list[dict]:
     """Surface any product_scrape evidence for raw materials in the group."""
     citations: list[dict] = []
@@ -160,6 +209,18 @@ def _claim_label(key: str, status: str, proposal: dict) -> str:
         )
     if key == "savings_bounds":
         return f"Estimated savings of {proposal['EstimatedSavingsPct']}% sits within the bounded heuristic range"
+    if key == "fda_enforcement_clear":
+        return {
+            "VERIFIED":     f"{name} has no FDA food enforcement records on file",
+            "UNVERIFIED":   f"FDA enforcement status for {name} could not be determined",
+            "CONTRADICTED": f"{name} has FDA food enforcement history on record",
+        }.get(status, f"FDA enforcement status: {status}")
+    if key == "supplier_entity_active":
+        return {
+            "VERIFIED":     f"{name} is an active registered business entity",
+            "UNVERIFIED":   f"Business registration status of {name} could not be verified",
+            "CONTRADICTED": f"{name} appears to be a dissolved or inactive business entity",
+        }.get(status, f"Entity registration status: {status}")
     return key.replace("_", " ").capitalize()
 
 
@@ -179,9 +240,12 @@ def _build_from_row(proposal: dict) -> dict:
     risks = json.loads(proposal.get("RiskFactorsJson") or "[]")
     summary = verification_summary(verifications)
 
+    supplier_id = proposal["RecommendedSupplierId"]
     supplier_cite = _supplier_citation(proposal, supplier_data)
     compliance_cites = _compliance_citations(consumers)
     scrape_cites = _scrape_citations(group_detail)
+    fda_cite = _fda_citation(supplier_id)
+    entity_cite = _entity_citation(supplier_id)
 
     headline = (
         f"Recommend consolidating '{canonical}' to {proposal['RecommendedSupplierName']} "
@@ -207,6 +271,10 @@ def _build_from_row(proposal: dict) -> dict:
                 "confidence": 1.0,
                 "snippet": _truncate(proposal.get("EvidenceSummary", "")),
             })
+        elif key == "fda_enforcement_clear" and fda_cite:
+            cites.append(fda_cite)
+        elif key == "supplier_entity_active" and entity_cite:
+            cites.append(entity_cite)
         claims.append({
             "claim": _claim_label(key, status, proposal),
             "status": status,

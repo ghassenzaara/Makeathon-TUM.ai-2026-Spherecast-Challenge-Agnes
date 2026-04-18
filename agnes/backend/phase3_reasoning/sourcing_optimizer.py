@@ -92,6 +92,8 @@ def optimize_sourcing(
     supplier_data: Dict[int, dict],
     compliance_results: Dict[int, ComplianceResult],
     top_n: int = 3,
+    fda_data_map: Dict[int, dict] = None,
+    entity_data_map: Dict[int, dict] = None,
 ) -> List[SourcingProposal]:
     """
     Generate sourcing proposals for a given substitution group.
@@ -142,7 +144,30 @@ def optimize_sourcing(
         if not sdata.get("certifications"):
             risk_factors.append("Supplier certifications unverified")
 
-        if status == "ALL_PASS" and coverage_ratio >= 0.5:
+        # FDA enforcement risk
+        fda = (fda_data_map or {}).get(sid) or {}
+        if fda.get("status") == "Warning":
+            count = fda.get("enforcement_count", 0)
+            latest = (fda.get("latest_recall") or "")[:80]
+            risk_factors.append(
+                f"FDA enforcement history: {count} record(s). Latest: {latest}"
+            )
+
+        # Entity registration check — demote dissolved suppliers to LOW and flag
+        entity = (entity_data_map or {}).get(sid) or {}
+        entity_status = entity.get("status", "Unknown")
+        if entity_status == "Dissolved":
+            risk_factors.append(
+                "Supplier entity is 'Dissolved' per OpenCorporates — not eligible for consolidation"
+            )
+        elif entity_status == "Unknown":
+            risk_factors.append(
+                "Supplier business registration status could not be verified (OpenCorporates)"
+            )
+
+        if entity_status == "Dissolved":
+            priority = "LOW"
+        elif status == "ALL_PASS" and coverage_ratio >= 0.5:
             priority = "HIGH"
         elif status in ("ALL_PASS", "PARTIAL") and coverage_ratio >= 0.3:
             priority = "MEDIUM"

@@ -16,6 +16,8 @@ load_dotenv(_PROJECT_ROOT / ".env")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 OPENAI_EMBEDDING_MODEL = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
 OPENAI_CHAT_MODEL = os.getenv("OPENAI_CHAT_MODEL", "gpt-4o")
+TAVILY_API_KEY = os.getenv("TAVILY_API_KEY", "")
+OPENCORPORATES_API_KEY = os.getenv("OPENCORPORATES_API_KEY", "")
 
 # --- Database ---
 DB_PATH = _PROJECT_ROOT.parent / "database" / "db.sqlite"  # database/db.sqlite
