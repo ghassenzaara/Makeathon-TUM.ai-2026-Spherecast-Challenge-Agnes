@@ -1,4 +1,4 @@
-# main.py — Agnes CLI Entry Point
+# main.py -- Agnes CLI Entry Point
 # Interactive command-line interface for the Agnes AI Supply Chain Manager.
 
 import sys
@@ -19,7 +19,7 @@ except ImportError:
     Style = _Stub()
 
 
-# ─── Demo queries ───
+# --- Demo queries ---
 DEMO_QUERIES = [
     "Identify the top 5 raw material consolidation opportunities across all companies. Focus on ingredients used by the most companies.",
     "Which raw materials have single-source risk (only 1 approved supplier)? List the top 10 highest-risk ones.",
@@ -30,26 +30,25 @@ DEMO_QUERIES = [
 def print_banner():
     """Prints the Agnes startup banner."""
     banner = f"""
-{Fore.CYAN}╔══════════════════════════════════════════════════════════════╗
-║                                                              ║
-║     █████╗  ██████╗ ███╗   ██╗███████╗███████╗               ║
-║    ██╔══██╗██╔════╝ ████╗  ██║██╔════╝██╔════╝               ║
-║    ███████║██║  ███╗██╔██╗ ██║█████╗  ███████╗               ║
-║    ██╔══██║██║   ██║██║╚██╗██║██╔══╝  ╚════██║               ║
-║    ██║  ██║╚██████╔╝██║ ╚████║███████╗███████║               ║
-║    ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚══════╝               ║
-║                                                              ║
-║    AI Supply Chain Manager — Spherecast Makeathon 2026       ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝{Style.RESET_ALL}
+{Fore.CYAN}+==============================================================+
+|                                                              |
+|      A   GGGG  N   N  EEEE  SSSS                            |
+|     A A  G     NN  N  E     S                                |
+|    AAAAA G GGG N N N  EEE    SSS                             |
+|    A   A G   G N  NN  E        S                             |
+|    A   A  GGG  N   N  EEEE SSSS                              |
+|                                                              |
+|    AI Supply Chain Manager -- Spherecast Makeathon 2026      |
+|                                                              |
++==============================================================+{Style.RESET_ALL}
 
 {Fore.YELLOW}Commands:{Style.RESET_ALL}
   Type your question and press Enter
-  {Fore.GREEN}/demo{Style.RESET_ALL}     — Run 3 pre-built demo queries
-  {Fore.GREEN}/fast{Style.RESET_ALL}     — Toggle fast mode (skip web scraping)
-  {Fore.GREEN}/scrape{Style.RESET_ALL}   — Toggle web scraping on/off
-  {Fore.GREEN}/help{Style.RESET_ALL}     — Show this help
-  {Fore.GREEN}/quit{Style.RESET_ALL}     — Exit Agnes
+  {Fore.GREEN}/demo{Style.RESET_ALL}     -- Run 3 pre-built demo queries
+  {Fore.GREEN}/fast{Style.RESET_ALL}     -- Toggle fast mode (skip web scraping)
+  {Fore.GREEN}/scrape{Style.RESET_ALL}   -- Toggle web scraping on/off
+  {Fore.GREEN}/help{Style.RESET_ALL}     -- Show this help
+  {Fore.GREEN}/quit{Style.RESET_ALL}     -- Exit Agnes
 """
     print(banner)
 
@@ -63,19 +62,19 @@ def display_recommendation(result: dict) -> None:
         print(result["raw_response"][:2000])
         return
 
-    # ── Header ──
+    # -- Header --
     overall_conf = result.get("overall_confidence", 0)
     conf_color = Fore.GREEN if overall_conf >= 0.7 else Fore.YELLOW if overall_conf >= 0.4 else Fore.RED
-    print(f"\n{Fore.CYAN}{'═' * 70}{Style.RESET_ALL}")
+    print(f"\n{Fore.CYAN}{'=' * 70}{Style.RESET_ALL}")
     print(f"{Fore.CYAN}  AGNES RECOMMENDATION{Style.RESET_ALL}  |  Confidence: {conf_color}{overall_conf:.0%}{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}{'═' * 70}{Style.RESET_ALL}")
+    print(f"{Fore.CYAN}{'=' * 70}{Style.RESET_ALL}")
 
-    # ── Executive Summary ──
+    # -- Executive Summary --
     summary = result.get("consolidation_summary", "No summary available.")
     print(f"\n{Fore.WHITE}[SUMMARY]{Style.RESET_ALL}")
     print(f"   {summary}")
 
-    # ── Substitution Groups ──
+    # -- Substitution Groups --
     groups = result.get("substitution_groups", [])
     if groups:
         print(f"\n{Fore.WHITE}SUBSTITUTION GROUPS ({len(groups)} found){Style.RESET_ALL}")
@@ -83,7 +82,7 @@ def display_recommendation(result: dict) -> None:
             conf = group.get("confidence_score", 0)
             conf_color = Fore.GREEN if conf >= 0.7 else Fore.YELLOW if conf >= 0.4 else Fore.RED
 
-            print(f"\n  {Fore.CYAN}─── Group {i}: {group.get('canonical_ingredient', 'Unknown')} ───{Style.RESET_ALL}")
+            print(f"\n  {Fore.CYAN}--- Group {i}: {group.get('canonical_ingredient', 'Unknown')} ---{Style.RESET_ALL}")
             print(f"  Confidence: {conf_color}{conf:.0%}{Style.RESET_ALL}")
 
             companies = group.get("companies_using", [])
@@ -115,7 +114,7 @@ def display_recommendation(result: dict) -> None:
             if evidence:
                 print(f"  Evidence:")
                 for e in evidence[:5]:
-                    print(f"    • {e}")
+                    print(f"    - {e}")
 
             # Risks
             risks = group.get("risks", [])
@@ -124,35 +123,35 @@ def display_recommendation(result: dict) -> None:
                 for r in risks:
                     print(f"    [!] {r}")
 
-    # ── Data Gaps ──
+    # -- Data Gaps --
     gaps = result.get("data_gaps", [])
     if gaps:
         print(f"\n{Fore.YELLOW}DATA GAPS{Style.RESET_ALL}")
         for gap in gaps:
-            print(f"   • {gap}")
+            print(f"   - {gap}")
 
-    # ── Scraper Status ──
+    # -- Scraper Status --
     scraper_status = result.get("scraper_status", {})
     if scraper_status:
         success = sum(1 for s in scraper_status.values() if s.get("status") == "success")
         total = len(scraper_status)
         print(f"\n{Fore.WHITE}SCRAPER: {success}/{total} suppliers scraped successfully{Style.RESET_ALL}")
 
-    # ── Meta ──
+    # -- Meta --
     meta = result.get("_meta", {})
     if meta:
         print(f"\n{Fore.WHITE}Model: {meta.get('model', '?')} | "
               f"Prompt: ~{meta.get('prompt_tokens_est', 0):,} tokens | "
               f"Time: {meta.get('response_time_s', 0)}s{Style.RESET_ALL}")
 
-    print(f"\n{Fore.CYAN}{'═' * 70}{Style.RESET_ALL}\n")
+    print(f"\n{Fore.CYAN}{'=' * 70}{Style.RESET_ALL}\n")
 
 
 def run_demo(skip_scraping: bool):
     """Runs the 3 canned demo queries."""
     print(f"\n{Fore.YELLOW}Running Agnes Demo (3 queries)...{Style.RESET_ALL}\n")
     for i, query in enumerate(DEMO_QUERIES, 1):
-        print(f"{Fore.CYAN}━━━ Demo Query {i}/3 ━━━{Style.RESET_ALL}")
+        print(f"{Fore.CYAN}--- Demo Query {i}/3 ---{Style.RESET_ALL}")
         print(f"  \"{query}\"\n")
         try:
             result = agnes_core.ask_agnes(query, skip_scraping=skip_scraping)
@@ -218,7 +217,7 @@ def main():
             cache = s.get_cached_results()
             print(f"  Cached scrape results: {len(cache)} suppliers")
             for name, data in cache.items():
-                print(f"    {name}: {data['status']} — {data.get('certifications_found', [])}")
+                print(f"    {name}: {data['status']} -- {data.get('certifications_found', [])}")
             print()
             continue
 
