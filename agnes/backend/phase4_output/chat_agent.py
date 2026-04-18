@@ -17,6 +17,8 @@ import re
 from typing import Any
 
 from backend.config import OPENAI_API_KEY, OPENAI_CHAT_MODEL
+from backend.db.queries import get_sourcing_proposal
+from backend.phase4_output.evidence_trail_builder import build_evidence_trail
 from backend.phase4_output.retriever import RetrievalIndex, Doc
 
 logger = logging.getLogger(__name__)
@@ -116,7 +118,7 @@ def _llm_answer(messages: list[dict], context: str) -> str:
     return resp.choices[0].message.content or ""
 
 
-def answer(messages: list[dict], index: RetrievalIndex) -> dict[str, Any]:
+def answer(messages: list[dict], index: RetrievalIndex, proposal_id: int | None = None) -> dict[str, Any]:
     """
     messages: full chat history, OpenAI format ({"role": "...", "content": "..."}).
     Returns:
@@ -131,13 +133,61 @@ def answer(messages: list[dict], index: RetrievalIndex) -> dict[str, Any]:
         return {"answer": "", "citations": [], "retrieved": []}
     query = user_messages[-1]["content"]
 
-    retrieved = index.retrieve(query)
+    pinned_context = ""
+    system_prompt = SYSTEM_PROMPT
+    if proposal_id is not None:
+        p = get_sourcing_proposal(proposal_id)
+        if p:
+            trail = build_evidence_trail(proposal_id)
+            supplier_id = p.get("RecommendedSupplierId")
+            group_id = p.get("IngredientGroupId")
+            
+            # Build PINNED PROPOSAL context block
+            claims_text = []
+            for c in trail.get("claims", []):
+                claims_text.append(f"- Claim: {c.get('claim')} (Status: {c.get('status')})")
+                for cit in c.get("citations", []):
+                    claims_text.append(f"  * {cit.get('label')}: {cit.get('snippet')}")
+            
+            claims_str = "\n".join(claims_text)
+            
+            pinned_context = (
+                f"PINNED PROPOSAL (You are currently helping the user evaluate Proposal {proposal_id}):\n"
+                f"Supplier: {p.get('RecommendedSupplierName')}\n"
+                f"Consolidates: {p.get('CompaniesConsolidated')} companies\n"
+                f"Est. Savings: {p.get('EstimatedSavingsPct', 0):.1f}%\n"
+                f"Confidence: {p.get('ConfidenceScore', 0):.0f}%\n"
+                f"Risks: {p.get('RiskFactorsJson')}\n"
+                f"Evidence Summary: {p.get('EvidenceSummary')}\n"
+                f"Detailed Evidence Trail:\n{claims_str}\n"
+            )
+            
+            system_prompt += f"\n\nYou are currently helping the user evaluate Proposal {proposal_id}. Prefer answers grounded in the PINNED PROPOSAL block; only pull from broader context when the user asks a comparative question."
+            
+            retrieved = index.retrieve(query, proposal_id=proposal_id, supplier_id=supplier_id, ingredient_group_id=group_id)
+        else:
+            retrieved = index.retrieve(query)
+    else:
+        retrieved = index.retrieve(query)
+
     context = _format_context(retrieved)
+    if pinned_context:
+        context = pinned_context + "\n\n" + context
+
     citation_pool = _citations_for(retrieved)
 
     if OPENAI_API_KEY:
         try:
-            text = _llm_answer(messages, context)
+            from openai import OpenAI
+            client = OpenAI(api_key=OPENAI_API_KEY)
+            convo = [{"role": "system", "content": system_prompt + "\n\n" + context}]
+            convo.extend(messages)
+            resp = client.chat.completions.create(
+                model=OPENAI_CHAT_MODEL,
+                messages=convo,
+                temperature=0.1,
+            )
+            text = resp.choices[0].message.content or ""
         except Exception as e:
             logger.warning(f"LLM call failed, using fallback: {e}")
             text = _fallback_answer(query, retrieved)

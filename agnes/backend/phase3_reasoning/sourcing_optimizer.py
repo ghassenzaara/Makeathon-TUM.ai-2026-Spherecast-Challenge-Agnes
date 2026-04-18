@@ -7,9 +7,10 @@ compliance status, and risk factors.
 """
 
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Dict, List
 import logging
+import math
 
 from backend.phase1_extraction.substitution_groups import SubstitutionGroup
 from backend.phase3_reasoning.compliance_checker import ComplianceResult
@@ -32,6 +33,15 @@ class SourcingProposal:
     confidence_score: float           # set later by confidence_scorer
     priority: str                     # "HIGH" | "MEDIUM" | "LOW"
     evidence_summary: str = ""
+    # Probabilistic / Pareto fields — set by pareto_engine after compliance scoring
+    compliance_probability: float = 0.5   # geometric mean over product-level checks
+    evidence_strength: float = 0.5        # mean evidence_strength across checks
+    risk_score: float = 0.0               # structured risk decomposition in [0,1]
+    utility_score: float = 0.0            # U = α·savings − β·risk − γ·uncertainty
+    pareto_rank: int = 0                  # 1 = Pareto frontier, 2+ = dominated layers
+    is_pareto_optimal: bool = False
+    dominated_by: List[int] = field(default_factory=list)
+    verification_confidence: float = 0.5  # weighted mean of verification outcomes
 
 
 def _supplier_reach(group: SubstitutionGroup) -> Dict[int, dict]:
@@ -164,6 +174,20 @@ def optimize_sourcing(
         else:
             priority = "LOW"
 
+        # Aggregate compliance_probability across this group's products for this supplier
+        relevant = [
+            r for r in compliance_results.values()
+            if r.proposed_supplier_id == sid and r.product_id in group_product_ids
+        ]
+        if relevant:
+            probs = [r.compliance_probability for r in relevant]
+            log_sum = sum(math.log(max(p, 1e-10)) for p in probs)
+            comp_prob = round(math.exp(log_sum / len(probs)), 4)
+            ev_str = round(sum(r.evidence_strength for r in relevant) / len(relevant), 4)
+        else:
+            comp_prob = 0.5
+            ev_str = 0.5
+
         hq = sdata.get("headquarters", "")
         evidence = (
             f"{info['name']} can serve {companies_served} of "
@@ -187,6 +211,8 @@ def optimize_sourcing(
             confidence_score=0.0,
             priority=priority,
             evidence_summary=evidence,
+            compliance_probability=comp_prob,
+            evidence_strength=ev_str,
         ))
 
     return proposals

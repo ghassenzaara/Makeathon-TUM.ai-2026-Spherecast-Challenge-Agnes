@@ -36,6 +36,7 @@ from backend.phase3_reasoning.compliance_checker import check_compliance, Compli
 from backend.phase3_reasoning.sourcing_optimizer import optimize_sourcing, SourcingProposal
 from backend.phase3_reasoning.confidence_scorer import score_proposal_confidence
 from backend.phase3_reasoning.verification_agent import verify_proposal, verification_summary
+from backend.phase3_reasoning.pareto_engine import compute_pareto_frontier, rank_by_utility
 
 
 logging.basicConfig(
@@ -94,6 +95,15 @@ def _persist_proposal(p: SourcingProposal, verifications: dict):
         "VerificationsJson": json.dumps(verifications),
         "VerificationPassed": 1 if summary["passed"] else 0,
         "CreatedAt": datetime.now(timezone.utc).isoformat(),
+        # Probabilistic / Pareto fields
+        "ComplianceProbability": p.compliance_probability,
+        "EvidenceStrength": p.evidence_strength,
+        "RiskScore": p.risk_score,
+        "UtilityScore": p.utility_score,
+        "ParetoRank": p.pareto_rank,
+        "IsParetoOptimal": 1 if p.is_pareto_optimal else 0,
+        "DominatedByJson": json.dumps(p.dominated_by),
+        "VerificationConfidence": p.verification_confidence,
     })
 
 
@@ -111,6 +121,7 @@ def run_phase3(top_groups: int = 50, persist: bool = True) -> List[SourcingPropo
     logger.info(f"Loaded {len(groups_data)} substitution groups")
 
     all_proposals: List[SourcingProposal] = []
+    all_verifications: Dict[int, dict] = {}  # proposal.id -> verifications dict
     skipped_invalid = 0
     skipped_no_consolidation = 0
 
@@ -177,7 +188,7 @@ def run_phase3(top_groups: int = 50, persist: bool = True) -> List[SourcingPropo
             entity_data_map=entity_data_map,
         )
 
-        # 5. Score + verify
+        # 5. Score + verify (collect; do NOT persist yet — Pareto runs globally after)
         for prop in proposals:
             sdata = supplier_data_map.get(prop.recommended_supplier_id, {}) or {}
             cdata_agg = compliance_evidence[0] if compliance_evidence else {}
@@ -187,11 +198,12 @@ def run_phase3(top_groups: int = 50, persist: bool = True) -> List[SourcingPropo
                 fda_data=fda_data_map.get(sid),
                 entity_data=entity_data_map.get(sid),
             )
-            verifications = verify_proposal(
+            verifications, ver_conf = verify_proposal(
                 prop, sdata, compliance_evidence,
                 fda_data=fda_data_map.get(sid),
                 entity_data=entity_data_map.get(sid),
             )
+            prop.verification_confidence = ver_conf
             v_summary = verification_summary(verifications)
             # Downgrade confidence if any claim was contradicted
             if not v_summary["passed"]:
@@ -199,15 +211,50 @@ def run_phase3(top_groups: int = 50, persist: bool = True) -> List[SourcingPropo
                 prop.risk_factors.append("Verification agent flagged contradicted claims")
 
             all_proposals.append(prop)
-            if persist:
-                _persist_proposal(prop, verifications)
+            all_verifications[prop.id] = verifications
             logger.info(
-                f"  [{prop.priority}] {prop.recommended_supplier_name} -> "
+                f"  {prop.recommended_supplier_name} -> "
                 f"{prop.companies_consolidated}/{prop.total_companies_in_group} companies"
                 f" | savings={prop.estimated_savings_pct:.1f}%"
-                f" | confidence={prop.confidence_score:.1f}%"
-                f" | compliance={prop.compliance_status}"
+                f" | compliance_p={prop.compliance_probability:.3f}"
             )
+
+    # 6. Global Pareto frontier (across ALL groups — chart needs a meaningful frontier)
+    if all_proposals:
+        pareto_results = compute_pareto_frontier(all_proposals)
+        pareto_map = {r.proposal_id: r for r in pareto_results}
+        for r in pareto_results:
+            for p in all_proposals:
+                if p.id == r.proposal_id:
+                    p.pareto_rank = r.pareto_rank
+                    p.is_pareto_optimal = r.is_pareto_optimal
+                    p.dominated_by = r.dominated_by
+                    break
+
+        # 7. Utility ranking (all proposals, not just frontier)
+        ranked_pairs = rank_by_utility(
+            all_proposals, pareto_results,
+            alpha=1.0, beta=1.5, gamma=0.8,
+            frontier_only=False,
+        )
+        for p, u in ranked_pairs:
+            p.utility_score = u
+
+        # Update priority: pareto_rank==1 + above-median utility -> HIGH
+        utilities = sorted(p.utility_score for p in all_proposals)
+        median_u = utilities[len(utilities) // 2] if utilities else 0.0
+        for p in all_proposals:
+            if p.pareto_rank == 1 and p.utility_score > median_u:
+                p.priority = "HIGH"
+            elif p.pareto_rank == 1:
+                p.priority = "MEDIUM"
+            else:
+                p.priority = "LOW"
+
+    # 8. Persist all proposals (now that Pareto fields are populated)
+    if persist:
+        for p in all_proposals:
+            _persist_proposal(p, all_verifications.get(p.id, {}))
 
     logger.info("=" * 60)
     logger.info(

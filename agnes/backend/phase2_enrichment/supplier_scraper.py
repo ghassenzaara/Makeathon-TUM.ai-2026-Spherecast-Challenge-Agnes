@@ -2,7 +2,7 @@
 Supplier Scraper -- enriches supplier records with certifications and location.
 
 Primary path: Tavily Search API (real web lookup of official supplier pages).
-Fallback:     GPT-4o inference when Tavily is unavailable or returns no content.
+Fallback:     structured_extractor (LLM-based, with Evidence rows).
 
 Results are cached in data/enrichment_cache/suppliers/.
 """
@@ -14,11 +14,13 @@ import re
 
 from backend.config import OPENAI_API_KEY, OPENAI_CHAT_MODEL, TAVILY_API_KEY
 from backend.db.queries import get_all_suppliers
+from backend.db.evidence import record_evidence
 from backend.phase2_enrichment.enrichment_store import (
     cache_get,
     cache_set,
     store_supplier_info,
 )
+from backend.phase2_enrichment.structured_extractor import extract_supplier_from_text
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +48,6 @@ _CERT_KEYWORDS = [
     "Rainforest Alliance",
 ]
 
-# LLM prompt kept as last-resort fallback (not deleted)
 SUPPLIER_INFERENCE_PROMPT = """You are a CPG supply chain expert with deep knowledge of ingredient suppliers.
 
 Given this supplier name, provide structured information based on your knowledge:
@@ -113,7 +114,6 @@ async def _tavily_enrich_supplier(supplier_name: str) -> dict | None:
             for r in results
         )
 
-        # HQ: look for "headquartered in", "based in", "located in" patterns
         hq = ""
         hq_match = re.search(
             r"(?:headquartered|based|located)\s+in\s+([A-Z][A-Za-z ,]{5,50}?)(?:\.|,|\s+and)",
@@ -122,14 +122,12 @@ async def _tavily_enrich_supplier(supplier_name: str) -> dict | None:
         if hq_match:
             hq = hq_match.group(1).strip().rstrip(",")
 
-        # Certifications
         found_certs = []
         text_lower = combined_text.lower()
         for cert in _CERT_KEYWORDS:
             if cert.lower() in text_lower and cert not in found_certs:
                 found_certs.append(cert)
 
-        # Website: first result URL
         website = results[0].get("url", "") if results else ""
 
         return {
@@ -143,6 +141,7 @@ async def _tavily_enrich_supplier(supplier_name: str) -> dict | None:
     except Exception as e:
         logger.warning(f"  Supplier {supplier_name}: Tavily enrichment failed - {e}")
         return None
+
 
 
 async def enrich_supplier(supplier_id: int, supplier_name: str) -> dict:
@@ -161,6 +160,7 @@ async def enrich_supplier(supplier_id: int, supplier_name: str) -> dict:
     Returns:
         Dict with enriched supplier data
     """
+    # Check cache
     cached = cache_get("suppliers", str(supplier_id))
     if cached:
         logger.info(f"  Supplier {supplier_name}: loaded from cache")
@@ -207,43 +207,26 @@ async def enrich_supplier(supplier_id: int, supplier_name: str) -> dict:
         )
         return result
 
-    # Fallback: LLM
-    if not OPENAI_API_KEY:
-        logger.warning(f"  Supplier {supplier_name}: no API key, skipping enrichment")
-        cache_set("suppliers", str(supplier_id), result)
-        return result
+    # Fallback: structured extractor (LLM-based, with evidence recording)
+    result = await extract_supplier_from_text(
+        text="",
+        supplier_name=supplier_name,
+        supplier_id=supplier_id,
+        source_url="",
+    )
 
-    from openai import AsyncOpenAI
-    client = AsyncOpenAI(api_key=OPENAI_API_KEY)
+    if known_location:
+        result["headquarters"] = known_location
 
-    try:
-        prompt = SUPPLIER_INFERENCE_PROMPT.format(supplier_name=supplier_name)
-        response = await client.chat.completions.create(
-            model=OPENAI_CHAT_MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.2,
-            response_format={"type": "json_object"},
-        )
-        inferred = json.loads(response.choices[0].message.content)
+    result["supplier_id"] = supplier_id
+    result["name"] = supplier_name
+    result["source"] = "llm_inference"
 
-        result["headquarters"] = known_location or inferred.get("headquarters", "")
-        result["region"] = inferred.get("region", "")
-        result["certifications"] = inferred.get("certifications", [])
-        result["specialties"] = inferred.get("specialties", [])
-        result["company_size"] = inferred.get("company_size", "unknown")
-        result["website"] = inferred.get("website", "")
-        result["notes"] = inferred.get("notes", "")
-        result["confidence"] = inferred.get("confidence", 40)
-        result["source"] = "llm_inference"
-
-        logger.info(
-            f"  Supplier {supplier_name}: LLM fallback - "
-            f"{len(result['certifications'])} certs, hq={result['headquarters']}"
-        )
-
-    except Exception as e:
-        logger.error(f"  Supplier {supplier_name}: enrichment failed - {e}")
-        result["notes"] = f"Enrichment failed: {e}"
+    logger.info(
+        f"  Supplier {supplier_name}: inferred "
+        f"{len(result.get('certifications', []))} certs, "
+        f"location={result.get('headquarters', 'unknown')}"
+    )
 
     cache_set("suppliers", str(supplier_id), result)
     store_supplier_info(

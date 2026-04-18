@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
+
+const ParetoChart = dynamic(
+  () => import("./components/ParetoChart").then((m) => m.ParetoChart),
+  { ssr: false }
+);
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -103,6 +109,8 @@ export default function Dashboard() {
           />
         </div>
       )}
+
+      <ParetoChart />
 
       <div className="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
         <div className="border-b border-slate-200 px-6 py-4">

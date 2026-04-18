@@ -2,7 +2,9 @@
 iHerb Product Scraper -- extracts certifications, ingredients, and pricing.
 
 Primary path: Tavily Search API (targeted query against iherb.com).
-Fallback:     LLM inference when Tavily is unavailable or returns no content.
+Fallbacks:
+  1. Group priors (uses sibling products' data when available)
+  2. LLM inference with low confidence (last resort)
 
 Results cached in data/enrichment_cache/iherb/.
 """
@@ -18,11 +20,17 @@ from backend.config import (
     OPENAI_CHAT_MODEL,
     TAVILY_API_KEY,
 )
+from backend.db.evidence import record_evidence
 from backend.phase1_extraction.sku_parser import parse_sku
 from backend.phase2_enrichment.enrichment_store import (
     cache_get,
     cache_set,
     store_product_scrape,
+)
+from backend.phase2_enrichment.group_priors import apply_group_priors_to_scrape
+from backend.phase2_enrichment.structured_extractor import (
+    extract_product_from_html,
+    clean_html,
 )
 
 logger = logging.getLogger(__name__)
@@ -122,7 +130,7 @@ def _parse_tavily_iherb(tavily_response: dict, base_result: dict) -> dict:
     return base_result
 
 
-async def scrape_iherb_product(iherb_id: str) -> dict:
+async def scrape_iherb_product(iherb_id: str, product_id: int = 0) -> dict:
     """
     Fetch structured product info for an iHerb product ID.
 
@@ -132,12 +140,14 @@ async def scrape_iherb_product(iherb_id: str) -> dict:
       3. LLM inference (last resort)
 
     Args:
-        iherb_id: The iHerb numeric product ID (e.g. '10421')
+        iherb_id: The iHerb product ID (e.g., '10421')
+        product_id: DB product ID (for evidence recording)
 
     Returns:
         Dict with: iherb_id, title, brand, description, certifications,
                    ingredients_text, price_usd, url, scrape_success
     """
+    # Check cache first
     cached = cache_get("iherb", iherb_id)
     if cached:
         logger.info(f"  iHerb {iherb_id}: loaded from cache")
@@ -152,6 +162,7 @@ async def scrape_iherb_product(iherb_id: str) -> dict:
         "description": "",
         "certifications": [],
         "ingredients_text": "",
+        "allergens": [],
         "price_usd": None,
         "scrape_success": False,
     }
@@ -167,9 +178,12 @@ async def scrape_iherb_product(iherb_id: str) -> dict:
         cache_set("iherb", iherb_id, result)
         return result
 
-    # Fallback: LLM
-    logger.info(f"  iHerb {iherb_id}: falling back to LLM inference")
-    result = await _llm_fallback_iherb(iherb_id, result)
+    # Fallback: group priors then LLM
+    logger.info(f"  iHerb {iherb_id}: Tavily failed — applying group priors")
+    result = apply_group_priors_to_scrape(result, product_id)
+    if not result.get("certifications"):
+        logger.info(f"  iHerb {iherb_id}: falling back to LLM inference")
+        result = await _llm_fallback_iherb(iherb_id, result)
     cache_set("iherb", iherb_id, result)
     return result
 
@@ -217,6 +231,7 @@ Set confidence between 5-25 since we cannot verify the page content."""
         result["ingredients_text"] = inferred.get("ingredients_text", "")
         result["_inference_note"] = "Data inferred by LLM (Tavily also failed)"
         result["_inference_confidence"] = inferred.get("confidence", 25)
+        result["_source"] = "llm-fallback"
         logger.info(
             f"  iHerb {iherb_id}: LLM fallback - "
             f"inferred {len(result['certifications'])} certs"
@@ -256,7 +271,10 @@ async def scrape_all_iherb_products(product_rows: list[dict]) -> list[dict]:
         logger.info(
             f"  [{i}/{len(iherb_products)}] Fetching iHerb ID {product['iherb_id']}..."
         )
-        data = await scrape_iherb_product(product["iherb_id"])
+        data = await scrape_iherb_product(
+            product["iherb_id"],
+            product_id=product["product_id"],
+        )
         data["product_id"] = product["product_id"]
         data["sku"] = product["sku"]
 

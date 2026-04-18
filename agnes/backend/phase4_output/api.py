@@ -7,6 +7,7 @@ Run from agnes/:
 
 from __future__ import annotations
 
+import json
 import logging
 from contextlib import asynccontextmanager
 from typing import Any
@@ -28,13 +29,17 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 
 _state: dict[str, Any] = {"index": None}
+_proposals_cache: list[dict] = []
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    global _proposals_cache
     logger.info("Phase 4 API starting up -- building retrieval index...")
     _state["index"] = build_or_load_index(force_rebuild=False)
     logger.info(f"Index ready ({len(_state['index'].docs)} docs).")
+    _proposals_cache = get_all_sourcing_proposals()
+    logger.info(f"Loaded {len(_proposals_cache)} proposals into rerank cache.")
     yield
 
 
@@ -60,6 +65,13 @@ class ChatMessage(BaseModel):
 
 class ChatRequest(BaseModel):
     messages: list[ChatMessage]
+    proposal_id: int | None = None
+
+
+class RerankRequest(BaseModel):
+    alpha: float = 1.0
+    beta: float = 1.5
+    gamma: float = 0.8
 
 
 # ──────────────────────────────────────────────
@@ -114,9 +126,55 @@ def list_proposals():
             "priority": p["Priority"],
             "verification_passed": bool(p["VerificationPassed"]),
             "canonical_name": _canonical_for_group(p["IngredientGroupId"]),
+            # Probabilistic / Pareto fields
+            "compliance_probability": p.get("ComplianceProbability", 0.5),
+            "evidence_strength": p.get("EvidenceStrength", 0.5),
+            "risk_score": p.get("RiskScore", 0.0),
+            "utility_score": p.get("UtilityScore", 0.0),
+            "pareto_rank": p.get("ParetoRank", 0),
+            "is_pareto_optimal": bool(p.get("IsParetoOptimal", 0)),
+            "dominated_by": json.loads(p.get("DominatedByJson", "[]") or "[]"),
+            "verification_confidence": p.get("VerificationConfidence", 0.5),
         }
         for p in proposals
     ]
+
+
+@app.post("/api/proposals/rerank")
+def rerank_proposals(req: RerankRequest):
+    """
+    Recompute utility in-memory with new alpha/beta/gamma weights.
+    Reads from startup cache; no DB writes. Latency < 5 ms for ~150 proposals.
+    """
+    results = []
+    for p in _proposals_cache:
+        comp_prob = p.get("ComplianceProbability") or 0.5
+        concentration = (p.get("CompaniesConsolidated") or 1) / max(p.get("TotalCompaniesInGroup") or 1, 1)
+        ver_conf = p.get("VerificationConfidence") or 0.5
+        risk = round(
+            0.4 * (1.0 - comp_prob)
+            + 0.3 * concentration
+            + 0.3 * (1.0 - ver_conf),
+            4,
+        )
+        savings_norm = (p.get("EstimatedSavingsPct") or 0.0) / 30.0
+        ev_strength = p.get("EvidenceStrength") or 0.5
+        uncertainty = 1.0 - ev_strength
+        u = round(req.alpha * savings_norm - req.beta * risk - req.gamma * uncertainty, 4)
+        results.append({
+            "id": p["Id"],
+            "utility_score": u,
+            "savings": p.get("EstimatedSavingsPct", 0.0),
+            "compliance_probability": comp_prob,
+            "risk_score": risk,
+            "is_pareto_optimal": bool(p.get("IsParetoOptimal", 0)),
+            "dominated_by": json.loads(p.get("DominatedByJson", "[]") or "[]"),
+            "recommended_supplier_name": p.get("RecommendedSupplierName", ""),
+        })
+    results.sort(key=lambda x: x["utility_score"], reverse=True)
+    for i, r in enumerate(results):
+        r["rank"] = i + 1
+    return results
 
 
 _canonical_cache: dict[int, str] = {}
@@ -146,4 +204,4 @@ def chat(req: ChatRequest):
     if not index:
         raise HTTPException(status_code=503, detail="Retrieval index not ready")
     msgs = [m.model_dump() for m in req.messages]
-    return chat_answer(msgs, index)
+    return chat_answer(msgs, index, proposal_id=req.proposal_id)

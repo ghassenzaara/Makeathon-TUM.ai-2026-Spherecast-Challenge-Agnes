@@ -26,7 +26,7 @@ def verify_proposal(
     compliance_evidence: List[dict] = None,
     fda_data: dict = None,
     entity_data: dict = None,
-) -> Dict[str, str]:
+) -> tuple:
     """
     Args:
         supplier_evidence:    Phase 2 supplier record for the proposed supplier.
@@ -36,7 +36,9 @@ def verify_proposal(
         entity_data:          OpenCorporates entity verification record (optional).
 
     Returns:
-        {claim_label: status} where status ∈ {VERIFIED, UNVERIFIED, CONTRADICTED}.
+        (verifications, verification_confidence) where:
+        - verifications: {claim_label: status}, status in {VERIFIED, UNVERIFIED, CONTRADICTED}
+        - verification_confidence: float in [0,1], weighted mean (VERIFIED=1.0, UNVERIFIED=0.5, CONTRADICTED=0.0)
     """
     supplier_evidence = supplier_evidence or {}
     compliance_evidence = compliance_evidence or []
@@ -113,7 +115,12 @@ def verify_proposal(
     else:
         verifications["supplier_entity_active"] = "UNVERIFIED"
 
-    return verifications
+    _weights = {"VERIFIED": 1.0, "UNVERIFIED": 0.5, "CONTRADICTED": 0.0}
+    verification_confidence = round(
+        sum(_weights.get(v, 0.5) for v in verifications.values()) / max(len(verifications), 1),
+        4,
+    )
+    return verifications, verification_confidence
 
 
 def verification_summary(verifications: Dict[str, str]) -> dict:

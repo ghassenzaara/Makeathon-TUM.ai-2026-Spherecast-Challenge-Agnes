@@ -1,17 +1,29 @@
 """
-Semantic Matcher — groups ingredients by functional equivalence.
+Semantic Matcher — constraint-aware ingredient clustering.
 
-Two-stage strategy:
-  1. Exact name match: identical canonical names across companies
-  2. Semantic similarity: OpenAI embeddings + cosine similarity for near-equivalents
-     (e.g. 'sunflower-lecithin' ≈ 'soy-lecithin')
+Two-level grouping:
+  1. **Hard groups** (exact substance match):
+     All IngredientCards with the same canonical `Substance` value belong to
+     one SubstitutionGroup. Members may differ on non-blocking attributes
+     (form, grade, source) — those are recorded as "divergent".
 
-Uses Union-Find (Disjoint Set) for efficient clustering.
+  2. **Soft links** (substitution links):
+     Groups whose substances are semantically related but differ on a
+     *blocking* axis (hydration, salt/ester, chirality, vit-form) are
+     linked as "could substitute, with caveats".  We use OpenAI embeddings
+     + cosine similarity for this, but the link is annotated with the
+     blocking-axis delta so Phase 3 can decide if it is acceptable.
+
+Public API:
+    cluster_by_substance(cards) -> list[SubstanceCluster]
+    link_substitution_groups(clusters, embeddings) -> list[SubstitutionLink]
+    cluster_ingredients_exact_only(names)  -- backward-compat fallback
 """
 
 import json
 import logging
 from dataclasses import dataclass, field
+from collections import defaultdict
 from pathlib import Path
 from typing import Optional
 
@@ -22,6 +34,7 @@ from backend.config import (
     OPENAI_API_KEY,
     OPENAI_EMBEDDING_MODEL,
     SIMILARITY_THRESHOLD,
+    LINK_SIMILARITY_THRESHOLD,
     EMBEDDING_BATCH_SIZE,
     DATA_DIR,
 )
@@ -142,16 +155,211 @@ def build_ingredient_embeddings(
 
 
 # ──────────────────────────────────────────────
-# Clustering
+# Constraint-aware clustering data models
 # ──────────────────────────────────────────────
 
 @dataclass
 class IngredientCluster:
-    """A cluster of semantically similar ingredient names."""
+    """A cluster of semantically similar ingredient names (backward compat)."""
     canonical_name: str          # Most common name in the cluster
     member_names: list[str]      # All ingredient names in the cluster
     avg_similarity: float        # Average pairwise similarity within the cluster
 
+
+@dataclass
+class SubstanceCluster:
+    """
+    A hard group: all members share the same canonical Substance.
+    Non-blocking attribute differences are recorded as divergent.
+    """
+    substance: str
+    product_ids: list[int] = field(default_factory=list)
+    raw_names: list[str] = field(default_factory=list)
+    # Unified attributes: values all members agree on
+    unified_attrs: dict[str, str] = field(default_factory=dict)
+    # Divergent attributes: {axis: {value: [product_ids with that value]}}
+    divergent_attrs: dict[str, dict[str, list[int]]] = field(default_factory=dict)
+
+
+@dataclass
+class SubstitutionLink:
+    """A soft link between two SubstanceCluster groups."""
+    from_substance: str
+    to_substance: str
+    similarity: float
+    caveats: list[str] = field(default_factory=list)  # blocking-axis deltas
+
+
+# ──────────────────────────────────────────────
+# Hard grouping: cluster by canonical substance
+# ──────────────────────────────────────────────
+
+_ATTRIBUTE_AXES = [
+    "form", "grade", "hydration", "salt_or_ester",
+    "source", "source_detail", "chirality",
+    "vit_d_form", "vit_b12_form", "tocopherol_form",
+]
+
+_DB_COLUMN_FOR_AXIS = {
+    "form": "Form",
+    "grade": "Grade",
+    "hydration": "Hydration",
+    "salt_or_ester": "SaltOrEster",
+    "source": "Source",
+    "source_detail": "SourceDetail",
+    "chirality": "Chirality",
+    "vit_d_form": "VitDForm",
+    "vit_b12_form": "VitB12Form",
+    "tocopherol_form": "TocopherolForm",
+}
+
+
+def cluster_by_substance(cards: list[dict]) -> list[SubstanceCluster]:
+    """
+    Group IngredientCard rows by their canonical Substance.
+    Compute unified and divergent attributes per group.
+
+    Args:
+        cards: list of dicts from `get_all_ingredient_cards()`.
+
+    Returns:
+        list of SubstanceCluster, sorted by number of members (desc).
+    """
+    subs_map: dict[str, list[dict]] = defaultdict(list)
+    for card in cards:
+        sub = card.get("Substance")
+        if not sub:
+            sub = card.get("RawIngredientName", "unknown")
+        subs_map[sub].append(card)
+
+    clusters: list[SubstanceCluster] = []
+    for substance, members in subs_map.items():
+        cluster = SubstanceCluster(
+            substance=substance,
+            product_ids=[m["ProductId"] for m in members],
+            raw_names=list({m.get("RawIngredientName", "") for m in members}),
+        )
+
+        # Compute unified vs divergent attributes.
+        for axis in _ATTRIBUTE_AXES:
+            col = _DB_COLUMN_FOR_AXIS[axis]
+            value_groups: dict[str, list[int]] = defaultdict(list)
+            for m in members:
+                v = m.get(col) or None
+                if v:
+                    value_groups[v].append(m["ProductId"])
+
+            if len(value_groups) == 0:
+                # No data for this axis → skip
+                pass
+            elif len(value_groups) == 1:
+                # All members agree
+                cluster.unified_attrs[axis] = list(value_groups.keys())[0]
+            else:
+                # Divergent
+                cluster.divergent_attrs[axis] = dict(value_groups)
+
+        clusters.append(cluster)
+
+    clusters.sort(key=lambda c: len(c.product_ids), reverse=True)
+    logger.info(
+        "Substance clustering: %d clusters from %d cards",
+        len(clusters), len(cards),
+    )
+    return clusters
+
+
+# ──────────────────────────────────────────────
+# Soft linking: substitution links across groups
+# ──────────────────────────────────────────────
+
+def link_substitution_groups(
+    clusters: list[SubstanceCluster],
+    threshold: float | None = None,
+    force_refresh_embeddings: bool = False,
+) -> list[SubstitutionLink]:
+    """
+    Build cross-group substitution links using embedding similarity.
+
+    Only links groups whose substances are ≥ threshold similar (default
+    LINK_SIMILARITY_THRESHOLD from config). For each link, record caveats
+    for any blocking-axis difference.
+
+    Args:
+        clusters: output of cluster_by_substance()
+        threshold: similarity cutoff (default from config)
+        force_refresh_embeddings: re-call OpenAI
+
+    Returns:
+        list of SubstitutionLink
+    """
+    if threshold is None:
+        threshold = LINK_SIMILARITY_THRESHOLD
+
+    if len(clusters) < 2:
+        return []
+
+    substances = [c.substance for c in clusters]
+    sub_to_idx = {s: i for i, s in enumerate(substances)}
+
+    # Get or build embeddings
+    if not OPENAI_API_KEY:
+        logger.warning("No OPENAI_API_KEY — skipping substitution linking.")
+        return []
+
+    embeddings = build_ingredient_embeddings(
+        substances, force_refresh=force_refresh_embeddings,
+    )
+
+    n = len(substances)
+    logger.info(f"Computing {n}x{n} cosine similarity for substitution linking...")
+    sim_matrix = cosine_similarity(embeddings)
+
+    from backend.ontology import get_ontologies
+    onts = get_ontologies()
+    blocking_axes = set(onts.attributes.blocking_axes)
+
+    links: list[SubstitutionLink] = []
+    for i in range(n):
+        for j in range(i + 1, n):
+            sim = float(sim_matrix[i, j])
+            if sim < threshold:
+                continue
+            # Skip if they'd already be in the same hard group
+            if substances[i] == substances[j]:
+                continue
+
+            # Compute caveats: blocking-axis differences
+            caveats: list[str] = []
+            ci, cj = clusters[i], clusters[j]
+            for axis in blocking_axes:
+                vi = ci.unified_attrs.get(axis)
+                vj = cj.unified_attrs.get(axis)
+                if vi and vj and vi != vj:
+                    caveats.append(
+                        f"{axis}: {ci.substance}={vi} vs {cj.substance}={vj}"
+                    )
+
+            links.append(SubstitutionLink(
+                from_substance=substances[i],
+                to_substance=substances[j],
+                similarity=round(sim, 4),
+                caveats=caveats,
+            ))
+
+    links.sort(key=lambda l: l.similarity, reverse=True)
+    logger.info(
+        "Substitution linking: %d links above threshold=%.2f "
+        "(%d with blocking caveats)",
+        len(links), threshold,
+        sum(1 for l in links if l.caveats),
+    )
+    return links
+
+
+# ──────────────────────────────────────────────
+# Legacy API (backward compatibility with existing callers)
+# ──────────────────────────────────────────────
 
 def cluster_ingredients(
     names: list[str],
