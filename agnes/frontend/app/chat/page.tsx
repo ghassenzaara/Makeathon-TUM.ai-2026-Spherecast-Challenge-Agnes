@@ -10,7 +10,11 @@ interface Message {
 
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Hello! I am Agnes, your AI Supply Chain Manager. Ask me anything about your supply chain data, consolidation proposals, or ingredient substitutions." }
+    {
+      role: "assistant",
+      content:
+        "Hello! I'm Agnes, your AI Supply Chain Manager. Ask me about consolidation proposals, ingredient substitutions, or compliance constraints.",
+    },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -36,63 +40,79 @@ export default function ChatPage() {
         body: JSON.stringify({
           messages: [...messages, userMessage].map((m) => ({
             role: m.role,
-            content: m.content
-          }))
-        })
+            content: m.content,
+          })),
+        }),
       });
 
-      if (!response.ok) {
-        throw new Error("Chat request failed");
-      }
-
+      if (!response.ok) throw new Error("Chat request failed");
       const data = await response.json();
-      setMessages((prev) => [...prev, { role: "assistant", content: data.answer || "No response." }]);
-    } catch (err) {
-      console.error(err);
-      setMessages((prev) => [...prev, { role: "assistant", content: "Error: Could not reach the chat agent. Is the backend running?" }]);
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: data.answer || "No response." },
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "Could not reach the chat agent — is the backend running on port 8000?",
+        },
+      ]);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)] max-w-4xl mx-auto rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden animate-in fade-in duration-500">
+    <div className="flex flex-col h-[calc(100vh-8rem)] max-w-3xl mx-auto rounded-xl border border-[var(--border)] bg-[var(--surface)] overflow-hidden animate-fade-in">
+
       {/* Header */}
-      <div className="border-b border-slate-200 bg-slate-50 px-6 py-4 flex items-center gap-3">
-        <div className="h-10 w-10 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
-          <Bot className="h-6 w-6" />
+      <div className="border-b border-[var(--border)] px-5 py-4 flex items-center gap-3 bg-white/[0.02]">
+        <div className="h-9 w-9 rounded-lg bg-cyan-500 text-slate-950 flex items-center justify-center glow-cyan">
+          <Bot className="h-5 w-5" />
         </div>
         <div>
-          <h2 className="text-sm font-semibold text-slate-900">Agnes Chat</h2>
-          <p className="text-xs text-slate-500">Powered by RAG & Vector Search</p>
+          <div className="text-sm font-semibold text-[var(--foreground)]">Agnes Chat</div>
+          <div className="text-xs text-[var(--foreground-muted)]">RAG-grounded supply chain Q&amp;A</div>
         </div>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50/50">
+      <div className="flex-1 overflow-y-auto p-5 space-y-5 bg-[var(--background)]/30">
         {messages.map((msg, i) => (
-          <div key={i} className={`flex gap-4 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
-            <div className={`shrink-0 h-8 w-8 rounded-full flex items-center justify-center ${
-              msg.role === "user" ? "bg-slate-900 text-white" : "bg-indigo-100 text-indigo-600"
-            }`}>
+          <div
+            key={i}
+            className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}
+          >
+            <div
+              className={`shrink-0 h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold ${
+                msg.role === "user"
+                  ? "bg-slate-700 text-white dark:bg-slate-600"
+                  : "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30"
+              }`}
+            >
               {msg.role === "user" ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
             </div>
-            <div className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm shadow-sm ${
-              msg.role === "user" 
-                ? "bg-slate-900 text-white rounded-tr-sm" 
-                : "bg-white border border-slate-200 text-slate-800 rounded-tl-sm"
-            }`}>
+            <div
+              className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                msg.role === "user"
+                  ? "bg-slate-800 text-slate-100 rounded-tr-sm dark:bg-slate-700"
+                  : "bg-[var(--surface)] border border-[var(--border)] text-[var(--foreground)] rounded-tl-sm"
+              }`}
+            >
               {msg.content}
             </div>
           </div>
         ))}
+
         {isLoading && (
-          <div className="flex gap-4">
-            <div className="shrink-0 h-8 w-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center">
+          <div className="flex gap-3">
+            <div className="shrink-0 h-8 w-8 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center">
               <Bot className="h-4 w-4" />
             </div>
-            <div className="bg-white border border-slate-200 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-2 shadow-sm text-sm text-slate-500">
-              <Loader2 className="h-4 w-4 animate-spin" /> Thinking...
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-2 text-sm text-[var(--foreground-muted)]">
+              <Loader2 className="h-4 w-4 animate-spin text-cyan-500" /> Thinking…
             </div>
           </div>
         )}
@@ -100,20 +120,20 @@ export default function ChatPage() {
       </div>
 
       {/* Input */}
-      <div className="p-4 bg-white border-t border-slate-200">
+      <div className="p-4 border-t border-[var(--border)] bg-[var(--surface)]">
         <form onSubmit={handleSubmit} className="relative flex items-center">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about consolidation, suppliers, or missing ingredients..."
-            className="w-full rounded-full border border-slate-300 bg-slate-50 pl-6 pr-12 py-3 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            placeholder="Ask about consolidation, compliance, or suppliers…"
             disabled={isLoading}
+            className="w-full rounded-full border border-[var(--border)] bg-[var(--background)] pl-5 pr-12 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--foreground-muted)] focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 transition-colors"
           />
           <button
             type="submit"
             disabled={!input.trim() || isLoading}
-            className="absolute right-2 p-2 rounded-full text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:hover:bg-indigo-600 transition-colors"
+            className="absolute right-2 p-2 rounded-full bg-cyan-500 text-slate-950 hover:bg-cyan-400 disabled:opacity-40 disabled:hover:bg-cyan-500 transition-colors"
           >
             <Send className="h-4 w-4" />
           </button>
