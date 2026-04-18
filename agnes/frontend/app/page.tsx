@@ -15,34 +15,10 @@ import {
 import { AgnesOrb } from "./components/AgnesOrb";
 import { Waveform } from "./components/Waveform";
 import { TracingBorder } from "./components/TracingBorder";
+import { SpotlightCard } from "./components/SpotlightCard";
+import { fetchDashboardData } from "@/lib/api";
+import type { Stats, Proposal } from "@/lib/types";
 
-/* ═══════════════════════════════════════
-   TYPES — swap mock data for API later
-   ═══════════════════════════════════════ */
-interface Stats {
-  proposal_count: number;
-  verified_count: number;
-  avg_confidence: number;
-  avg_savings_pct: number;
-  by_priority: Record<string, number>;
-  by_compliance: Record<string, number>;
-}
-
-interface Proposal {
-  id: number;
-  ingredient_group_id: number;
-  recommended_supplier_id: number;
-  recommended_supplier_name: string;
-  companies_consolidated: string[];
-  members_served: number;
-  total_companies_in_group: number;
-  estimated_savings_pct: number;
-  compliance_status: string;
-  confidence_score: number;
-  priority: string;
-  verification_passed: boolean;
-  canonical_name: string;
-}
 
 /* ─── Priority Sort ─── */
 const PRIORITY_WEIGHT: Record<string, number> = { HIGH: 3, MEDIUM: 2, LOW: 1 };
@@ -61,7 +37,7 @@ const fadeInUp = {
   hidden: { opacity: 0, y: 14 },
   visible: (i: number) => ({
     opacity: 1, y: 0,
-    transition: { delay: i * 0.06, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { delay: i * 0.06, duration: 0.4 },
   }),
 };
 
@@ -79,20 +55,12 @@ export default function Dashboard() {
   useEffect(() => {
     async function loadData() {
       setOrbState("thinking");
-      try {
-        const [statsRes, propsRes] = await Promise.all([
-          fetch("http://127.0.0.1:8000/api/stats"),
-          fetch("http://127.0.0.1:8000/api/proposals"),
-        ]);
-        if (statsRes.ok) setStats(await statsRes.json());
-        if (propsRes.ok) setProposals(await propsRes.json());
-        setOrbState("complete");
-        setTimeout(() => setOrbState("idle"), 1200);
-      } catch {
-        setOrbState("idle");
-      } finally {
-        setLoading(false);
-      }
+      const data = await fetchDashboardData();
+      setStats(data.stats);
+      setProposals(data.proposals);
+      setOrbState("complete");
+      setTimeout(() => setOrbState("idle"), 1200);
+      setLoading(false);
     }
     loadData();
   }, []);
@@ -134,31 +102,33 @@ export default function Dashboard() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <TracingBorder active={orbState === "thinking"}>
-          <div className="p-5 flex items-start gap-4">
-            <AgnesOrb state={orbState} size={44} />
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-2">
-                <h2 className="text-sm font-semibold text-gray-100">Strategic Summary</h2>
-                <StatusIndicator active={orbState === "idle"} />
-              </div>
-              {stats ? (
-                <p className="text-[13px] leading-relaxed text-gray-400">
-                  Agnes identified <span className="text-blue-400 font-medium">{stats.proposal_count} consolidation opportunities</span> across
-                  your supply chain. <span className="text-emerald-400 font-medium">{stats.verified_count} proposals</span> are fully verified
-                  with an average saving of <span className="text-emerald-400 font-medium">{stats.avg_savings_pct}%</span>.
-                  {" "}<span className="text-amber-400 font-medium">{stats.by_priority["HIGH"] || 0} high-priority alerts</span> require immediate attention
-                  — {stats.by_compliance["REVIEW_NEEDED"] ? `${stats.by_compliance["REVIEW_NEEDED"]} have compliance conflicts detected.` : "all compliance checks passed."}
-                </p>
-              ) : (
-                <p className="text-[13px] text-gray-500">Start the backend to see AI-generated insights.</p>
-              )}
-              <div className="mt-3 opacity-50">
-                <Waveform active={orbState === "thinking"} barCount={40} />
+        <SpotlightCard>
+          <TracingBorder active={orbState === "thinking"}>
+            <div className="p-5 flex items-start gap-4">
+              <AgnesOrb state={orbState} size={44} />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-2">
+                  <h2 className="text-sm font-semibold text-gray-100">Strategic Summary</h2>
+                  <StatusIndicator active={orbState === "idle"} />
+                </div>
+                {stats ? (
+                  <p className="text-[13px] leading-relaxed text-gray-400">
+                    Agnes identified <span className="text-blue-400 font-medium">{stats.proposal_count} consolidation opportunities</span> across
+                    your supply chain. <span className="text-emerald-400 font-medium">{stats.verified_count} proposals</span> are fully verified
+                    with an average saving of <span className="text-emerald-400 font-medium">{stats.avg_savings_pct}%</span>.
+                    {" "}<span className="text-amber-400 font-medium">{stats.by_priority["HIGH"] || 0} high-priority alerts</span> require immediate attention
+                    — {stats.by_compliance["REVIEW_NEEDED"] ? `${stats.by_compliance["REVIEW_NEEDED"]} have compliance conflicts detected.` : "all compliance checks passed."}
+                  </p>
+                ) : (
+                  <p className="text-[13px] text-gray-500">Start the backend to see AI-generated insights.</p>
+                )}
+                <div className="mt-3 opacity-50">
+                  <Waveform active={orbState === "thinking"} barCount={40} />
+                </div>
               </div>
             </div>
-          </div>
-        </TracingBorder>
+          </TracingBorder>
+        </SpotlightCard>
       </motion.div>
 
       {/* ── Stat Tiles ── */}
@@ -175,11 +145,13 @@ export default function Dashboard() {
             { label: "High Priority", val: (stats.by_priority["HIGH"] || 0).toString(), icon: <AlertTriangle className="h-3.5 w-3.5" /> },
           ].map((t, i) => (
             <motion.div key={t.label} variants={fadeInUp} custom={i}>
-              <div className="card-solid px-4 py-3 flex flex-col items-center justify-center gap-1.5 text-center hover:border-white/[0.12] transition-colors duration-200">
-                <div className="rounded-lg p-1.5 border border-gray-700 bg-gray-800/50 text-gray-400">{t.icon}</div>
-                <p className="text-2xl font-bold text-gray-100 leading-none">{t.val}</p>
-                <p className="text-[9px] uppercase tracking-[0.12em] text-gray-500">{t.label}</p>
-              </div>
+              <SpotlightCard>
+                <div className="px-4 py-3 flex flex-col items-center justify-center gap-1.5 text-center">
+                  <div className="rounded-lg p-1.5 border border-gray-700 bg-gray-800/50 text-gray-400">{t.icon}</div>
+                  <p className="text-2xl font-bold text-gray-100 leading-none">{t.val}</p>
+                  <p className="text-[9px] uppercase tracking-[0.12em] text-gray-500">{t.label}</p>
+                </div>
+              </SpotlightCard>
             </motion.div>
           ))}
         </motion.div>
@@ -219,8 +191,9 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
-          className="card-solid p-5"
         >
+        <SpotlightCard>
+          <div className="p-5">
           <div className="flex items-center justify-between mb-1">
             <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500">
               {whatIf ? "Impact: Ignoring Proposals" : "Savings Distribution"}
@@ -278,6 +251,8 @@ export default function Dashboard() {
               ⚠ Ignoring all proposals loses ~{stats ? (stats.avg_savings_pct * 0.85).toFixed(1) : "—"}% potential savings
             </motion.p>
           )}
+          </div>
+        </SpotlightCard>
         </motion.div>
       )}
 
@@ -287,18 +262,21 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.5 }}
-          className="card-solid p-5 space-y-3"
         >
-          <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500">Compliance Breakdown</span>
-          {Object.entries(stats.by_compliance).map(([status, count]) => (
-            <div key={status} className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className={`h-2 w-2 rounded-full ${status === "ALL_PASS" ? "bg-emerald-500" : status === "PARTIAL" ? "bg-amber-500" : "bg-gray-500"}`} />
-                <span className="text-xs text-gray-400">{status.replace(/_/g, " ")}</span>
+        <SpotlightCard>
+          <div className="p-5 space-y-3">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500">Compliance Breakdown</span>
+            {Object.entries(stats.by_compliance).map(([status, count]) => (
+              <div key={status} className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className={`h-2 w-2 rounded-full ${status === "ALL_PASS" ? "bg-emerald-500" : status === "PARTIAL" ? "bg-amber-500" : "bg-gray-500"}`} />
+                  <span className="text-xs text-gray-400">{status.replace(/_/g, " ")}</span>
+                </div>
+                <span className="text-sm font-semibold text-gray-200">{count}</span>
               </div>
-              <span className="text-sm font-semibold text-gray-200">{count}</span>
-            </div>
-          ))}
+            ))}
+          </div>
+        </SpotlightCard>
         </motion.div>
       )}
     </div>
@@ -391,16 +369,16 @@ function ProposalCard({ proposal: p, isCritical, isTop }: { proposal: Proposal; 
 
   if (isCritical) {
     return (
-      <TracingBorder active={true} borderRadius={16}>
+      <SpotlightCard>
         {cardInner}
-      </TracingBorder>
+      </SpotlightCard>
     );
   }
 
   return (
-    <div className="card-solid overflow-hidden">
+    <SpotlightCard>
       {cardInner}
-    </div>
+    </SpotlightCard>
   );
 }
 
