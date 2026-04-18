@@ -1,19 +1,21 @@
 {
-  "supplier_id": 13,
   "name": "Darling Ingredients / Rousselot",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Irving, Texas, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "ISO 9001",
+    "FSSC 22000",
+    "GMP"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "gelatin",
+    "collagen peptides",
+    "protein ingredients"
   ],
-  "company_size": "medium",
-  "website": "https://www.darlingingredients/rousselot.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "company_size": "large",
+  "website": "https://www.darlingii.com",
+  "notes": "Darling Ingredients is a global leader in converting edible and inedible bio-nutrients into sustainable products. Rousselot, a brand of Darling Ingredients, specializes in gelatin and collagen solutions.",
+  "confidence": 85,
+  "supplier_id": 13,
+  "source": "llm_inference"
 }

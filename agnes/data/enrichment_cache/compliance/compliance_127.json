@@ -3,8 +3,143 @@
   "product_sku": "FG-walgreens-prod6028865",
   "company_name": "One A Day",
   "retailer": "walgreens",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 625,
+      "ingredient": "calcium-carbonate",
+      "substance": "calcium-carbonate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 639,
+      "ingredient": "magnesium-oxide",
+      "substance": "magnesium-oxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 644,
+      "ingredient": "microcrystalline-cellulose",
+      "substance": "microcrystalline-cellulose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 646,
+      "ingredient": "niacin",
+      "substance": "vitamin-b3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 652,
+      "ingredient": "riboflavin",
+      "substance": "vitamin-b2",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 657,
+      "ingredient": "thiamin",
+      "substance": "vitamin-b1",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 659,
+      "ingredient": "vitamin-a",
+      "substance": "vitamin-a",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 661,
+      "ingredient": "vitamin-b12",
+      "substance": "vitamin-b12",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 662,
+      "ingredient": "vitamin-b6",
+      "substance": "vitamin-b6",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 663,
+      "ingredient": "vitamin-c",
+      "substance": "ascorbic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 664,
+      "ingredient": "vitamin-d",
+      "substance": "vitamin-d",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 665,
+      "ingredient": "vitamin-e",
+      "substance": "vitamin-e",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 666,
+      "ingredient": "vitamin-k",
+      "substance": "vitamin-k",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 26,
   "required_certifications": [
-    "Non-GMO"
+    "fda-compliant",
+    "cgmp-manufactured"
   ],
   "inferred_constraints": [],
   "regulatory_requirements": [
@@ -13,6 +148,6 @@
   ],
   "risk_flags": [],
   "confidence": 35,
-  "reasoning": "Mocked compliance inference due to API limits",
-  "source": "mock"
+  "reasoning": "Derived 26 requirements from 0 FG certs across 13 ingredients",
+  "source": "rule"
 }

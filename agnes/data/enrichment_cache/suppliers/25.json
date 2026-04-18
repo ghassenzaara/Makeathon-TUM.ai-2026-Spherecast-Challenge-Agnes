@@ -1,19 +1,23 @@
 {
-  "supplier_id": 25,
   "name": "Nutra Food Ingredients",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Westlake, Ohio, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "ISO 9001",
+    "GMP",
+    "Kosher",
+    "Halal"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "nutritional ingredients",
+    "sports nutrition",
+    "functional foods",
+    "dietary supplements"
   ],
   "company_size": "medium",
   "website": "https://www.nutrafoodingredients.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Nutra Food Ingredients is known for providing a wide range of high-quality ingredients for the food and beverage industry, focusing on health and wellness products.",
+  "confidence": 85,
+  "supplier_id": 25,
+  "source": "llm_inference"
 }

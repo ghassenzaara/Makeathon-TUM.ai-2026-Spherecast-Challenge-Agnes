@@ -1,20 +1,20 @@
 {
-  "supplier_id": 24,
   "name": "Nutra Blend",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Neosho, Missouri, USA",
   "region": "North America",
   "certifications": [
     "ISO 9001",
-    "GMP",
-    "Kosher"
+    "Safe Feed/Safe Food"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "animal nutrition",
+    "feed ingredients",
+    "premixes"
   ],
-  "company_size": "medium",
-  "website": "https://www.nutrablend.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "company_size": "large",
+  "website": "https://www.nutrablend.net",
+  "notes": "Nutra Blend is known for providing high-quality ingredients and premixes for the animal nutrition industry. They focus on safety and quality assurance in their supply chain.",
+  "confidence": 85,
+  "supplier_id": 24,
+  "source": "llm_inference"
 }

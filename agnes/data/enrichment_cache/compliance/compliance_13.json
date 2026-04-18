@@ -3,8 +3,113 @@
   "product_sku": "FG-iherb-cen-27493",
   "company_name": "21st Century",
   "retailer": "iherb",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 150,
+      "ingredient": "calcium-citrate",
+      "substance": "calcium-citrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 151,
+      "ingredient": "cellulose",
+      "substance": "cellulose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 152,
+      "ingredient": "croscarmellose-sodium",
+      "substance": "croscarmellose-sodium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 153,
+      "ingredient": "magnesium-silicate",
+      "substance": "magnesium-silicate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 154,
+      "ingredient": "magnesium-stearate",
+      "substance": "magnesium-stearate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 155,
+      "ingredient": "polyethylene-glycol",
+      "substance": "polyethylene-glycol",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 156,
+      "ingredient": "polyvinyl-alcohol",
+      "substance": "polyvinyl-alcohol",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 157,
+      "ingredient": "stearic-acid",
+      "substance": "stearic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 158,
+      "ingredient": "titanium-dioxide",
+      "substance": "titanium-dioxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 159,
+      "ingredient": "vitamin-d3-cholecalciferol",
+      "substance": "vitamin-d3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 20,
   "required_certifications": [
-    "Non-GMO"
+    "fda-compliant",
+    "cgmp-manufactured"
   ],
   "inferred_constraints": [],
   "regulatory_requirements": [
@@ -13,6 +118,6 @@
   ],
   "risk_flags": [],
   "confidence": 35,
-  "reasoning": "Mocked compliance inference due to API limits",
-  "source": "mock"
+  "reasoning": "Derived 20 requirements from 0 FG certs across 10 ingredients",
+  "source": "rule"
 }

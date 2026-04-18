@@ -1,20 +1,20 @@
 {
-  "supplier_id": 4,
   "name": "American Botanicals",
   "headquarters": "Eolia, Missouri, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
+    "Organic",
     "Kosher"
   ],
   "specialties": [
-    "herbs",
-    "spices",
-    "botanical ingredients"
+    "Herbs",
+    "Spices",
+    "Botanical Ingredients"
   ],
   "company_size": "medium",
   "website": "https://www.americanbotanicals.com",
-  "notes": "American Botanicals specializes in sourcing and processing a wide range of botanical ingredients for various industries, including food, beverage, and health products.",
-  "confidence": 65,
+  "notes": "American Botanicals is known for sourcing and supplying a wide range of botanical ingredients, primarily focusing on herbs and spices. They emphasize sustainable and ethical sourcing practices.",
+  "confidence": 85,
+  "supplier_id": 4,
   "source": "llm_inference"
 }

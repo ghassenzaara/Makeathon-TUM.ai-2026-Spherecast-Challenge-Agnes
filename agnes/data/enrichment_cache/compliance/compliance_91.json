@@ -3,18 +3,81 @@
   "product_sku": "FG-the-vitamin-shoppe-anp-14924",
   "company_name": "AN PERFORMANCE",
   "retailer": "the-vitamin-shoppe",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 186,
+      "ingredient": "citric-acid",
+      "substance": "citric-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 187,
+      "ingredient": "maltodextrin",
+      "substance": "maltodextrin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 188,
+      "ingredient": "orange-flavor",
+      "substance": "natural-flavor",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 189,
+      "ingredient": "potassium",
+      "substance": "potassium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 190,
+      "ingredient": "sodium",
+      "substance": "sodium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 191,
+      "ingredient": "sugar",
+      "substance": "sucrose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 12,
   "required_certifications": [
-    "Non-GMO"
+    "fda-compliant",
+    "cgmp-manufactured"
   ],
   "inferred_constraints": [],
   "regulatory_requirements": [
     "FDA Compliance",
     "cGMP"
   ],
-  "risk_flags": [
-    "Ingredient origin unknown"
-  ],
+  "risk_flags": [],
   "confidence": 35,
-  "reasoning": "Mocked compliance inference due to API limits",
-  "source": "mock"
+  "reasoning": "Derived 12 requirements from 0 FG certs across 6 ingredients",
+  "source": "rule"
 }

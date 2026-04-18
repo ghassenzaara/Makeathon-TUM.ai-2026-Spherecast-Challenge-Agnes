@@ -1,19 +1,23 @@
 {
-  "supplier_id": 14,
   "name": "FutureCeuticals",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Momence, Illinois, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "Organic",
+    "Non-GMO",
+    "Kosher",
+    "Halal"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "Fruit and vegetable powders",
+    "Grain-based ingredients",
+    "Nutraceuticals",
+    "Functional foods"
   ],
-  "company_size": "medium",
+  "company_size": "large",
   "website": "https://www.futureceuticals.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "FutureCeuticals is known for its innovation in the nutraceutical and functional food sectors, offering a wide range of plant-based ingredients.",
+  "confidence": 85,
+  "supplier_id": 14,
+  "source": "llm_inference"
 }

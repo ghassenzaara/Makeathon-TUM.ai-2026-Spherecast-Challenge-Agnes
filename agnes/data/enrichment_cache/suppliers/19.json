@@ -1,19 +1,20 @@
 {
-  "supplier_id": 19,
   "name": "Jost Chemical",
-  "headquarters": "Mock City, USA",
+  "headquarters": "St. Louis, Missouri, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "ISO 9001",
+    "FSSC 22000"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "Mineral salts",
+    "Nutritional ingredients",
+    "Pharmaceutical ingredients"
   ],
   "company_size": "medium",
   "website": "https://www.jostchemical.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Jost Chemical is known for producing high-purity specialty chemicals, particularly mineral salts used in various industries including pharmaceuticals and nutrition.",
+  "confidence": 85,
+  "supplier_id": 19,
+  "source": "llm_inference"
 }

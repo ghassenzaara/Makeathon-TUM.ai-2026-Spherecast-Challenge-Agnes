@@ -1,20 +1,19 @@
 {
-  "supplier_id": 21,
   "name": "Magtein / ThreoTech LLC",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Austin, Texas, USA",
   "region": "North America",
   "certifications": [
-    "ISO 9001",
     "GMP",
-    "Kosher"
+    "ISO 9001"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "Magnesium supplements",
+    "Nutraceuticals"
   ],
   "company_size": "medium",
-  "website": "https://www.magtein/threotechllc.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "website": "https://www.magtein.com",
+  "notes": "Magtein is known for its patented magnesium L-threonate product, which is used in cognitive health supplements.",
+  "confidence": 80,
+  "supplier_id": 21,
+  "source": "llm_inference"
 }

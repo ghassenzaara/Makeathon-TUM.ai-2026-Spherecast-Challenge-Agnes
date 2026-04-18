@@ -3,8 +3,63 @@
   "product_sku": "FG-target-a-90430364",
   "company_name": "up&up",
   "retailer": "target",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 999,
+      "ingredient": "gelatin",
+      "substance": "gelatin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1003,
+      "ingredient": "magnesium-glycinate",
+      "substance": "magnesium-bisglycinate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1006,
+      "ingredient": "magnesium-stearate",
+      "substance": "magnesium-stearate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1021,
+      "ingredient": "rice-powder",
+      "substance": "rice-flour",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1023,
+      "ingredient": "silica",
+      "substance": "silicon-dioxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 10,
   "required_certifications": [
-    "Non-GMO"
+    "fda-compliant",
+    "cgmp-manufactured"
   ],
   "inferred_constraints": [],
   "regulatory_requirements": [
@@ -13,6 +68,6 @@
   ],
   "risk_flags": [],
   "confidence": 35,
-  "reasoning": "Mocked compliance inference due to API limits",
-  "source": "mock"
+  "reasoning": "Derived 10 requirements from 0 FG certs across 5 ingredients",
+  "source": "rule"
 }

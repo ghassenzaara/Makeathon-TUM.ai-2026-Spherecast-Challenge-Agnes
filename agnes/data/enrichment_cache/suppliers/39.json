@@ -1,20 +1,20 @@
 {
-  "supplier_id": 39,
   "name": "Virginia Dare",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Brooklyn, New York, USA",
   "region": "North America",
   "certifications": [
     "ISO 9001",
-    "GMP",
-    "Kosher"
+    "FSSC 22000"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "flavors",
+    "extracts",
+    "botanical ingredients"
   ],
   "company_size": "medium",
   "website": "https://www.virginiadare.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Virginia Dare is known for its expertise in creating natural and artificial flavors, with a focus on tea, coffee, and vanilla extracts.",
+  "confidence": 85,
+  "supplier_id": 39,
+  "source": "llm_inference"
 }

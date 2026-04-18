@@ -3,9 +3,103 @@
   "product_sku": "FG-iherb-5452",
   "company_name": "NutriBiotic",
   "retailer": "iherb",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 607,
+      "ingredient": "calcium-carbonate",
+      "substance": "calcium-carbonate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 608,
+      "ingredient": "chromium-nicotinate",
+      "substance": "chromium-nicotinate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 609,
+      "ingredient": "magnesium-carbonate",
+      "substance": "magnesium-carbonate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 610,
+      "ingredient": "magnesium-stearate",
+      "substance": "magnesium-stearate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 611,
+      "ingredient": "potassium-gluconate",
+      "substance": "potassium-gluconate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 612,
+      "ingredient": "sodium-chloride",
+      "substance": "sodium-chloride",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 613,
+      "ingredient": "vegan-capsule",
+      "substance": "vegan-capsule",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 614,
+      "ingredient": "vitamin-c-l-ascorbic-acid",
+      "substance": "ascorbic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 615,
+      "ingredient": "zinc-sulfate",
+      "substance": "zinc-sulfate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 18,
   "required_certifications": [
-    "Kosher",
-    "GMP"
+    "fda-compliant",
+    "cgmp-manufactured"
   ],
   "inferred_constraints": [],
   "regulatory_requirements": [
@@ -14,6 +108,6 @@
   ],
   "risk_flags": [],
   "confidence": 35,
-  "reasoning": "Mocked compliance inference due to API limits",
-  "source": "mock"
+  "reasoning": "Derived 18 requirements from 0 FG certs across 9 ingredients",
+  "source": "rule"
 }

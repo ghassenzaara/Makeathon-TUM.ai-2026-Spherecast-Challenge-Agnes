@@ -1,19 +1,22 @@
 {
-  "supplier_id": 10,
   "name": "Cargill",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Minneapolis, MN, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "ISO 9001",
+    "ISO 14001",
+    "FSSC 22000"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "agricultural products",
+    "food ingredients",
+    "animal nutrition",
+    "bio-industrial"
   ],
-  "company_size": "medium",
+  "company_size": "large",
   "website": "https://www.cargill.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Cargill is one of the largest privately held corporations in the United States, providing food, agriculture, financial, and industrial products and services.",
+  "confidence": 90,
+  "supplier_id": 10,
+  "source": "llm_inference"
 }

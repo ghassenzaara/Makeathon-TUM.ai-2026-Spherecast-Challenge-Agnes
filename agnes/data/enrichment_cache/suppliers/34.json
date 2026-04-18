@@ -1,19 +1,20 @@
 {
-  "supplier_id": 34,
   "name": "Stauber",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Fullerton, California, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "GMP",
+    "ISO 9001"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "nutraceutical ingredients",
+    "dietary supplements",
+    "functional foods"
   ],
   "company_size": "medium",
-  "website": "https://www.stauber.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "website": "https://www.stauberusa.com",
+  "notes": "Stauber is known for providing high-quality ingredients for the nutraceutical and dietary supplement industries. They focus on innovation and quality assurance.",
+  "confidence": 85,
+  "supplier_id": 34,
+  "source": "llm_inference"
 }

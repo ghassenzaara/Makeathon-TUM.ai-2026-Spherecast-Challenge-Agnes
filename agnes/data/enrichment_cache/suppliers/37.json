@@ -1,19 +1,21 @@
 {
-  "supplier_id": 37,
   "name": "Trace Minerals",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Ogden, Utah, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
+    "GMP",
+    "NSF Certified",
     "Non-GMO Project Verified"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "Mineral Supplements",
+    "Electrolytes",
+    "Liquid Ionic Minerals"
   ],
   "company_size": "medium",
   "website": "https://www.traceminerals.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Trace Minerals is known for its high-quality mineral supplements and has a strong presence in the dietary supplement industry.",
+  "confidence": 85,
+  "supplier_id": 37,
+  "source": "llm_inference"
 }

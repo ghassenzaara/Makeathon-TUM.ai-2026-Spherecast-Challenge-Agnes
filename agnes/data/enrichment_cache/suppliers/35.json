@@ -1,19 +1,20 @@
 {
-  "supplier_id": 35,
   "name": "Strahl & Pitsch",
-  "headquarters": "Mock City, USA",
+  "headquarters": "West Babylon, NY, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "ISO 9001"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "natural waxes",
+    "beeswax",
+    "carnauba wax",
+    "candelilla wax"
   ],
   "company_size": "medium",
-  "website": "https://www.strahl&pitsch.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "website": "https://www.strahlpitsch.com",
+  "notes": "Strahl & Pitsch is known for its high-quality natural waxes used in various industries, including cosmetics and pharmaceuticals.",
+  "confidence": 85,
+  "supplier_id": 35,
+  "source": "llm_inference"
 }

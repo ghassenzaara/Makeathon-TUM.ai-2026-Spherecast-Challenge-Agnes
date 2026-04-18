@@ -1,22 +1,22 @@
 {
-  "supplier_id": 5,
   "name": "Ashland",
   "headquarters": "Wilmington, DE, USA",
   "region": "North America",
   "certifications": [
     "ISO 9001",
-    "ISO 14001",
-    "cGMP"
+    "ISO 14001"
   ],
   "specialties": [
     "specialty chemicals",
     "additives",
-    "pharmaceutical ingredients",
-    "personal care ingredients"
+    "ingredients for personal care",
+    "pharmaceuticals",
+    "food and beverage"
   ],
   "company_size": "large",
   "website": "https://www.ashland.com",
-  "notes": "Ashland is a global leader in providing specialty chemical solutions across various industries, including personal care, pharmaceuticals, and food and beverage.",
-  "confidence": 70,
+  "notes": "Ashland is known for its specialty chemical solutions and serves a wide range of industries including personal care, pharmaceuticals, and food and beverage.",
+  "confidence": 85,
+  "supplier_id": 5,
   "source": "llm_inference"
 }

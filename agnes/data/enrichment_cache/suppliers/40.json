@@ -1,19 +1,22 @@
 {
-  "supplier_id": 40,
   "name": "Vitaquest",
-  "headquarters": "Mock City, USA",
+  "headquarters": "West Caldwell, NJ, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "cGMP",
+    "NSF",
+    "ISO 9001"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "nutraceuticals",
+    "dietary supplements",
+    "vitamins",
+    "minerals"
   ],
-  "company_size": "medium",
+  "company_size": "large",
   "website": "https://www.vitaquest.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Vitaquest is known for its comprehensive capabilities in custom formulation and manufacturing of dietary supplements. They focus on innovation and quality assurance.",
+  "confidence": 85,
+  "supplier_id": 40,
+  "source": "llm_inference"
 }

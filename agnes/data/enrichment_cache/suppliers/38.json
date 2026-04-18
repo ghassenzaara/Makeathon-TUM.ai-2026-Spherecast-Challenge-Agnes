@@ -1,19 +1,21 @@
 {
-  "supplier_id": 38,
   "name": "Univar Solutions",
-  "headquarters": "Mock City, USA",
+  "headquarters": "Downers Grove, IL, USA",
   "region": "North America",
   "certifications": [
-    "USDA Organic",
-    "Non-GMO Project Verified"
+    "ISO 9001",
+    "ISO 14001",
+    "Responsible Care"
   ],
   "specialties": [
-    "Vitamins",
-    "Minerals"
+    "Chemicals",
+    "Ingredients",
+    "Specialty Ingredients"
   ],
-  "company_size": "medium",
+  "company_size": "large",
   "website": "https://www.univarsolutions.com",
-  "notes": "Mocked supplier info",
-  "confidence": 40,
-  "source": "mock"
+  "notes": "Univar Solutions is a global chemical and ingredient distributor and provider of value-added services.",
+  "confidence": 85,
+  "supplier_id": 38,
+  "source": "llm_inference"
 }

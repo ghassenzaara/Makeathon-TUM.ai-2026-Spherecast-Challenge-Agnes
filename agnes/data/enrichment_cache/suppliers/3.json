@@ -1,13 +1,13 @@
 {
-  "supplier_id": 3,
   "name": "Actus Nutrition",
-  "headquarters": "Unknown City, Unknown State/Province, Unknown Country",
-  "region": "Unknown",
+  "headquarters": "unknown",
+  "region": "unknown",
   "certifications": [],
   "specialties": [],
   "company_size": "unknown",
   "website": "unknown",
-  "notes": "Actus Nutrition is not a widely recognized supplier in major databases or industry reports. Further research is needed to provide accurate information.",
-  "confidence": 30,
+  "notes": "No specific information available about Actus Nutrition. Further research is needed to provide accurate details.",
+  "confidence": 0,
+  "supplier_id": 3,
   "source": "llm_inference"
 }

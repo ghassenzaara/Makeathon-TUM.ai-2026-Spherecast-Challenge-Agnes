@@ -1,16 +1,15 @@
 {
   "iherb_id": "2582",
   "url": "https://www.iherb.com/pr/p/2582",
-  "title": "Melatonin 3 mg",
-  "brand": "Natrol",
+  "title": "",
+  "brand": "",
   "description": "",
-  "certifications": [
-    "GMP Certified",
-    "Non-GMO"
-  ],
-  "ingredients_text": "Melatonin, Cellulose, Stearic Acid, Silica, Magnesium Stearate",
+  "certifications": [],
+  "ingredients_text": "",
+  "allergens": [],
   "price_usd": null,
   "scrape_success": false,
-  "_inference_note": "Data inferred by LLM (scraping failed)",
-  "_inference_confidence": 35
+  "_inference_note": "Data inferred by LLM (Tavily also failed)",
+  "_inference_confidence": 15,
+  "_source": "llm-fallback"
 }

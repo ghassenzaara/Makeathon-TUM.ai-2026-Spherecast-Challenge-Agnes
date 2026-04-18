@@ -1,16 +1,15 @@
 {
   "iherb_id": "105065",
   "url": "https://www.iherb.com/pr/p/105065",
-  "title": "Vitamin D3 5000 IU",
-  "brand": "California Gold Nutrition",
+  "title": "",
+  "brand": "",
   "description": "",
-  "certifications": [
-    "GMP Certified",
-    "Third-Party Tested"
-  ],
-  "ingredients_text": "Vitamin D3 (as Cholecalciferol), Olive Oil",
+  "certifications": [],
+  "ingredients_text": "",
+  "allergens": [],
   "price_usd": null,
   "scrape_success": false,
-  "_inference_note": "Data inferred by LLM (scraping failed)",
-  "_inference_confidence": 35
+  "_inference_note": "Data inferred by LLM (Tavily also failed)",
+  "_inference_confidence": 15,
+  "_source": "llm-fallback"
 }
