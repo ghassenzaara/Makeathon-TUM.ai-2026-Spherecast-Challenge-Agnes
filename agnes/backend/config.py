@@ -18,7 +18,7 @@ OPENAI_EMBEDDING_MODEL = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-s
 OPENAI_CHAT_MODEL = os.getenv("OPENAI_CHAT_MODEL", "gpt-4o")
 
 # --- Database ---
-DB_PATH = _PROJECT_ROOT.parent / "db.sqlite"  # Root-level db.sqlite
+DB_PATH = _PROJECT_ROOT.parent / "database" / "db.sqlite"  # database/db.sqlite
 
 # --- Semantic Matching ---
 SIMILARITY_THRESHOLD = float(os.getenv("SIMILARITY_THRESHOLD", "0.85"))
