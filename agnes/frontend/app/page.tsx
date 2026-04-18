@@ -13,6 +13,8 @@ import {
   Box,
   Zap,
 } from "lucide-react";
+import { SavingsChart } from "./components/SavingsChart";
+import { GaugeChart } from "./components/GaugeChart";
 
 interface Stats {
   proposal_count: number;
@@ -85,33 +87,25 @@ export default function Dashboard() {
         </p>
       </div>
 
-      {/* ── Stat tiles ── */}
+      {/* ── Row 1: compact stat tiles ── */}
       {stats && (
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          <StatTile
-            label="Total Proposals"
-            value={stats.proposal_count.toString()}
-            accent="cyan"
-            icon={<Box className="h-4 w-4" />}
-          />
-          <StatTile
-            label="Avg Est. Savings"
-            value={`${stats.avg_savings_pct}%`}
-            accent="emerald"
-            icon={<TrendingUp className="h-4 w-4" />}
-          />
-          <StatTile
-            label="Agent Verified"
-            value={stats.verified_count.toString()}
-            accent="violet"
-            icon={<CheckCircle2 className="h-4 w-4" />}
-          />
-          <StatTile
-            label="High Priority"
-            value={(stats.by_priority["HIGH"] || 0).toString()}
-            accent="amber"
-            icon={<AlertTriangle className="h-4 w-4" />}
-          />
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          <StatTile label="Total Proposals" value={stats.proposal_count.toString()} accent="cyan"    icon={<Box className="h-3.5 w-3.5" />} />
+          <StatTile label="Avg Est. Savings" value={`${stats.avg_savings_pct}%`}   accent="emerald" icon={<TrendingUp className="h-3.5 w-3.5" />} />
+          <StatTile label="Agent Verified"   value={stats.verified_count.toString()} accent="violet" icon={<CheckCircle2 className="h-3.5 w-3.5" />} />
+          <StatTile label="High Priority"    value={(stats.by_priority["HIGH"] || 0).toString()} accent="amber" icon={<AlertTriangle className="h-3.5 w-3.5" />} />
+        </div>
+      )}
+
+      {/* ── Row 2: savings bar chart + gauge ── */}
+      {stats && proposals.length > 0 && (
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
+          <div className="lg:col-span-3">
+            <SavingsChart proposals={proposals} />
+          </div>
+          <div className="lg:col-span-2">
+            <GaugeChart value={stats.avg_confidence} label="AI Confidence" />
+          </div>
         </div>
       )}
 
@@ -244,14 +238,10 @@ function StatTile({
     amber:   "text-amber-400 bg-amber-500/10 border-amber-500/20",
   };
   return (
-    <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5">
-      <div className="flex items-center gap-3">
-        <div className={`rounded-lg p-2.5 border ${colors[accent]}`}>{icon}</div>
-        <div>
-          <p className="text-xs text-[var(--foreground-muted)]">{label}</p>
-          <p className="text-2xl font-bold text-[var(--foreground)] leading-tight">{value}</p>
-        </div>
-      </div>
+    <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-2.5 flex flex-col items-center justify-center gap-1 text-center">
+      <div className={`rounded-md p-1.5 border ${colors[accent]}`}>{icon}</div>
+      <p className="text-2xl font-bold text-[var(--foreground)] leading-none">{value}</p>
+      <p className="text-[9px] uppercase tracking-wider text-[var(--foreground-muted)]">{label}</p>
     </div>
   );
 }
