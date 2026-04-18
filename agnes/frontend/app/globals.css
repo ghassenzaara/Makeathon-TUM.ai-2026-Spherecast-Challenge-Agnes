@@ -62,7 +62,7 @@ body::after {
   pointer-events: none;
   background: radial-gradient(
     ellipse 90% 50% at 50% 0%,
-    rgba(59, 130, 246, 0.06) 0%,
+    rgba(59, 130, 246, 0.03) 0%,
     transparent 65%
   );
 }

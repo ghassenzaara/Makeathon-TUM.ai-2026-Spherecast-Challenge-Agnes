@@ -7,6 +7,7 @@ type OrbState = "idle" | "thinking" | "complete";
 interface AgnesOrbProps {
   state?: OrbState;
   size?: number;
+  transparent?: boolean;
 }
 
 /**
@@ -14,7 +15,7 @@ interface AgnesOrbProps {
  * Idle: anti-gravity levitation (slow float up/down).
  * Thinking: HEAVY spin (rotate: 360, linear, infinite) + outward grey pulse rings.
  */
-export function AgnesOrb({ state = "idle", size = 48 }: AgnesOrbProps) {
+export function AgnesOrb({ state = "idle", size = 48, transparent = false }: AgnesOrbProps) {
   const sphereSize = size * 0.7;
 
   return (
@@ -45,24 +46,26 @@ export function AgnesOrb({ state = "idle", size = 48 }: AgnesOrbProps) {
       </AnimatePresence>
 
       {/* Ambient glow */}
-      <motion.div
-        className="absolute rounded-full"
-        style={{
-          width: size * 1.4,
-          height: size * 1.4,
-          background: "radial-gradient(circle, rgba(160,160,160,0.1) 0%, transparent 70%)",
-        }}
-        animate={
-          state === "thinking"
-            ? { scale: [1, 1.4, 1], opacity: [0.2, 0.6, 0.2] }
-            : { scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }
-        }
-        transition={{
-          duration: state === "thinking" ? 0.8 : 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
+      {!transparent && (
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            width: size * 1.4,
+            height: size * 1.4,
+            background: "radial-gradient(circle, rgba(160,160,160,0.1) 0%, transparent 70%)",
+          }}
+          animate={
+            state === "thinking"
+              ? { scale: [1, 1.4, 1], opacity: [0.2, 0.6, 0.2] }
+              : { scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }
+          }
+          transition={{
+            duration: state === "thinking" ? 0.8 : 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      )}
 
       {/* Anti-gravity levitation */}
       <motion.div
@@ -90,51 +93,57 @@ export function AgnesOrb({ state = "idle", size = 48 }: AgnesOrbProps) {
         >
           {/* Core metallic sphere */}
           <div
-            className="rounded-full relative overflow-hidden"
+            className="rounded-full relative"
             style={{
               width: sphereSize,
               height: sphereSize,
-              background: "radial-gradient(circle at 30% 30%, #f3f4f6, #737373, #171717)",
-              boxShadow:
-                state === "thinking"
-                  ? "0 0 24px 8px rgba(180,180,180,0.3), 0 0 48px 16px rgba(120,120,120,0.1)"
-                  : "0 0 10px 3px rgba(120,120,120,0.15), 0 0 20px 6px rgba(80,80,80,0.06)",
+              background: transparent ? "transparent" : "radial-gradient(circle at 30% 30%, #f3f4f6, #737373, #171717)",
+              boxShadow: transparent 
+                ? "none" 
+                : state === "thinking"
+                ? "0 0 24px 8px rgba(180,180,180,0.3), 0 0 48px 16px rgba(120,120,120,0.1)"
+                : "0 0 10px 3px rgba(120,120,120,0.15), 0 0 20px 6px rgba(80,80,80,0.06)",
             }}
           >
-            {/* Crescent specular highlight */}
-            <div
-              className="absolute"
-              style={{
-                top: "12%",
-                left: "15%",
-                width: "40%",
-                height: "25%",
-                background: "rgba(255,255,255,0.5)",
-                filter: "blur(3px)",
-                borderRadius: "50%",
-                transform: "rotate(-25deg)",
-              }}
-            />
-            {/* Sparkle */}
-            <motion.div
-              className="absolute rounded-full bg-white"
-              style={{ top: "22%", left: "58%", width: "7%", height: "7%" }}
-              animate={{ opacity: [0.2, 0.9, 0.2] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            {/* Bottom reflection */}
-            <div
-              className="absolute"
-              style={{
-                bottom: "8%",
-                right: "18%",
-                width: "22%",
-                height: "12%",
-                background: "rgba(200,200,200,0.12)",
-                filter: "blur(2px)",
-                borderRadius: "50%",
-              }}
-            />
+            {/* Inner details only if not transparent or if we want them over the backball? 
+                The user said "remove any bg... from the inner element... so that ONLY the parent container's beautiful radial-gradient is visible."
+                So I should probably hide these details too.
+            */}
+            {!transparent && (
+              <>
+                <div
+                  className="absolute"
+                  style={{
+                    top: "12%",
+                    left: "15%",
+                    width: "40%",
+                    height: "25%",
+                    background: "rgba(255,255,255,0.5)",
+                    filter: "blur(3px)",
+                    borderRadius: "50%",
+                    transform: "rotate(-25deg)",
+                  }}
+                />
+                <motion.div
+                  className="absolute rounded-full bg-white"
+                  style={{ top: "22%", left: "58%", width: "7%", height: "7%" }}
+                  animate={{ opacity: [0.2, 0.9, 0.2] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <div
+                  className="absolute"
+                  style={{
+                    bottom: "8%",
+                    right: "18%",
+                    width: "22%",
+                    height: "12%",
+                    background: "rgba(200,200,200,0.12)",
+                    filter: "blur(2px)",
+                    borderRadius: "50%",
+                  }}
+                />
+              </>
+            )}
           </div>
         </motion.div>
       </motion.div>

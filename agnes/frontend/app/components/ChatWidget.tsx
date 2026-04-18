@@ -6,6 +6,7 @@ import Link from "next/link";
 import { X, Send, ExternalLink } from "lucide-react";
 import { AgnesOrb } from "./AgnesOrb";
 import { TracingBorder } from "./TracingBorder";
+import { sendChatMessage } from "@/lib/api";
 
 interface Message {
   role: "user" | "agnes";
@@ -33,19 +34,13 @@ export function ChatWidget() {
     setThinking(true);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: [{ role: "user", content: userMsg }] }),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setMessages((prev) => [...prev, { role: "agnes", content: data.answer }]);
-      } else {
-        setMessages((prev) => [...prev, { role: "agnes", content: "I'm having trouble connecting. Please try again." }]);
-      }
-    } catch {
-      setMessages((prev) => [...prev, { role: "agnes", content: "Backend is offline. Start the mock API to chat with Agnes." }]);
+      const answer = await sendChatMessage([...messages, { role: "user", content: userMsg }]);
+      setMessages((prev) => [...prev, { role: "agnes", content: answer }]);
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev,
+        { role: "agnes", content: err instanceof Error ? err.message : "Agent offline. Ensure the backend is running." },
+      ]);
     } finally {
       setThinking(false);
     }
@@ -56,18 +51,18 @@ export function ChatWidget() {
       {/* ── Floating Action Button ── */}
       <motion.button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full cursor-pointer"
+        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 aspect-square rounded-full cursor-pointer"
         style={{
           background: "radial-gradient(circle at 30% 30%, #d4d4d8, #525252, #171717)",
-          boxShadow: "0 0 20px 4px rgba(160,160,160,0.15), 0 4px 12px rgba(0,0,0,0.4)",
+          boxShadow: "0 0 24px 6px rgba(100,80,220,0.2), 0 4px 12px rgba(0,0,0,0.4)",
         }}
-        whileHover={{ scale: 1.1, boxShadow: "0 0 28px 6px rgba(160,160,160,0.25)" }}
+        whileHover={{ scale: 1.1, boxShadow: "0 0 32px 8px rgba(100,80,220,0.3)" }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: open ? 0 : 1, y: open ? 20 : 0, pointerEvents: open ? "none" as const : "auto" as const }}
         transition={{ duration: 0.3 }}
       >
-        <AgnesOrb state="idle" size={40} />
+        <AgnesOrb state="idle" size={40} transparent={true} />
       </motion.button>
 
       {/* ── Side Panel Overlay ── */}

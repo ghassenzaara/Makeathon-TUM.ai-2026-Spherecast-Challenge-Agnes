@@ -54,13 +54,18 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadData() {
-      setOrbState("thinking");
-      const data = await fetchDashboardData();
-      setStats(data.stats);
-      setProposals(data.proposals);
-      setOrbState("complete");
-      setTimeout(() => setOrbState("idle"), 1200);
-      setLoading(false);
+      try {
+        setOrbState("thinking");
+        const data = await fetchDashboardData();
+        setStats(data.stats);
+        setProposals(data.proposals);
+        setOrbState("complete");
+      } catch (err) {
+        console.error("Dashboard Load Error:", err);
+      } finally {
+        setTimeout(() => setOrbState("idle"), 1200);
+        setLoading(false);
+      }
     }
     loadData();
   }, []);

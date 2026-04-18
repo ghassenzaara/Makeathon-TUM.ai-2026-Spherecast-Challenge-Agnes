@@ -10,6 +10,7 @@ import {
 import { AgnesOrb } from "../../components/AgnesOrb";
 import { TracingBorder } from "../../components/TracingBorder";
 import { Waveform } from "../../components/Waveform";
+import { fetchProposalDetail } from "@/lib/api";
 
 interface Citation {
   label: string;
@@ -52,7 +53,7 @@ const fadeIn = {
   hidden: { opacity: 0, y: 14 },
   visible: (i: number) => ({
     opacity: 1, y: 0,
-    transition: { delay: i * 0.08, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { delay: i * 0.08, duration: 0.4 },
   }),
 };
 
@@ -66,9 +67,8 @@ export default function ProposalDetail() {
   useEffect(() => {
     async function loadData() {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/api/proposals/${params.id}`);
-        if (!res.ok) throw new Error(res.status === 404 ? "Proposal not found" : "Failed to load");
-        setTrail(await res.json());
+        const data = await fetchProposalDetail(params.id as string);
+        setTrail(data);
       } catch (err: unknown) {
         setError(err instanceof Error ? err.message : "Unexpected error");
       } finally {
