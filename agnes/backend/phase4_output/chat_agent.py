@@ -143,6 +143,14 @@ def answer(messages: list[dict], index: RetrievalIndex, proposal_id: int | None 
             group_id = p.get("IngredientGroupId")
             
             # Build PINNED PROPOSAL context block
+            claims_text = []
+            for c in trail.get("claims", []):
+                claims_text.append(f"- Claim: {c.get('claim')} (Status: {c.get('status')})")
+                for cit in c.get("citations", []):
+                    claims_text.append(f"  * {cit.get('label')}: {cit.get('snippet')}")
+            
+            claims_str = "\n".join(claims_text)
+            
             pinned_context = (
                 f"PINNED PROPOSAL (You are currently helping the user evaluate Proposal {proposal_id}):\n"
                 f"Supplier: {p.get('RecommendedSupplierName')}\n"
@@ -150,7 +158,8 @@ def answer(messages: list[dict], index: RetrievalIndex, proposal_id: int | None 
                 f"Est. Savings: {p.get('EstimatedSavingsPct', 0):.1f}%\n"
                 f"Confidence: {p.get('ConfidenceScore', 0):.0f}%\n"
                 f"Risks: {p.get('RiskFactorsJson')}\n"
-                f"Evidence: {p.get('EvidenceSummary')}\n"
+                f"Evidence Summary: {p.get('EvidenceSummary')}\n"
+                f"Detailed Evidence Trail:\n{claims_str}\n"
             )
             
             system_prompt += f"\n\nYou are currently helping the user evaluate Proposal {proposal_id}. Prefer answers grounded in the PINNED PROPOSAL block; only pull from broader context when the user asks a comparative question."
