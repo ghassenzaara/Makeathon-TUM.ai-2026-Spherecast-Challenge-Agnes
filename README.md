@@ -210,6 +210,15 @@ Instead of guessing, Agnes explicitly outputs:
 > No hallucinated certifications allowed
 
 ---
+## ⚠️ Limitations
+
+The system is a working **prototype**. Due to time and data constraints, several components have been simplified:
+
+* **Heuristic Confidence Scoring:** Reliability scores are currently based on fixed rules rather than being learned from historical labeled data.
+* **Data Consistency:** External supplier data gathered via scraping or APIs may be **incomplete or inconsistent** depending on source availability.
+* **Inference Precision:** Compliance checking utilizes a hybrid of rule-based logic and LLM assistance; as a result, precision levels may vary.
+* **System Integration:** There is currently **no integration** with enterprise procurement systems (e.g., SAP or ERP platforms).
+* **Ranking Model:** The system lacks a trained machine learning ranking model due to a **lack of labeled historical sourcing decisions**. 
 
 # 🚀 Setup & Running the Demo
 
