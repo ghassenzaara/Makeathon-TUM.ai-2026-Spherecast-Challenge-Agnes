@@ -14,6 +14,8 @@ import {
   ReferenceArea,
   ReferenceArea,
 } from "recharts";
+import { rerankProposals } from "@/lib/api";
+import type { RerankPoint } from "@/lib/types";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -132,11 +134,11 @@ function CustomTooltip({
           ★ Pareto Optimal (rank #{d.rank})
         </p>
       ) : (
-        <p className="text-slate-400">
+        <p className="text-[var(--foreground-dim)]">
           Dominated by {d.dominated_by?.length ?? 0} proposal(s)
         </p>
       )}
-      <p className="text-slate-300 mt-1">Click to view details</p>
+      <p className="text-[var(--foreground-dim)] mt-1">Click to view details</p>
     </div>
   );
 }
@@ -657,7 +659,10 @@ export function ParetoChart() {
               tick={{ fontSize: 10, fill: "#94a3b8" }}
             />
             <Tooltip
-              cursor={{ strokeDasharray: "3 3", stroke: "#cbd5e1" }}
+              cursor={{
+                strokeDasharray: "3 3",
+                stroke: "rgba(255,255,255,0.15)",
+              }}
               content={<CustomTooltip />}
             />
 
@@ -729,11 +734,11 @@ export function ParetoChart() {
       {data.length > 0 && (
         <div className="flex items-center gap-6 text-xs text-slate-500 flex-wrap">
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-3 w-3 rounded-full bg-amber-400 border-2 border-amber-600" />
+            <span className="inline-block h-2.5 w-2.5 rounded-full bg-amber-400 border-2 border-amber-600" />
             {frontier.length} Pareto-optimal
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-3 w-3 rounded-full bg-slate-400 opacity-60" />
+            <span className="inline-block h-2.5 w-2.5 rounded-full bg-slate-500 opacity-60" />
             {dominated.length} dominated
           </span>
           {flagged.length > 0 && (

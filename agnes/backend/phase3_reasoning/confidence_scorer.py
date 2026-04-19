@@ -75,7 +75,46 @@ def _is_mock(d: dict) -> bool:
     # No explicit source: treat prose-only notes as low-trust.
     if d.get("_inference_note") and not d.get("scrape_success"):
         return True
-    return False
+    source = (d.get("source") or "").lower()
+    return source in ("mock",)
+
+
+def _supplier_quality_score(supplier_data: dict) -> float:
+    """
+    Returns a 0–25 score based on how the supplier data was sourced.
+      25 — Tavily Search (real web data, deterministic)
+      15 — LLM inference (educated guess, not externally verified)
+       5 — No data / unknown source
+    """
+    if not supplier_data:
+        return 5.0
+    source = (supplier_data.get("source") or "").lower()
+    if source == "tavily_search":
+        return 25.0
+    if source == "llm_inference":
+        return 15.0
+    return 5.0
+
+
+def _regulatory_adjustment(fda_data: dict, entity_data: dict) -> float:
+    """
+    Post-score multiplier based on FDA enforcement and entity verification data.
+    Returns a value 0.0–1.0 to multiply the base score by.
+    Called after the 4-factor sum so it doesn't distort individual factor weights.
+    """
+    multiplier = 1.0
+
+    entity_status = (entity_data or {}).get("status", "Unknown")
+    if entity_status == "Dissolved":
+        multiplier *= 0.10   # near-disqualification: entity is out of business
+    elif entity_status == "Unknown":
+        multiplier *= 0.90   # small uncertainty penalty
+
+    fda_status = (fda_data or {}).get("status", "")
+    if fda_status == "Warning":
+        multiplier *= 0.75   # 25% penalty for FDA enforcement history
+
+    return multiplier
 
 
 def _supplier_quality_score(supplier_data: dict) -> float:

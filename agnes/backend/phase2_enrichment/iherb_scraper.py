@@ -7,8 +7,7 @@ Resolution order:
   3. Group priors (if Tavily fails — uses sibling products' data)
   4. LLM inference with low confidence (last resort)
 
-Rate-limited to 1 request/second. Results cached in data/enrichment_cache/iherb/.
-Every extracted field emits an Evidence row.
+Results cached in data/enrichment_cache/iherb/.
 """
 
 import asyncio
