@@ -19,19 +19,95 @@ It answers:
 
 ---
 
+```mermaid
+flowchart TD
+
+%% ─────────────────────────────
+%% Phase 1: Data Ingestion & Structuring
+%% ─────────────────────────────
+A[(SQLite Database)] --> B[Data Extraction Layer]
+B --> C[Ingredient Normalization & Semantic Matching]
+C --> D[Cross-Company Substitution Groups]
+
+%% ─────────────────────────────
+%% Phase 2: External Intelligence & Enrichment
+%% ─────────────────────────────
+D --> E[External Intelligence Layer]
+
+E --> F[iHerb / Supplier Scraping APIs]
+E --> G[Supplier Websites: Certifications, Specs, Geography]
+E --> H[LLM-assisted Compliance Inference]
+
+F & G & H --> I[(Enriched Knowledge Base)]
+
+%% ─────────────────────────────
+%% Phase 3: Retrieval & Grounding (RAG Layer)
+%% ─────────────────────────────
+I --> R[Embedding Index + RAG Retrieval System]
+R --> Q[Contextual Grounding over Proposals & Evidence]
+
+%% ─────────────────────────────
+%% Phase 4: Reasoning & Optimization Engine
+%% ─────────────────────────────
+Q --> J[Substitution Validator]
+J --> K[Compliance & Risk Checker]
+
+K --> L[Multi-Objective Sourcing Optimizer]
+
+L --> M1[Cost Savings Objective]
+L --> M2[Compliance Probability Objective]
+L --> M3[Supplier Concentration Risk Objective]
+L --> M4[Data Quality / Uncertainty Objective]
+
+M1 & M2 & M3 & M4 --> N[Pareto Frontier Selection Engine]
+
+%% ─────────────────────────────
+%% Phase 5: Trust, Explainability & Uncertainty
+%% ─────────────────────────────
+N --> O[Confidence Scoring Module]
+O --> P[Verification & Hallucination Guardrails]
+P --> U[Uncertainty & Evidence Attribution Layer]
+
+%% ─────────────────────────────
+%% Phase 6: Output Layer
+%% ─────────────────────────────
+U --> V[Evidence Trail Builder]
+V --> W[Agnes Dashboard & Chat UI (RAG-powered)]
+
+%% ─────────────────────────────
+%% Feedback Loop
+%% ─────────────────────────────
+W -.-> |Human-in-the-Loop Feedback| C
+
+%% ─────────────────────────────
+%% Styling
+%% ─────────────────────────────
+style C fill:#ff6b6b,color:white
+style E fill:#ff6b6b,color:white
+style R fill:#9c27b0,color:white
+style L fill:#ff9800,color:white
+style N fill:#4caf50,color:white
+style O fill:#4caf50,color:white
+style W fill:#2196f3,color:white
+```
+
 # 🧩 Core Idea (Why this is powerful)
 
 Agnes is not just prediction — it is:
 
 ### ✔ Multi-objective decision system
+
 It balances:
+
 - 💰 Cost savings (consolidation efficiency)
 - ⚖ Compliance safety (certifications, regulatory risk)
 - 📊 Data quality (scraped vs missing vs inferred)
 - 🏭 Supplier coverage (market fragmentation reduction)
 
 ### ✔ Pareto-aware reasoning (implicit)
+
 Recommendations are not single-optimum:
+
 - Some suppliers maximize savings
 - Others maximize compliance safety
 - Others maximize data certainty
@@ -43,6 +119,7 @@ Agnes surfaces **trade-offs instead of hiding them**
 # 🏗 System Architecture
 
 ## 🔹 Phase 1 – Data Extraction
+
 - Extracts raw materials (SKUs)
 - Maps companies → ingredients → suppliers
 - Builds structured relational dataset
@@ -50,6 +127,7 @@ Agnes surfaces **trade-offs instead of hiding them**
 ---
 
 ## 🔹 Phase 2 – External Enrichment (Scraping Layer)
+
 - Scrapes supplier websites + product pages
 - Extracts certifications (organic, halal, GMP, etc.)
 - Builds compliance evidence database
@@ -61,7 +139,7 @@ Agnes surfaces **trade-offs instead of hiding them**
 
 ## 🔹 Phase 3 – Reasoning Engine (Core Intelligence)
 
-### What happens here:
+### What happens here
 
 - Groups functionally identical ingredients
 - Detects substitution opportunities
@@ -72,7 +150,8 @@ Agnes surfaces **trade-offs instead of hiding them**
   - ⚠ risk factors
   - 📦 coverage across companies
 
-### Outputs:
+### Outputs
+
 - Sourcing proposals
 - Verification results
 - Risk analysis
@@ -96,6 +175,7 @@ Agnes surfaces **trade-offs instead of hiding them**
 # 🧠 Key System Strengths
 
 ## 1. 🔍 Full Explainability (not a black box)
+
 Every decision includes:
 
 - Supplier identity proof
@@ -114,6 +194,7 @@ Each recommendation is computed using explicit signals:
 - Compliance coverage
 - Supplier reach across companies
 - Data completeness (real vs missing vs inferred)
+
 ## 4. 🌐 Evidence-Based AI (Scraping + Grounding)
 
 The system explicitly tracks:
@@ -150,6 +231,7 @@ Instead of guessing, Agnes explicitly outputs:
 > No hallucinated certifications allowed
 
 ---
+
 # 🚀 Setup & Running the Demo
 
 ## 1. Prerequisites
@@ -173,6 +255,7 @@ cd Makeathon-TUM.ai-2026-Spherecast-Challenge-Agnes/agnes
 ## 3. Environment Setup
 
 ### Backend (Python)
+
 ```bash
 python -m venv venv
 source venv/bin/activate  # Mac/Linux
@@ -182,7 +265,9 @@ pip install -r requirements.txt
 ```
 
 ### Configuration
+
 Create a `.env` file in the `agnes/` directory (or set environment variables):
+
 ```env
 OPENAI_API_KEY=your_api_key_here
 OPENAI_CHAT_MODEL=gpt-4o
@@ -195,13 +280,17 @@ OPENAI_CHAT_MODEL=gpt-4o
 Agnes processes data in phases. You must run these to populate the enrichment data and build the search index.
 
 ### Phase 1: Semantic Matching
+
 Groups raw materials across 61 companies into substitution groups.
+
 ```bash
 python -m backend.run_phase1
 ```
 
 ### Phase 4: Build RAG Index & Evidence Trails
+
 This generates the sourcing proposals and builds the embedding index for the Chat AI.
+
 ```bash
 python -m backend.run_phase4 --rebuild-index
 ```
@@ -211,17 +300,21 @@ python -m backend.run_phase4 --rebuild-index
 ## 5. Run the Servers
 
 ### Backend API (FastAPI)
+
 ```bash
 uvicorn backend.main:app --reload --port 8000
 ```
+
 The API will be live at `http://localhost:8000`. You can view the automated docs at `http://localhost:8000/docs`.
 
 ### Frontend (Next.js)
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
+
 The Dashboard will be live at `http://localhost:3000`.
 
 ---
@@ -229,6 +322,7 @@ The Dashboard will be live at `http://localhost:3000`.
 ## 6. Testing the System
 
 ### Verify RAG Chat via CLI
+
 ```bash
 curl -X POST http://localhost:8000/api/chat \
 -H "Content-Type: application/json" \
@@ -241,17 +335,7 @@ curl -X POST http://localhost:8000/api/chat \
 
 ---
 
-## 7. Demo Strategy (Pitch Mode)
-
-To ensure a smooth presentation, Agnes is designed to prefer cached data to avoid live scraping latency:
-
-1.  **Use Cached Enrichment:** The system automatically uses `data/enrichment_cache/` to avoid rate limits on iHerb or Supplier websites.
-2.  **Focus on Explainability:** When showing an opportunity in the UI, highlight the **Evidence Trail**—the links and scraped text that prove the substitute is compliant (e.g., "Non-GMO" verified via iHerb).
-3.  **Chat Interaction:** Ask questions about specific ingredients (e.g., "What are the risks for the Prinova USA proposal?") to demonstrate the RAG grounding.
-
----
-
-## 8. System Architecture Flow
+## 7. System Architecture Flow
 
 - **Phase 1 (Extraction):** Parses SKUs and clusters 876 raw materials using OpenAI embeddings.
 - **Phase 2 (Enrichment):** Scrapes iHerb and uses LLM agents to infer compliance requirements for finished goods.
@@ -261,4 +345,5 @@ To ensure a smooth presentation, Agnes is designed to prefer cached data to avoi
 ---
 
 ## 🎯 Result
+
 You now have a working supply chain intelligence engine capable of finding millions in potential savings with full compliance verification and a RAG-powered chat interface.
