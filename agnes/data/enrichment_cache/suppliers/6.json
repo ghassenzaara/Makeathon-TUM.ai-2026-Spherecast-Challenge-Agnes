@@ -1,0 +1,13 @@
+{
+  "supplier_id": 6,
+  "name": "Balchem",
+  "headquarters": "",
+  "region": "",
+  "certifications": [],
+  "specialties": [],
+  "company_size": "unknown",
+  "website": "",
+  "notes": "",
+  "confidence": 0,
+  "source": "llm_inference"
+}

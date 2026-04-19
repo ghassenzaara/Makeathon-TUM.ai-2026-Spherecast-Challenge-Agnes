@@ -1,0 +1,123 @@
+{
+  "product_id": 61,
+  "product_sku": "FG-amazon-b016mrfr8y",
+  "company_name": "Garden of Life",
+  "retailer": "amazon",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 432,
+      "ingredient": "bifidobacterium-lactis-bl-04",
+      "substance": "bifidobacterium-lactis",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 433,
+      "ingredient": "milk-protein",
+      "substance": "milk-protein",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 434,
+      "ingredient": "organic-erythritol",
+      "substance": "erythritol",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 435,
+      "ingredient": "organic-gum-acacia",
+      "substance": "acacia-gum",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 436,
+      "ingredient": "organic-stevia-extract-leaf",
+      "substance": "stevia",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 437,
+      "ingredient": "organic-tapioca-fiber-imo",
+      "substance": "tapioca-fiber",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 438,
+      "ingredient": "organic-vanilla-flavors",
+      "substance": "natural-flavor",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 439,
+      "ingredient": "sea-salt",
+      "substance": "sodium-chloride",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 440,
+      "ingredient": "sunflower-lecithin",
+      "substance": "sunflower-lecithin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 441,
+      "ingredient": "whey-protein-isolate",
+      "substance": "whey-protein-isolate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 20,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 20 requirements from 0 FG certs across 10 ingredients",
+  "source": "rule"
+}

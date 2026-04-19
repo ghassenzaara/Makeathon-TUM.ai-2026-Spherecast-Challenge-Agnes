@@ -1,0 +1,103 @@
+{
+  "product_id": 5,
+  "product_sku": "FG-iherb-14689",
+  "company_name": "Solgar",
+  "retailer": "iherb",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 759,
+      "ingredient": "microcrystalline-cellulose",
+      "substance": "microcrystalline-cellulose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 760,
+      "ingredient": "riboflavin",
+      "substance": "vitamin-b2",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 761,
+      "ingredient": "silica",
+      "substance": "silicon-dioxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 762,
+      "ingredient": "vegetable-cellulose",
+      "substance": "cellulose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 763,
+      "ingredient": "vegetable-glycerin",
+      "substance": "glycerin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 764,
+      "ingredient": "vegetable-magnesium-stearate",
+      "substance": "magnesium-stearate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 765,
+      "ingredient": "vegetable-stearic-acid",
+      "substance": "stearic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 766,
+      "ingredient": "vitamin-d3-cholecalciferol",
+      "substance": "vitamin-d3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 16,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 16 requirements from 0 FG certs across 8 ingredients",
+  "source": "rule"
+}

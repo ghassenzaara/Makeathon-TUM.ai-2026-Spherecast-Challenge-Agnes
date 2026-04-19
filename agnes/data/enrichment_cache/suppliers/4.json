@@ -1,0 +1,13 @@
+{
+  "supplier_id": 4,
+  "name": "American Botanicals",
+  "headquarters": "",
+  "region": "",
+  "certifications": [],
+  "specialties": [],
+  "company_size": "unknown",
+  "website": "",
+  "notes": "",
+  "confidence": 0,
+  "source": "llm_inference"
+}

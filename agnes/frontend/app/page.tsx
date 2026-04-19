@@ -10,7 +10,7 @@ import {
 import {
   CheckCircle2, AlertTriangle, TrendingUp,
   ShieldAlert, FileCheck, Box, Zap, Activity,
-  ExternalLink, ChevronDown, ChevronUp, Eye, ToggleLeft, ToggleRight,
+  ExternalLink, ChevronDown, ChevronUp, Eye, ToggleLeft, ToggleRight, Star,
 } from "lucide-react";
 import { AgnesOrb } from "./components/AgnesOrb";
 import { Waveform } from "./components/Waveform";
@@ -198,8 +198,19 @@ export default function Dashboard() {
         </motion.div>
       )}
 
-      {/* ═══ 2. DECISION LOGS — Prioritized, critical at top ═══ */}
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
+      {/* ═══ 2. PARETO FRONTIER ═══ */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+      >
+        <SpotlightCard>
+          <ParetoChart />
+        </SpotlightCard>
+      </motion.div>
+
+      {/* ═══ 3. DECISION LOGS — Prioritized, critical at top ═══ */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4 gap-3">
           <div className="flex items-center gap-3">
             <h2 className="text-sm font-semibold text-gray-100 flex items-center gap-2">
@@ -280,17 +291,6 @@ export default function Dashboard() {
             </motion.div>
           )}
         </div>
-      </motion.div>
-
-      {/* ═══ 3. PARETO FRONTIER — Decision-Theoretic Ranking ═══ */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-      >
-        <SpotlightCard>
-          <ParetoChart />
-        </SpotlightCard>
       </motion.div>
 
       {/* ═══ 4. CHARTS — Savings Distribution ═══ */}
@@ -435,6 +435,16 @@ function ProposalCard({ proposal: p, isCritical, isTop }: { proposal: Proposal; 
                 <PriorityBadge priority={p.priority} />
                 <ComplianceBadge status={p.compliance_status} />
                 <ConfidenceBadge score={p.confidence_score} />
+                {p.is_pareto_optimal && (
+                  <span className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                    <Star className="h-2.5 w-2.5" /> Pareto
+                  </span>
+                )}
+                {p.flagged_low_confidence_high_impact && (
+                  <span className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-red-500/10 text-red-400 border border-red-500/20">
+                    <AlertTriangle className="h-2.5 w-2.5" /> Flag
+                  </span>
+                )}
               </div>
               <h3 className={`font-semibold text-gray-100 truncate ${isTop ? "text-base" : "text-sm"}`}>
                 {p.canonical_name}
@@ -505,6 +515,7 @@ function ProposalCard({ proposal: p, isCritical, isTop }: { proposal: Proposal; 
               <div className="flex gap-2"><span className="text-emerald-400 shrink-0">→</span><span>Supplier &quot;{p.recommended_supplier_name}&quot; covers {p.members_served} companies ({((p.members_served / p.total_companies_in_group) * 100).toFixed(0)}% reach)</span></div>
               <div className="flex gap-2"><span className={`shrink-0 ${p.compliance_status === "ALL_PASS" ? "text-emerald-400" : "text-amber-400"}`}>→</span><span>Compliance: {p.compliance_status.replace(/_/g, " ")} — Confidence {p.confidence_score}%</span></div>
               <div className="flex gap-2"><span className="text-blue-400 shrink-0">→</span><span>Estimated volume discount: +{p.estimated_savings_pct}% savings from consolidation leverage</span></div>
+              {p.risk_score != null && <div className="flex gap-2"><span className="text-red-400 shrink-0">→</span><span>Multi-objective risk score: {p.risk_score.toFixed(3)} · Impact score: {(p.impact_score ?? 0).toFixed(3)}</span></div>}
             </div>
           </motion.div>
         )}

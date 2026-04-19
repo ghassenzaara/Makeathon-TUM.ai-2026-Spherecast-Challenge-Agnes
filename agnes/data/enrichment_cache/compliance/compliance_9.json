@@ -1,0 +1,63 @@
+{
+  "product_id": 9,
+  "product_sku": "FG-iherb-698",
+  "company_name": "NOW Foods",
+  "retailer": "iherb",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 504,
+      "ingredient": "ascorbyl-palmitate",
+      "substance": "ascorbyl-palmitate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 507,
+      "ingredient": "hypromellose",
+      "substance": "hydroxypropyl-methyl-cellulose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 508,
+      "ingredient": "magnesium-citrate",
+      "substance": "magnesium-citrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 510,
+      "ingredient": "silicon-dioxide",
+      "substance": "silicon-dioxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 8,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 8 requirements from 0 FG certs across 4 ingredients",
+  "source": "rule"
+}

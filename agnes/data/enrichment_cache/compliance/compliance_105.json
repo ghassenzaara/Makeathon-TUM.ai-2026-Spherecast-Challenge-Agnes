@@ -1,0 +1,113 @@
+{
+  "product_id": 105,
+  "product_sku": "FG-target-a-90043370",
+  "company_name": "up&up",
+  "retailer": "target",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 981,
+      "ingredient": "acesulfame-potassium",
+      "substance": "acesulfame-potassium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1007,
+      "ingredient": "maltodextrin",
+      "substance": "maltodextrin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1010,
+      "ingredient": "natural-and-artificial-flavors",
+      "substance": "natural-flavor",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1022,
+      "ingredient": "salt",
+      "substance": "sodium-chloride",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1027,
+      "ingredient": "soy-lecithin",
+      "substance": "soy-lecithin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1032,
+      "ingredient": "sucralose",
+      "substance": "sucralose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1043,
+      "ingredient": "whey-protein-concentrate",
+      "substance": "whey-protein-concentrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1044,
+      "ingredient": "whey-protein-isolate",
+      "substance": "whey-protein-isolate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 1045,
+      "ingredient": "xanthan-gum",
+      "substance": "xanthan-gum",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 18,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 18 requirements from 0 FG certs across 9 ingredients",
+  "source": "rule"
+}

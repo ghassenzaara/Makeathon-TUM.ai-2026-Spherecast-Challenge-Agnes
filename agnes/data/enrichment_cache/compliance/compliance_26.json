@@ -1,0 +1,53 @@
+{
+  "product_id": 26,
+  "product_sku": "FG-thrive-market-671635733788",
+  "company_name": "Wellmade",
+  "retailer": "thrive-market",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 962,
+      "ingredient": "organic-agave-inulin-powder",
+      "substance": "inulin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 963,
+      "ingredient": "organic-food-complex",
+      "substance": "energy-support-botanicals-nutrients",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 968,
+      "ingredient": "vitamin-d3",
+      "substance": "vitamin-d3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 6,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 6 requirements from 0 FG certs across 3 ingredients",
+  "source": "rule"
+}

@@ -1,0 +1,63 @@
+{
+  "product_id": 11,
+  "product_sku": "FG-iherb-2582",
+  "company_name": "Natural Factors",
+  "retailer": "iherb",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 514,
+      "ingredient": "dibasic-calcium-phosphate-dihydrate",
+      "substance": "dicalcium-phosphate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 515,
+      "ingredient": "magnesium-stearate",
+      "substance": "magnesium-stearate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 516,
+      "ingredient": "microcrystalline-cellulose",
+      "substance": "microcrystalline-cellulose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 517,
+      "ingredient": "vitamin-d3-cholecalciferol",
+      "substance": "vitamin-d3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 8,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 8 requirements from 0 FG certs across 4 ingredients",
+  "source": "rule"
+}

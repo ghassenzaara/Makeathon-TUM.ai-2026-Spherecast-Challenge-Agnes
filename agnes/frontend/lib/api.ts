@@ -12,6 +12,7 @@ import type {
   ChatResponse,
   RerankPoint,
   RerankWeights,
+  EvidenceTrail,
 } from "./types";
 import { MOCK_STATS, MOCK_PROPOSALS } from "./mockData";
 
@@ -33,18 +34,17 @@ export async function fetchDashboardData(): Promise<DashboardData> {
 
     return { stats, proposals };
   } catch {
-    // Silent fallback to keep the "Issue Panel" away
     return { stats: MOCK_STATS, proposals: MOCK_PROPOSALS };
   }
 }
 
-export async function fetchProposalDetail(id: string | number) {
+export async function fetchProposalDetail(id: string | number): Promise<EvidenceTrail | null> {
   try {
     const res = await fetch(`${API_BASE}/api/proposals/${id}`, {
       signal: AbortSignal.timeout(5000),
     });
     if (!res.ok) throw new Error("Offline");
-    return await res.json();
+    return await res.json() as EvidenceTrail;
   } catch {
     return null;
   }

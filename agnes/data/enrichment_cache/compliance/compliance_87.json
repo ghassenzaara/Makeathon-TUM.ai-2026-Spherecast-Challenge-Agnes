@@ -1,0 +1,103 @@
+{
+  "product_id": 87,
+  "product_sku": "FG-the-vitamin-shoppe-vs-0435",
+  "company_name": "The Vitamin Shoppe",
+  "retailer": "the-vitamin-shoppe",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 794,
+      "ingredient": "b-vitamins",
+      "substance": "b-vitamins",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 810,
+      "ingredient": "magnesium",
+      "substance": "magnesium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 820,
+      "ingredient": "performance-support-nutrients",
+      "substance": "energy-support-botanicals-nutrients",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 829,
+      "ingredient": "vitamin-a",
+      "substance": "vitamin-a",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 830,
+      "ingredient": "vitamin-c",
+      "substance": "ascorbic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 831,
+      "ingredient": "vitamin-d",
+      "substance": "vitamin-d",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 833,
+      "ingredient": "vitamin-e",
+      "substance": "vitamin-e",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 837,
+      "ingredient": "zinc",
+      "substance": "zinc",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 16,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 16 requirements from 0 FG certs across 8 ingredients",
+  "source": "rule"
+}

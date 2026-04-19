@@ -1,0 +1,193 @@
+{
+  "product_id": 116,
+  "product_sku": "FG-costco-11491625",
+  "company_name": "Kirkland Signature",
+  "retailer": "costco",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 457,
+      "ingredient": "ascorbic-acid",
+      "substance": "ascorbic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 458,
+      "ingredient": "b-vitamins",
+      "substance": "b-vitamins",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 459,
+      "ingredient": "calcium-carbonate",
+      "substance": "calcium-carbonate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 461,
+      "ingredient": "chromium",
+      "substance": "chromium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 462,
+      "ingredient": "copper",
+      "substance": "copper",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 463,
+      "ingredient": "dicalcium-phosphate",
+      "substance": "dicalcium-phosphate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 464,
+      "ingredient": "ferrous-fumarate",
+      "substance": "iron-glycinate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 468,
+      "ingredient": "magnesium-oxide",
+      "substance": "magnesium-oxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 469,
+      "ingredient": "manganese",
+      "substance": "manganese",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 470,
+      "ingredient": "microcrystalline-cellulose",
+      "substance": "microcrystalline-cellulose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 471,
+      "ingredient": "potassium-chloride",
+      "substance": "potassium-chloride",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 472,
+      "ingredient": "selenium",
+      "substance": "selenium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 474,
+      "ingredient": "vitamin-a",
+      "substance": "vitamin-a",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 475,
+      "ingredient": "vitamin-d",
+      "substance": "vitamin-d",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 478,
+      "ingredient": "vitamin-e",
+      "substance": "vitamin-e",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 479,
+      "ingredient": "vitamin-k",
+      "substance": "vitamin-k",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 480,
+      "ingredient": "zinc",
+      "substance": "zinc",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 34,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 34 requirements from 0 FG certs across 17 ingredients",
+  "source": "rule"
+}

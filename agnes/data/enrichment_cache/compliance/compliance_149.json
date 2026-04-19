@@ -1,0 +1,63 @@
+{
+  "product_id": 149,
+  "product_sku": "FG-sams-club-p03012212",
+  "company_name": "Nature Made",
+  "retailer": "sams-club",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 526,
+      "ingredient": "epicor-postbiotic",
+      "substance": "epicor-postbiotic",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 549,
+      "ingredient": "vegetarian-capsule",
+      "substance": "vegan-capsule",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 551,
+      "ingredient": "vitamin-c",
+      "substance": "ascorbic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 552,
+      "ingredient": "vitamin-d3",
+      "substance": "vitamin-d3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 8,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 8 requirements from 0 FG certs across 4 ingredients",
+  "source": "rule"
+}

@@ -1,0 +1,243 @@
+{
+  "product_id": 34,
+  "product_sku": "FG-walmart-17324942",
+  "company_name": "Equate",
+  "retailer": "walmart",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 339,
+      "ingredient": "biotin",
+      "substance": "vitamin-b7",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 340,
+      "ingredient": "calcium-carbonate",
+      "substance": "calcium-carbonate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 343,
+      "ingredient": "chromium",
+      "substance": "chromium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 356,
+      "ingredient": "folic-acid",
+      "substance": "vitamin-b9",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 362,
+      "ingredient": "magnesium-oxide",
+      "substance": "magnesium-oxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 364,
+      "ingredient": "maltodextrin",
+      "substance": "maltodextrin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 367,
+      "ingredient": "microcrystalline-cellulose",
+      "substance": "microcrystalline-cellulose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 368,
+      "ingredient": "molybdenum",
+      "substance": "molybdenum",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 369,
+      "ingredient": "niacin",
+      "substance": "vitamin-b3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 371,
+      "ingredient": "pantothenic-acid",
+      "substance": "vitamin-b5",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 375,
+      "ingredient": "potassium-chloride",
+      "substance": "potassium-chloride",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 379,
+      "ingredient": "riboflavin",
+      "substance": "vitamin-b2",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 380,
+      "ingredient": "selenium",
+      "substance": "selenium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 393,
+      "ingredient": "thiamine",
+      "substance": "vitamin-b1",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 398,
+      "ingredient": "vitamin-a",
+      "substance": "vitamin-a",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 399,
+      "ingredient": "vitamin-b12",
+      "substance": "vitamin-b12",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 400,
+      "ingredient": "vitamin-b6",
+      "substance": "vitamin-b6",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 401,
+      "ingredient": "vitamin-c",
+      "substance": "ascorbic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 402,
+      "ingredient": "vitamin-d3",
+      "substance": "vitamin-d3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 403,
+      "ingredient": "vitamin-e",
+      "substance": "vitamin-e",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 404,
+      "ingredient": "vitamin-k",
+      "substance": "vitamin-k",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 405,
+      "ingredient": "zinc-oxide",
+      "substance": "zinc-oxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 44,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 44 requirements from 0 FG certs across 22 ingredients",
+  "source": "rule"
+}

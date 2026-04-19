@@ -1,0 +1,63 @@
+{
+  "product_id": 124,
+  "product_sku": "FG-sams-club-p03016382",
+  "company_name": "Care/of",
+  "retailer": "sams-club",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 281,
+      "ingredient": "b-vitamins",
+      "substance": "b-vitamins",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 282,
+      "ingredient": "energy-support-botanicals-nutrients",
+      "substance": "energy-support-botanicals-nutrients",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 283,
+      "ingredient": "probiotic-cultures",
+      "substance": "probiotic-cultures",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 284,
+      "ingredient": "vitamin-d",
+      "substance": "vitamin-d",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 8,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 8 requirements from 0 FG certs across 4 ingredients",
+  "source": "rule"
+}

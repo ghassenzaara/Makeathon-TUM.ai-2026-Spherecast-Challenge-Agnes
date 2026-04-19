@@ -1,0 +1,143 @@
+{
+  "product_id": 22,
+  "product_sku": "FG-thrive-market-aloha-vanilla-protein-powder",
+  "company_name": "Aloha",
+  "retailer": "thrive-market",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 196,
+      "ingredient": "blue-agave-inulin",
+      "substance": "inulin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 197,
+      "ingredient": "brown-rice-protein",
+      "substance": "rice-protein",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 198,
+      "ingredient": "cinnamon",
+      "substance": "cinnamon",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 199,
+      "ingredient": "coconut-sugar",
+      "substance": "coconut-sugar",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 200,
+      "ingredient": "ground-vanilla-beans",
+      "substance": "ground-vanilla-beans",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 201,
+      "ingredient": "hemp-seed-protein",
+      "substance": "hemp-seed-protein",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 202,
+      "ingredient": "medium-chain-triglycerides-mct-from-coconut-oil",
+      "substance": "medium-chain-triglycerides",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 203,
+      "ingredient": "monk-fruit-extract",
+      "substance": "monk-fruit-extract",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 204,
+      "ingredient": "natural-flavor",
+      "substance": "natural-flavor",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 205,
+      "ingredient": "pea-protein",
+      "substance": "pea-protein",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 206,
+      "ingredient": "pumpkin-seed-protein",
+      "substance": "pumpkin-seed-protein",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 207,
+      "ingredient": "xanthan-gum",
+      "substance": "xanthan-gum",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 24,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 24 requirements from 0 FG certs across 12 ingredients",
+  "source": "rule"
+}

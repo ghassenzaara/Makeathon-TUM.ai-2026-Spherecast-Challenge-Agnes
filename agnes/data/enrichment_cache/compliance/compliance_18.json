@@ -1,0 +1,63 @@
+{
+  "product_id": 18,
+  "product_sku": "FG-thrive-market-jarrow-formulas-vitamin-d3-supplement",
+  "company_name": "Jarrow Formulas",
+  "retailer": "thrive-market",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 452,
+      "ingredient": "glycerin",
+      "substance": "glycerin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 453,
+      "ingredient": "olive-oil",
+      "substance": "olive-oil",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 454,
+      "ingredient": "softgel-bovine-gelatin",
+      "substance": "gelatin-capsule",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 455,
+      "ingredient": "vitamin-d3-cholecalciferol",
+      "substance": "vitamin-d3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 8,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 8 requirements from 0 FG certs across 4 ingredients",
+  "source": "rule"
+}

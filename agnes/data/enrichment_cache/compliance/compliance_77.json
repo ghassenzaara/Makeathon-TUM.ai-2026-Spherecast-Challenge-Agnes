@@ -1,0 +1,213 @@
+{
+  "product_id": 77,
+  "product_sku": "FG-the-vitamin-shoppe-vs-2750",
+  "company_name": "The Vitamin Shoppe",
+  "retailer": "the-vitamin-shoppe",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 792,
+      "ingredient": "aqueous-coating",
+      "substance": "aqueous-coating",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 793,
+      "ingredient": "astaxanthin",
+      "substance": "astaxanthin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 795,
+      "ingredient": "black-pepper-concentrate",
+      "substance": "black-pepper-concentrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 797,
+      "ingredient": "boron-amino-acid-chelate",
+      "substance": "boron-amino-acid-chelate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 800,
+      "ingredient": "croscarmellose-sodium",
+      "substance": "croscarmellose-sodium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 803,
+      "ingredient": "grape-seed-extract",
+      "substance": "grape-seed-extract",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 804,
+      "ingredient": "green-tea-extract",
+      "substance": "green-tea-extract",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 806,
+      "ingredient": "inositol",
+      "substance": "inositol",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 808,
+      "ingredient": "lutein",
+      "substance": "lutein",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 809,
+      "ingredient": "lycopene",
+      "substance": "lycopene",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 814,
+      "ingredient": "magnesium-stearate",
+      "substance": "magnesium-stearate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 816,
+      "ingredient": "microcrystalline-cellulose",
+      "substance": "microcrystalline-cellulose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 817,
+      "ingredient": "modified-cellulose",
+      "substance": "cellulose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 818,
+      "ingredient": "natural-vanilla-flavor",
+      "substance": "natural-flavor",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 821,
+      "ingredient": "pomegranate-extract",
+      "substance": "pomegranate-extract",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 825,
+      "ingredient": "silica",
+      "substance": "silicon-dioxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 826,
+      "ingredient": "stearic-acid",
+      "substance": "stearic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 828,
+      "ingredient": "vanadium-as-vanadyl-sulfate",
+      "substance": "vanadium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 836,
+      "ingredient": "zeaxanthin",
+      "substance": "zeaxanthin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 38,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 38 requirements from 0 FG certs across 19 ingredients",
+  "source": "rule"
+}

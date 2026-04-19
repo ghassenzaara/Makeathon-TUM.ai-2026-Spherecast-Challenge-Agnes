@@ -1,0 +1,13 @@
+{
+  "supplier_id": 10,
+  "name": "Cargill",
+  "headquarters": "Minneapolis, MN, USA",
+  "region": "",
+  "certifications": [],
+  "specialties": [],
+  "company_size": "unknown",
+  "website": "",
+  "notes": "",
+  "confidence": 0,
+  "source": "llm_inference"
+}

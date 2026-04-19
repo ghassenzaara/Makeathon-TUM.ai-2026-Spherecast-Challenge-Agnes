@@ -1,0 +1,73 @@
+{
+  "product_id": 83,
+  "product_sku": "FG-the-vitamin-shoppe-vs-3450",
+  "company_name": "The Vitamin Shoppe",
+  "retailer": "the-vitamin-shoppe",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 801,
+      "ingredient": "gelatin-capsule",
+      "substance": "gelatin-capsule",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 802,
+      "ingredient": "glycerin",
+      "substance": "glycerin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 819,
+      "ingredient": "oil-fill",
+      "substance": "oil-fill",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 832,
+      "ingredient": "vitamin-d3-cholecalciferol",
+      "substance": "vitamin-d3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 834,
+      "ingredient": "vitamin-k2",
+      "substance": "vitamin-k2",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 10,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 10 requirements from 0 FG certs across 5 ingredients",
+  "source": "rule"
+}

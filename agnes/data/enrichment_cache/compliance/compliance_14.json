@@ -1,0 +1,43 @@
+{
+  "product_id": 14,
+  "product_sku": "FG-thrive-market-671635734464",
+  "company_name": "Wellmade",
+  "retailer": "thrive-market",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 961,
+      "ingredient": "magnesium-glycinate",
+      "substance": "magnesium-bisglycinate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 965,
+      "ingredient": "vegan-capsule-hypromellose",
+      "substance": "hypromellose-capsule",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 4,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 4 requirements from 0 FG certs across 2 ingredients",
+  "source": "rule"
+}

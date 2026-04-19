@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "concurrently -n \"API,WEB\" -c \"cyan,magenta\" \"npm run dev:api\" \"npm run dev:web\"",
     "dev:web": "next dev",
-    "dev:api": "cd .. && ..\\venv\\Scripts\\uvicorn backend.phase4_output.api:app --reload --port 8000",
+    "dev:api": "cd .. && ..\\.venv\\Scripts\\uvicorn backend.phase4_output.api:app --reload --port 8000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

@@ -1,0 +1,63 @@
+{
+  "product_id": 71,
+  "product_sku": "FG-vitacost-vitacost-synergy-vitamin-d3-with-cultured-nutrients-fruits-vegetables",
+  "company_name": "Vitacost",
+  "retailer": "vitacost",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 885,
+      "ingredient": "cultured-nutrients",
+      "substance": "probiotic-cultures",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 886,
+      "ingredient": "fruit-nutrients",
+      "substance": "energy-support-botanicals-nutrients",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 906,
+      "ingredient": "vegetable-nutrients",
+      "substance": "energy-support-botanicals-nutrients",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 911,
+      "ingredient": "vitamin-d3",
+      "substance": "vitamin-d3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 8,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 8 requirements from 0 FG certs across 4 ingredients",
+  "source": "rule"
+}

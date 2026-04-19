@@ -1,0 +1,123 @@
+{
+  "product_id": 16,
+  "product_sku": "FG-thrive-market-cure-hydration-electrolyte-drink-mix-jar-berry-pomegranate",
+  "company_name": "Cure Hydration",
+  "retailer": "thrive-market",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 317,
+      "ingredient": "beet-powder",
+      "substance": "beet-extract",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 318,
+      "ingredient": "coconut-water-powder",
+      "substance": "coconut-water",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 319,
+      "ingredient": "lemon-juice-powder",
+      "substance": "lemon-juice-powder",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 320,
+      "ingredient": "monk-fruit-extract",
+      "substance": "monk-fruit-extract",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 321,
+      "ingredient": "non-gmo-citric-acid",
+      "substance": "citric-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 322,
+      "ingredient": "organic-flavor",
+      "substance": "natural-flavor",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 324,
+      "ingredient": "organic-pomegranate-juice-powder",
+      "substance": "pomegranate-extract",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 325,
+      "ingredient": "organic-stevia-extract",
+      "substance": "stevia",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 327,
+      "ingredient": "pink-himalayan-salt",
+      "substance": "sodium-chloride",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 328,
+      "ingredient": "sodium-citrate",
+      "substance": "sodium-citrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 20,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 20 requirements from 0 FG certs across 10 ingredients",
+  "source": "rule"
+}

@@ -1,0 +1,173 @@
+{
+  "product_id": 36,
+  "product_sku": "FG-walmart-270357039",
+  "company_name": "Liquid I.V.",
+  "retailer": "walmart",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 488,
+      "ingredient": "citric-acid",
+      "substance": "citric-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 489,
+      "ingredient": "dextrose",
+      "substance": "dextrose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 490,
+      "ingredient": "dipotassium-phosphate",
+      "substance": "potassium-phosphate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 492,
+      "ingredient": "natural-strawberry-flavor",
+      "substance": "natural-flavor",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 493,
+      "ingredient": "potassium-citrate",
+      "substance": "potassium-citrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 494,
+      "ingredient": "pure-cane-sugar",
+      "substance": "sucrose",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 495,
+      "ingredient": "salt",
+      "substance": "sodium-chloride",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 496,
+      "ingredient": "silicon-dioxide",
+      "substance": "silicon-dioxide",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 497,
+      "ingredient": "sodium-citrate",
+      "substance": "sodium-citrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 498,
+      "ingredient": "stevia-leaf-extract-rebaudioside-a",
+      "substance": "stevia",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 499,
+      "ingredient": "vitamin-b12-cyanocobalamin",
+      "substance": "vitamin-b12",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 500,
+      "ingredient": "vitamin-b3-niacinamide",
+      "substance": "vitamin-b3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 501,
+      "ingredient": "vitamin-b5-d-calcium-pantothenate",
+      "substance": "vitamin-b5",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 502,
+      "ingredient": "vitamin-b6-pyridoxine-hydrochloride",
+      "substance": "vitamin-b6",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 503,
+      "ingredient": "vitamin-c-ascorbic-acid",
+      "substance": "ascorbic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 30,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 30 requirements from 0 FG certs across 15 ingredients",
+  "source": "rule"
+}

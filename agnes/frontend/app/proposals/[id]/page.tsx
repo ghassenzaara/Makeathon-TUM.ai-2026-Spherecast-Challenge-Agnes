@@ -5,72 +5,14 @@ import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   ArrowLeft, CheckCircle2, AlertTriangle, XCircle,
-  ExternalLink, ShieldAlert, FileText, Activity,
+  ExternalLink, ShieldAlert, FileText, Activity, Zap,
 } from "lucide-react";
 import { AgnesOrb } from "../../components/AgnesOrb";
 import { TracingBorder } from "../../components/TracingBorder";
 import { Waveform } from "../../components/Waveform";
 import AgnesChat from "../../components/AgnesChat";
 import { fetchProposalDetail } from "@/lib/api";
-
-interface Citation {
-  label: string;
-  url: string;
-  scraped_at: string;
-  confidence: number;
-  snippet: string;
-}
-
-interface Claim {
-  claim: string;
-  status: string;
-  citations: Citation[];
-}
-
-interface SignalItem {
-  label: string;
-  value: number;
-  confidence: number;
-  source_type: string;
-  importance: number;
-}
-
-interface ScoreBreakdown {
-  value: number;
-  confidence: number;
-  coverage: number;
-  source_distribution: Record<string, number>;
-  drivers: SignalItem[];
-  weak_signals: SignalItem[];
-  uncertainty_sources: string[];
-}
-
-interface EvidenceTrail {
-  proposal_id: number;
-  canonical_name: string;
-  recommended_supplier: { id: number; name: string };
-  headline: string;
-  metrics: {
-    companies_consolidated: number;
-    total_companies_in_group: number;
-    members_served: number;
-    estimated_savings_pct: number;
-    confidence_score: number;
-    priority: string;
-    compliance_status: string;
-  };
-  claims: Claim[];
-  risks: string[];
-  verification_summary: {
-    counts: Record<string, number>;
-    passed: boolean;
-    all_verified: boolean;
-  };
-  score_breakdown: ScoreBreakdown | null;
-  compliance_breakdown: Record<string, number> | null;
-  impact_score: number;
-  flagged_low_confidence_high_impact: boolean;
-}
+import type { EvidenceTrail, Claim, ScoreBreakdown, EvidenceCitation } from "@/lib/types";
 
 const SOURCE_COLORS: Record<string, string> = {
   ontology: "bg-violet-500",
@@ -145,6 +87,7 @@ export default function ProposalDetail() {
     async function loadData() {
       try {
         const data = await fetchProposalDetail(params.id as string);
+        if (!data) throw new Error("No data returned from backend.");
         setTrail(data);
       } catch (err: unknown) {
         setError(err instanceof Error ? err.message : "Unexpected error");
@@ -173,10 +116,7 @@ export default function ProposalDetail() {
         <div className="glass-card p-8 text-center max-w-sm">
           <Activity className="h-8 w-8 mx-auto mb-3 text-[var(--foreground-dim)]" />
           <p className="text-sm text-[var(--foreground-muted)] mb-4">{error || "Something went wrong"}</p>
-          <button
-            onClick={() => router.back()}
-            className="text-[var(--accent-blue)] text-sm font-medium hover:underline"
-          >
+          <button onClick={() => router.back()} className="text-[var(--accent-blue)] text-sm font-medium hover:underline">
             ← Go back
           </button>
         </div>
@@ -186,9 +126,22 @@ export default function ProposalDetail() {
 
   const confScore = trail.metrics.confidence_score;
   const confColor = confScore >= 75 ? "text-emerald-400" : confScore >= 50 ? "text-amber-400" : "text-fuchsia-400";
+  const impactPct = Math.round((trail.impact_score ?? 0) * 100);
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-6 space-y-6">
+
+      {/* ── Flagged warning banner ── */}
+      {trail.flagged_low_confidence_high_impact && (
+        <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}>
+          <div className="flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3">
+            <AlertTriangle className="h-4 w-4 text-red-400 shrink-0" />
+            <p className="text-sm text-red-300">
+              <span className="font-semibold">High-impact / low-confidence flag.</span> This proposal shows strong savings potential but the underlying evidence is limited. Review manually before acting.
+            </p>
+          </div>
+        </motion.div>
+      )}
 
       {/* ── Header ── */}
       <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col md:flex-row items-start gap-4 justify-between">
@@ -212,9 +165,7 @@ export default function ProposalDetail() {
         </div>
 
         <button
-          onClick={() => {
-            document.getElementById("chat-section")?.scrollIntoView({ behavior: "smooth" });
-          }}
+          onClick={() => document.getElementById("chat-section")?.scrollIntoView({ behavior: "smooth" })}
           className="shrink-0 md:mt-1 px-4 py-2 text-sm font-semibold rounded-full bg-[var(--accent-blue)]/10 text-[var(--accent-blue)] border border-[var(--accent-blue)]/30 hover:bg-[var(--accent-blue)]/20 transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:shadow-[0_0_25px_rgba(56,189,248,0.5)] whitespace-nowrap flex items-center gap-2 ml-14 md:ml-0"
         >
           Ask More <AgnesOrb state="idle" size={16} />
@@ -223,7 +174,7 @@ export default function ProposalDetail() {
 
       {/* ── Metrics Grid ── */}
       <motion.div
-        className="grid grid-cols-2 md:grid-cols-4 gap-3"
+        className="grid grid-cols-2 md:grid-cols-5 gap-3"
         initial="hidden" animate="visible"
         variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
       >
@@ -237,6 +188,9 @@ export default function ProposalDetail() {
           <MetricTile label="Confidence" value={`${confScore.toFixed(0)}%`} accent={confScore >= 75 ? "emerald" : confScore >= 50 ? "amber" : "fuchsia"} />
         </motion.div>
         <motion.div variants={fadeIn} custom={3}>
+          <MetricTile label="Impact Score" value={`${impactPct}%`} accent={impactPct >= 50 ? "cyan" : "amber"} icon={<Zap className="h-3.5 w-3.5" />} />
+        </motion.div>
+        <motion.div variants={fadeIn} custom={4}>
           <MetricTile
             label="Verification"
             value={trail.verification_summary.passed ? "Passed" : "Issues Found"}
@@ -247,7 +201,7 @@ export default function ProposalDetail() {
       </motion.div>
 
       {/* ── Coverage Bar ── */}
-      <motion.div variants={fadeIn} custom={4} initial="hidden" animate="visible" className="glass-card p-4">
+      <motion.div variants={fadeIn} custom={5} initial="hidden" animate="visible" className="glass-card p-4">
         <div className="flex items-center justify-between mb-2">
           <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--foreground-muted)]">Consolidation Coverage</span>
           <span className="text-xs font-medium text-[var(--foreground)]">{trail.metrics.members_served} / {trail.metrics.total_companies_in_group} companies</span>
@@ -263,9 +217,34 @@ export default function ProposalDetail() {
         </div>
       </motion.div>
 
+      {/* ── Score Breakdown ── */}
+      {trail.score_breakdown && (
+        <motion.div variants={fadeIn} custom={6} initial="hidden" animate="visible">
+          <div className="glass-card p-4 space-y-4">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--foreground-muted)]">Confidence Score Breakdown</span>
+            <ScoreBreakdownPanel breakdown={trail.score_breakdown} />
+          </div>
+        </motion.div>
+      )}
+
+      {/* ── Compliance Breakdown ── */}
+      {trail.compliance_breakdown && Object.keys(trail.compliance_breakdown).length > 0 && (
+        <motion.div variants={fadeIn} custom={7} initial="hidden" animate="visible">
+          <div className="glass-card p-4 space-y-3">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--foreground-muted)]">Compliance Breakdown</span>
+            {Object.entries(trail.compliance_breakdown).map(([key, val]) => (
+              <div key={key} className="flex items-center justify-between">
+                <span className="text-xs text-[var(--foreground-muted)]">{key.replace(/_/g, " ")}</span>
+                <span className="text-sm font-semibold text-[var(--foreground)]">{typeof val === "number" ? val.toFixed(2) : val}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
+
       {/* ── Risk Factors ── */}
       {trail.risks?.length > 0 && (
-        <motion.div variants={fadeIn} custom={5} initial="hidden" animate="visible">
+        <motion.div variants={fadeIn} custom={8} initial="hidden" animate="visible">
           <div className="glass-card p-4 border-amber-500/15" style={{ borderColor: "rgba(245,158,11,0.12)" }}>
             <h3 className="text-[10px] font-semibold uppercase tracking-[0.15em] text-amber-400 flex items-center gap-2 mb-3">
               <AlertTriangle className="h-3.5 w-3.5" /> Risk Factors
@@ -345,7 +324,7 @@ export default function ProposalDetail() {
         </TracingBorder>
       </motion.div>
 
-      {/* ── Per-Proposal Chat (Evidence-Trail Context) ── */}
+      {/* ── Per-Proposal Chat ── */}
       <motion.div
         id="chat-section"
         initial={{ opacity: 0, y: 16 }}
@@ -361,6 +340,54 @@ export default function ProposalDetail() {
 
 /* ═══ Sub-Components ═══ */
 
+function ScoreBreakdownPanel({ breakdown }: { breakdown: ScoreBreakdown }) {
+  return (
+    <div className="space-y-3">
+      <div className="grid grid-cols-3 gap-3">
+        <div className="text-center">
+          <p className="text-[10px] text-[var(--foreground-muted)] uppercase tracking-wider mb-1">Score</p>
+          <p className="text-lg font-bold text-[var(--foreground)]">{(breakdown.value * 100).toFixed(0)}%</p>
+        </div>
+        <div className="text-center">
+          <p className="text-[10px] text-[var(--foreground-muted)] uppercase tracking-wider mb-1">Conf.</p>
+          <p className="text-lg font-bold text-[var(--foreground)]">{(breakdown.confidence * 100).toFixed(0)}%</p>
+        </div>
+        <div className="text-center">
+          <p className="text-[10px] text-[var(--foreground-muted)] uppercase tracking-wider mb-1">Coverage</p>
+          <p className="text-lg font-bold text-[var(--foreground)]">{(breakdown.coverage * 100).toFixed(0)}%</p>
+        </div>
+      </div>
+      <CoverageMeter coverage={breakdown.coverage} />
+      {breakdown.source_distribution && Object.keys(breakdown.source_distribution).length > 0 && (
+        <SourceBar distribution={breakdown.source_distribution} />
+      )}
+      {breakdown.drivers?.length > 0 && (
+        <div>
+          <p className="text-[10px] font-medium text-[var(--foreground-muted)] uppercase tracking-wider mb-1.5">Key Drivers</p>
+          <div className="space-y-1">
+            {breakdown.drivers.slice(0, 4).map((d, i) => (
+              <div key={i} className="flex items-center justify-between text-xs">
+                <span className="text-[var(--foreground-muted)] truncate">{d.label}</span>
+                <span className="text-emerald-400 font-medium ml-2">{(d.value * 100).toFixed(0)}%</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {breakdown.uncertainty_sources?.length > 0 && (
+        <div>
+          <p className="text-[10px] font-medium text-amber-500 uppercase tracking-wider mb-1.5">Uncertainty Sources</p>
+          <div className="flex flex-wrap gap-1.5">
+            {breakdown.uncertainty_sources.map((s, i) => (
+              <span key={i} className="text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded px-1.5 py-0.5">{s}</span>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ClaimContent({ claim }: { claim: Claim }) {
   return (
     <>
@@ -370,19 +397,14 @@ function ClaimContent({ claim }: { claim: Claim }) {
       </div>
       {claim.citations.length > 0 ? (
         <div className="p-5 space-y-4">
-          {claim.citations.map((cite, cidx) => (
+          {claim.citations.map((cite: EvidenceCitation, cidx: number) => (
             <div key={cidx} className="flex gap-3">
               <FileText className="h-4 w-4 text-[var(--foreground-muted)] mt-0.5 shrink-0" />
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2 mb-2">
                   <span className="text-sm font-medium text-[var(--foreground)]">{cite.label}</span>
                   {cite.url && (
-                    <a
-                      href={cite.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-[var(--accent-blue)] hover:underline"
-                    >
+                    <a href={cite.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-[var(--accent-blue)] hover:underline">
                       Source <ExternalLink className="h-3 w-3" />
                     </a>
                   )}

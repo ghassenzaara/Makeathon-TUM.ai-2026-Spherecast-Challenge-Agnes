@@ -1,0 +1,143 @@
+{
+  "product_id": 70,
+  "product_sku": "FG-vitacost-vitacost-synergy-once-daily-multivitamin",
+  "company_name": "Vitacost",
+  "retailer": "vitacost",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 882,
+      "ingredient": "b-vitamins",
+      "substance": "b-vitamins",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 883,
+      "ingredient": "calcium",
+      "substance": "calcium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 884,
+      "ingredient": "coq10",
+      "substance": "coenzyme-q10",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 889,
+      "ingredient": "green-tea-extract",
+      "substance": "green-tea-extract",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 891,
+      "ingredient": "magnesium",
+      "substance": "magnesium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 900,
+      "ingredient": "resveratrol",
+      "substance": "resveratrol",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 902,
+      "ingredient": "selenium",
+      "substance": "selenium",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 908,
+      "ingredient": "vitamin-a",
+      "substance": "vitamin-a",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 909,
+      "ingredient": "vitamin-c",
+      "substance": "ascorbic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 910,
+      "ingredient": "vitamin-d",
+      "substance": "vitamin-d",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 913,
+      "ingredient": "vitamin-e",
+      "substance": "vitamin-e",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 915,
+      "ingredient": "zinc",
+      "substance": "zinc",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 24,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 24 requirements from 0 FG certs across 12 ingredients",
+  "source": "rule"
+}

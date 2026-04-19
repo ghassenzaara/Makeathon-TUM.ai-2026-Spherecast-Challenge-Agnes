@@ -1,0 +1,233 @@
+{
+  "product_id": 48,
+  "product_sku": "FG-amazon-b0002wrqy4",
+  "company_name": "ALL ONE",
+  "retailer": "amazon",
+  "fg_certifications": [],
+  "per_ingredient": [
+    {
+      "rm_id": 160,
+      "ingredient": "ascorbic-acid",
+      "substance": "ascorbic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 161,
+      "ingredient": "beta-carotene",
+      "substance": "beta-carotene",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 164,
+      "ingredient": "choline-bitartrate",
+      "substance": "choline-bitartrate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 165,
+      "ingredient": "cyanocobalamin",
+      "substance": "vitamin-b12",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 166,
+      "ingredient": "d-alpha-tocopheryl-succinate",
+      "substance": "vitamin-e",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 167,
+      "ingredient": "d-calcium-pantothenate",
+      "substance": "vitamin-b5",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 168,
+      "ingredient": "hesperidin-complex",
+      "substance": "hesperidin-complex",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 169,
+      "ingredient": "inositol",
+      "substance": "inositol",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 170,
+      "ingredient": "lemon-bioflavonoid-complex",
+      "substance": "citrus-bioflavonoids",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 172,
+      "ingredient": "manganese",
+      "substance": "manganese",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 173,
+      "ingredient": "niacinamide",
+      "substance": "vitamin-b3",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 174,
+      "ingredient": "para-amino-benzoic-acid",
+      "substance": "para-amino-benzoic-acid",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 175,
+      "ingredient": "potassium-alginate",
+      "substance": "potassium-alginate",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 177,
+      "ingredient": "pyridoxine-hcl",
+      "substance": "vitamin-b6",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 178,
+      "ingredient": "riboflavin",
+      "substance": "vitamin-b2",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 179,
+      "ingredient": "rice-bran",
+      "substance": "rice-bran-extract",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 180,
+      "ingredient": "rice-protein",
+      "substance": "rice-protein",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 181,
+      "ingredient": "rutin",
+      "substance": "rutin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 182,
+      "ingredient": "soy-lecithin",
+      "substance": "soy-lecithin",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 183,
+      "ingredient": "thiamine-hcl",
+      "substance": "vitamin-b1",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    },
+    {
+      "rm_id": 184,
+      "ingredient": "vitamin-a-palmitate",
+      "substance": "vitamin-a",
+      "requirements": [
+        "fda-compliant",
+        "cgmp-manufactured"
+      ],
+      "exceptions": []
+    }
+  ],
+  "total_requirements": 42,
+  "required_certifications": [
+    "cgmp-manufactured",
+    "fda-compliant"
+  ],
+  "inferred_constraints": [],
+  "regulatory_requirements": [
+    "FDA Compliance",
+    "cGMP"
+  ],
+  "risk_flags": [],
+  "confidence": 35,
+  "reasoning": "Derived 42 requirements from 0 FG certs across 21 ingredients",
+  "source": "rule"
+}

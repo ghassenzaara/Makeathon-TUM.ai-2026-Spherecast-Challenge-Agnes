@@ -2,16 +2,19 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, ArrowLeft } from "lucide-react";
+import { Send, ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { AgnesOrb } from "../components/AgnesOrb";
 import { TracingBorder } from "../components/TracingBorder";
 import { Waveform } from "../components/Waveform";
+import { sendChatMessage } from "@/lib/api";
+import type { RagCitation } from "@/lib/types";
 
 interface Message {
   role: "user" | "agnes";
   content: string;
   timestamp?: string;
+  citations?: RagCitation[];
 }
 
 export default function ChatPage() {
@@ -44,28 +47,22 @@ export default function ChatPage() {
     setThinking(true);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: [...messages, { role: "user", content: userMsg }].map((m) => ({
-            role: m.role === "agnes" ? "assistant" : m.role,
-            content: m.content,
-          })),
-        }),
-      });
+      const history = [...messages, { role: "user", content: userMsg }].map((m) => ({
+        role: m.role === "agnes" ? "assistant" : m.role,
+        content: m.content,
+      }));
+
+      const response = await sendChatMessage(history);
       const rTs = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-      if (res.ok) {
-        const data = await res.json();
-        setMessages((prev) => [...prev, { role: "agnes", content: data.answer || "No response.", timestamp: rTs }]);
-      } else {
-        setMessages((prev) => [...prev, { role: "agnes", content: "I'm having trouble connecting to my analysis engine. Please try again.", timestamp: rTs }]);
-      }
-    } catch {
-      const rTs = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
       setMessages((prev) => [
         ...prev,
-        { role: "agnes", content: "Backend is offline. Start the mock API on port 8000 to chat with Agnes.", timestamp: rTs },
+        {
+          role: "agnes",
+          content: response.answer,
+          timestamp: rTs,
+          citations: response.citations,
+        },
       ]);
     } finally {
       setThinking(false);
@@ -77,10 +74,7 @@ export default function ChatPage() {
       {/* ── Header ── */}
       <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--border)] bg-[var(--bg-surface-solid)]/60 backdrop-blur-md">
         <div className="flex items-center gap-4">
-          <Link
-            href="/"
-            className="p-2 rounded-xl text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-white/[0.04] transition-all"
-          >
+          <Link href="/" className="p-2 rounded-xl text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-white/[0.04] transition-all">
             <ArrowLeft className="h-4 w-4" />
           </Link>
           <div className="flex items-center gap-3">
@@ -93,13 +87,11 @@ export default function ChatPage() {
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5">
-            <span className={`h-1.5 w-1.5 rounded-full ${thinking ? "bg-amber-400 status-pulse" : "bg-emerald-500"}`} />
-            <span className="text-[10px] uppercase tracking-wider text-[var(--foreground-dim)]">
-              {thinking ? "Processing" : "Online"}
-            </span>
-          </div>
+        <div className="flex items-center gap-1.5">
+          <span className={`h-1.5 w-1.5 rounded-full ${thinking ? "bg-amber-400 status-pulse" : "bg-emerald-500"}`} />
+          <span className="text-[10px] uppercase tracking-wider text-[var(--foreground-dim)]">
+            {thinking ? "Processing" : "Online"}
+          </span>
         </div>
       </div>
 
@@ -116,17 +108,15 @@ export default function ChatPage() {
             >
               {/* Avatar */}
               {msg.role === "agnes" ? (
-                <div className="shrink-0 mt-1">
-                  <AgnesOrb state="idle" size={32} />
-                </div>
+                <div className="shrink-0 mt-1"><AgnesOrb state="idle" size={32} /></div>
               ) : (
                 <div className="shrink-0 mt-1 h-8 w-8 rounded-full bg-white/[0.08] border border-white/[0.1] flex items-center justify-center text-[11px] font-semibold text-[var(--foreground-muted)]">
                   You
                 </div>
               )}
 
-              {/* Bubble */}
-              <div className={`max-w-[75%] ${msg.role === "user" ? "text-right" : ""}`}>
+              {/* Bubble + Citations */}
+              <div className={`max-w-[75%] space-y-2 ${msg.role === "user" ? "text-right" : ""}`}>
                 {msg.role === "agnes" ? (
                   <TracingBorder active={i === messages.length - 1 && !thinking} borderRadius={14}>
                     <div className="px-4 py-3">
@@ -138,8 +128,27 @@ export default function ChatPage() {
                     <p className="text-[13px] leading-relaxed text-[var(--foreground)]">{msg.content}</p>
                   </div>
                 )}
+
+                {/* Citations */}
+                {msg.citations && msg.citations.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mt-1">
+                    {msg.citations.map((c, ci) => (
+                      <a
+                        key={ci}
+                        href={c.url || "#"}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 text-[10px] text-[var(--accent-blue)] bg-blue-500/10 border border-blue-500/20 rounded px-1.5 py-0.5 hover:bg-blue-500/20 transition-colors"
+                      >
+                        <ExternalLink className="h-2.5 w-2.5" />
+                        {c.label || c.doc_id}
+                      </a>
+                    ))}
+                  </div>
+                )}
+
                 {msg.timestamp && (
-                  <p className={`text-[9px] text-[var(--foreground-dim)] mt-1 ${msg.role === "user" ? "text-right" : ""}`}>
+                  <p className={`text-[9px] text-[var(--foreground-dim)] ${msg.role === "user" ? "text-right" : ""}`}>
                     {msg.timestamp}
                   </p>
                 )}
@@ -147,7 +156,7 @@ export default function ChatPage() {
             </motion.div>
           ))}
 
-          {/* Thinking */}
+          {/* Thinking indicator */}
           <AnimatePresence>
             {thinking && (
               <motion.div
@@ -156,9 +165,7 @@ export default function ChatPage() {
                 exit={{ opacity: 0, y: -5 }}
                 className="flex gap-3"
               >
-                <div className="shrink-0 mt-1">
-                  <AgnesOrb state="thinking" size={32} />
-                </div>
+                <div className="shrink-0 mt-1"><AgnesOrb state="thinking" size={32} /></div>
                 <TracingBorder active={true} borderRadius={14}>
                   <div className="px-4 py-3 flex items-center gap-3">
                     <div className="flex gap-1">
@@ -183,11 +190,9 @@ export default function ChatPage() {
       {/* ── Input Bar ── */}
       <div className="border-t border-[var(--border)] bg-[var(--bg-surface-solid)]/60 backdrop-blur-md px-6 py-4">
         <div className="max-w-2xl mx-auto">
-          {/* Waveform */}
           <div className="mb-2 opacity-50">
             <Waveform active={thinking} barCount={48} />
           </div>
-
           <form onSubmit={handleSend} className="flex items-center gap-3">
             <input
               value={input}
