@@ -23,19 +23,19 @@ It answers:
 flowchart TD
 
 A[(SQLite Database)] --> B[Data Extraction Layer]
-B --> C[Ingredient Normalization & Semantic Matching]
+B --> C["Ingredient Normalization & Semantic Matching"]
 C --> D[Cross-Company Substitution Groups]
 
 D --> E[External Intelligence Layer]
 
 E --> F[iHerb / Supplier Scraping APIs]
-E --> G[Supplier Websites: Certifications, Specs, Geography]
+E --> G["Supplier Websites: Certifications, Specs, Geography"]
 E --> H[LLM-assisted Compliance Inference]
 
 F & G & H --> I[(Enriched Knowledge Base)]
 
 I --> R[Embedding Index + RAG Retrieval System]
-R --> Q[Contextual Grounding over Proposals & Evidence]
+R --> Q["Contextual Grounding over Proposals & Evidence"]
 
 Q --> J[Substitution Validator]
 J --> K[Compliance & Risk Checker]
@@ -54,9 +54,11 @@ O --> P[Verification & Hallucination Guardrails]
 P --> U[Uncertainty & Evidence Attribution Layer]
 
 U --> V[Evidence Trail Builder]
-V --> W[Agnes Dashboard & Chat UI (RAG-powered)]
+V --> W["Agnes Dashboard & Chat UI (RAG-powered)"]
 
-W -.-> C
+%% Correcting the feedback loop with a Human-in-the-Loop gate
+W -.-> HITL[Human Verification Gate]
+HITL -.-> C
 
 style C fill:#ff6b6b,color:white
 style E fill:#ff6b6b,color:white
@@ -65,6 +67,7 @@ style L fill:#ff9800,color:white
 style N fill:#4caf50,color:white
 style O fill:#4caf50,color:white
 style W fill:#2196f3,color:white
+style HITL fill:#f1c40f,color:black
 ```
 
 # 🧩 Core Idea (Why this is powerful)
