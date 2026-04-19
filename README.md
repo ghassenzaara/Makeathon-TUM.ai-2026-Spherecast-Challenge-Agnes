@@ -22,16 +22,10 @@ It answers:
 ```mermaid
 flowchart TD
 
-%% ─────────────────────────────
-%% Phase 1: Data Ingestion & Structuring
-%% ─────────────────────────────
 A[(SQLite Database)] --> B[Data Extraction Layer]
 B --> C[Ingredient Normalization & Semantic Matching]
 C --> D[Cross-Company Substitution Groups]
 
-%% ─────────────────────────────
-%% Phase 2: External Intelligence & Enrichment
-%% ─────────────────────────────
 D --> E[External Intelligence Layer]
 
 E --> F[iHerb / Supplier Scraping APIs]
@@ -40,15 +34,9 @@ E --> H[LLM-assisted Compliance Inference]
 
 F & G & H --> I[(Enriched Knowledge Base)]
 
-%% ─────────────────────────────
-%% Phase 3: Retrieval & Grounding (RAG Layer)
-%% ─────────────────────────────
 I --> R[Embedding Index + RAG Retrieval System]
 R --> Q[Contextual Grounding over Proposals & Evidence]
 
-%% ─────────────────────────────
-%% Phase 4: Reasoning & Optimization Engine
-%% ─────────────────────────────
 Q --> J[Substitution Validator]
 J --> K[Compliance & Risk Checker]
 
@@ -61,27 +49,15 @@ L --> M4[Data Quality / Uncertainty Objective]
 
 M1 & M2 & M3 & M4 --> N[Pareto Frontier Selection Engine]
 
-%% ─────────────────────────────
-%% Phase 5: Trust, Explainability & Uncertainty
-%% ─────────────────────────────
 N --> O[Confidence Scoring Module]
 O --> P[Verification & Hallucination Guardrails]
 P --> U[Uncertainty & Evidence Attribution Layer]
 
-%% ─────────────────────────────
-%% Phase 6: Output Layer
-%% ─────────────────────────────
 U --> V[Evidence Trail Builder]
 V --> W[Agnes Dashboard & Chat UI (RAG-powered)]
 
-%% ─────────────────────────────
-%% Feedback Loop
-%% ─────────────────────────────
-W -.-> |Human-in-the-Loop Feedback| C
+W -.-> C
 
-%% ─────────────────────────────
-%% Styling
-%% ─────────────────────────────
 style C fill:#ff6b6b,color:white
 style E fill:#ff6b6b,color:white
 style R fill:#9c27b0,color:white
