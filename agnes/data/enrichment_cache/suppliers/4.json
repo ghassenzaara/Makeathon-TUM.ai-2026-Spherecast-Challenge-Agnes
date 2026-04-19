@@ -8,12 +8,12 @@
   ],
   "specialties": [
     "Herbs",
-    "Spices",
-    "Botanical Ingredients"
+    "Botanicals",
+    "Spices"
   ],
   "company_size": "medium",
   "website": "https://www.americanbotanicals.com",
-  "notes": "American Botanicals is known for sourcing and supplying a wide range of botanical ingredients. They focus on sustainable and ethical sourcing practices.",
+  "notes": "American Botanicals is known for sourcing and supplying a wide range of natural ingredients, including herbs and botanicals, primarily for the food, beverage, and health industries.",
   "confidence": 85,
   "supplier_id": 4,
   "source": "llm_inference"

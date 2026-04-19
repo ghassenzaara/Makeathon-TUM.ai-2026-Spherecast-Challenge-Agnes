@@ -33,15 +33,31 @@ SOURCE_WEIGHTS: Dict[SourceType, float] = {
     SourceType.EMBEDDING: 0.4,
 }
 
-# Map evidence.py SourceType strings → our 4-bucket SourceType
+# Map evidence.py SourceType strings → our 4-bucket SourceType.
+#
+# Per the harmonized source-truth contract:
+#   ONTOLOGY / DB        → 1.0   (rule-based, structured DB)
+#   DETERMINISTIC        → 0.9   (real scraping / regex / exact match)
+#   LLM                  → 0.6   (LLM inference / hallucination risk)
+#   EMBEDDING            → 0.4   (fuzzy match, last-resort signal)
+#
+# Scraping is DETERMINISTIC — real web data that we can cite. Mock data is
+# intentionally downgraded to LLM-level so it cannot masquerade as evidence.
 DB_SOURCE_MAP: Dict[str, SourceType] = {
     "ontology": SourceType.ONTOLOGY,
+    "db": SourceType.ONTOLOGY,
     "sku-regex": SourceType.DETERMINISTIC,
     "rule": SourceType.DETERMINISTIC,
+    "scrape": SourceType.DETERMINISTIC,
+    "tavily_search": SourceType.DETERMINISTIC,
+    "rule+llm": SourceType.DETERMINISTIC,
     "llm-inference": SourceType.LLM,
     "llm-group-inference": SourceType.LLM,
-    "scrape": SourceType.EMBEDDING,
-    "mock": SourceType.EMBEDDING,
+    "llm-fallback": SourceType.LLM,
+    "llm_inference": SourceType.LLM,
+    "fuzzy": SourceType.EMBEDDING,
+    "embedding": SourceType.EMBEDDING,
+    "mock": SourceType.LLM,
 }
 
 

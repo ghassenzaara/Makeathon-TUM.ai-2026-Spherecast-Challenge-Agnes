@@ -8,7 +8,6 @@ compliance status, and risk factors.
 
 from collections import defaultdict
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
 import logging
 
 from backend.phase1_extraction.substitution_groups import SubstitutionGroup
@@ -29,7 +28,7 @@ class SourcingProposal:
     total_companies_in_group: int     # group's full footprint (for context)
     estimated_savings_pct: float
     compliance_status: str            # "ALL_PASS" | "PARTIAL" | "REVIEW_NEEDED" | "NO_DATA"
-    risk_factors: List[str]
+    risk_factors: list[str]
     confidence_score: float           # set later by confidence_scorer
     priority: str                     # "HIGH" | "MEDIUM" | "LOW"
     evidence_summary: str = ""
@@ -40,25 +39,30 @@ class SourcingProposal:
     utility_score: float = 0.0            # U = α·savings − β·risk − γ·uncertainty
     pareto_rank: int = 0                  # 1 = Pareto frontier, 2+ = dominated layers
     is_pareto_optimal: bool = False
-    dominated_by: List[int] = field(default_factory=list)
+    dominated_by: list[int] = field(default_factory=list)
     verification_confidence: float = 0.5  # weighted mean of verification outcomes
-    # Uncertainty-aware fields — populated after Pareto in run_phase3
-    score_breakdown: Optional[AggregatedMetric] = None
-    compliance_breakdown: Dict[str, int] = field(
+    # Fix 2 & 3: uncertainty-aware fields — populated after Pareto in run_phase3
+    score_breakdown: AggregatedMetric | None = None
+    compliance_breakdown: dict[str, int] = field(
         default_factory=lambda: {"compliant": 0, "non_compliant": 0, "unknown": 0}
     )
+    compliance_risk: dict[str, float] = field(default_factory=dict)
+    substitution_risk: float = 0.0          # 1 - group_similarity
+    cost_score: float = 1.0                # 1 - savings_pct/30 (minimize)
+    reliability_variance: float = 0.1      # historical consistency (minimize)
     impact_score: float = 0.0
+    data_completeness: float = 0.5         # (coverage + evidence_strength) / 2 (maximize, Fix 6)
     flagged_low_confidence_high_impact: bool = False
 
 
-def _supplier_reach(group: SubstitutionGroup) -> Dict[int, dict]:
+def _supplier_reach(group: SubstitutionGroup) -> dict[int, dict]:
     """
     Build {supplier_id: {name, member_product_ids, company_ids}} from the
     group's supplier relationships. A supplier's "reach" is measured in
     distinct company_ids it could serve within this group.
     """
     member_to_company = {m.product_id: m.company_id for m in group.members}
-    reach: Dict[int, dict] = defaultdict(
+    reach: dict[int, dict] = defaultdict(
         lambda: {"name": "", "member_product_ids": set(), "company_ids": set()}
     )
     for s in group.suppliers:
@@ -74,7 +78,7 @@ def _supplier_reach(group: SubstitutionGroup) -> Dict[int, dict]:
 def _compliance_status_for_supplier(
     supplier_id: int,
     group_product_ids: set,
-    compliance_results: Dict[int, ComplianceResult],
+    compliance_results: dict[int, ComplianceResult],
 ) -> str:
     """
     Aggregate compliance results across members of THIS group only.
@@ -96,17 +100,17 @@ def _compliance_status_for_supplier(
 
 def optimize_sourcing(
     group: SubstitutionGroup,
-    supplier_data: Dict[int, dict],
-    compliance_results: Dict[int, ComplianceResult],
+    supplier_data: dict[int, dict],
+    compliance_results: dict[int, ComplianceResult],
     top_n: int = 3,
-    fda_data_map: Dict[int, dict] = None,
-    entity_data_map: Dict[int, dict] = None,
-) -> List[SourcingProposal]:
+    fda_data_map: dict[int, dict] = None,
+    entity_data_map: dict[int, dict] = None,
+) -> list[SourcingProposal]:
     """
     Generate sourcing proposals for a given substitution group.
     Only groups with consolidation potential (>=2 companies) produce proposals.
     """
-    proposals: List[SourcingProposal] = []
+    proposals: list[SourcingProposal] = []
     if not group.has_consolidation_potential:
         return proposals
 
@@ -140,7 +144,7 @@ def optimize_sourcing(
         coverage_ratio = companies_served / max(total_companies, 1)
         savings_pct = round(min(30.0, (companies_served - 1) * 5.0 * coverage_ratio + 5.0), 1)
 
-        risk_factors: List[str] = []
+        risk_factors: list[str] = []
         if coverage_ratio >= 0.8:
             risk_factors.append("Single-supplier concentration risk")
         if status in ("PARTIAL", "REVIEW_NEEDED"):
@@ -181,9 +185,7 @@ def optimize_sourcing(
         else:
             priority = "LOW"
 
-        # Aggregate compliance across this group's products for this supplier
-        # Use arithmetic mean since compliance_probability now comes from the
-        # spec formula (not raw probability), so geometric mean is no longer appropriate.
+        # Fix 1 & 2: Aggregate compliance across this group's products
         relevant = [
             r for r in compliance_results.values()
             if r.proposed_supplier_id == sid and r.product_id in group_product_ids
@@ -194,23 +196,24 @@ def optimize_sourcing(
             )
             ev_str = round(sum(r.evidence_strength for r in relevant) / len(relevant), 4)
             # Aggregate breakdown counts across products
-            agg_breakdown: Dict[str, int] = {"compliant": 0, "non_compliant": 0, "unknown": 0}
+            agg_breakdown: dict[str, int] = {"compliant": 0, "non_compliant": 0, "unknown": 0}
+            agg_risk: dict[str, float] = {"probability": 0.0, "uncertainty": 0.0, "missing_data_ratio": 0.0}
             for r in relevant:
                 for k, v in r.breakdown.items():
                     agg_breakdown[k] = agg_breakdown.get(k, 0) + v
+                for k, v in r.compliance_risk.items():
+                    agg_risk[k] += v / len(relevant)
+            # Fix 6: compute data_completeness_score
+            total_checks = sum(agg_breakdown.values()) or 1
+            resolved = agg_breakdown.get("compliant", 0) + agg_breakdown.get("non_compliant", 0)
+            coverage_score = resolved / total_checks
+            data_completeness = round((coverage_score + ev_str) / 2.0, 4)
         else:
             comp_prob = 0.5
-            ev_str = 0.5
+            ev_str = 0.0
             agg_breakdown = {"compliant": 0, "non_compliant": 0, "unknown": 0}
-
-        hq = sdata.get("headquarters", "")
-        evidence = (
-            f"{info['name']} can serve {companies_served} of "
-            f"{total_companies} companies in the '{group.canonical_name}' "
-            f"group ({members_served} SKUs)."
-        )
-        if hq:
-            evidence += f" HQ: {hq}."
+            agg_risk = {"probability": 0.5, "uncertainty": 1.0, "missing_data_ratio": 1.0}
+            data_completeness = 0.0
 
         proposals.append(SourcingProposal(
             id=(group.id or 0) * 100 + i,
@@ -225,10 +228,15 @@ def optimize_sourcing(
             risk_factors=risk_factors,
             confidence_score=0.0,
             priority=priority,
-            evidence_summary=evidence,
+            evidence_summary=f"Supplier {info['name']} can consolidate {companies_served} companies with {status} compliance status.",
             compliance_probability=comp_prob,
             evidence_strength=ev_str,
             compliance_breakdown=agg_breakdown,
+            compliance_risk=agg_risk,
+            substitution_risk=round(1.0 - group.similarity_score, 4),
+            cost_score=round(1.0 - (savings_pct / 30.0), 4),
+            reliability_variance=0.3 if fda.get("status") == "Warning" else 0.1,
+            data_completeness=data_completeness,
         ))
 
     return proposals

@@ -168,8 +168,8 @@
   ],
   "total_requirements": 32,
   "required_certifications": [
-    "fda-compliant",
-    "cgmp-manufactured"
+    "cgmp-manufactured",
+    "fda-compliant"
   ],
   "inferred_constraints": [],
   "regulatory_requirements": [

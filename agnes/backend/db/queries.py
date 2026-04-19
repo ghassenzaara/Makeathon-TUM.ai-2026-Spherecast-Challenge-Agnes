@@ -650,6 +650,10 @@ def create_proposal_tables():
                 ComplianceBreakdownJson TEXT NOT NULL DEFAULT '{}',
                 ImpactScore REAL NOT NULL DEFAULT 0.0,
                 FlaggedLowConfHighImpact INTEGER NOT NULL DEFAULT 0,
+                ComplianceRiskJson TEXT NOT NULL DEFAULT '{}',
+                SubstitutionRisk REAL NOT NULL DEFAULT 0.0,
+                CostScore REAL NOT NULL DEFAULT 1.0,
+                ReliabilityVariance REAL NOT NULL DEFAULT 0.1,
                 FOREIGN KEY (IngredientGroupId) REFERENCES SubstitutionGroup(Id),
                 FOREIGN KEY (RecommendedSupplierId) REFERENCES Supplier(Id)
             )
@@ -675,8 +679,9 @@ def insert_sourcing_proposal(row: dict) -> int:
                 ComplianceProbability, EvidenceStrength, RiskScore, UtilityScore,
                 ParetoRank, IsParetoOptimal, DominatedByJson, VerificationConfidence,
                 ScoreBreakdownJson, ComplianceBreakdownJson, ImpactScore,
-                FlaggedLowConfHighImpact
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                FlaggedLowConfHighImpact, ComplianceRiskJson, SubstitutionRisk,
+                CostScore, ReliabilityVariance
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             row["IngredientGroupId"],
             row["RecommendedSupplierId"],
@@ -705,6 +710,10 @@ def insert_sourcing_proposal(row: dict) -> int:
             row.get("ComplianceBreakdownJson", "{}"),
             row.get("ImpactScore", 0.0),
             row.get("FlaggedLowConfHighImpact", 0),
+            row.get("ComplianceRiskJson", "{}"),
+            row.get("SubstitutionRisk", 0.0),
+            row.get("CostScore", 1.0),
+            row.get("ReliabilityVariance", 0.1),
         ))
         return cur.lastrowid
 

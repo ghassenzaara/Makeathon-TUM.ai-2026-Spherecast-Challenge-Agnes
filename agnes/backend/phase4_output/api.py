@@ -21,6 +21,7 @@ from backend.db.queries import (
     get_sourcing_proposal,
     get_substitution_group_detail,
 )
+from backend.phase3_reasoning.pareto_engine import compute_composite_risk
 from backend.phase4_output.evidence_trail_builder import build_evidence_trail
 from backend.phase4_output.retriever import build_or_load_index
 from backend.phase4_output.chat_agent import answer as chat_answer
@@ -69,9 +70,11 @@ class ChatRequest(BaseModel):
 
 
 class RerankRequest(BaseModel):
-    alpha: float = 1.0
-    beta: float = 1.5
-    gamma: float = 0.8
+    alpha: float = 1.0  # Savings/Cost weight
+    beta: float = 1.5   # Compliance Risk penalty
+    gamma: float = 1.0  # Substitution Risk penalty
+    delta: float = 0.5  # Reliability Variance penalty
+    epsilon: float = 0.8 # Uncertainty (Evidence Strength) weight
 
 
 # ──────────────────────────────────────────────
@@ -140,6 +143,11 @@ def list_proposals():
             "compliance_breakdown": json.loads(p.get("ComplianceBreakdownJson", "{}") or "{}"),
             "impact_score": p.get("ImpactScore", 0.0),
             "flagged_low_confidence_high_impact": bool(p.get("FlaggedLowConfHighImpact", 0)),
+            # Fix 3: New Multi-Objective Axes
+            "compliance_risk": json.loads(p.get("ComplianceRiskJson", "{}") or "{}"),
+            "substitution_risk": p.get("SubstitutionRisk", 0.0),
+            "cost_score": p.get("CostScore", 1.0),
+            "reliability_variance": p.get("ReliabilityVariance", 0.1),
         }
         for p in proposals
     ]
@@ -148,43 +156,101 @@ def list_proposals():
 @app.post("/api/proposals/rerank")
 def rerank_proposals(req: RerankRequest):
     """
-    Recompute utility in-memory with new alpha/beta/gamma weights.
+    Recompute utility + Pareto frontier in-memory with new α/β/γ/δ/ε weights.
+
+    Utility: U = α·savings − β·comp_risk − γ·sub_risk − δ·rel_var − ε·uncertainty
+    Risk (Y-axis): weighted mean of the four risk axes using the same β/γ/δ/ε,
+    so the chart tracks the user's current preference dynamically.
+    Dominance: 5D NSGA-II style (A dominates B iff ≥ on all and > on one).
+
     Reads from startup cache; no DB writes. Latency < 5 ms for ~150 proposals.
     """
-    results = []
+    rows = []
     for p in _proposals_cache:
-        comp_prob = p.get("ComplianceProbability") or 0.5
-        concentration = (p.get("CompaniesConsolidated") or 1) / max(p.get("TotalCompaniesInGroup") or 1, 1)
-        ver_conf = p.get("VerificationConfidence") or 0.5
-        risk = round(
-            0.4 * (1.0 - comp_prob)
-            + 0.3 * concentration
-            + 0.3 * (1.0 - ver_conf),
-            4,
+        savings_norm = min((p.get("EstimatedSavingsPct") or 0.0) / 30.0, 1.0)
+
+        # Prefer the stored compliance_risk vector when present; otherwise
+        # fall back to (1 − compliance_probability).
+        try:
+            risk_vec = json.loads(p.get("ComplianceRiskJson") or "{}") or {}
+        except (ValueError, TypeError):
+            risk_vec = {}
+        c_risk = (
+            risk_vec.get("probability")
+            if risk_vec.get("probability") is not None
+            else 1.0 - (p.get("ComplianceProbability") or 0.5)
         )
-        savings_norm = (p.get("EstimatedSavingsPct") or 0.0) / 30.0
+        s_risk = p.get("SubstitutionRisk") or 0.0
+        r_var = p.get("ReliabilityVariance") or 0.1
         ev_strength = p.get("EvidenceStrength") or 0.5
         uncertainty = 1.0 - ev_strength
-        u = round(req.alpha * savings_norm - req.beta * risk - req.gamma * uncertainty, 4)
-        impact_score = p.get("ImpactScore") or round(savings_norm * ev_strength * 0.9, 4)
-        impact_confidence = round(ev_strength * 0.9, 4)
-        results.append({
+
+        # Dynamic composite risk driven by the current coefficients.
+        risk_score = compute_composite_risk(
+            c_risk, s_risk, r_var, uncertainty,
+            beta=req.beta, gamma=req.gamma, delta=req.delta, epsilon=req.epsilon,
+        )
+
+        u = round(
+            req.alpha * savings_norm
+            - req.beta * c_risk
+            - req.gamma * s_risk
+            - req.delta * r_var
+            - req.epsilon * uncertainty,
+            4,
+        )
+
+        rows.append({
             "id": p["Id"],
             "utility_score": u,
             "savings": p.get("EstimatedSavingsPct", 0.0),
-            "compliance_probability": comp_prob,
-            "risk_score": risk,
-            "is_pareto_optimal": bool(p.get("IsParetoOptimal", 0)),
-            "dominated_by": json.loads(p.get("DominatedByJson", "[]") or "[]"),
+            "compliance_probability": p.get("ComplianceProbability", 0.5),
+            "risk_score": risk_score,
+            "substitution_risk": s_risk,
+            "reliability_variance": r_var,
             "recommended_supplier_name": p.get("RecommendedSupplierName", ""),
-            "impact_score": impact_score,
-            "impact_confidence": impact_confidence,
+            "companies_consolidated": p.get("CompaniesConsolidated", 2),
+            "canonical_name": _canonical_for_group(p["IngredientGroupId"]),
+            "impact_score": p.get("ImpactScore") or round(savings_norm * ev_strength * 0.9, 4),
+            "impact_confidence": round(ev_strength * 0.9, 4),
             "flagged_low_confidence_high_impact": bool(p.get("FlaggedLowConfHighImpact", 0)),
+            # 5D maximize-form objective vector for dominance.
+            "_obj": (
+                savings_norm,
+                -max(0.0, min(1.0, c_risk)),
+                -max(0.0, min(1.0, s_risk)),
+                -max(0.0, min(1.0, r_var)),
+                -max(0.0, min(1.0, uncertainty)),
+            ),
         })
-    results.sort(key=lambda x: x["utility_score"], reverse=True)
-    for i, r in enumerate(results):
+
+    # 5D Pareto dominance — recomputed so the frontier responds to new weights
+    # only through the Y-axis composite; the frontier itself is weight-free
+    # (NSGA-II on the raw 5-axis vector).
+    n = len(rows)
+    for i in range(n):
+        rows[i]["is_pareto_optimal"] = True
+        rows[i]["dominated_by"] = []
+    for i in range(n):
+        a = rows[i]["_obj"]
+        for j in range(n):
+            if i == j:
+                continue
+            b = rows[j]["_obj"]
+            # j dominates i iff b ≥ a on all axes and > on at least one.
+            better_or_equal = all(bv >= av for bv, av in zip(b, a))
+            strictly_better = any(bv > av for bv, av in zip(b, a))
+            if better_or_equal and strictly_better:
+                rows[i]["is_pareto_optimal"] = False
+                rows[i]["dominated_by"].append(rows[j]["id"])
+
+    for r in rows:
+        r.pop("_obj", None)
+
+    rows.sort(key=lambda x: x["utility_score"], reverse=True)
+    for i, r in enumerate(rows):
         r["rank"] = i + 1
-    return results
+    return rows
 
 
 _canonical_cache: dict[int, str] = {}

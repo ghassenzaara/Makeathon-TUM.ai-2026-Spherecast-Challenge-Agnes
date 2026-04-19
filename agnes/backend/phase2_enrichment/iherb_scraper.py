@@ -32,14 +32,15 @@ from backend.phase2_enrichment.group_priors import apply_group_priors_to_scrape
 
 logger = logging.getLogger(__name__)
 
-CERTIFICATION_KEYWORDS = [
+# Canonical certification vocabulary the LLM is guided to emit. It is a hint,
+# not a hard filter — the LLM may emit other certifications from the prose.
+CERTIFICATION_VOCABULARY = [
     "Non-GMO", "USDA Organic", "Organic", "Kosher", "Halal",
-    "Vegan", "Vegetarian", "Gluten-Free", "Gluten Free",
-    "GMP Certified", "GMP", "NSF Certified", "NSF",
-    "USP Verified", "USP", "Third-Party Tested",
-    "Dairy-Free", "Dairy Free", "Soy-Free", "Soy Free",
+    "Vegan", "Vegetarian", "Gluten-Free",
+    "GMP Certified", "NSF Certified", "USP Verified", "Third-Party Tested",
+    "Dairy-Free", "Soy-Free",
     "No Artificial Colors", "No Artificial Flavors",
-    "No Preservatives", "Sugar-Free", "Sugar Free",
+    "No Preservatives", "Sugar-Free",
     "Certified B Corporation", "Fair Trade",
     "cGMP", "ISO", "HACCP",
 ]
@@ -73,24 +74,147 @@ async def _tavily_fetch_iherb(iherb_id: str) -> dict | None:
         return None
 
 
-def _parse_tavily_iherb(tavily_response: dict, base_result: dict) -> dict:
+async def _parse_tavily_iherb(tavily_response: dict, base_result: dict) -> dict:
     """
-    Extracts certifications, ingredients, title, brand, and price from
-    Tavily search results by scanning content strings for known keywords.
+    Context-aware extraction of certifications, ingredients, title, brand, and
+    price from Tavily search results.
+
+    Rather than relying on brittle regex + keyword presence (which mis-classifies
+    negations like "no gluten-free claim" as "Gluten-Free"), this asks an LLM to
+    read the prose and emit a structured JSON record. The certification list is
+    treated as semantic evidence — the LLM only includes a cert if the text
+    actually asserts the product carries it.
+
+    Falls back to the legacy regex path only if no OpenAI key is configured.
     """
     results = tavily_response.get("results", [])
     combined_text = " ".join(
         (r.get("content", "") + " " + r.get("raw_content", ""))
         for r in results
-    )
+    ).strip()
 
+    # Always prefer the first result's title/url as metadata.
     if results and results[0].get("title"):
         base_result["title"] = results[0]["title"]
-
     if results and results[0].get("url"):
         base_result["url"] = results[0]["url"]
 
-    brand_match = re.search(r"[Bb]rand[:\s]+([A-Z][A-Za-z0-9& ]{2,40})", combined_text)
+    if not combined_text:
+        base_result["certifications"] = []
+        base_result["scrape_success"] = False
+        base_result["_inference_note"] = "Tavily returned empty content"
+        return base_result
+
+    # Trim text to stay within a reasonable prompt budget while keeping
+    # enough prose for context-aware claim extraction.
+    prose = combined_text[:8000]
+
+    if OPENAI_API_KEY:
+        try:
+            parsed = await _llm_extract_product_fields(prose)
+            if parsed.get("title") and not base_result.get("title"):
+                base_result["title"] = parsed["title"]
+            if parsed.get("brand"):
+                base_result["brand"] = parsed["brand"]
+            if parsed.get("price_usd") is not None:
+                try:
+                    base_result["price_usd"] = float(parsed["price_usd"])
+                except (TypeError, ValueError):
+                    pass
+            if parsed.get("ingredients_text"):
+                base_result["ingredients_text"] = str(
+                    parsed["ingredients_text"]
+                )[:2000]
+            certs = parsed.get("certifications") or []
+            if isinstance(certs, list):
+                base_result["certifications"] = sorted(
+                    {str(c).strip() for c in certs if str(c).strip()}
+                )
+            else:
+                base_result["certifications"] = []
+            base_result["scrape_success"] = True
+            base_result["_inference_note"] = (
+                "Data sourced via Tavily Search (iherb.com), parsed by LLM "
+                "with context-aware extraction"
+            )
+            base_result["_source"] = "tavily_search"
+            return base_result
+        except Exception as e:
+            logger.warning(
+                f"  iHerb parse: LLM extraction failed ({e}); "
+                "falling back to regex parser"
+            )
+
+    # Regex fallback (only when no key, or LLM failed).
+    return _parse_tavily_iherb_regex(combined_text, base_result)
+
+
+async def _llm_extract_product_fields(prose: str) -> dict:
+    """
+    Ask the LLM to pull out structured product fields from Tavily prose.
+
+    The prompt explicitly instructs the model to reject negated claims and
+    unrelated brand mentions — the whole point of the context-aware upgrade.
+    """
+    from openai import AsyncOpenAI
+
+    client = AsyncOpenAI(api_key=OPENAI_API_KEY)
+
+    cert_hint = ", ".join(CERTIFICATION_VOCABULARY)
+
+    system_msg = (
+        "You are a strict supplement-industry data extractor. "
+        "Given web-search snippets about a SINGLE iHerb product, return one "
+        "JSON object with the product's attributes. "
+        "Only assert a certification if the prose CLAIMS the product carries "
+        "it. Reject negations (e.g. 'no gluten-free claim', 'not kosher', "
+        "'does not contain organic'), comparisons ('unlike organic brands'), "
+        "and unrelated mentions. If a field is not stated, leave it empty / "
+        "null. Never invent a brand or price."
+    )
+
+    user_msg = f"""Extract the following fields from the iHerb search snippets below.
+Respond ONLY with a JSON object of this exact shape (no markdown):
+
+{{
+  "title": "<product title as advertised, or empty string>",
+  "brand": "<brand name, or empty string>",
+  "price_usd": <number in USD or null>,
+  "ingredients_text": "<ingredients / supplement facts text, or empty string>",
+  "certifications": ["<cert 1>", "<cert 2>", ...]
+}}
+
+Guidance for certifications:
+- Include only certifications the product is explicitly described as having.
+- Preferred canonical labels (use these spellings when the claim matches):
+  {cert_hint}
+- You MAY include other clearly stated certifications not in that list.
+- Do NOT include a cert the text denies, qualifies away, or attributes to a
+  different product/brand.
+
+SNIPPETS:
+\"\"\"
+{prose}
+\"\"\""""
+
+    response = await client.chat.completions.create(
+        model=OPENAI_CHAT_MODEL,
+        messages=[
+            {"role": "system", "content": system_msg},
+            {"role": "user", "content": user_msg},
+        ],
+        temperature=0.1,
+        response_format={"type": "json_object"},
+    )
+    content = response.choices[0].message.content or "{}"
+    return json.loads(content)
+
+
+def _parse_tavily_iherb_regex(combined_text: str, base_result: dict) -> dict:
+    """Legacy regex-based parser; retained as a last-resort fallback only."""
+    brand_match = re.search(
+        r"[Bb]rand[:\s]+([A-Z][A-Za-z0-9& ]{2,40})", combined_text
+    )
     if brand_match:
         base_result["brand"] = brand_match.group(1).strip()
 
@@ -111,13 +235,16 @@ def _parse_tavily_iherb(tavily_response: dict, base_result: dict) -> dict:
 
     found_certs = set()
     text_lower = combined_text.lower()
-    for cert in CERTIFICATION_KEYWORDS:
+    for cert in CERTIFICATION_VOCABULARY:
         if cert.lower() in text_lower:
             found_certs.add(cert)
     base_result["certifications"] = sorted(found_certs)
 
     base_result["scrape_success"] = True
-    base_result["_inference_note"] = "Data sourced via Tavily Search (iherb.com)"
+    base_result["_inference_note"] = (
+        "Data sourced via Tavily Search (iherb.com); regex fallback parser"
+    )
+    base_result["_source"] = "tavily_search"
     return base_result
 
 
@@ -155,7 +282,7 @@ async def scrape_iherb_product(iherb_id: str, product_id: int = 0) -> dict:
     # Primary: Tavily
     tavily_response = await _tavily_fetch_iherb(iherb_id)
     if tavily_response:
-        result = _parse_tavily_iherb(tavily_response, result)
+        result = await _parse_tavily_iherb(tavily_response, result)
         logger.info(
             f"  iHerb {iherb_id}: Tavily OK - "
             f"{result['title'][:50]} | {len(result['certifications'])} certs"

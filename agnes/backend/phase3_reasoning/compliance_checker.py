@@ -1,30 +1,21 @@
 """
-Compliance Checker -- cross-references product requirements with supplier data.
-
 Uncertainty-aware compliance scoring:
   synonym hit         -> COMPLIANT, confidence=0.95, source=DETERMINISTIC
   fuzzy hit (>=85)    -> COMPLIANT, confidence=ratio-scaled 0.60–0.90, source=EMBEDDING
   no hit + blocking   -> NON_COMPLIANT, confidence=0.80, source=DETERMINISTIC
   no hit + non-block  -> UNKNOWN (not FAIL) — unknown != non-compliant
 
-Aggregation formula (replaces geometric-mean collapse):
-  compliance_score =
-    Σ (compliant_confidence × importance) /
-    Σ ((compliant_confidence × importance) + (non_compliant_confidence × importance)
-       + (0.3 × unknown_importance))
-
-Vacuous compliance (no requirements) → value=1.0, confidence=1.0, coverage=1.0.
-
-Legacy `compliance_probability` and `evidence_strength` on ComplianceResult are
-populated from AggregatedMetric for backward-compat with sourcing_optimizer and
-run_phase3 logging.
+Aggregation rule (Fix 1):
+  uncertainty_penalty = 1 / (1 + n_unknown + missing_req_weight)
+  compliance_probability = geometric_mean(check_probs) * uncertainty_penalty
+  (where check_probs are 1.0 for COMPLIANT, 0.0 for NON_COMPLIANT, 0.5 for UNKNOWN)
 """
 
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Dict, List, Optional, Tuple
 import logging
 import re
+import math
 
 try:
     from rapidfuzz import fuzz as _fuzz
@@ -71,23 +62,25 @@ class ComplianceResult:
     product_id: int
     ingredient_group_id: int
     proposed_supplier_id: int
-    checks: List[ComplianceCheck] = field(default_factory=list)
+    checks: list[ComplianceCheck] = field(default_factory=list)
     all_passed: bool = False
-    blocking_issues: List[str] = field(default_factory=list)
-    warnings: List[str] = field(default_factory=list)
+    blocking_issues: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
     # New uncertainty-aware fields
-    compliance_score: Optional[AggregatedMetric] = None
-    breakdown: Dict[str, int] = field(
+    compliance_score: AggregatedMetric | None = None
+    breakdown: dict[str, int] = field(
         default_factory=lambda: {"compliant": 0, "non_compliant": 0, "unknown": 0}
     )
     # Legacy compat — populated from compliance_score
-    compliance_probability: float = 1.0
-    evidence_strength: float = 1.0
+    compliance_probability: float = 0.5
+    evidence_strength: float = 0.0
+    # Fix 2: Compliance Risk Vector
+    compliance_risk: dict[str, float] = field(default_factory=dict)
 
 
 # ── Normalization & matching helpers ─────────────────────────────────────────
 
-_SYNONYM_GROUPS: List[set] = [
+_SYNONYM_GROUPS: list[set] = [
     {"non-gmo", "non gmo", "non-gmo project verified", "ngmo"},
     {"organic", "usda organic", "certified organic", "eu organic"},
     {"kosher", "ou kosher", "kof-k", "star-k"},
@@ -105,7 +98,7 @@ _SYNONYM_GROUPS: List[set] = [
     {"sqf", "safe quality food"},
     {"fair trade", "fair-trade certified"},
     {"haccp"},
-    {"fda", "fda compliance", "fda registered"},
+    {"fda", "fda compliance", "fda registered", "fda-compliant", "fda compliant"},
     {"dairy-free", "dairy free"},
     {"soy-free", "soy free"},
     {"sugar-free", "sugar free"},
@@ -143,7 +136,7 @@ def _canonical_tokens(raw: str) -> set:
     return hits
 
 
-def _supplier_supports(req: str, supplier_certs: List[str]) -> bool:
+def _supplier_supports(req: str, supplier_certs: list[str]) -> bool:
     """Back-compat synonym-only boolean check (used by verification_agent)."""
     req_tokens = _canonical_tokens(req)
     if not req_tokens:
@@ -155,8 +148,8 @@ def _supplier_supports(req: str, supplier_certs: List[str]) -> bool:
 
 
 def _supplier_supports_probabilistic(
-    req: str, supplier_certs: List[str], is_blocking: bool
-) -> Tuple[float, float, str]:
+    req: str, supplier_certs: list[str], is_blocking: bool
+) -> tuple[float, float, str]:
     """
     Returns (probability, evidence_strength, match_method).
     Kept as-is for the matching logic; output is adapted in check_compliance().
@@ -192,10 +185,10 @@ def check_compliance(
     product_id: int,
     ingredient_group_id: int,
     proposed_supplier_id: int,
-    required_certs: List[str],
-    supplier_certs: List[str],
+    required_certs: list[str],
+    supplier_certs: list[str],
     supplier_website: str = "",
-    blocking_certs: List[str] = None,
+    blocking_certs: list[str] = None,
 ) -> ComplianceResult:
     """
     Uncertainty-aware compliance check.
@@ -211,9 +204,9 @@ def check_compliance(
     for b in blocking_certs:
         blocking_tokens |= _canonical_tokens(b)
 
-    checks: List[ComplianceCheck] = []
-    blocking_issues: List[str] = []
-    warnings: List[str] = []
+    checks: list[ComplianceCheck] = []
+    blocking_issues: list[str] = []
+    warnings: list[str] = []
 
     for req in required_certs or []:
         req_tokens = _canonical_tokens(req)
@@ -225,10 +218,15 @@ def check_compliance(
         )
 
         # Output adapter: map (prob, match_method) → (ComplianceState, confidence, SourceType)
+        # Source-truth mapping (harmonized with confidence_scorer):
+        #   synonym hit → ONTOLOGY   (1.0) — curated synonym table
+        #   fuzzy hit   → EMBEDDING  (0.4) — approximate match
+        #   hard miss   → DETERMINISTIC (0.9) — real evidence of absence from scrape
+        #   unverified  → LLM        (0.6) — no evidence; inference-only judgment
         if match_method == "synonym":
             state = ComplianceState.COMPLIANT
             confidence = 0.95
-            source_type = SourceType.DETERMINISTIC
+            source_type = SourceType.ONTOLOGY
             evidence_text = f"Supplier holds matching {req} certification."
         elif match_method == "fuzzy":
             state = ComplianceState.COMPLIANT
@@ -248,7 +246,8 @@ def check_compliance(
             state = ComplianceState.UNKNOWN
             # Coverage shortfall: supplier has no cert data at all → lower confidence
             confidence = 0.15 if not supplier_certs else prob
-            source_type = SourceType.DETERMINISTIC
+            # Unverified requirements are an LLM-level judgement (no direct evidence).
+            source_type = SourceType.LLM
             if not supplier_certs:
                 evidence_text = f"No supplier certification data available to verify {req}."
             else:
@@ -302,24 +301,51 @@ def check_compliance(
             breakdown={"compliant": 0, "non_compliant": 0, "unknown": 0},
             compliance_probability=1.0,
             evidence_strength=1.0,
+            compliance_risk={
+                "probability": 0.0,
+                "uncertainty": 0.0,
+                "missing_data_ratio": 1.0,
+            },
         )
 
-    # ── Compliance aggregation (spec formula) ─────────────────────────────
-    weights = SOURCE_WEIGHTS
-    numerator = sum(
-        c.confidence * c.importance
-        for c in checks if c.state == ComplianceState.COMPLIANT
-    )
-    denominator = (
-        sum(c.confidence * c.importance for c in checks if c.state == ComplianceState.COMPLIANT)
-        + sum(c.confidence * c.importance for c in checks if c.state == ComplianceState.NON_COMPLIANT)
-        + sum(0.3 * c.importance for c in checks if c.state == ComplianceState.UNKNOWN)
-    )
-    compliance_value = round(numerator / denominator, 4) if denominator > 0 else 0.0
+    # ── Compliance aggregation (Fix 1: Robust Scoring) ────────────────────────
+    # Neutral prior for probability: 0.5 if no checks, otherwise geometric mean
+    # Penalty weight for missing metadata/requirements:
+    MISSING_REQ_WEIGHT = 0.5  
+    
+    check_probs = []
+    unknown_count = 0
+    for c in checks:
+        if c.state == ComplianceState.COMPLIANT:
+            # We use high probability for pass, but limited by confidence
+            check_probs.append(0.5 + (0.5 * c.confidence))
+        elif c.state == ComplianceState.NON_COMPLIANT:
+            # Low probability for fail
+            check_probs.append(0.5 * (1 - c.confidence))
+        else:
+            # Unknowns are neutral but increase the uncertainty penalty
+            check_probs.append(0.5)
+            unknown_count += 1
+
+    # Geometric mean of check probabilities
+    if not check_probs:
+        base_p = 0.5
+    else:
+        # Use log-space for geometric mean stability (add small epsilon to avoid log(0))
+        eps = 1e-6
+        base_p = math.exp(sum(math.log(max(eps, p)) for p in check_probs) / len(check_probs))
+
+    # Uncertainty penalty (Fix 1)
+    # Penalizes lack of evidence (unknowns) and empty requirements
+    penalty_denom = 1.0 + unknown_count + (MISSING_REQ_WEIGHT if not required_certs else 0.0)
+    uncertainty_penalty = 1.0 / penalty_denom
+    
+    compliance_value = round(base_p * uncertainty_penalty, 4)
 
     # Metric confidence = mean(check.confidence × source_weight)
+    weights = SOURCE_WEIGHTS
     metric_confidence = round(
-        sum(c.confidence * weights[c.source_type] for c in checks) / len(checks), 4
+        sum(c.confidence * weights[c.source_type] for c in checks) / len(checks) if checks else 0.0, 4
     )
 
     # Coverage = fraction with actual match (compliant or non_compliant vs. unknown)
@@ -327,7 +353,7 @@ def check_compliance(
     coverage = round(resolved / len(checks), 4)
 
     # Source distribution
-    type_weights_sum: Dict[str, float] = {st.value: 0.0 for st in SourceType}
+    type_weights_sum: dict[str, float] = {st.value: 0.0 for st in SourceType}
     for c in checks:
         type_weights_sum[c.source_type.value] += weights[c.source_type]
     total_w = sum(type_weights_sum.values()) or 1.0
@@ -363,7 +389,7 @@ def check_compliance(
 
     # Uncertainty sources
     unknown_count = sum(1 for c in checks if c.state == ComplianceState.UNKNOWN)
-    uncertainty_sources: List[str] = []
+    uncertainty_sources: list[str] = []
     if unknown_count > 0:
         uncertainty_sources.append(f"{unknown_count} requirement(s) unverified")
     if not supplier_certs:
@@ -406,4 +432,10 @@ def check_compliance(
         # Legacy compat
         compliance_probability=compliance_value,
         evidence_strength=metric_confidence,
+        # Fix 2: Risk Vector
+        compliance_risk={
+            "probability": round(1.0 - compliance_value, 4),
+            "uncertainty": round(1.0 - metric_confidence, 4),
+            "missing_data_ratio": round(unknown_count / len(checks), 4) if checks else 1.0,
+        }
     )

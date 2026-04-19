@@ -5,15 +5,17 @@
   "certifications": [
     "ISO 9001",
     "GMP"
+    "ISO 9001",
+    "GMP"
   ],
   "specialties": [
-    "nutritional ingredients",
+    "nutraceutical ingredients",
     "functional ingredients",
-    "botanical extracts"
+    "dietary supplements"
   ],
   "company_size": "medium",
   "website": "https://www.aidp.com",
-  "notes": "AIDP is known for supplying innovative nutritional and functional ingredients, with a focus on health and wellness.",
+  "notes": "AIDP is known for its focus on innovative and functional ingredients, particularly in the health and wellness sector.",
   "confidence": 85,
   "supplier_id": 2,
   "source": "llm_inference"

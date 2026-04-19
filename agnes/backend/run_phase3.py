@@ -158,6 +158,10 @@ def _persist_proposal(p: SourcingProposal, verifications: dict):
         "ComplianceBreakdownJson": json.dumps(p.compliance_breakdown),
         "ImpactScore": p.impact_score,
         "FlaggedLowConfHighImpact": 1 if p.flagged_low_confidence_high_impact else 0,
+        "ComplianceRiskJson": json.dumps(p.compliance_risk),
+        "SubstitutionRisk": p.substitution_risk,
+        "CostScore": p.cost_score,
+        "ReliabilityVariance": p.reliability_variance,
     })
 
 
@@ -216,21 +220,39 @@ def run_phase3(top_groups: int = 50, persist: bool = True) -> List[SourcingPropo
             fda_data_map[sid] = get_fda_risk(sid) or {}
             entity_data_map[sid] = get_entity_verification(sid) or {}
 
-        # 3. Compliance check per (member product, supplier) pair
+        # 3. Compliance check per (member product, supplier) pair.
+        #
+        # FIX: compliance_requirements are stored for FG (finished-good) product
+        # IDs, NOT for RM (raw-material) IDs used in SubstitutionGroupMember.
+        # We take the UNION of required certs across every FG that consumes
+        # this group (conservative: if any FG needs Organic, we require it).
         compliance_results: Dict[int, ComplianceResult] = {}
         compliance_evidence: List[dict] = []
+
+        fg_required_certs: set = set()
+        for fg_id in (group.consuming_product_ids or []):
+            fg_reqs = get_compliance_requirements(fg_id) or {}
+            if fg_reqs:
+                compliance_evidence.append(fg_reqs)
+            fg_required_certs.update(fg_reqs.get("required_certifications", []))
+        required_certs = sorted(fg_required_certs)
         for member in group.members:
-            reqs = get_compliance_requirements(member.product_id) or {}
-            if reqs:
-                compliance_evidence.append(reqs)
-            required_certs = reqs.get("required_certifications", [])
             for sid, sdata in supplier_data_map.items():
+                fda = fda_data_map.get(sid) or {}
+                # Derive fda-compliant from enforcement data: every supplier is
+                # presumed FDA-registered unless they carry an active Warning.
+                # This turns the always-UNKNOWN "fda-compliant" requirement into
+                # a real differentiating signal without inventing certifications.
+                inferred_certs = list(sdata.get("certifications", []))
+                if fda.get("status") != "Warning":
+                    inferred_certs.append("fda-compliant")
+
                 res = check_compliance(
                     product_id=member.product_id,
                     ingredient_group_id=group.id,
                     proposed_supplier_id=sid,
                     required_certs=required_certs,
-                    supplier_certs=sdata.get("certifications", []),
+                    supplier_certs=inferred_certs,
                     supplier_website=sdata.get("website", ""),
                 )
                 compliance_results[member.product_id * 1_000_000 + sid] = res
@@ -288,10 +310,10 @@ def run_phase3(top_groups: int = 50, persist: bool = True) -> List[SourcingPropo
         for p in all_proposals:
             p.score_breakdown = _build_score_breakdown(p)
 
-        # 7. Utility ranking (all proposals, not just frontier)
+        # 7. Utility ranking (all proposals, not just frontier) — 5 coefficients
         ranked_pairs = rank_by_utility(
             all_proposals, pareto_results,
-            alpha=1.0, beta=1.5, gamma=0.8,
+            alpha=1.0, beta=1.5, gamma=1.0, delta=0.5, epsilon=0.8,
             frontier_only=False,
         )
         for p, u in ranked_pairs:
