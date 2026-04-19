@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/923b77ca-ecf0-4cfd-a97f-7acce71fdd89
+
 # 🧠 Agnes – AI Supply Chain Intelligence System
 
 > A transparent, explainable AI system for **supplier consolidation, compliance reasoning, and sourcing optimization** in the CPG industry.
