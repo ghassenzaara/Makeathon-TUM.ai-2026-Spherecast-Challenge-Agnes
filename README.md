@@ -24,68 +24,54 @@ It answers:
 ---
 
 ```mermaid
-flowchart LR
-    subgraph Data_Acquisition [Data Acquisition & Orchestration]
-        direction LR
-        Cron[Python Scheduler / Cron] -->|Triggers Every 3 Days| Sources
-        
-        subgraph Sources [Specific Data Targets]
-            direction TB
-            S1[Regulations: EUR-Lex, VDI]
-            S2[Macro: Copper Prices, Tariffs]
-            S3[Certs: DVGW, WRAS]
-            S4[Global Patents: Abstracts]
-            S5[Competitor PR: Geberit, NIBCO]
-        end
-        
-        Sources -->|POST Raw Data| Webhook[FastAPI Webhook]
-    end
+flowchart TD
 
-    subgraph Backend_Pipeline [Python Data Cleaning Pipeline]
-        direction LR
-        Webhook --> TimeFilter[Strict Time Filter:<br/>Keep Only Recent]
-        TimeFilter --> ZeroShot{Vertex AI:<br/>Zero-Shot Anti-Hallucination}
-        ZeroShot -->|Spam/Irrelevant| Discard[Discard]
-        ZeroShot -->|Verified Signal| Pydantic[Pydantic Schema Validation]
-    end
+A[(SQLite Database)] --> B[Data Extraction Layer]
+B --> C["Ingredient Normalization & Semantic Matching"]
+C --> D[Cross-Company Substitution Groups]
 
-    subgraph Intelligence_Engine [Vertex AI Reasoning & Classification]
-        direction LR
-        Pydantic --> DualEval[Vertex AI: Dual-Pass Extraction]
-        
-        DualEval --> Factors[1. Calculate Routing Factors <br/> Quality, Benefit, Timing, Tech Direction]
-        DualEval --> UIMetrics[2. Estimate UI Display Metrics <br/> Relevance, Impact, Urgency, Risk, Profit]
-        
-        Factors --> Math[Apply Coefficient Weights:<br/>1.0 to 0.3]
-        Math --> Classifier{Decision Classifier}
-        
-        Classifier -->|Gap / Demand| D1[BUILD]
-        Classifier -->|Material / Tech Shift| D2[INVEST]
-        Classifier -->|Low Confidence / Hype| D4[IGNORE]
-        
-        %% Both final decisions and UI metrics go to DB
-        D1 & D2 & D4 --> DB[(Google Cloud Firestore)]
-        UIMetrics -->|Attach to Payload| DB
-    end
+D --> E[External Intelligence Layer]
 
-    subgraph Frontend [React / Vue User Interface]
-        direction LR
-        DB --> CriticalCheck{Is Update Critical?}
-        CriticalCheck -->|Yes| Alert[UI: Urgent Pop-up Alert]
-        CriticalCheck -->|No| Dashboard[Dashboard: Trend List & UI Charts]
-        Alert --> Dashboard
-        
-        Dashboard --> TrendPage[Trend Detail Page]
-        TrendPage --> ChatUI[On-Page RAG Chatbot]
-    end
-    
-    subgraph RAG_System [Interactive Evidence Agent]
-        direction LR
-        ChatUI -->|Ask about Decision/Evidence| RAG_API[FastAPI: RAG Chat Endpoint]
-        RAG_API -->|1. Fetch Trend Context| DB
-        DB -.->|2. Return Evidence Payload| RAG_API
-        RAG_API -->|3. Inject Context into Prompt| RAG_LLM{Vertex AI:<br/>Gemini RAG Agent}
-        RAG_LLM -->|4
+E --> F[iHerb / Supplier Scraping APIs]
+E --> G["Supplier Websites: Certifications, Specs, Geography"]
+E --> H[LLM-assisted Compliance Inference]
+
+F & G & H --> I[(Enriched Knowledge Base)]
+
+I --> R[Embedding Index + RAG Retrieval System]
+R --> Q["Contextual Grounding over Proposals & Evidence"]
+
+Q --> J[Substitution Validator]
+J --> K[Compliance & Risk Checker]
+
+K --> L[Multi-Objective Sourcing Optimizer]
+
+L --> M1[Cost Savings Objective]
+L --> M2[Compliance Probability Objective]
+L --> M3[Supplier Concentration Risk Objective]
+L --> M4[Data Quality / Uncertainty Objective]
+
+M1 & M2 & M3 & M4 --> N[Pareto Frontier Selection Engine]
+
+N --> O[Confidence Scoring Module]
+O --> P[Verification & Hallucination Guardrails]
+P --> U[Uncertainty & Evidence Attribution Layer]
+
+U --> V[Evidence Trail Builder]
+V --> W["Agnes Dashboard & Chat UI (RAG-powered)"]
+
+%% Correcting the feedback loop with a Human-in-the-Loop gate
+W -.-> HITL[Human Verification Gate]
+HITL -.-> C
+
+style C fill:#ff6b6b,color:white
+style E fill:#ff6b6b,color:white
+style R fill:#9c27b0,color:white
+style L fill:#ff9800,color:white
+style N fill:#4caf50,color:white
+style O fill:#4caf50,color:white
+style W fill:#2196f3,color:white
+style HITL fill:#f1c40f,color:black
 ```
 
 # 🧩 Core Idea (Why this is powerful)
